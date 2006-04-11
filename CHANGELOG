@@ -1,3 +1,20 @@
+version 0.3 (10 April 2006)
+  - moderncv now uses the 'longtable' class, allowing cv sections to split across multiple pages.
+  - the different lengths used by moderncv are now customizable! In particular, the first column
+  (the one containing the date in the examples), can now be set to any width, for people
+  needing a smaller or larger one. To do that, either use
+  \sethintscolumnlength{<length>},
+  where <length> is the desired length in a unit LaTeX understands, or
+  \sethintscolumntowidth{<string>},
+  where <string> is a string of the desired length (usually, the longest string that has to appear
+  in the column). Thanks to A. Pöge for pointing out the need of such a feature.
+  - added the command \emptysection{}, which makes it possible to start a section without
+  name. In combination with \closesection{}, this makes it possible to drop out of the layout of
+  moderncv, and come back to it later. This should make the inclusion of arbitrary elements not
+  covered by moderncv code possible.
+  - corrected a spacing problem in the cventry command, as pointed out and solved by
+  B. Eßmann.
+
 version 0.2 (6 March 2006)
   - rewrite of the code to have the styles (fonts, colours, headers and footers) be defined
   in different files than the class. The styles are now defined in a separate file per style,
