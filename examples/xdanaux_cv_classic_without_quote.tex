@@ -1,0 +1,86 @@
+\documentclass[classic]{moderncv}
+
+\usepackage[utf8]{inputenc}
+
+\firstname{Xavier}
+\familyname{Danaux}
+\title{Dynamic and innovative engineer/jurist}
+\address{234 rue de l'infante, B-1410 Waterloo}
+\phone{+32 (0)494 68 23 41}
+\email{xdanaux@gmail.com}
+\extrainfo{{\small single with driver licence}}
+\quote{Am willing to tear down walls, build bridges, and light fires.\\I have no real experience, but lots of energy, a bit of that ``vision thing'',\\and I'm not afraid to start from the beginning.}
+
+%\renewcommand{\listsymbol}{{\fontencoding{U}\fontfamily{ding}\selectfont\tiny\symbol{'102}}}
+\definecolor{see}{rgb}{0.5,0.5,0.5}
+
+% for text subscripts
+\newcommand{\up}[1]{\ensuremath{^\textrm{\scriptsize#1}}}
+
+% to produce the ConTeXt symbol
+\def\ConTeXt{%
+  C%
+  \kern-.0333emo%
+  \kern-.0333emn%
+  \kern-.0667em\TeX%
+  \kern-.0333emt}
+
+% to use slanted small caps (only with roman family; the sans serif font doesn't exists :-()
+%\usepackage{slantsc}
+%\DeclareFontFamily{T1}{myfont}{}
+%\DeclareFontShape{T1}{myfont}{m}{scsl}{ <-> cork-lmssqbo8}{}
+
+
+%----------------------------------------------------------------------------------
+%            content
+%----------------------------------------------------------------------------------
+\begin{document}
+\sffamily
+\maketitle%
+%\makequote%
+%
+\section{Assets}
+\cvresume{Soon-to-be mechanical engineer specialized in computational fluid dy\-na\-mics, with a good legal education.}{Likes practicing adventure sports like skying, rock climbing and scuba diving, and has been a boy scout for five years.}
+\cvresume{Leadership skills.}{Open minded and eager to learn.}
+\cvresume{Photography and design enthusiast.}{Creative with a strong analytical mind.}
+\cvresume{Loves to tackle complex problems.}{World citizen.}
+%
+\section{Education}
+\cventry{2003--current}{Master of Science in Mechanical Engineering}{Université catholique de Louvain}{}{}{1\up{st} year: 82\%\hspace{2em}2\up{nd} year: 74\%\hspace{2em}3\up{rd} year: --- (currently being assessed)}
+\cventry{2005--current}{Master of Laws}{Université catholique de Louvain}{}{}{1\up{st} year: --- (currently being assessed)}
+\cventry{2003--2005}{Bachelor of Laws}{Université catholique de Louvain}{}{}{1\up{st} year: 70\%\hspace{2em}2\up{nd} year: 67\%}
+\cventry{2001--2003}{Bachelor of Science}{Université catholique de Louvain}{}{}{1\up{st} year: 74\%\hspace{2em}2\up{nd} year: 76\%}
+%\cveducation{1995--2001}{High School Degree, Latin--Math orientation}{Collège Saint-Michel d'Etterbeek}{}
+%\cveducation{1989--1995}{Primary School Degree}{Sint-Jozefscollege te Sint-Pieters-Woluwe}{}
+%
+\section{Master thesis}
+\cvitem{title}{\emph{On the rheology of entangled polymers}}
+\cvitem{supervisors}{Pr Christian Bailly and Pr Roland Keunings}
+\cvitem{description}{\small Study of the complex behaviour of viscoelastic fluids, and in particular of entangled polymers.\\The study is focussed on double-step strain and recoil deformations, comparing experimental data to simulations based on recent microstructural models.
+Depending on the model used, numerous mathematical tools are used: numerical solving of nonlinear PDEs, stochastic equations, Monte-Carlo simulations, Fourier transforms, \dots{}}
+%
+\section{Experience}
+\cventry{april 2004--\\current}{Administrator}{Alterezo ASBL}{Liège}{}{Nonprofit association aimed at helping small organizations access mo\-dern com\-mu\-ni\-ca\-tion tools via the internet, and promoting the use of open sour\-ce so\-lu\-tions and open standards.\newline{\itshape\color{see}\footnotesize{}See \httplink{www.alterezo.be}.}}
+\cventry{2005--2006}{Mathematics tutor}{UCL}{Louvain-la-Neuve}{}{Supervision of practical sessions for a mathematical course given to second year engineering students (course \emph{FSAB1104: Numerical Methods}).\newline{\itshape\color{see}\footnotesize{}See \httplink{www.legat-online.be/b2q1/num}.}}
+\cventry{2004--2006}{Cultural project leader}{Tchouque-Tschouk Kot}{Louvain-la-Neuve}{}{Leader of a student home with a cultural project, requiring day to day management as well as the organization of public events.\newline{\itshape\color{see}\footnotesize{}See \httplink{www.organe.be}.}}
+%\cventry{1999--2003}{Student jobs}{}{}{}{Various student jobs, ranging from sport monitor and birthday animator for kids (Action Sport ASBL, 1999--2001) to tank station employee (Shell-Gecafin, august 2002 and september 2003) or receptionist (Randstad S.A., august 2001).}
+\cventry{1999--2001}{IMO preselected}{SBPMef}{Wépion}{}{Advanced mathematical training, as belgian preselected candidate for the International Mathematical Olympiads, selected by the Belgian mathematical society.\newline{\itshape\color{see}\footnotesize{}See \weblink{imo.math.ca/belgium.html}.}}
+%\cvwork{august 2003}{Job student}{Belgian Ministry of Defense}{Brussels}{Affected to the material ressources division, geomatic section; Access database encoding.}
+%\cvwork{sept. 2003\\august 2002}{Job student}{Shell-Gecafin S.A.}{Tank station employee.}
+%\cvwork{août 2001}{Job d'étudiant}{Randstad S.A.}{Brussels}{Vérification de bases de données, prospection de clients et acceuil central.}
+%\cvwork{1999--2001}{Animateur}{Action Sport asbl}{Brussels}{Animateur de stages et d'évènements sportifs pour enfants. Voir \href{www.sportcity-woluwe.be/html/stages.html}{www.sportcity-woluwe.be/html/stages.html}.}
+%
+\section{Languages}
+\cvlanguage{French}{Native}{}
+\cvlanguage{Dutch}{Near-native}{Primary education degree obtained in a dutch college\\(Sint-Jozefscollege te Sint-Pieters-Woluwe).}
+\cvlanguage{English}{Very good}{Many journeys in english speaking countries, including the United States, the United Kingdom and Kenya.}
+\cvlanguage{Chinese}{Elementary}{Following official courses at the ``Institut des Langues Vivantes'' (UCL), for the second year now.}
+%
+\section{Computer knowledge}
+\cvcomputer{OS}{Linux, Unix, MacOS, Windows}{desktop}{OpenOffice, StarOffice, MS Office}
+\cvcomputer{programmation}{\textsc{Java}, C/C++}{scripting}{PHP, Shell, Ruby}
+\cvcomputer{scientific}{Matlab, Autocad, Abaqus}{typography}{\LaTeX, \ConTeXt, Scribus, QuarkXPress}
+\cvcomputer{web design}{XHTML, CSS, AJAX}{database}{MySQL, PostgreSQL}
+\cvcomputer{administration}{Apache, Mailman}{}{}
+%
+\end{document}
