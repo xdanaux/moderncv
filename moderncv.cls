@@ -4,7 +4,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{moderncv}[2006/03/06 v0.2 modern curriculum vitae document class]
+\ProvidesClass{moderncv}[2006/04/10 v0.3 modern curriculum vitae document class]
 
 
 %-------------------------------------------------------------------------------
@@ -99,7 +99,8 @@
 
 % page geometry
 % (this should perhaps be left to the user...)
-\RequirePackage[top=2cm, bottom=2.5cm, left=2.25cm, right=2.25cm]{geometry}
+%\RequirePackage[top=2cm, bottom=2.5cm, left=2.25cm, right=2.25cm]{geometry}
+\RequirePackage[top=1.5cm, bottom=2cm, left=2cm, right=2cm]{geometry}
 
 % hyperrefs
 \RequirePackage{url}
@@ -117,6 +118,14 @@
 \else
   \RequirePackage[dvips]{hyperref}\fi
 \urlstyle{tt}
+
+% tables that split across multiple pages
+\RequirePackage[]{longtable}
+% spacing between sections
+\setlength{\LTpre}{\medskipamount}
+\setlength{\LTpost}{\medskipamount}
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
 
 % graphics
 \ifpdf
@@ -167,6 +176,8 @@
 \definecolor{quotecolor}{rgb}{0,0,0}
 \definecolor{sectionrectanglecolor}{rgb}{0,0,0}
 \definecolor{sectiontitlecolor}{rgb}{0,0,0}
+\definecolor{subsectioncolor}{rgb}{0,0,0}
+\definecolor{hintcolor}{rgb}{0,0,0}
 
 % fonts
 \providecommand*{\firstnamefont}{}
@@ -176,6 +187,7 @@
 \providecommand*{\quotefont}{}
 \providecommand*{\sectionfont}{}
 \providecommand*{\subsectionfont}{}
+\providecommand*{\hintfont}{\small\sffamily}
 
 % styles
 \providecommand*{\firstnamestyle}[1]{{\firstnamefont\color{firstnamecolor}#1}}
@@ -184,7 +196,8 @@
 \providecommand*{\addresstyle}[1]{{\addressfont\color{addresscolor}#1}}
 \providecommand*{\quotestyle}[1]{{\quotefont\color{quotecolor}#1}}
 \providecommand*{\sectionstyle}[1]{{\sectionfont\color{sectiontitlecolor}#1}}
-\providecommand*{\subsectionstyle}[1]{{\subsectionfont#1}}
+\providecommand*{\subsectionstyle}[1]{{\subsectionfont\color{subsectioncolor}#1}}
+\providecommand*{\hintstyle}[1]{{\hintfont\color{hintcolor}#1}}
 
 % styles: casual (default), classic, ...
 \newcommand*{\moderncvstyle}[2][]{
@@ -216,61 +229,114 @@
 \extrainfo{}
 \quote{}
 
+% length used by the table layout
+\newlength{\hintscolumnwidth}
+\newlength{\separatorcolumnwidth}
+\setlength{\separatorcolumnwidth}{0.025\textwidth}
+\newlength{\maincolumnwidth}
+\newcommand*{\sethintscolumnlength}[1]{
+  \setlength{\hintscolumnwidth}{#1}%
+  \setlength{\maincolumnwidth}{\textwidth}%
+  \addtolength{\maincolumnwidth}{-\separatorcolumnwidth}%
+  \addtolength{\maincolumnwidth}{-\hintscolumnwidth}}
+\newcommand*{\sethintscolumntowidth}[1]{
+  \settowidth{\hintscolumnwidth}{#1}%
+  \setlength{\maincolumnwidth}{\textwidth}%
+  \addtolength{\maincolumnwidth}{-\separatorcolumnwidth}%
+  \addtolength{\maincolumnwidth}{-\hintscolumnwidth}}
+\sethintscolumnlength{0.15\textwidth}
+
 % makes the cv title
 \renewcommand*{\maketitle}{}%
 
 % make a quote
+\newlength{\quotewidth}
+\setlength{\quotewidth}{0.65\textwidth}
 \newcommand*{\makequote}{%
   {\centering{%
-    \begin{minipage}{\textwidth}\centering\quotestyle{\@quote}\end{minipage}}}\\[3em]}
+    \begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}}\\[2.5em]}}
 
 % draws a colored rectangle
 % usage: \colorrule[optional height]{width}
 %\newcommand*{\colorrule}[2][1ex]{{\color{sectionrectanglecolor}{\rule{#2}{#1}}}}
 
-% usage: \section[optional width <= .8\textwidth]{<title>}
-\newif\if@sectionopen \@sectionopenfalse
+% usage: \section{<title>}, or \emptysection{}
+\newif\if@sectionopen\@sectionopenfalse
+\newif\if@firstcvline\@firstcvlinefalse % bug if initially set to true...
 \newcommand*{\closesection}{%
-  \if@sectionopen
-    \end{tabular}%
-    \par\null%
+  \if@sectionopen%
+    \end{longtable}%
+    \phantomsection%  % reset the anchor for hyperrefs
+%    \par\null%
     \@sectionopenfalse\fi}
 \AtEndDocument{\closesection{}}
-\newcommand*{\section}[2][0.825]{%
+\newcommand*{\section}[1]{%
   \closesection{}%
   \@sectionopentrue%
-  \addcontentsline{toc}{part}{#2}
-  \begin{tabular}[t]{@{}r@{\hspace{.025\textwidth}}@{}p{#1\textwidth}@{}}%
-%  \colorrule{.15\textwidth}&\mbox{\color{sectiontitlecolor}\sectionfont#2}\\[1ex]}%
-  {\color{sectionrectanglecolor}\rule{0.15\textwidth}{1ex}}&\mbox{\color{sectiontitlecolor}\sectionfont#2}\\[1ex]}%
+  \phantomsection{}%
+  \addcontentsline{toc}{part}{#1}%
+%  \ignorespacesafterend% NOT WORKING
+  \begin{longtable}[l]{@{}l@{\hspace{\separatorcolumnwidth}}@{}p{\maincolumnwidth}@{}}%
+%  \colorrule{\hintscolumnwidth}&\mbox{\sectionstyle{#1}}\\[1ex]}%
+  {\color{sectionrectanglecolor}\rule{\hintscolumnwidth}{1ex}} &\sectionstyle{#1}\\[1ex]%
+  \@firstcvlinetrue}
+\newcommand*{\emptysection}{%
+  \closesection{}%
+  \@sectionopentrue%
+%  \ignorespacesafterend% NOT WORKING
+  \begin{longtable}[l]{@{}l@{\hspace{\separatorcolumnwidth}}@{}p{\maincolumnwidth}@{}}%
+  \@firstcvlinetrue}
 
 % usage (inside section): \subsection{title}
 \newcommand*{\subsection}[1]{%
-  &{\subsectionfont#1}\\[1ex]}
+  &\subsectionstyle{#1}\\[1ex]}
 
-% usage (inside section): \cvline[optional width <= .8\textwidth]{leftmark}{text}
-\newcommand*{\cvline}[3][.825]{%
-  \begin{minipage}[t]{0.15\textwidth}\raggedleft\small\sffamily #2\end{minipage}&\begin{minipage}[t]{#1\textwidth}#3\end{minipage}\\}
+% usage (inside section): \cvline{leftmark}{text}
+\newcommand*{\cvline}[2]{%
+  \if@firstcvline%
+    \@firstcvlinefalse%
+    \\[-1em]% ugly hack to remove spaces before the first line
+  \else%
+    \\\fi%
+  \begin{minipage}[t]{\hintscolumnwidth}\raggedleft\hintfont{#1}\end{minipage}&\begin{minipage}[t]{\maincolumnwidth}#2\end{minipage}}
+%  #1&\framebox{\begin{minipage}[t]{\maincolumnwidth}#2\end{minipage}}}
+%  \begin{minipage}[t]{\hintscolumnwidth}\raggedleft\hintstyle{#1}\end{minipage}&\begin{minipage}[t]{\maincolumnwidth}#2\end{minipage}}
 
-% usage (inside section): \cvitem[optional width <= .8\textwidth]{leftmark}{text}
-\newcommand*{\cvitem}[3][.825]{%
-  \cvline[#1]{#2}{#3\vspace*{.75em}}}   % the \vspace*{} inside the cvline environment is a hack... (should conceptually be outside the environment)
+% usage (inside section): \cvitem{leftmark}{text}
+\newcommand*{\cvitem}[2]{%
+  \if@firstcvline
+  \else
+    \\[-0.75em]\fi
+  \cvline{#1}{#2}}
 
 % usage (inside section}: \cvdoubleitem{subtitle}{text}{subtitle}{text}
+\newlength{\doubleitemmaincolumnwidth}
+\setlength{\doubleitemmaincolumnwidth}{\maincolumnwidth}
+\addtolength{\doubleitemmaincolumnwidth}{-\hintscolumnwidth}
+\addtolength{\doubleitemmaincolumnwidth}{-\separatorcolumnwidth}
+\setlength{\doubleitemmaincolumnwidth}{0.5\doubleitemmaincolumnwidth}
 \newcommand*{\cvdoubleitem}[4]{%
- \cvitem{#1}{\begin{minipage}[t]{.4125\textwidth}#2\end{minipage}\hfill\begin{minipage}[t]{.125\textwidth}\raggedleft\small\sffamily#3\end{minipage}\hspace*{.025\textwidth}\begin{minipage}[t]{.4125\textwidth}#4\end{minipage}}}%the second column title should have 0.1818 = 0.15*1/0.825 as width, and the data columns shoudl have 0.395 as width to be equal. But this is not achived here, by purpose...
+ \cvitem{#1}{\begin{minipage}[t]{\doubleitemmaincolumnwidth}#2\end{minipage}%
+ \hfill%
+ \begin{minipage}[t]{\hintscolumnwidth}\raggedleft\hintfont{#3}\end{minipage}\hspace*{\separatorcolumnwidth}\begin{minipage}[t]{\doubleitemmaincolumnwidth}#4\end{minipage}}}
 
 % usage (inside section): \cvlistitem{point1}
 \newcommand*{\cvlistitem}[1]{%
   \cvline{}{\listitemsymbol{}~#1}}
 
 % usage (inside section): \cvlistdoubleitem{point1}{point2}
+\newlength{\listitemsymbolwidth}
+\settowidth{\listitemsymbolwidth}{\listitemsymbol{}~}
+\newlength{\listdoubleitemmaincolumnwidth}
+\setlength{\listdoubleitemmaincolumnwidth}{\maincolumnwidth}
+\addtolength{\listdoubleitemmaincolumnwidth}{-\listitemsymbolwidth}
+\setlength{\listdoubleitemmaincolumnwidth}{0.475\listdoubleitemmaincolumnwidth}
 \newcommand*{\cvlistdoubleitem}[2]{%
-  \vspace{0.25em}&\listitemsymbol{}~\begin{minipage}[t]{0.375\textwidth}#1\end{minipage}%
+  \cvline{}{\listitemsymbol{}~\begin{minipage}[t]{\listdoubleitemmaincolumnwidth}#1\end{minipage}%
   \hfill%
   \ifthenelse{\equal{#2}{}}%
     {}%
-    {\listitemsymbol{}~\begin{minipage}[t]{0.375\textwidth}#2\end{minipage}\\}}
+    {\listitemsymbol{}~\begin{minipage}[t]{\listdoubleitemmaincolumnwidth}#2\end{minipage}}}}
 
 % usage : \cventry{years}{degree/job title}{institution/employer}{localization}{optionnal: grade/...}{optional: comment/job description}
 \newcommand*{\cventry}[6]{%
@@ -280,15 +346,15 @@
     \ifthenelse{\equal{#4}{}}{}{, #4}%
     \ifthenelse{\equal{#5}{}}{}{, #5}%
     .%
-    \ifthenelse{\equal{#6}{}}{}{\\\begin{minipage}{\textwidth}\small#6\end{minipage}}}}
+    \ifthenelse{\equal{#6}{}}{}{\\\begin{minipage}[t]{\textwidth}\small#6\end{minipage}}}}
 
 % usage (inside 'language' cvsection environment): \cvlanguage{name}{level}{comment}
 \newcommand*{\cvlanguage}[3]{%
-  \cvitem{#1}{\begin{minipage}[t]{.225\textwidth}\textbf{#2}\end{minipage}\hfill\begin{minipage}[t]{0.725\textwidth}\raggedleft\footnotesize\itshape #3\end{minipage}}}
+  \cvitem{#1}{\begin{minipage}[t]{.225\maincolumnwidth}\textbf{#2}\end{minipage}\hfill\begin{minipage}[t]{0.725\maincolumnwidth}\raggedleft\footnotesize\itshape #3\end{minipage}}}
 
 % usage (inside 'computer skills' cvsection environment): \cvcomputer{category}{programs}{category}{programs}
 \newcommand*{\cvcomputer}[4]{%
-  \vspace*{-.5em}\cvdoubleitem{#1}{\small#2}{#3}{\small#4}}
+  \cvdoubleitem{#1}{\small#2}{#3}{\small#4}}
 
 % usage: \weblink[optional text]{link}
 \newcommand*{\weblink}[2][]{%

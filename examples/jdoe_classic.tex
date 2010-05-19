@@ -1,0 +1,91 @@
+\documentclass[10pt]{moderncv}
+
+% moderncv styles
+%\moderncvstyle{casual}
+%\moderncvstyle[nocolor]{casual}
+\moderncvstyle{classic}
+%\moderncvstyle[roman]{classic}
+
+% character encoding
+\usepackage[utf8]{inputenc}
+
+% personal data
+\firstname{John}
+\familyname{Doe}
+\title{Design enthusiast\dots}
+\address{12 somestreet\\3456 somecity} % for classic style
+%\address{12 somestreet, 3456 somecity} % for casual style
+\phone{+12 (3)456 78 90}
+\email{jdoe@design.org}
+%\extrainfo{{\small maried with childrens}}
+\quote{Any intelligent fool can make things bigger, more complex, and more violent. It takes a touch of genius -- and a lot of courage -- to move in the opposite direction.}
+
+%\renewcommand{\listsymbol}{{\fontencoding{U}\fontfamily{ding}\selectfont\tiny\symbol{'102}}}
+\definecolor{see}{rgb}{0.5,0.5,0.5}
+
+% command for text subscripts
+\newcommand{\up}[1]{\ensuremath{^\textrm{\scriptsize#1}}}
+
+% the ConTeXt symbol
+\def\ConTeXt{%
+  C%
+  \kern-.0333emo%
+  \kern-.0333emn%
+  \kern-.0667em\TeX%
+  \kern-.0333emt}
+
+% slanted small caps (only with roman family; the sans serif font doesn't exists :-()
+%\usepackage{slantsc}
+%\DeclareFontFamily{T1}{myfont}{}
+%\DeclareFontShape{T1}{myfont}{m}{scsl}{ <-> cork-lmssqbo8}{}
+%\usefont{T1}{myfont}{m}{scsl}Testing the font
+
+
+%----------------------------------------------------------------------------------
+%            content
+%----------------------------------------------------------------------------------
+\begin{document}
+\maketitle
+%\makequote
+
+\section{Education}
+\cventry{2003--2006}{Master of Design}{Valparezzo School of Design}{}{}{1\up{st} year: 79\%\hspace{2em}2\up{nd} year: 84\%\hspace{2em}3\up{rd} year: ---\hspace{2em}(graduation expected in June 2006)}
+\cventry{2001--2003}{Bachelor of Design}{Beijing Drawing University}{}{}{1\up{st} year: 63\%\hspace{2em}2\up{nd} year: 76\%}
+
+\section{Master thesis}
+\cvitem{title}{\emph{On the design of modern curriculum vit\ae{}s}}
+\cvitem{supervisors}{Pr P. Picasso and Pr G. Klimt}
+\cvitem{description}{\small Study of the complex design of a curriculum vit\ae{}, also known as ``résumé''. In my opinion, a good design needs to be show the personality of its author. Some people will thus prefer a more classic style, and others will be more audacious\dots}
+
+\section{Experience}
+\cventry{February 2006--\\current}{Maintainer of the a CTAN package}{CTAN}{World}{}{Maintainer of the {\ttfamily moderncv} package, meant to ease the production of beautiful curriculum vit\ae{}s.}
+\cventry{2005--2006}{Mathematics tutor}{UCL}{Louvain-la-Neuve}{}{Supervision of practical sessions for a mathematical course given to second year engineering students (course \emph{FSAB1104: Numerical Methods}).\hfill{\itshape\color{see}\footnotesize{}See \httplink{www.legat-online.be/b2q1/num}.}}
+\cventry{2004--2006}{Cultural project leader}{Tchouque-Tschouk Kot}{Louvain-la-Neuve}{}{Leader of a student home with a cultural project, requiring day to day management as well as the organization of public events.\hfill{\itshape\color{see}\footnotesize{}See \httplink{www.organe.be}.}}
+\cventry{1999--2001}{IMO preselected}{SBPMef}{Wépion}{}{Advanced mathematical training, as Belgian preselected candidate for the International Mathematical Olympiads, selected by the Belgian mathematical society.\hfill{\itshape\color{see}\footnotesize{}See \weblink{imo.math.ca/belgium.html}.}}
+
+\section{Languages}
+\cvlanguage{French}{Native}{}
+\cvlanguage{Dutch}{Near-native}{Primary education degree obtained in a Dutch college\\(Sint-Jozefscollege te Sint-Pieters-Woluwe).}
+\cvlanguage{English}{Very good}{Many journeys in English speaking countries, including the United States,\\the United Kingdom and Kenya.}
+\cvlanguage{Mandarin}{Elementary}{Taking classes at the ``Institut des Langues Vivantes'' (UCL), for the second year now.}
+
+\section{Computer skills}
+\cvcomputer{OS}{Linux, Unix, Windows}{administration}{Apache, Mailman}
+\cvcomputer{programming}{\textsc{Java}, C/C++}{scripting}{PHP, Shell, Ruby}
+\cvcomputer{scientific}{Matlab, Autocad, Abaqus}{typography}{\LaTeX, \ConTeXt, Scribus, QuarkXPress}
+\cvcomputer{web design}{XHTML, CSS, AJAX}{database}{MySQL, PostgreSQL}
+
+\section{Interests}
+\cvitem{design}{\small I am a design fan, especially when it comes to typography and photography.}
+\cvitem{adventure sports}{\small I like practicing adventure sports like skiing, rock climbing and scuba diving, and have been a boy scout for five years.}
+\cvitem{travelling}{\small I have been living abroad during my childhood, and love travelling around the world.}
+
+%\section{Section with a list}
+%\cvlistitem{lol}
+%\cvlistitem{lol}
+%\cvlistdoubleitem{lol}{relol}
+%\cvlistdoubleitem{lol}{relol}
+
+%\section{Section with your own content}\closesection
+%Your content here
+\end{document}
