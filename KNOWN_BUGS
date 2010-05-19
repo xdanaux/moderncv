@@ -1,3 +1,2 @@
-- moderncv doesn't work with natbib
 - The \cvsection command seems to be unable to handle a Chinese argument, using
 CJK.

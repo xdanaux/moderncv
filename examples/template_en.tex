@@ -1,5 +1,5 @@
 %% start of file `template_en.tex'.
-%% Copyright 2007 Xavier Danaux (xdanaux@gmail.com).
+%% Copyright 2006-1008 Xavier Danaux (xdanaux@gmail.com).
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License version 1.3c,
@@ -17,7 +17,9 @@
 
 % adjust the page margins
 \usepackage[scale=0.8]{geometry}
-\recomputelengths                             % required when changes are made to page layout lengths
+%\setlength{\hintscolumnwidth}{3cm}						% if you want to change the width of the column with the dates
+%\AtBeginDocument{\setlength{\maketitlenamewidth}{6cm}}  % only for the classic theme, if you want to change the width of your name placeholder (to leave more space for your address details
+\AtBeginDocument{\recomputelengths}                     % required when changes are made to page layout lengths
 
 % personal data
 \firstname{John}
@@ -72,7 +74,6 @@
 \cvline{hobby 2}{\small Description}
 \cvline{hobby 3}{\small Description}
 
-\closesection{}                   % needed to renewcommands
 \renewcommand{\listitemsymbol}{-} % change the symbol for lists
 
 \section{Extra 1}

@@ -1,5 +1,5 @@
 %% start of file `moderncv.cls'.
-%% Copyright 2007 Xavier Danaux (xdanaux@gmail.com).
+%% Copyright 2006-2008 Xavier Danaux (xdanaux@gmail.com).
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License version 1.3c,
@@ -10,7 +10,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{moderncv}[2007/05/28 v0.6 modern curriculum vitae document class]
+\ProvidesClass{moderncv}[2008/06/17 v0.7 modern curriculum vitae document class]
 
 
 %-------------------------------------------------------------------------------
@@ -120,33 +120,26 @@
 % hyperrefs
 \RequirePackage{url}
 \ifpdf
-  \RequirePackage[pdftex]{hyperref}
+  \RequirePackage[pdftex,]{hyperref}
 \else
   \RequirePackage[dvips]{hyperref}\fi
+\hypersetup{%
+  breaklinks,
+  baseurl       = http://,%
+  pdfborder     = 0 0 0,%
+  pdfpagemode   = UseNone,%
+%  pdfstartview  = XYZ,%
+  pdfstartpage  = 1,%
+  pdfcreator    = \LaTeX{} with `moderncv' package,%
+  pdfproducer   = \LaTeX}
 \AtEndOfClass{%
   \AtBeginDocument{%
     \hypersetup{%
-      breaklinks,
-      baseurl       = http://,
-      pdfborder     = 0 0 0,
-      pdfpagemode   = None,
-      pdfstartview  = XYZ,
-      pdfstartpage  = 1,
       pdfauthor     = \@firstname~\@familyname,%
       pdftitle      = \@title,%
       pdfsubject    = \@firstname~\@familyname,%
-      pdfkeywords   = \@firstname~\@familyname{} curriculum vit\ae{},%
-      pdfcreator    = \LaTeX{} with `moderncv' package,%
-      pdfproducer   = \LaTeX}}}
+      pdfkeywords   = \@firstname~\@familyname{} curriculum vit\ae{}}}}
 \urlstyle{tt}
-
-% tables that split across multiple pages
-\RequirePackage[]{longtable}
-% spacing between sections
-\setlength{\LTpre}{\smallskipamount}
-\setlength{\LTpost}{\smallskipamount}
-\setlength{\LTleft}{0pt}
-\setlength{\LTright}{0pt}
 
 % graphics
 \ifpdf
@@ -245,7 +238,8 @@
 \renewcommand*{\fax}[1]{\def\@fax{#1}}
 \newcommand*{\email}[1]{\def\@email{#1}}
 \newcommand*{\extrainfo}[1]{\def\@extrainfo{#1}}
-\newcommand*{\photo}[2][64pt]{\def\@photoheight{#1}\def\@photo{#2}}
+\def\@photowidth{0pt}
+\newcommand*{\photo}[2][64pt]{\def\@photowidth{#1}\def\@photo{#2}}
 \newcommand*{\quote}[1]{\def\@quote{#1}}
 
 % length used by the moderncv layout
@@ -256,27 +250,25 @@
 \newlength{\separatorcolumnwidth}
 \setlength{\separatorcolumnwidth}{0.025\textwidth}
 \newlength{\maincolumnwidth}
-\newcommand*{\sethintscolumnlength}[1]{
-  \setlength{\hintscolumnwidth}{#1}%
-  \setlength{\maincolumnwidth}{\textwidth}%
-  \addtolength{\maincolumnwidth}{-\separatorcolumnwidth}%
-  \addtolength{\maincolumnwidth}{-\hintscolumnwidth}}
-\newcommand*{\sethintscolumntowidth}[1]{
-  \settowidth{\hintscolumnwidth}{#1}%
-  \setlength{\maincolumnwidth}{\textwidth}%
-  \addtolength{\maincolumnwidth}{-\separatorcolumnwidth}%
-  \addtolength{\maincolumnwidth}{-\hintscolumnwidth}}
 % doubleitem lengths
 \newlength{\doubleitemmaincolumnwidth}
 % listitem lengths
 \newlength{\listitemsymbolwidth}
 \settowidth{\listitemsymbolwidth}{\listitemsymbol{}~}
+\newlength{\listitemmaincolumnwidth}
 % listdoubleitem lengths
 \newlength{\listdoubleitemmaincolumnwidth}
 % recompute all the lengths that depends on the text width
+\newcommand*{\recomputethemelengths}{}
 \newcommand*{\recomputelengths}{%
   \setlength{\quotewidth}{0.65\textwidth}%
-  \sethintscolumnlength{\hintscolumnwidth}%
+  % main lenghts
+  \setlength{\maincolumnwidth}{\textwidth}%
+  \addtolength{\maincolumnwidth}{-\separatorcolumnwidth}%
+  \addtolength{\maincolumnwidth}{-\hintscolumnwidth}%
+  % listitem lengths
+  \setlength{\listitemmaincolumnwidth}{\maincolumnwidth}%
+  \addtolength{\listitemmaincolumnwidth}{-\listitemsymbolwidth}%
   % doubleitem lengths
   \setlength{\doubleitemmaincolumnwidth}{\maincolumnwidth}%
   \addtolength{\doubleitemmaincolumnwidth}{-\hintscolumnwidth}%
@@ -287,67 +279,50 @@
   \addtolength{\listdoubleitemmaincolumnwidth}{-\listitemsymbolwidth}%
   \setlength{\listdoubleitemmaincolumnwidth}{0.475\listdoubleitemmaincolumnwidth}%
   % fancyhdr lengths
-  \renewcommand{\headwidth}{\textwidth}}
-\sethintscolumnlength{0.15\textwidth}
+  \renewcommand{\headwidth}{\textwidth}%
+  \recomputethemelengths}
+\setlength{\hintscolumnwidth}{0.15\textwidth}
 \recomputelengths
 
 % makes the cv title
+\title{}% to avoid LaTeX complaining that \maketitle is a called without first a call to \title
 \renewcommand*{\maketitle}{}%
 
 % draws a colored rectangle
 % usage: \colorrule[optional height]{width}
 %\newcommand*{\colorrule}[2][1ex]{{\color{sectionrectanglecolor}{\rule{#2}{#1}}}}
 
-\newif\if@sectionopen\@sectionopenfalse
-\newif\if@firstcvlineofsection\@firstcvlineofsectionfalse % bug if initially set to true...
-% usage: \closesection{} to force a section to be closed (and the tabular layout it generates)
-\newcommand*{\closesection}{%
-  \if@sectionopen%
-    \end{longtable}%
-%    \phantomsection% reset the anchor for hyperrefs
-%    \par\null%
-    \@sectionopenfalse\fi}
-\AtEndDocument{\closesection{}}
-% usage: \section{<title>}, or \emptysection{}
+% usage: \section{<title>}
 \newcommand*{\section}[1]{%
-  \closesection{}%
-  \@sectionopentrue%
+	\vspace*{2.5ex \@plus 1ex \@minus .2ex}%
   \phantomsection{}% reset the anchor for hyperrefs
   \addcontentsline{toc}{part}{#1}%
-  \begin{longtable}[l]{@{}p{\hintscolumnwidth}@{\hspace{\separatorcolumnwidth}}p{\maincolumnwidth}@{}}%
-  {\color{sectionrectanglecolor}\rule{\hintscolumnwidth}{1ex}} &\sectionstyle{#1}\\[1ex]%
-  \@firstcvlineofsectiontrue%
-  }
-\newcommand*{\emptysection}{%
-  \closesection{}%
-  \@sectionopentrue%
-  \begin{longtable}[l]{@{}p{\hintscolumnwidth}@{\hspace{\separatorcolumnwidth}}p{\maincolumnwidth}@{}}%
-  \@firstcvlineofsectiontrue%
-  }
+  \parbox[m]{\hintscolumnwidth}{\raggedleft\hintfont{\color{sectionrectanglecolor}\rule{\hintscolumnwidth}{1ex}}}%
+  \hspace{\separatorcolumnwidth}%
+  \parbox[m]{\maincolumnwidth}{\sectionstyle{#1}}\\[1ex]}
+%  \cvline[1ex]{\color{sectionrectanglecolor}\rule[0]{\hintscolumnwidth}{1ex}}{\sectionstyle{#1}}}% gives bad alignment of rectangle; too bad m{width} columns seem not to work as a valid column definition for tabular environments
 
-% usage (inside section): \subsection{title}
+% usage: \subsection{title}
 \newcommand*{\subsection}[1]{%
-  \cvline[0.65em]{}{\subsectionstyle{#1}}}
+  \cvline[0.45em]{}{\subsectionstyle{#1}}}
 
-% usage (inside section): \cvline{leftmark}{text}
+% usage: \cvline{margintext}{linetext}
 \newcommand*{\cvline}[3][.25em]{%
-  \if@firstcvlineofsection%
-    \@firstcvlineofsectionfalse%
-  \else%
-    \\[#1]\fi%
-  \raggedleft\hintfont{#2} &#3}
+  \begin{tabular}{@{}p{\hintscolumnwidth}@{\hspace{\separatorcolumnwidth}}p{\maincolumnwidth}@{}}%
+ 	  \raggedleft\hintfont{#2} &{#3}%
+  \end{tabular}\\[#1]}
 
-% usage (inside section}: \cvdoubleitem{subtitle}{text}{subtitle}{text}
+% usage: \cvdoubleitem{subtitle}{text}{subtitle}{text}
 \newcommand*{\cvdoubleitem}[4]{%
  \cvline{#1}{\begin{minipage}[t]{\doubleitemmaincolumnwidth}#2\end{minipage}%
  \hfill%
  \begin{minipage}[t]{\hintscolumnwidth}\raggedleft\hintfont{#3}\end{minipage}\hspace*{\separatorcolumnwidth}\begin{minipage}[t]{\doubleitemmaincolumnwidth}#4\end{minipage}}}
 
-% usage (inside section): \cvlistitem{point1}
+% usage: \cvlistitem[symbol]{point1}
 \newcommand*{\cvlistitem}[2][\listitemsymbol{}]{%
-  \cvline[0pt]{}{#1~#2}}
+  \cvline[0pt]{}{#1~\begin{minipage}[t]{\listitemmaincolumnwidth}#2\end{minipage}}}
 
-% usage (inside section): \cvlistdoubleitem{point1}{point2}
+% usage: \cvlistdoubleitem[symbol]{point1}{point2}
 \newcommand*{\cvlistdoubleitem}[3][\listitemsymbol{}]{%
   \cvline[0pt]{}{#1~\begin{minipage}[t]{\listdoubleitemmaincolumnwidth}#2\end{minipage}%
   \hfill%
@@ -355,17 +330,16 @@
     {}%
     {#1~\begin{minipage}[t]{\listdoubleitemmaincolumnwidth}#3\end{minipage}}}}
 
-% usage : \cventry{years}{degree/job title}{institution/employer}{localization}{optionnal: grade/...}{optional: comment/job description}
+% usage: \cventry{years}{degree/job title}{institution/employer}{localization}{optionnal: grade/...}{optional: comment/job description}
 \newcommand*{\cventry}[6]{%
   \cvline{#1}{%
     {\bfseries#2}%
-    \ifthenelse{\equal{#3}{}}{}{, {\slshape#3}}%
-    \ifthenelse{\equal{#4}{}}{}{, #4}%
-    \ifthenelse{\equal{#5}{}}{}{, #5}%
+    \ifx#3\else{, {\slshape#3}}\fi%
+    \ifx#4\else{, #4}\fi%
+    \ifx#5\else{, #5}\fi%
     .%
-    \ifthenelse{\equal{#6}{}}{}{\newline{}\small#6}
+    \ifx#6\else{\newline{}\begin{minipage}[t]{\linewidth}\small#6\end{minipage}}\fi
     }}%
-%  \ifthenelse{\equal{#6}{}}{}{\cvline[0pt]{}{\small#6}}}
 
 % usage (inside 'language' cvsection environment): \cvlanguage{name}{level}{comment}
 \newcommand*{\cvlanguage}[3]{%
@@ -375,26 +349,23 @@
 \newcommand*{\cvcomputer}[4]{%
   \cvdoubleitem{#1}{\small#2}{#3}{\small#4}}
 
-% usage: \weblink[optional text]{link}
-\newcommand*{\weblink}[2][]{%
+% usage: \link[optional text]{link}
+\newcommand*{\link}[2][]{%
   \ifthenelse{\equal{#1}{}}%
-    {\def\@linktext{#2}}%
-    {\def\@linktext{#1}}%
-  \href{#2}{\@linktext{}}}
+    {\href{#2}{#2}}%
+    {\href{#2}{#1}}}
 
 % usage: \httplink[optional text]{link}
 \newcommand*{\httplink}[2][]{%
   \ifthenelse{\equal{#1}{}}%
-    {\def\@linktext{#2}}%
-    {\def\@linktext{#1}}%
-  \href{http://#2}{\@linktext{}}}
+    {\href{http://#2}{#2}}%
+    {\href{http://#2}{#1}}}
 
 % usage: \emaillink[optional text]{link}
 \newcommand*{\emaillink}[2][]{%
   \ifthenelse{\equal{#1}{}}%
-    {\def\@linktext{#2}}%
-    {\def\@linktext{#1}}%
-  \href{mailto:#2}{\@linktext{}}}
+    {\href{mailto:#2}{#2}}%
+    {\href{mailto:#2}{#1}}}
 
 % usage: \nopagenumbers{}
 \newif\if@displaypagenumbers\@displaypagenumberstrue
@@ -413,18 +384,12 @@
 \newcommand{\refname}{Publications}
 \newlength{\bibindent}
 \setlength{\bibindent}{1.5em}
-% trick to force the previous section to close before the thebibliography environment
-\let\oldbibliography\bibliography
-\renewcommand*{\bibliography}[1]{%
-  \closesection{}%
-  \oldbibliography{#1}}
 % bibliography item label
 \newcommand*{\bibliographyitemlabel}{}% use \@biblabel{\arabic{enumiv}} for BibTeX labels
 \newenvironment{thebibliography}[1]%
   {%
     \section{\refname}%
-    \closesection{}%
-    \vspace*{-1.65em}%
+%    \vspace*{-0.65em}%
     \small%
     \begin{list}{\bibliographyitemlabel}%
       {%

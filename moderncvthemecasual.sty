@@ -10,7 +10,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{moderncvthemecasual}[2007/05/28 v0.6 modern curriculum vitae style: casual]
+\ProvidesPackage{moderncvthemecasual}[2008/06/17 v0.7 modern curriculum vitae style: casual]
 
 
 %-------------------------------------------------------------------------------
@@ -109,9 +109,10 @@
   {%
     \ifthenelse{\isundefined{\@photo}}%
       {}%
-      {{\color{firstnamecolor}\framebox{\includegraphics[height=\@photoheight]{\@photo}}}}%
+      {{\color{firstnamecolor}\framebox{\includegraphics[width=\@photowidth]{\@photo}}}}%
     \hfill%
-    \raggedleft{\firstnamestyle{\MakeLowercase{\@firstname}}\familynamestyle{\MakeLowercase{\@familyname}}}\\[-.35em]}%
+%    \raggedleft{\firstnamestyle{\MakeLowercase{\@firstname}}\familynamestyle{\MakeLowercase{\@familyname}}}\\[-.35em]}%
+    \raggedleft{\firstnamestyle{\@firstname}~\familynamestyle{\@familyname}}\\[-.35em]}%
   {\color{firstnamecolor}\rule{\textwidth}{.25ex}\\[2.5em]}%
 % optional quote
   \ifthenelse{\isundefined{\@quote}}%
@@ -136,7 +137,7 @@
       \ifthenelse{\isundefined{\@addressstreet}}{}{%
         \addresssymbol~\@addressstreet%
         \@firstfooterelementfalse%
-        \ifthenelse{\isundefined{\@addresscity}}{}{\footersymbol\@addresscity}\\\@firstfooterelementtrue}%
+        \ifthenelse{\isundefined{\@addresscity}}{}{~--~\@addresscity}\\\@firstfooterelementtrue}%
       \ifthenelse{\isundefined{\@mobile}}{}{\footersymbol\mobilesymbol~\@mobile\@firstfooterelementfalse}%
       \ifthenelse{\isundefined{\@phone}}{}{\footersymbol\phonesymbol~\@phone\@firstfooterelementfalse}%
       \ifthenelse{\isundefined{\@fax}}{}{\footersymbol\faxsymbol~\@fax\@firstfooterelementfalse}%

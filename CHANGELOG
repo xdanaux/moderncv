@@ -1,3 +1,20 @@
+version 0.7 (17 June 2008)
+  - corrected an outstanding spacing bug (space between cvlines longer
+  than 1 line).
+  - removed the need to use \closesection and \emptysection as internal
+  tabulars are now always closed. This allows she use of bibliography packages
+  such as bibunits.
+  - changed the definition of \photo: the first (optional) argument should
+  give the desired width of the picture, instead of its height
+  - corrected an alignment bug for \cvlistitems longer than 1 line, as
+  reported by S. Nikolopoulos.
+  - deprecated the commands \sethintscolumnlength and \sethintscolumntowidth.
+  Instead, just set \hintscolumnwidth to the desired length by using the regular
+  \setlength or \settowidth commands, and call \recomputelengths.
+  - added the ability to control the width of the name placeholder in the classic
+  theme, by setting the length \maketitlenamewidth. Again, don't forget to call
+  \recomputelengths afterward.
+
 version 0.6 (28 May 2007)
   - corrected some spacing bugs and cleaned up the code.
   - corrected a bug in the bibliography file of the examples spotted by
