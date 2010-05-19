@@ -1,5 +1,5 @@
 %% start of file `moderncvcompatibility.sty'.
-%% Copyright 2006 Xavier Danaux.
+%% Copyright 2007 Xavier Danaux (xdanaux@gmail.com).
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License version 1.3c,
@@ -10,7 +10,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{moderncvcompatibility}[2006/09/09 v0.5 modern curriculum vitae compatibility patches]
+\ProvidesPackage{moderncvcompatibility}[2007/05/28 v0.6 modern curriculum vitae compatibility patches]
 
 
 %-------------------------------------------------------------------------------
@@ -38,7 +38,7 @@
 % compatibility with version 0.1
 \newcommand*{\cvresume}[2]{\cvlistdoubleitem{#1}{#2}}
 
-% compatibility with version 0.2
+% compatibility with versions <= 0.2
 % section, cvline, ... with width argument...
 %\newcommand*{\section}[2][0.825]{%
 %  \closesection{}%
@@ -51,6 +51,10 @@
 %  \begin{minipage}[t]{\hintscolumnwidth}\raggedleft\small\sffamily#2\end{minipage}&\begin{minipage}[t]{\maincolumnwidth}#3\end{minipage}\\}
 %\newcommand*{\cvitem}[3][.825]{%
 %  \cvline[#1]{#2}{#3\vspace*{.75em}}}   % the \vspace*{} inside the cvline environment is a hack... (should conceptually be outside the environment)
+
+% compatibility with versions <= 0.5
+\newcommand*{\cvitem}[2]{\cvline{#1}{#2}}
+\newcommand*{\moderncvstyle}[1]{\moderncvtheme{#1}}
 
 \endinput
 

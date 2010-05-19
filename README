@@ -12,12 +12,10 @@ commands like:
   \maketitle,
 but also defines its own special commands:
   \cventry,
-  \makequote,
   \firstname,
   \familyname,
   ...
-All the commands are defined in such a way that the arguments are always
-optional.
+Most commands are defined in such a way that the arguments are optional.
 
 Documents can be compiled into dvi, ps or pdf.
 
@@ -26,4 +24,4 @@ directory for some examples.
 
 
 Author: Xavier Danaux <xdanaux@gmail.com>
-Date: 09 September 2006
+Date: 28 May 2007

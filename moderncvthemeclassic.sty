@@ -1,0 +1,149 @@
+%% start of file `moderncvthemeclassic.sty'.
+%% Copyright 2007 Xavier Danaux (xdanaux@gmail.com).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+%-------------------------------------------------------------------------------
+%                identification
+%-------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{moderncvthemeclassic}[2007/05/28 v0.6 modern curriculum vitae style: classic]
+
+
+%-------------------------------------------------------------------------------
+%                required packages
+%-------------------------------------------------------------------------------
+
+
+%-------------------------------------------------------------------------------
+%                package options
+%-------------------------------------------------------------------------------
+% color options
+% blue (default option)
+\DeclareOption{blue}{}
+% orange
+\newif\if@colororange\@colororangefalse
+\DeclareOption{orange}{\@colororangetrue}
+% green
+\newif\if@colorgreen\@colorgreenfalse
+\DeclareOption{green}{\@colorgreentrue}
+% red
+\newif\if@colorred\@colorredfalse
+\DeclareOption{red}{\@colorredtrue}
+% grey
+\newif\if@colorgrey\@colorgreyfalse
+\DeclareOption{grey}{\@colorgreytrue}
+
+% roman option
+\newif\if@roman\@romanfalse
+\DeclareOption{roman}{\@romantrue}
+
+% unused options
+\DeclareOption*{
+  \PackageWarning{moderncvthemeclassic}{Unknown option '\CurrentOption'}}
+
+% execute default options
+\ExecuteOptions{color}
+
+% process given options
+\ProcessOptions\relax
+
+
+%-------------------------------------------------------------------------------
+%                style definition
+%-------------------------------------------------------------------------------
+% symbols used
+\renewcommand*{\listitemsymbol}{\textbullet}
+
+% colors
+\definecolor{firstnamecolor}{rgb}{0,0,0}
+\definecolor{familynamecolor}{rgb}{0,0,0}
+\definecolor{titlecolor}{rgb}{0.35,0.35,0.35}
+\definecolor{quotecolor}{rgb}{0.35,0.35,0.35}
+% default blue color
+  \definecolor{addresscolor}{rgb}{0.25,0.5,0.75}
+  \definecolor{sectionrectanglecolor}{rgb}{0.25,0.5,0.75}
+  \definecolor{sectiontitlecolor}{rgb}{0.2,0.4,0.65}
+  \definecolor{subsectioncolor}{rgb}{0.2,0.4,0.65}
+\if@colororange
+  \definecolor{addresscolor}{rgb}{0.95,0.55,0.15}
+  \definecolor{sectionrectanglecolor}{rgb}{1,0.65,0.20}
+  \definecolor{sectiontitlecolor}{rgb}{0.95,0.55,0.15}
+  \definecolor{subsectioncolor}{rgb}{0.95,0.55,0.15}\fi
+\if@colorgreen
+  \definecolor{addresscolor}{rgb}{0.30,0.65,0.15}
+  \definecolor{sectionrectanglecolor}{rgb}{0.55,0.85,0.35}
+  \definecolor{sectiontitlecolor}{rgb}{0.30,0.65,0.15}
+  \definecolor{subsectioncolor}{rgb}{0.30,0.65,0.15}\fi
+\if@colorred
+  \definecolor{addresscolor}{rgb}{0.95,0.20,0.20}
+  \definecolor{sectionrectanglecolor}{rgb}{1.00,0.30,0.30}
+  \definecolor{sectiontitlecolor}{rgb}{0.95,0.20,0.20}
+  \definecolor{subsectioncolor}{rgb}{0.95,0.20,0.20}\fi
+\if@colorgrey
+  \definecolor{addresscolor}{rgb}{0.35,0.35,0.35}
+  \definecolor{sectionrectanglecolor}{rgb}{0.75,0.75,0.75}
+  \definecolor{sectiontitlecolor}{rgb}{0.35,0.35,0.35}
+  \definecolor{subsectioncolor}{rgb}{0.35,0.35,0.35}\fi
+
+% fonts
+\if@roman
+  \AtBeginDocument{\rmfamily}
+\else
+  \AtBeginDocument{\sffamily}\fi
+\renewcommand*{\ttdefault}{pcr}
+\renewcommand*{\firstnamefont}{\fontsize{34}{36}\sffamily\mdseries\upshape}
+\renewcommand*{\titlefont}{\LARGE\sffamily\mdseries\slshape}
+\renewcommand*{\addressfont}{\normalsize\rmfamily\mdseries\slshape}
+\renewcommand*{\familynamefont}{\firstnamefont}
+\renewcommand*{\quotefont}{\large\slshape}
+\renewcommand*{\sectionfont}{\Large\sffamily\mdseries\upshape}
+\renewcommand*{\subsectionfont}{\large\sffamily\mdseries\upshape}
+
+% styles
+
+% maketitle
+\renewcommand*{\maketitle}{%
+  % name and title
+  \if@DEBUG\framebox{\fi
+  \begin{minipage}[b]{.525\textwidth}%
+    \firstnamestyle{\@firstname~}\familynamestyle{\@familyname}%
+    \ifthenelse{\isundefined{\@title}}%
+      {}%
+      {\\[1.25em]\titlestyle{\@title}}%
+  \end{minipage}%
+  \if@DEBUG}\fi
+  \hfill%
+  \if@DEBUG\framebox{\fi%
+  % optional data
+  \begin{minipage}[b]{.225\textwidth}%
+    \raggedleft\addressfont\color{addresscolor}%
+    \ifthenelse{\isundefined{\@addressstreet}}{}{%
+      \addresssymbol~\@addressstreet%
+      \ifthenelse{\isundefined{\@addresscity}}{}{\\\@addresscity}%
+      \\[.2em]}%
+    \ifthenelse{\isundefined{\@mobile}}{}{\mobilesymbol~\@mobile\\[.2em]}%
+    \ifthenelse{\isundefined{\@phone}}{}{\phonesymbol~\@phone\\[.2em]}%
+    \ifthenelse{\isundefined{\@fax}}{}{\faxsymbol~\@fax\\[.2em]}%
+    \ifthenelse{\isundefined{\@email}}{}{\emailsymbol~\emaillink{\@email}\\[.2em]}%
+    \ifthenelse{\isundefined{\@extrainfo}}{}{\@extrainfo\\[.2em]}%
+  \end{minipage}%
+  % optional photo
+  \ifthenelse{\isundefined{\@photo}}%
+    {}%
+    {\hspace*{0.75em}\color{firstnamecolor}\framebox{\includegraphics[height=\@photoheight]{\@photo}}}\\[3em]%
+  \if@DEBUG}\fi%
+  % optional quote
+  \ifthenelse{\isundefined{\@quote}}%
+    {}%
+    {\centering{\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}}\\[2.5em]}%
+  }
+
+
+\endinput
+
+
+%% end of file `moderncvthemeclassic.sty'.

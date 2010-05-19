@@ -1,5 +1,5 @@
 %% start of file `moderncv.cls'.
-%% Copyright 2006 Xavier Danaux.
+%% Copyright 2007 Xavier Danaux (xdanaux@gmail.com).
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License version 1.3c,
@@ -10,7 +10,13 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{moderncv}[2006/09/09 v0.5 modern curriculum vitae document class]
+\ProvidesClass{moderncv}[2007/05/28 v0.6 modern curriculum vitae document class]
+
+
+%-------------------------------------------------------------------------------
+%                debugging
+%-------------------------------------------------------------------------------
+\newif\if@DEBUG\@DEBUGfalse
 
 
 %-------------------------------------------------------------------------------
@@ -114,25 +120,31 @@
 % hyperrefs
 \RequirePackage{url}
 \ifpdf
-  \RequirePackage[pdftex,pdfborder=0,breaklinks,baseurl=http://,pdfpagemode=None,pdfstartview=FitH,pdfpagelayout=SinglePage,pdfstartpage=1]{hyperref}
-  \AtEndOfClass{%
-    \AtBeginDocument{%
-      \hypersetup{%
-        pdfauthor   = \@firstname~\@familyname,%
-        pdftitle    = \@title,%
-        pdfsubject  = \@firstname~\@familyname,%
-        pdfkeywords = \@firstname~\@familyname{} curriculum vit\ae{},%
-        pdfcreator  = \LaTeX{} with `moderncv' package,%
-        pdfproducer = \LaTeX}}}
+  \RequirePackage[pdftex]{hyperref}
 \else
   \RequirePackage[dvips]{hyperref}\fi
+\AtEndOfClass{%
+  \AtBeginDocument{%
+    \hypersetup{%
+      breaklinks,
+      baseurl       = http://,
+      pdfborder     = 0 0 0,
+      pdfpagemode   = None,
+      pdfstartview  = XYZ,
+      pdfstartpage  = 1,
+      pdfauthor     = \@firstname~\@familyname,%
+      pdftitle      = \@title,%
+      pdfsubject    = \@firstname~\@familyname,%
+      pdfkeywords   = \@firstname~\@familyname{} curriculum vit\ae{},%
+      pdfcreator    = \LaTeX{} with `moderncv' package,%
+      pdfproducer   = \LaTeX}}}
 \urlstyle{tt}
 
 % tables that split across multiple pages
 \RequirePackage[]{longtable}
 % spacing between sections
-\setlength{\LTpre}{\medskipamount}
-\setlength{\LTpost}{\medskipamount}
+\setlength{\LTpre}{\smallskipamount}
+\setlength{\LTpost}{\smallskipamount}
 \setlength{\LTleft}{0pt}
 \setlength{\LTright}{0pt}
 
@@ -176,6 +188,11 @@
 %-------------------------------------------------------------------------------
 % symbols used 
 \providecommand*{\listitemsymbol}{\textbullet}
+\providecommand*{\addresssymbol}{}
+\providecommand*{\mobilesymbol}{\Mobilefone}
+\providecommand*{\phonesymbol}{\Telefon}
+\providecommand*{\faxsymbol}{\FAX}
+\providecommand*{\emailsymbol}{\Letter}
 
 % colors
 \definecolor{firstnamecolor}{rgb}{0,0,0}
@@ -208,14 +225,12 @@
 \providecommand*{\subsectionstyle}[1]{{\subsectionfont\color{subsectioncolor}#1}}
 \providecommand*{\hintstyle}[1]{{\hintfont\color{hintcolor}#1}}
 
-% styles: casual (default), classic, ...
-\newcommand*{\moderncvstyle}[2][]{
-  \def\@moderncvstyle{#2}
-  \def\@moderncvstyleoptions{#1}}
-\AtBeginDocument{\RequirePackage[\@moderncvstyleoptions]{moderncvstyle\@moderncvstyle}}
-
-% load default style
-\moderncvstyle{casual}
+% themes: casual (default), classic, ...
+\newcommand*{\moderncvtheme}[2][]{
+  \def\@moderncvtheme{#2}
+  \def\@moderncvthemeoptions{#1}}
+\moderncvtheme{casual}   % default theme
+\AtBeginDocument{\RequirePackage[\@moderncvthemeoptions]{moderncvtheme\@moderncvtheme}}
 
 
 %-------------------------------------------------------------------------------
@@ -224,21 +239,14 @@
 \newcommand*{\firstname}[1]{\def\@firstname{#1}}
 \newcommand*{\familyname}[1]{\def\@familyname{#1}}
 \renewcommand*{\title}[1]{\def\@title{#1}}
-\newcommand*{\address}[1]{\def\@address{#1}}
+\newcommand*{\address}[2]{\def\@addressstreet{#1}\def\@addresscity{#2}}
+\newcommand*{\mobile}[1]{\def\@mobile{#1}}
 \newcommand*{\phone}[1]{\def\@phone{#1}}
+\renewcommand*{\fax}[1]{\def\@fax{#1}}
 \newcommand*{\email}[1]{\def\@email{#1}}
 \newcommand*{\extrainfo}[1]{\def\@extrainfo{#1}}
-\newcommand*{\photo}[2][84pt]{\def\@photoheight{#1}\def\@photo{#2}}
+\newcommand*{\photo}[2][64pt]{\def\@photoheight{#1}\def\@photo{#2}}
 \newcommand*{\quote}[1]{\def\@quote{#1}}
-\firstname{}
-\familyname{}
-\title{}
-\address{}
-\phone{}
-\email{}
-\extrainfo{}
-\photo{}{}
-\quote{}
 
 % length used by the moderncv layout
 % quote length
@@ -277,29 +285,26 @@
   % listdoubleitem lengths
   \setlength{\listdoubleitemmaincolumnwidth}{\maincolumnwidth}%
   \addtolength{\listdoubleitemmaincolumnwidth}{-\listitemsymbolwidth}%
-  \setlength{\listdoubleitemmaincolumnwidth}{0.475\listdoubleitemmaincolumnwidth}}
+  \setlength{\listdoubleitemmaincolumnwidth}{0.475\listdoubleitemmaincolumnwidth}%
+  % fancyhdr lengths
+  \renewcommand{\headwidth}{\textwidth}}
 \sethintscolumnlength{0.15\textwidth}
 \recomputelengths
 
 % makes the cv title
 \renewcommand*{\maketitle}{}%
 
-% make a quote
-\newcommand*{\makequote}{%
-  {\centering{%
-    \begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}}\\[2.5em]}}
-
 % draws a colored rectangle
 % usage: \colorrule[optional height]{width}
 %\newcommand*{\colorrule}[2][1ex]{{\color{sectionrectanglecolor}{\rule{#2}{#1}}}}
 
 \newif\if@sectionopen\@sectionopenfalse
-\newif\if@firstcvline\@firstcvlinefalse % bug if initially set to true...
+\newif\if@firstcvlineofsection\@firstcvlineofsectionfalse % bug if initially set to true...
 % usage: \closesection{} to force a section to be closed (and the tabular layout it generates)
 \newcommand*{\closesection}{%
   \if@sectionopen%
     \end{longtable}%
-    \phantomsection% reset the anchor for hyperrefs
+%    \phantomsection% reset the anchor for hyperrefs
 %    \par\null%
     \@sectionopenfalse\fi}
 \AtEndDocument{\closesection{}}
@@ -307,73 +312,64 @@
 \newcommand*{\section}[1]{%
   \closesection{}%
   \@sectionopentrue%
-  \phantomsection{}%
+  \phantomsection{}% reset the anchor for hyperrefs
   \addcontentsline{toc}{part}{#1}%
-%  \ignorespacesafterend% NOT WORKING
-  \begin{longtable}[l]{@{}l@{\hspace{\separatorcolumnwidth}}@{}p{\maincolumnwidth}@{}}%
-%  \colorrule{\hintscolumnwidth}&\mbox{\sectionstyle{#1}}\\[1ex]}%
+  \begin{longtable}[l]{@{}p{\hintscolumnwidth}@{\hspace{\separatorcolumnwidth}}p{\maincolumnwidth}@{}}%
   {\color{sectionrectanglecolor}\rule{\hintscolumnwidth}{1ex}} &\sectionstyle{#1}\\[1ex]%
-  \@firstcvlinetrue}
+  \@firstcvlineofsectiontrue%
+  }
 \newcommand*{\emptysection}{%
   \closesection{}%
   \@sectionopentrue%
-%  \ignorespacesafterend% NOT WORKING
-  \begin{longtable}[l]{@{}l@{\hspace{\separatorcolumnwidth}}@{}p{\maincolumnwidth}@{}}%
-  \@firstcvlinetrue}
+  \begin{longtable}[l]{@{}p{\hintscolumnwidth}@{\hspace{\separatorcolumnwidth}}p{\maincolumnwidth}@{}}%
+  \@firstcvlineofsectiontrue%
+  }
 
 % usage (inside section): \subsection{title}
 \newcommand*{\subsection}[1]{%
-  &\subsectionstyle{#1}\\[1ex]}
+  \cvline[0.65em]{}{\subsectionstyle{#1}}}
 
 % usage (inside section): \cvline{leftmark}{text}
-\newcommand*{\cvline}[2]{%
-  \if@firstcvline%
-    \@firstcvlinefalse%
-    \\[-1em]% ugly hack to remove spaces before the first line
+\newcommand*{\cvline}[3][.25em]{%
+  \if@firstcvlineofsection%
+    \@firstcvlineofsectionfalse%
   \else%
-    \\\fi%
-  \begin{minipage}[t]{\hintscolumnwidth}\raggedleft\hintfont{#1}\end{minipage}&\begin{minipage}[t]{\maincolumnwidth}#2\end{minipage}}
-%  #1&\framebox{\begin{minipage}[t]{\maincolumnwidth}#2\end{minipage}}}
-%  \begin{minipage}[t]{\hintscolumnwidth}\raggedleft\hintstyle{#1}\end{minipage}&\begin{minipage}[t]{\maincolumnwidth}#2\end{minipage}}
-
-% usage (inside section): \cvitem{leftmark}{text}
-\newcommand*{\cvitem}[2]{%
-  \if@firstcvline
-  \else
-    \\[-0.75em]\fi
-  \cvline{#1}{#2}}
+    \\[#1]\fi%
+  \raggedleft\hintfont{#2} &#3}
 
 % usage (inside section}: \cvdoubleitem{subtitle}{text}{subtitle}{text}
 \newcommand*{\cvdoubleitem}[4]{%
- \cvitem{#1}{\begin{minipage}[t]{\doubleitemmaincolumnwidth}#2\end{minipage}%
+ \cvline{#1}{\begin{minipage}[t]{\doubleitemmaincolumnwidth}#2\end{minipage}%
  \hfill%
  \begin{minipage}[t]{\hintscolumnwidth}\raggedleft\hintfont{#3}\end{minipage}\hspace*{\separatorcolumnwidth}\begin{minipage}[t]{\doubleitemmaincolumnwidth}#4\end{minipage}}}
 
 % usage (inside section): \cvlistitem{point1}
-\newcommand*{\cvlistitem}[1]{%
-  \cvline{}{\listitemsymbol{}~#1}}
+\newcommand*{\cvlistitem}[2][\listitemsymbol{}]{%
+  \cvline[0pt]{}{#1~#2}}
 
 % usage (inside section): \cvlistdoubleitem{point1}{point2}
-\newcommand*{\cvlistdoubleitem}[2]{%
-  \cvline{}{\listitemsymbol{}~\begin{minipage}[t]{\listdoubleitemmaincolumnwidth}#1\end{minipage}%
+\newcommand*{\cvlistdoubleitem}[3][\listitemsymbol{}]{%
+  \cvline[0pt]{}{#1~\begin{minipage}[t]{\listdoubleitemmaincolumnwidth}#2\end{minipage}%
   \hfill%
-  \ifthenelse{\equal{#2}{}}%
+  \ifthenelse{\equal{#3}{}}%
     {}%
-    {\listitemsymbol{}~\begin{minipage}[t]{\listdoubleitemmaincolumnwidth}#2\end{minipage}}}}
+    {#1~\begin{minipage}[t]{\listdoubleitemmaincolumnwidth}#3\end{minipage}}}}
 
 % usage : \cventry{years}{degree/job title}{institution/employer}{localization}{optionnal: grade/...}{optional: comment/job description}
 \newcommand*{\cventry}[6]{%
-  \cvitem{#1}{%
+  \cvline{#1}{%
     {\bfseries#2}%
     \ifthenelse{\equal{#3}{}}{}{, {\slshape#3}}%
     \ifthenelse{\equal{#4}{}}{}{, #4}%
     \ifthenelse{\equal{#5}{}}{}{, #5}%
     .%
-    \ifthenelse{\equal{#6}{}}{}{\\\begin{minipage}[t]{\textwidth}\small#6\end{minipage}}}}
+    \ifthenelse{\equal{#6}{}}{}{\newline{}\small#6}
+    }}%
+%  \ifthenelse{\equal{#6}{}}{}{\cvline[0pt]{}{\small#6}}}
 
 % usage (inside 'language' cvsection environment): \cvlanguage{name}{level}{comment}
 \newcommand*{\cvlanguage}[3]{%
-  \cvitem{#1}{\begin{minipage}[t]{.225\maincolumnwidth}\textbf{#2}\end{minipage}\hfill\begin{minipage}[t]{0.725\maincolumnwidth}\raggedleft\footnotesize\itshape #3\end{minipage}}}
+  \cvline{#1}{\begin{minipage}[t]{.225\maincolumnwidth}\textbf{#2}\end{minipage}\hfill\begin{minipage}[t]{0.725\maincolumnwidth}\raggedleft\footnotesize\itshape #3\end{minipage}}}
 
 % usage (inside 'computer skills' cvsection environment): \cvcomputer{category}{programs}{category}{programs}
 \newcommand*{\cvcomputer}[4]{%
@@ -399,6 +395,19 @@
     {\def\@linktext{#2}}%
     {\def\@linktext{#1}}%
   \href{mailto:#2}{\@linktext{}}}
+
+% usage: \nopagenumbers{}
+\newif\if@displaypagenumbers\@displaypagenumberstrue
+\newcommand*{\nopagenumbers}{\@displaypagenumbersfalse}
+\AtBeginDocument{%
+  \if@displaypagenumbers%
+    \@ifundefined{r@lastpage}{}{%
+      \ifthenelse{\pageref{lastpage} > 1}{%
+      \fancypagestyle{plain}{%
+        \fancyfoot[r]{\addressfont\color{quotecolor}\footnotesize\thepage/\pageref{lastpage}}}%
+      \pagestyle{plain}}{}}%
+  \AtEndDocument{\label{lastpage}}%
+  \fi}
 
 % thebibliography environment, for use with BibTeX
 \newcommand{\refname}{Publications}

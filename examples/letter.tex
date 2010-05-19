@@ -1,0 +1,96 @@
+\documentclass[11pt]{article}
+
+
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{marvosym}
+\usepackage{ifpdf}
+\ifpdf
+  \usepackage[pdftex]{graphicx}
+\else
+  \usepackage[dvips]{graphicx}\fi
+
+\pagestyle{empty}
+
+\usepackage[scale=0.775]{geometry}
+\setlength{\parindent}{0pt}
+\addtolength{\parskip}{6pt}
+
+\def\firstname{John}
+\def\familyname{Doe}
+\def\FileAuthor{\firstname \familyname}
+\def\FileTitle{\firstname \familyname's cover letter}
+\def\FileSubject{Cover letter}
+\def\FileKeyWords{\firstname \familyname, Cover letter}
+
+\renewcommand{\ttdefault}{pcr}
+
+\usepackage{url}
+\urlstyle{tt}
+\ifpdf
+  \usepackage[pdftex,pdfborder=0,breaklinks,baseurl=http://,pdfpagemode=None,pdfstartview=XYZ,pdfstartpage=1]{hyperref}
+  \hypersetup{
+    pdfauthor   = \FileAuthor,%
+    pdftitle    = \FileTitle,%
+    pdfsubject  = \FileSubject,%
+    pdfkeywords = \FileKeyWords,%
+    pdfcreator  = \LaTeX,%
+    pdfproducer = \LaTeX}
+\else
+  \usepackage[dvips]{hyperref}
+\fi
+
+
+\begin{document}
+\sffamily   % for use with a résumé using sans serif fonts;
+%\rmfamily  % for use with a résumé using serif fonts;
+\hfill%
+\begin{minipage}[t]{.6\textwidth}
+\raggedleft%
+{\bfseries John Doe}\\[.35ex]
+\small\itshape%
+street and number\\
+postcode city\\[.35ex]
+\Telefon~phone number\\
+\Letter~\href{mailto:jdoe@gmail.com}{jdoe@gmail.com}
+\end{minipage}\\[1em]
+%
+\begin{minipage}[t]{.4\textwidth}
+\raggedright%
+{\bfseries Company XYZ}\\[.35ex]
+\small\itshape%
+street and number\\
+postcode city
+\end{minipage}
+\hfill % US style
+%\\[1em] % UK style
+\begin{minipage}[t]{.4\textwidth}
+\raggedleft % US style
+\today
+%April 6, 2006 % US informal style
+%05/04/2006 % UK formal style
+\end{minipage}\\[2em]
+\raggedright
+Dear Sir or Madam:\\[1.5em]
+%
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed nec sem sit amet lacus aliquam blandit. Nunc tristique mollis eros. Praesent elit. Maecenas turpis. Vestibulum consectetuer velit sit amet ipsum. Aliquam pede nunc, dictum ac, dictum nec, bibendum ut, ante. Phasellus justo urna, convallis vitae, scelerisque a, egestas vitae, diam. Cras eu enim a eros tristique varius.
+
+Pellentesque pellentesque magna a arcu. Phasellus enim purus, pellentesque sed, interdum hendrerit, interdum elementum, sapien. Nunc lobortis neque sed elit congue tempus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam lacus mi, volutpat bibendum, ullamcorper in, imperdiet vel, purus. Aliquam egestas sollicitudin mauris. Maecenas quis massa euismod tortor interdum consectetuer. Mauris rutrum leo adipiscing erat.
+
+Vivamus ullamcorper pellentesque arcu. Sed laoreet. Aenean porttitor, purus vel porta pretium, ante metus ultrices neque, id volutpat felis tellus vitae nunc. Vivamus tellus neque, tincidunt non, cursus non, porttitor vel, erat. Cras dictum, nisi vitae condimentum tempor, erat nisl pharetra diam, vitae scelerisque odio purus scelerisque massa. Curabitur malesuada purus volutpat dui. Fusce vitae sem. Fusce tempor felis vitae pede.
+
+Nurabitur id mi. Morbi tempor porta neque. Curabitur nunc dui, posuere sed, ornare eget, pellentesque eu, nisl. Suspendisse eget nulla in nisl consequat vulputate. Quisque id neque. Curabitur consectetuer, risus viverra suscipit rutrum, tortor mauris consequat lectus, quis gravida dolor arcu a velit. Sed elementum sagittis pede. Fusce erat. Aliquam quis justo. Praesent justo. Fusce turpis justo, fermentum et, placerat quis, vestibulum sed, sem. Morbi iaculis. Nunc in massa.
+
+Nulla mi. Suspendisse potenti. Quisque sapien nisl, congue id, egestas a, lacinia ut, pede. Etiam vehicula nisi eu dolor. Aliquam nulla elit, dignissim nec, suscipit ut, cursus sit amet, dui. Sed vel lorem ut lacus sagittis egestas. Quisque justo nisl, convallis non, ultrices et, tempor at, pede. Phasellus orci. Morbi non velit blandit pede adipiscing mollis. Cras malesuada. Mauris tincidunt massa ut risus. Maecenas sit amet mi nec elit ultrices tincidunt. Nullam hendrerit congue ipsum. Fusce felis.
+  
+%Yours sincerely,\\[2em] % if the opening is "Dear Mr(s) Doe,"
+Yours faithfully,\\[2em] % if the opening is "Dear Sir or Madam,"
+%
+%\includegraphics[scale=0.75]{signature_blue}\\
+{\bfseries John Doe}\\
+%
+\vfill%
+{\slshape Enclosure}
+%{\slshape Attachment: curriculum vit\ae{}}
+\end{document}

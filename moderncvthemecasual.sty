@@ -1,0 +1,153 @@
+%% start of file `moderncvthemecasual.sty'.
+%% Copyright 2007 Xavier Danaux (xdanaux@gmail.com).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+%-------------------------------------------------------------------------------
+%                identification
+%-------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{moderncvthemecasual}[2007/05/28 v0.6 modern curriculum vitae style: casual]
+
+
+%-------------------------------------------------------------------------------
+%                required packages
+%-------------------------------------------------------------------------------
+
+
+%-------------------------------------------------------------------------------
+%                package options
+%-------------------------------------------------------------------------------
+% color options
+% blue (default option)
+\DeclareOption{blue}{}
+% orange
+\newif\if@colororange\@colororangefalse
+\DeclareOption{orange}{\@colororangetrue}
+% green
+\newif\if@colorgreen\@colorgreenfalse
+\DeclareOption{green}{\@colorgreentrue}
+% red
+\newif\if@colorred\@colorredfalse
+\DeclareOption{red}{\@colorredtrue}
+% grey
+\newif\if@colorgrey\@colorgreyfalse
+\DeclareOption{grey}{\@colorgreytrue}
+
+% roman option
+\newif\if@roman\@romanfalse
+\DeclareOption{roman}{\@romantrue}
+
+% unused options
+\DeclareOption*{
+  \PackageWarning{moderncvthemecasual}{Unknown option '\CurrentOption'}}
+
+% execute default options
+\ExecuteOptions{color}
+
+% process given options
+\ProcessOptions\relax
+
+
+%-------------------------------------------------------------------------------
+%                style definition
+%-------------------------------------------------------------------------------
+% symbols used
+\renewcommand*{\listitemsymbol}{\textbullet}
+
+% colors
+\definecolor{firstnamecolor}{rgb}{0.65,0.65,0.65}
+\definecolor{familynamecolor}{rgb}{0.45,0.45,0.45}
+\definecolor{quotecolor}{rgb}{0.35,0.35,0.35}
+\definecolor{addresscolor}{rgb}{0.35,0.35,0.35}
+% default blue color
+  \definecolor{sectionrectanglecolor}{rgb}{0.25,0.50,0.75}
+  \definecolor{sectiontitlecolor}{rgb}{0.20,0.40,0.65}
+  \definecolor{subsectioncolor}{rgb}{0.20,0.40,0.65}
+  \definecolor{footersymbolcolor}{rgb}{0.25,0.50,0.75}
+\if@colororange
+  \definecolor{sectionrectanglecolor}{rgb}{1.00,0.65,0.20}
+  \definecolor{sectiontitlecolor}{rgb}{0.95,0.55,0.15}
+  \definecolor{subsectioncolor}{rgb}{0.95,0.55,0.15}
+  \definecolor{footersymbolcolor}{rgb}{0.95,0.55,0.15}\fi
+\if@colorgreen
+  \definecolor{sectionrectanglecolor}{rgb}{0.55,0.85,0.35}
+  \definecolor{sectiontitlecolor}{rgb}{0.30,0.65,0.15}
+  \definecolor{subsectioncolor}{rgb}{0.30,0.65,0.15}
+  \definecolor{footersymbolcolor}{rgb}{0.30,0.65,0.15}\fi
+\if@colorred
+  \definecolor{sectionrectanglecolor}{rgb}{1.00,0.30,0.30}
+  \definecolor{sectiontitlecolor}{rgb}{0.95,0.20,0.20}
+  \definecolor{subsectioncolor}{rgb}{0.95,0.20,0.20}
+  \definecolor{footersymbolcolor}{rgb}{0.95,0.20,0.20}\fi
+\if@colorgrey
+  \definecolor{sectionrectanglecolor}{rgb}{0.75,0.75,0.75}
+  \definecolor{sectiontitlecolor}{rgb}{0.35,0.35,0.35}
+  \definecolor{subsectioncolor}{rgb}{0.35,0.35,0.35}
+  \definecolor{footersymbolcolor}{rgb}{0.35,0.35,0.35}\fi
+
+% fonts
+\if@roman
+  \AtBeginDocument{\rmfamily}
+\else
+  \AtBeginDocument{\sffamily}\fi
+\renewcommand*{\ttdefault}{pcr}
+\renewcommand*{\firstnamefont}{\fontsize{38}{40}\sffamily\mdseries\upshape}
+\renewcommand*{\familynamefont}{\firstnamefont}
+\renewcommand*{\addressfont}{\normalsize\sffamily\mdseries\slshape}
+\renewcommand*{\quotefont}{\large\slshape}
+\renewcommand*{\sectionfont}{\Large\sffamily\mdseries\upshape}
+\renewcommand*{\subsectionfont}{\large\sffamily\mdseries\upshape}
+
+% styles
+
+% maketitle
+\renewcommand*{\maketitle}{%
+  {%
+    \ifthenelse{\isundefined{\@photo}}%
+      {}%
+      {{\color{firstnamecolor}\framebox{\includegraphics[height=\@photoheight]{\@photo}}}}%
+    \hfill%
+    \raggedleft{\firstnamestyle{\MakeLowercase{\@firstname}}\familynamestyle{\MakeLowercase{\@familyname}}}\\[-.35em]}%
+  {\color{firstnamecolor}\rule{\textwidth}{.25ex}\\[2.5em]}%
+% optional quote
+  \ifthenelse{\isundefined{\@quote}}%
+    {}%
+    {\centering{\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}}\\[2.5em]}%
+  }%
+
+% cv footer
+\newif\if@firstfooterelement\@firstfooterelementtrue
+\providecommand*{\footersymbol}{}
+\renewcommand*{\footersymbol}{%
+  \if@firstfooterelement%
+  \else%
+    { ~~\color{footersymbolcolor}\textbullet~~~}\fi}
+\providecommand*{\makefooter}{}
+\renewcommand*{\makefooter}{%
+  \fancypagestyle{plain}{%
+    \fancyfoot[c]{%
+      \parbox{0.8\textwidth}{%
+      \centering%
+      \addressfont\color{addresscolor}%
+      \ifthenelse{\isundefined{\@addressstreet}}{}{%
+        \addresssymbol~\@addressstreet%
+        \@firstfooterelementfalse%
+        \ifthenelse{\isundefined{\@addresscity}}{}{\footersymbol\@addresscity}\\\@firstfooterelementtrue}%
+      \ifthenelse{\isundefined{\@mobile}}{}{\footersymbol\mobilesymbol~\@mobile\@firstfooterelementfalse}%
+      \ifthenelse{\isundefined{\@phone}}{}{\footersymbol\phonesymbol~\@phone\@firstfooterelementfalse}%
+      \ifthenelse{\isundefined{\@fax}}{}{\footersymbol\faxsymbol~\@fax\@firstfooterelementfalse}%
+      \ifthenelse{\isundefined{\@email}}{}{\footersymbol\emailsymbol~\emaillink{\@email}\@firstfooterelementfalse}%
+      \ifthenelse{\isundefined{\@extrainfo}}{}{\footersymbol\@extrainfo\@firstfooterelementfalse}}}%
+  }%
+  \pagestyle{plain}}
+\AtBeginDocument{\makefooter}
+
+
+\endinput
+
+
+%% end of file `moderncvthemecasual.sty'.
