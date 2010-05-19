@@ -1,10 +1,16 @@
 %% start of file `moderncvstyleclassic.sty'.
+%% Copyright 2006 Xavier Danaux.
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
 
 %-------------------------------------------------------------------------------
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{moderncvstyleclassic}[2006/05/02 v0.4 modern curriculum vitae style: casual]
+\ProvidesPackage{moderncvstyleclassic}[2006/09/09 v0.5 modern curriculum vitae style: classic]
 
 
 %-------------------------------------------------------------------------------
@@ -76,22 +82,27 @@
 
 % maketitle
 \renewcommand*{\maketitle}{%
-  \begin{minipage}[t]{.6\textwidth}%
+  \begin{minipage}[b]{.5\textwidth}%
     \firstnamestyle{\@firstname~}\familynamestyle{\@familyname}%
     \ifthenelse{\equal{\@title}{}}%
       {}%
       {\\[1.25em]\titlestyle{\@title}}%
   \end{minipage}%
-  \begin{minipage}[t]{.4\textwidth}%
+  \hfill%
+  \begin{minipage}[b]{.35\textwidth}%
     \raggedleft\addressfont\color{addresscolor}\@address\\[0.2em]%
     \Telefon~\@phone\\[.2em]%
     \Letter~\emaillink{\@email}%
     \ifthenelse{\equal{\@extrainfo}{}}%
       {}%
       {\\[0.2em]\@extrainfo}
-  \end{minipage}\\[3em]}
+  \end{minipage}%
+  \ifthenelse{\equal{\@photo}{}}%
+    {}%
+    {\hspace*{1em}\color{firstnamecolor}\framebox{\includegraphics[height=\@photoheight]{\@photo}}}\\[3em]}
 
 
 \endinput
+
 
 %% end of file `moderncvstyleclassic.sty'.

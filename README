@@ -1,19 +1,29 @@
 moderncv -- a modern curriculum vitae class
 
-Moderncv provides a documentclass for typesetting modern curriculum vitaes, both in a
-classic and in a casual style. It is fairly customisable, allowing you to define your own
-style by changing the colors, the fonts, ...
+Moderncv provides a documentclass for typesetting modern curriculum vitaes in
+various styles. It is fairly customizable, allowing you to define your own style
+by changing the colors, the fonts, ... and provides two default styles: classic
+and casual.
 
-The moderncv documentclass need it's input to be formatted with regular commands
-(\section, \subsection, \maketitle, ...), but also defines its own special commands
-(\cventry, \makequote, \firsname, \familyname, ...).
-All the commands are defined in such a way that the arguments are always optional.
+The moderncv documentclass need it's input to be formatted with regular
+commands like:
+  \section,
+  \subsection,
+  \maketitle,
+but also defines its own special commands:
+  \cventry,
+  \makequote,
+  \firstname,
+  \familyname,
+  ...
+All the commands are defined in such a way that the arguments are always
+optional.
 
 Documents can be compiled into dvi, ps or pdf.
 
-Until a decent manual is written, you can always look in the "examples" directory for
-some decent examples.
+Until a decent manual is written, you can always look in the "examples"
+directory for some examples.
 
 
 Author: Xavier Danaux <xdanaux@gmail.com>
-Date: 10 April 2006
+Date: 09 September 2006

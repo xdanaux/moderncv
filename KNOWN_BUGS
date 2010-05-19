@@ -1,3 +1,5 @@
-* Inside the last argument of \cventry, used to display some complementary
-information of an entry, the command "\\" doesn't seem to work, while "\newline" works
-perfectly. I have no idea why...
+- Inside the last argument of \cventry, used to display some complementary
+information of an entry, the command "\\" doesn't seem to work, while "\newline"
+works perfectly. I have no idea why...
+- The \cvsection command seems to be unable to handle a Chinese argument, using
+CJK.

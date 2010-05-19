@@ -1,10 +1,16 @@
 %% start of file `moderncv.cls'.
+%% Copyright 2006 Xavier Danaux.
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
 
 %-------------------------------------------------------------------------------
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{moderncv}[2006/05/02 v0.4 modern curriculum vitae document class]
+\ProvidesClass{moderncv}[2006/09/09 v0.5 modern curriculum vitae document class]
 
 
 %-------------------------------------------------------------------------------
@@ -222,6 +228,7 @@
 \newcommand*{\phone}[1]{\def\@phone{#1}}
 \newcommand*{\email}[1]{\def\@email{#1}}
 \newcommand*{\extrainfo}[1]{\def\@extrainfo{#1}}
+\newcommand*{\photo}[2][84pt]{\def\@photoheight{#1}\def\@photo{#2}}
 \newcommand*{\quote}[1]{\def\@quote{#1}}
 \firstname{}
 \familyname{}
@@ -230,6 +237,7 @@
 \phone{}
 \email{}
 \extrainfo{}
+\photo{}{}
 \quote{}
 
 % length used by the moderncv layout
@@ -285,16 +293,17 @@
 % usage: \colorrule[optional height]{width}
 %\newcommand*{\colorrule}[2][1ex]{{\color{sectionrectanglecolor}{\rule{#2}{#1}}}}
 
-% usage: \section{<title>}, or \emptysection{}
 \newif\if@sectionopen\@sectionopenfalse
 \newif\if@firstcvline\@firstcvlinefalse % bug if initially set to true...
+% usage: \closesection{} to force a section to be closed (and the tabular layout it generates)
 \newcommand*{\closesection}{%
   \if@sectionopen%
     \end{longtable}%
-    \phantomsection%  % reset the anchor for hyperrefs
+    \phantomsection% reset the anchor for hyperrefs
 %    \par\null%
     \@sectionopenfalse\fi}
 \AtEndDocument{\closesection{}}
+% usage: \section{<title>}, or \emptysection{}
 \newcommand*{\section}[1]{%
   \closesection{}%
   \@sectionopentrue%
@@ -391,7 +400,53 @@
     {\def\@linktext{#1}}%
   \href{mailto:#2}{\@linktext{}}}
 
+% thebibliography environment, for use with BibTeX
+\newcommand{\refname}{Publications}
+\newlength{\bibindent}
+\setlength{\bibindent}{1.5em}
+% trick to force the previous section to close before the thebibliography environment
+\let\oldbibliography\bibliography
+\renewcommand*{\bibliography}[1]{%
+  \closesection{}%
+  \oldbibliography{#1}}
+% bibliography item label
+\newcommand*{\bibliographyitemlabel}{}% use \@biblabel{\arabic{enumiv}} for BibTeX labels
+\newenvironment{thebibliography}[1]%
+  {%
+    \section{\refname}%
+    \closesection{}%
+    \vspace*{-1.65em}%
+    \small%
+    \begin{list}{\bibliographyitemlabel}%
+      {%
+        \setlength{\topsep}{0pt}%
+        \setlength{\labelwidth}{\hintscolumnwidth}%
+        \setlength{\labelsep}{\separatorcolumnwidth}%
+        \leftmargin\labelwidth%
+        \advance\leftmargin\labelsep%
+        \@openbib@code%
+        \usecounter{enumiv}%
+        \let\p@enumiv\@empty%
+        \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+        \sloppy\clubpenalty4000\widowpenalty4000%
+%        \sfcode`\.\@m%
+%        \sfcode `\=1000\relax%
+  }%
+  {%
+    \def\@noitemerr{\@latex@warning{Empty `thebibliography' environment}}%
+    \end{list}%
+  }
+\newcommand\newblock{\hskip .11em\@plus.33em\@minus.07em}
+\let\@openbib@code\@empty
+
+% the classical \today definition
+\def\today{\ifcase\month\or
+  January\or February\or March\or April\or May\or June\or
+  July\or August\or September\or October\or November\or December\fi
+  \space\number\day, \number\year}
+
 
 \endinput
+
 
 %% end of file `moderncv.cls'.

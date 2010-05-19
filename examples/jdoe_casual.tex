@@ -1,30 +1,33 @@
+%% start of file `jdoe_casual.tex'.
+%% Copyright 2006 Xavier Danaux.
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
 \documentclass[11pt]{moderncv}
 
 % moderncv styles
-\moderncvstyle{casual}
-%\moderncvstyle[nocolor]{casual}
-%\moderncvstyle{classic}
-%\moderncvstyle[roman]{classic}
+\moderncvstyle{casual}         % optional argument are 'nocolor' (black & white cv) and 'roman' (for roman fonts, instead of sans serif fonts)
+%\moderncvstyle{classic}       % idem
 
 % character encoding
-\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}   % replace by the encoding you are using
 
-% personal data
+% personal data (the given example is exhaustive; just give what you want)
 \firstname{John}
 \familyname{Doe}
 \title{Design enthusiast\dots}
 %\address{12 somestreet\\3456 somecity} % for classic style
-\address{12 somestreet, 3456 somecity} % for casual style
+\address{12 somestreet, 3456 somecity}  % for casual style
 \phone{+12 (3)456 78 90}
 \email{jdoe@design.org}
-%\extrainfo{{\small maried with childrens}}
-\quote{Any intelligent fool can make things bigger, more complex, and more violent. It takes a touch of genius -- and a lot of courage -- to move in the opposite direction.}
+\extrainfo{\weblink{www.ctan.org}}
+\photo[64pt]{jdoe_picture} % also optional, and the optional argument is the height the picture must be resized to
+\quote{Any intelligent fool can make things bigger, more complex, and more violent. It takes a touch of genius -- and a lot of courage -- to move in the opposite direction.}% also optional
 
-%\renewcommand{\listsymbol}{{\fontencoding{U}\fontfamily{ding}\selectfont\tiny\symbol{'102}}}
-\definecolor{see}{rgb}{0.5,0.5,0.5}
-
-% command for text subscripts
-\newcommand{\up}[1]{\ensuremath{^\textrm{\scriptsize#1}}}
+%\renewcommand{\listsymbol}{{\fontencoding{U}\fontfamily{ding}\selectfont\tiny\symbol{'102}}} % define another symbol to be used in front of the list items
 
 % the ConTeXt symbol
 \def\ConTeXt{%
@@ -40,6 +43,9 @@
 %\DeclareFontShape{T1}{myfont}{m}{scsl}{ <-> cork-lmssqbo8}{}
 %\usefont{T1}{myfont}{m}{scsl}Testing the font
 
+% command and color used in this document, independently from moderncv 
+\definecolor{see}{rgb}{0.5,0.5,0.5}% for web links
+\newcommand{\up}[1]{\ensuremath{^\textsf{\scriptsize#1}}}% for text subscripts
 
 %----------------------------------------------------------------------------------
 %            content
@@ -68,8 +74,8 @@
 \cvlanguage{Dutch}{Near-native}{Primary education degree obtained in a Dutch college\\(Sint-Jozefscollege te Sint-Pieters-Woluwe).}
 \cvlanguage{English}{Very good}{Many journeys in English speaking countries, including the United States,\\the United Kingdom and Kenya.}
 \cvlanguage{Mandarin}{Elementary}{Taking classes at the ``Institut des Langues Vivantes'' (UCL), for the second year now.}
-\closesection
-\pagebreak
+\closesection{}
+\pagebreak{}
 
 \section{Computer skills}
 \cvcomputer{OS}{Linux, Unix, Windows}{administration}{Apache, Mailman}
@@ -82,16 +88,25 @@
 \cvitem{adventure sports}{\small I like practicing adventure sports like skiing, rock climbing and scuba diving, and have been a boy scout for five years.}
 \cvitem{travelling}{\small I have been living abroad during my childhood, and love travelling around the world.}
 
-%\section{Section with a list}
-%\cvlistitem{lol}
-%\cvlistitem{lol}
-%\cvlistdoubleitem{lol}{relol}
-%\cvlistdoubleitem{lol}{relol}
+\section{Section with a list}
+\cvlistitem{Single item.}
+\cvlistitem{Another single item.}
+\cvlistdoubleitem{Double\dots{}}{\dots{} item.}
+\cvlistdoubleitem{Another double\dots{}}{\dots{} item.}
 
-%\section{Section with your own content}\closesection
-%Your content here,\\
-%inside the normal \LaTeX{} environment.
+\section{Section with your own content}\closesection
+Your content here, inside the normal \LaTeX{} environment. You can use any regular \LaTeX{} command, display mathematics
+\[e =m\,c^2,\]
+put some table or figure, \dots
 
-%\emptysection{}
-%\cvitem{Now}{Back to moderncv layout, without making a new section :-)}
+\emptysection{}
+\cvitem{Now}{Back to moderncv layout, without making a new section :-)}
+
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{jdoe_publications}
+
 \end{document}
+
+
+%% end of file `jdoe_casual.tex'.

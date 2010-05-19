@@ -1,40 +1,66 @@
+version 0.5 (9 September 2006)
+  - added a \photo command to display a picture. That command takes the name of
+  the file with the picture as argument, and the desired height as optional
+  argument.
+  - implemented the needed commands to make moderncv compatible with BibTeX, as
+  suggested by J. Lie. This makes it possible to display one's publications,
+  stored in the BibTeX file 'publications.bib'
+  by using:
+    \nocite{*}
+    \bibliographystyle{plain}
+    \bibliography{publications}
+  As usual, the name of the section title can be changed by redefining the
+  command \refname.
+  - added the \today command, useful for example if one need to add the date the
+  resumé was produced with
+    \closesection{}
+    \vfill{\hfill{\scriptsize Produced \today.}}
+  at the end of your CV, as suggested by F. Hammann.
+
 version 0.4 (2 May 2006)
-  - removed the dependency on the geometry package, so that users can now invoke it themselve, and easily change the geometry of the page.
+  - removed the dependency on the geometry package, so that users can now invoke
+  it themselve, and easily change the geometry of the page.
 
 version 0.3 (10 April 2006)
-  - moderncv now uses the 'longtable' class, allowing cv sections to split across multiple pages.
-  - the different lengths used by moderncv are now customizable! In particular, the first column
-  (the one containing the date in the examples), can now be set to any width, for people
-  needing a smaller or larger one. To do that, either use
-  \sethintscolumnlength{<length>},
+  - moderncv now uses the 'longtable' class, allowing cv sections to split
+  across multiple pages.
+  - the different lengths used by moderncv are now customizable! In particular,
+  the first column (the one containing the date in the examples), can now be set
+  to any width, for people needing a smaller or larger one. To do that, either
+  use
+    \sethintscolumnlength{<length>},
   where <length> is the desired length in a unit LaTeX understands, or
-  \sethintscolumntowidth{<string>},
-  where <string> is a string of the desired length (usually, the longest string that has to appear
-  in the column). Thanks to A. Pöge for pointing out the need of such a feature.
-  - added the command \emptysection{}, which makes it possible to start a section without
-  name. In combination with \closesection{}, this makes it possible to drop out of the layout of
-  moderncv, and come back to it later. This should make the inclusion of arbitrary elements not
-  covered by moderncv code possible.
-  - corrected a spacing problem in the cventry command, as pointed out and solved by
-  B. Eßmann.
+    \sethintscolumntowidth{<string>},
+  where <string> is a string of the desired length (usually, the longest string
+  that has to appear in the column). Thanks to A. Pöge for pointing out the need
+  of such a feature.
+  - added the command \emptysection{}, which makes it possible to start a
+  section without name. In combination with \closesection{}, this makes it
+  possible to drop out of the layout of moderncv, and come back to it later.
+  This should make the inclusion of arbitrary elements not covered by moderncv
+  code possible.
+  - corrected a spacing problem in the cventry command, as pointed out and
+  solved by B. Eßmann.
 
 version 0.2 (6 March 2006)
-  - rewrite of the code to have the styles (fonts, colours, headers and footers) be defined
-  in different files than the class. The styles are now defined in a separate file per style,
-  named moderncvstyle<style_name>. It should now be easy to write your own
-  style, starting from moderncvstyleempty.sty. If you feel you have created a nice style,
-  just email it to me and I'll include it in the next version.
+  - rewrite of the code to have the styles (fonts, colours, headers and footers)
+  be defined in different files than the class. The styles are now defined in a
+  separate file per style, named moderncvstyle<style_name>. It should now be
+  easy to write your own style, starting from moderncvstyleempty.sty. If you
+  feel you have created a nice style, just email it to me and I'll include it in
+  the next version.
   - due to the previous point, styles are now loaded by the command
   \moderncvstyle{style_name}. I couldn't figure out a way to preserve the old
   "casual" and "classic" class options, so these are now broken! Use
   \moderncvstyle{casual} or \moderncvstyle{classic} at the beginning of your
   document. This should be the only incompatibility with version 0.1.
   - added class option "nolmodern" for people without the latin modern fonts.
-  - corrected some English mistakes in the examples. Thanks to Machael H. Prager for
+  - corrected some English mistakes in the examples. Thanks to M. H. Prager for
   pointing them out.
-  - added a \cvlistitem to produce items with a bullet (controlled by \listitemsymbol), and
-  renamed \cvresume to \cvlistdoubleitem for consistency purpose. For compatibility
-  reasons, the command \cvresume still works, but should be avoided.
+  - added a \cvlistitem to produce items with a bullet (or whatever is defined
+  in \listitemsymbol), and renamed \cvresume to \cvlistdoubleitem for
+  consistency purpose. For compatibility reasons, the command \cvresume still
+  works, but should be avoided.
 
 version 0.1 (1 March 2006)
   - first release.
