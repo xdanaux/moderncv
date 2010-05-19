@@ -4,7 +4,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{moderncv}[2006/04/10 v0.3 modern curriculum vitae document class]
+\ProvidesClass{moderncv}[2006/05/02 v0.4 modern curriculum vitae document class]
 
 
 %-------------------------------------------------------------------------------
@@ -98,9 +98,12 @@
 %\RequirePackage{ae,aecompl,aeguill}
 
 % page geometry
-% (this should perhaps be left to the user...)
-%\RequirePackage[top=2cm, bottom=2.5cm, left=2.25cm, right=2.25cm]{geometry}
-\RequirePackage[top=1.5cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\addtolength{\oddsidemargin}{-54pt}
+\addtolength{\textwidth}{109pt}
+\addtolength{\topmargin}{-70pt}
+\addtolength{\textheight}{122pt}
+\addtolength{\marginparsep}{-5pt}
+\addtolength{\marginparwidth}{-10pt}
 
 % hyperrefs
 \RequirePackage{url}
@@ -229,7 +232,10 @@
 \extrainfo{}
 \quote{}
 
-% length used by the table layout
+% length used by the moderncv layout
+% quote length
+\newlength{\quotewidth}
+% section lengths
 \newlength{\hintscolumnwidth}
 \newlength{\separatorcolumnwidth}
 \setlength{\separatorcolumnwidth}{0.025\textwidth}
@@ -244,14 +250,33 @@
   \setlength{\maincolumnwidth}{\textwidth}%
   \addtolength{\maincolumnwidth}{-\separatorcolumnwidth}%
   \addtolength{\maincolumnwidth}{-\hintscolumnwidth}}
+% doubleitem lengths
+\newlength{\doubleitemmaincolumnwidth}
+% listitem lengths
+\newlength{\listitemsymbolwidth}
+\settowidth{\listitemsymbolwidth}{\listitemsymbol{}~}
+% listdoubleitem lengths
+\newlength{\listdoubleitemmaincolumnwidth}
+% recompute all the lengths that depends on the text width
+\newcommand*{\recomputelengths}{%
+  \setlength{\quotewidth}{0.65\textwidth}%
+  \sethintscolumnlength{\hintscolumnwidth}%
+  % doubleitem lengths
+  \setlength{\doubleitemmaincolumnwidth}{\maincolumnwidth}%
+  \addtolength{\doubleitemmaincolumnwidth}{-\hintscolumnwidth}%
+  \addtolength{\doubleitemmaincolumnwidth}{-\separatorcolumnwidth}%
+  \setlength{\doubleitemmaincolumnwidth}{0.5\doubleitemmaincolumnwidth}%
+  % listdoubleitem lengths
+  \setlength{\listdoubleitemmaincolumnwidth}{\maincolumnwidth}%
+  \addtolength{\listdoubleitemmaincolumnwidth}{-\listitemsymbolwidth}%
+  \setlength{\listdoubleitemmaincolumnwidth}{0.475\listdoubleitemmaincolumnwidth}}
 \sethintscolumnlength{0.15\textwidth}
+\recomputelengths
 
 % makes the cv title
 \renewcommand*{\maketitle}{}%
 
 % make a quote
-\newlength{\quotewidth}
-\setlength{\quotewidth}{0.65\textwidth}
 \newcommand*{\makequote}{%
   {\centering{%
     \begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}}\\[2.5em]}}
@@ -310,11 +335,6 @@
   \cvline{#1}{#2}}
 
 % usage (inside section}: \cvdoubleitem{subtitle}{text}{subtitle}{text}
-\newlength{\doubleitemmaincolumnwidth}
-\setlength{\doubleitemmaincolumnwidth}{\maincolumnwidth}
-\addtolength{\doubleitemmaincolumnwidth}{-\hintscolumnwidth}
-\addtolength{\doubleitemmaincolumnwidth}{-\separatorcolumnwidth}
-\setlength{\doubleitemmaincolumnwidth}{0.5\doubleitemmaincolumnwidth}
 \newcommand*{\cvdoubleitem}[4]{%
  \cvitem{#1}{\begin{minipage}[t]{\doubleitemmaincolumnwidth}#2\end{minipage}%
  \hfill%
@@ -325,12 +345,6 @@
   \cvline{}{\listitemsymbol{}~#1}}
 
 % usage (inside section): \cvlistdoubleitem{point1}{point2}
-\newlength{\listitemsymbolwidth}
-\settowidth{\listitemsymbolwidth}{\listitemsymbol{}~}
-\newlength{\listdoubleitemmaincolumnwidth}
-\setlength{\listdoubleitemmaincolumnwidth}{\maincolumnwidth}
-\addtolength{\listdoubleitemmaincolumnwidth}{-\listitemsymbolwidth}
-\setlength{\listdoubleitemmaincolumnwidth}{0.475\listdoubleitemmaincolumnwidth}
 \newcommand*{\cvlistdoubleitem}[2]{%
   \cvline{}{\listitemsymbol{}~\begin{minipage}[t]{\listdoubleitemmaincolumnwidth}#1\end{minipage}%
   \hfill%
