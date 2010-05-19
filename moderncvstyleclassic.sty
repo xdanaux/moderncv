@@ -1,0 +1,97 @@
+%% start of file `moderncvstyleclassic.sty'.
+
+%-------------------------------------------------------------------------------
+%                identification
+%-------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{moderncvstyleclassic}[2006/03/06 v0.2 modern curriculum vitae style: casual]
+
+
+%-------------------------------------------------------------------------------
+%                required packages
+%-------------------------------------------------------------------------------
+
+
+%-------------------------------------------------------------------------------
+%                package options
+%-------------------------------------------------------------------------------
+% nocolor option
+\newif\if@color\@colortrue
+\DeclareOption{nocolor}{\@colorfalse}
+
+% roman option
+\newif\if@roman\@romanfalse
+\DeclareOption{roman}{\@romantrue}
+
+% unused options
+\DeclareOption*{
+  \PackageWarning{moderncvstyleclassic}{Unknown option '\CurrentOption'}}
+
+% execute default options
+\ExecuteOptions{color}
+
+% process given options
+\ProcessOptions\relax
+
+
+%-------------------------------------------------------------------------------
+%                style definition
+%-------------------------------------------------------------------------------
+% symbols used
+\renewcommand*{\listitemsymbol}{\textbullet}
+
+% colors
+\if@color
+  \definecolor{firstnamecolor}{rgb}{0,0,0}
+  \definecolor{familynamecolor}{rgb}{0,0,0}
+  \definecolor{titlecolor}{rgb}{0.35,0.35,0.35}
+  \definecolor{addresscolor}{rgb}{0.25,0.5,0.75}
+  \definecolor{quotecolor}{rgb}{0.35,0.35,0.35}
+  \definecolor{sectionrectanglecolor}{rgb}{0.25,0.5,0.75}
+  \definecolor{sectiontitlecolor}{rgb}{0.2,0.4,0.65}
+\else
+  \definecolor{firstnamecolor}{rgb}{0,0,0}
+  \definecolor{familynamecolor}{rgb}{0,0,0}
+  \definecolor{titlecolor}{rgb}{0.35,0.35,0.35}
+  \definecolor{addresscolor}{rgb}{0.35,0.35,0.35}
+  \definecolor{quotecolor}{rgb}{0.35,0.35,0.35}
+  \definecolor{sectionrectanglecolor}{rgb}{0.75,0.75,0.75}
+  \definecolor{sectiontitlecolor}{rgb}{0.35,0.35,0.35}\fi
+
+% fonts
+\if@roman
+  \AtBeginDocument{\rmfamily}
+\else
+  \AtBeginDocument{\sffamily}\fi
+\renewcommand*{\ttdefault}{pcr}
+\renewcommand*{\firstnamefont}{\fontsize{34}{36}\sffamily\mdseries\upshape}
+\renewcommand*{\titlefont}{\LARGE\sffamily\mdseries\slshape}
+\renewcommand*{\addressfont}{\rmfamily\mdseries\slshape}
+\renewcommand*{\familynamefont}{\firstnamefont}
+\renewcommand*{\quotefont}{\large\slshape}
+\renewcommand*{\sectionfont}{\Large\sffamily\mdseries\upshape}
+\renewcommand*{\subsectionfont}{\normalsize\sffamily\mdseries\upshape}
+
+% styles
+
+% maketitle
+\renewcommand*{\maketitle}{%
+  \begin{minipage}[t]{.6\textwidth}%
+    \firstnamestyle{\@firstname~}\familynamestyle{\@familyname}%
+    \ifthenelse{\equal{\@title}{}}%
+      {}%
+      {\\[1.25em]\titlestyle{\@title}}%
+  \end{minipage}%
+  \begin{minipage}[t]{.4\textwidth}%
+    \raggedleft\addressfont\color{addresscolor}\@address\\[0.2em]%
+    \Telefon~\@phone\\[.2em]%
+    \Letter~\emaillink{\@email}%
+    \ifthenelse{\equal{\@extrainfo}{}}%
+      {}%
+      {\\[0.2em]\@extrainfo}
+  \end{minipage}\\[3em]}
+
+
+\endinput
+
+%% end of file `moderncvstyleclassic.sty'.

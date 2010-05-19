@@ -1,0 +1,20 @@
+version 0.2 (6 March 2006)
+  - rewrite of the code to have the styles (fonts, colours, headers and footers) be defined
+  in different files than the class. The styles are now defined in a separate file per style,
+  named moderncvstyle<style_name>. It should now be easy to write your own
+  style, starting from moderncvstyleempty.sty. If you feel you have created a nice style,
+  just email it to me and I'll include it in the next version.
+  - due to the previous point, styles are now loaded by the command
+  \moderncvstyle{style_name}. I couldn't figure out a way to preserve the old
+  "casual" and "classic" class options, so these are now broken! Use
+  \moderncvstyle{casual} or \moderncvstyle{classic} at the beginning of your
+  document. This should be the only incompatibility with version 0.1.
+  - added class option "nolmodern" for people without the latin modern fonts.
+  - corrected some English mistakes in the examples. Thanks to Machael H. Prager for
+  pointing them out.
+  - added a \cvlistitem to produce items with a bullet (controlled by \listitemsymbol), and
+  renamed \cvresume to \cvlistdoubleitem for consistency purpose. For compatibility
+  reasons, the command \cvresume still works, but should be avoided.
+
+version 0.1 (1 March 2006)
+  - first release.

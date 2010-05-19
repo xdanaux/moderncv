@@ -1,0 +1,37 @@
+%% start of file `moderncvcompatibility.sty'.
+
+%-------------------------------------------------------------------------------
+%                identification
+%-------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{moderncvcompatibility}[2006/03/06 v0.2 modern curriculum vitae compatibility patches]
+
+
+%-------------------------------------------------------------------------------
+%                required packages
+%-------------------------------------------------------------------------------
+
+
+%-------------------------------------------------------------------------------
+%                package options
+%-------------------------------------------------------------------------------
+% old casual option (version 0.1)
+%\DeclareOption{casual}{\input{moderncvstylecasual.sty}}
+
+% old classic option (version 0.1)
+%\DeclareOption{classic}{\input{moderncvstyleclassic.sty}}
+
+\DeclareOption*{}
+
+% process given options
+\ProcessOptions\relax
+
+%-------------------------------------------------------------------------------
+%                style definition
+%-------------------------------------------------------------------------------
+\newcommand*{\cvresume}[2]{\cvlistdoubleitem{#1}{#2}}
+
+
+\endinput
+
+%% end of file `moderncvstylethemecasual.sty'.
