@@ -10,7 +10,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{moderncvthemecasual}[2008/06/17 v0.7 modern curriculum vitae style: casual]
+\ProvidesPackage{moderncvthemecasual}[2008/08/17 v0.8 modern curriculum vitae style: casual]
 
 
 %-------------------------------------------------------------------------------
@@ -117,8 +117,8 @@
 % optional quote
   \ifthenelse{\isundefined{\@quote}}%
     {}%
-    {\centering{\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}}\\[2.5em]}%
-  }%
+    {{\centering{}\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
+  \par}% to avoid weird spacing bug at the first section if no blank line is left after \maketitle
 
 % cv footer
 \newif\if@firstfooterelement\@firstfooterelementtrue

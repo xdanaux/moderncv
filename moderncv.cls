@@ -10,7 +10,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{moderncv}[2008/06/17 v0.7 modern curriculum vitae document class]
+\ProvidesClass{moderncv}[2008/11/17 v0.8 modern curriculum vitae document class]
 
 
 %-------------------------------------------------------------------------------
@@ -68,6 +68,10 @@
 \newif\if@color\@colortrue
 \DeclareOption{nocolor}{\@colorfalse}
 
+% CJK option
+%\newif\if@CJK\@CJKfalse
+%\DeclareOption{CJK}{\@CJKtrue}
+
 % execute default options
 \ExecuteOptions{a4paper,11pt,color,final}
 
@@ -117,21 +121,39 @@
 \addtolength{\marginparsep}{-5pt}
 \addtolength{\marginparwidth}{-10pt}
 
+% \AtEndPreamble hook
+\let\@endpreamblehook\@empty
+\def\AtEndPreamble{\g@addto@macro\@endpreamblehook}
+\let\moderncv@document\document
+\def\document{\endgroup\@endpreamblehook\begingroup\moderncv@document}
+
 % hyperrefs
 \RequirePackage{url}
-\ifpdf
-  \RequirePackage[pdftex,]{hyperref}
-\else
-  \RequirePackage[dvips]{hyperref}\fi
-\hypersetup{%
-  breaklinks,
-  baseurl       = http://,%
-  pdfborder     = 0 0 0,%
-  pdfpagemode   = UseNone,%
-%  pdfstartview  = XYZ,%
-  pdfstartpage  = 1,%
-  pdfcreator    = \LaTeX{} with `moderncv' package,%
-  pdfproducer   = \LaTeX}
+%\if@CJK
+\AtEndPreamble{%
+	\@ifpackageloaded{CJK}%
+		{%
+			\ifpdf%
+	  		\RequirePackage[pdftex,CJKbookmarks]{hyperref}%
+			\else%
+  			\RequirePackage[dvips,CJKbookmarks]{hyperref}\fi}%
+  	{%
+			\ifpdf%
+		  	\RequirePackage[pdftex]{hyperref}%
+			\else%
+  		\RequirePackage[dvips]{hyperref}\fi}%
+	\hypersetup{%
+	  breaklinks,%
+	  baseurl       = http://,%
+	  pdfborder     = 0 0 0,%
+	  pdfpagemode   = UseNone,%
+%    pdfstartview  = XYZ,%
+	  pdfstartpage  = 1,%
+	  pdfcreator    = \LaTeX{} with `moderncv' package,%
+	  pdfproducer   = \LaTeX{},%
+	  bookmarksopen = true}%
+	  }
+% TO BE CHECKED IF CANNOT BE INCLUDED IN ATENDPREAMBLE HOOK
 \AtEndOfClass{%
   \AtBeginDocument{%
     \hypersetup{%
@@ -170,6 +192,16 @@
 \setlength{\parskip}{0pt}
 \setlength\columnsep{10\p@}
 \setlength\columnseprule{0\p@}
+
+% TO BE TESTED
+%\setlength\arraycolsep{5\p@}
+%\setlength\tabcolsep{6\p@}
+%\setlength\arrayrulewidth{.4\p@}
+%\setlength\doublerulesep{2\p@}
+%\setlength\tabbingsep{\labelsep}
+%\setlength\fboxsep{3\p@}
+%\setlength\fboxrule{.4\p@}
+
 \pagestyle{empty}
 \pagenumbering{arabic}
 \raggedbottom
@@ -286,7 +318,7 @@
 
 % makes the cv title
 \title{}% to avoid LaTeX complaining that \maketitle is a called without first a call to \title
-\renewcommand*{\maketitle}{}%
+\newcommand*{\maketitle}{}%
 
 % draws a colored rectangle
 % usage: \colorrule[optional height]{width}
@@ -294,17 +326,21 @@
 
 % usage: \section{<title>}
 \newcommand*{\section}[1]{%
-	\vspace*{2.5ex \@plus 1ex \@minus .2ex}%
+  \vspace*{2.5ex}%
+  \parbox[m]{\hintscolumnwidth}{\raggedleft\hintfont{\color{sectionrectanglecolor}\rule{\hintscolumnwidth}{1ex}}}%
   \phantomsection{}% reset the anchor for hyperrefs
   \addcontentsline{toc}{part}{#1}%
-  \parbox[m]{\hintscolumnwidth}{\raggedleft\hintfont{\color{sectionrectanglecolor}\rule{\hintscolumnwidth}{1ex}}}%
   \hspace{\separatorcolumnwidth}%
   \parbox[m]{\maincolumnwidth}{\sectionstyle{#1}}\\[1ex]}
 %  \cvline[1ex]{\color{sectionrectanglecolor}\rule[0]{\hintscolumnwidth}{1ex}}{\sectionstyle{#1}}}% gives bad alignment of rectangle; too bad m{width} columns seem not to work as a valid column definition for tabular environments
 
 % usage: \subsection{title}
 \newcommand*{\subsection}[1]{%
-  \cvline[0.45em]{}{\subsectionstyle{#1}}}
+  \cvline[0.5ex]{}{%
+    \subsectionstyle{#1}%
+%    \phantomsection{}% reset the anchor for hyperrefs
+%    \addcontentsline{toc}{chapter}{#1}% does not work, the bookmark is placed at the same level as sections (placed themself at part level to be visible, as hyperref does not allow sections without parents...)
+  }}
 
 % usage: \cvline{margintext}{linetext}
 \newcommand*{\cvline}[3][.25em]{%
@@ -413,7 +449,7 @@
 \newcommand\newblock{\hskip .11em\@plus.33em\@minus.07em}
 \let\@openbib@code\@empty
 
-% the classical \today definition
+% classical \today definition
 \def\today{\ifcase\month\or
   January\or February\or March\or April\or May\or June\or
   July\or August\or September\or October\or November\or December\fi

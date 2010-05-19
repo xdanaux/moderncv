@@ -1,9 +1,20 @@
+version 0.8 (xx Xxxx 2008)
+  - corrected an alignment bug for text following a \quote with no immediate
+  \section, as kindly reported by J. Vermeulen.
+  - corrected a spacing bug when no blank line (or \par) is left after \maketitle.
+  Thanks to A. Menzel for reporting the strange behaviour.
+  - corrected the alignment of the extrainfo title part when no picture was used,
+  as reported by M. Bana.
+  - corrected the missplacement of pdf bookmarks as noticed by L. Fortunato.
+  - ...
+
 version 0.7 (17 June 2008)
   - corrected an outstanding spacing bug (space between cvlines longer
   than 1 line).
   - removed the need to use \closesection and \emptysection as internal
   tabulars are now always closed. This allows she use of bibliography packages
-  such as bibunits.
+  such as bibunits. Thanks to S. Busch for pointing out the incompatibility and
+  helping testing out the bug correction.
   - changed the definition of \photo: the first (optional) argument should
   give the desired width of the picture, instead of its height
   - corrected an alignment bug for \cvlistitems longer than 1 line, as

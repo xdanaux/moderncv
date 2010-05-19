@@ -1,0 +1,12 @@
+\begin{thebibliography}{1}
+
+\bibitem{publication1}
+Author 1 and Author 2.
+\newblock {\em Title}.
+\newblock Publisher, edition edition, year.
+
+\bibitem{publication2}
+Author.
+\newblock Title, year.
+
+\end{thebibliography}
