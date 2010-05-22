@@ -370,12 +370,13 @@
 \newcommand*{\cventry}[6]{%
   \cvline{#1}{%
     {\bfseries#2}%
-    \ifx{#3}\empty\else{, {\slshape#3}}\fi%
-    \ifx{#4}\empty\else{, #4}\fi%
-    \ifx{#5}\empty\else{, #5}\fi%
+    \ifthenelse{\equal{#3}{}}{}{, {\slshape#3}}%
+    \ifthenelse{\equal{#4}{}}{}{, #4}%
+    \ifthenelse{\equal{#5}{}}{}{, #5}%
     .%
-    \ifx{#6}\empty\else{\newline{}\begin{minipage}[t]{\linewidth}\small#6\end{minipage}}\fi
-    }}%
+    \ifx&#6&%
+      \else{\newline{}\begin{minipage}[t]{\linewidth}\small#6\end{minipage}}\fi%
+  }}%
 
 % usage (inside 'language' cvsection environment): \cvlanguage{name}{level}{comment}
 \newcommand*{\cvlanguage}[3]{%
