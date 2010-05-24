@@ -1,5 +1,5 @@
 %% start of file `moderncvthemecasual.sty'.
-%% Copyright 2007 Xavier Danaux (xdanaux@gmail.com).
+%% Copyright 2006-2010 Xavier Danaux (xdanaux@gmail.com).
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License version 1.3c,
@@ -10,7 +10,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{moderncvthemecasual}[2008/08/17 v0.8 modern curriculum vitae style: casual]
+\ProvidesPackage{moderncvthemecasual}[2010/05/24 v0.8 modern curriculum vitae style: casual]
 
 
 %-------------------------------------------------------------------------------
@@ -142,6 +142,7 @@
       \ifthenelse{\isundefined{\@phone}}{}{\footersymbol\phonesymbol~\@phone\@firstfooterelementfalse}%
       \ifthenelse{\isundefined{\@fax}}{}{\footersymbol\faxsymbol~\@fax\@firstfooterelementfalse}%
       \ifthenelse{\isundefined{\@email}}{}{\footersymbol\emailsymbol~\emaillink{\@email}\@firstfooterelementfalse}%
+      \ifthenelse{\isundefined{\@homepage}}{}{\footersymbol\homepagesymbol~\httplink{\@homepage}\@firstfooterelementfalse}%
       \ifthenelse{\isundefined{\@extrainfo}}{}{\footersymbol\@extrainfo\@firstfooterelementfalse}}}%
   }%
   \pagestyle{plain}}

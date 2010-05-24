@@ -1,5 +1,5 @@
-%% start of file `template_en.tex'.
-%% Copyright 2006-1008 Xavier Danaux (xdanaux@gmail.com).
+%% start of file `template.tex'.
+%% Copyright 2006-2010 Xavier Danaux (xdanaux@gmail.com).
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License version 1.3c,
@@ -19,7 +19,7 @@
 \usepackage[scale=0.8]{geometry}
 %\setlength{\hintscolumnwidth}{3cm}						% if you want to change the width of the column with the dates
 %\AtBeginDocument{\setlength{\maketitlenamewidth}{6cm}}  % only for the classic theme, if you want to change the width of your name placeholder (to leave more space for your address details
-\AtBeginDocument{\recomputelengths}                     % required when changes are made to page layout lengths
+%\AtBeginDocument{\recomputelengths}                     % required when changes are made to page layout lengths
 
 % personal data
 \firstname{John}
@@ -30,13 +30,21 @@
 \phone{phone (optional)}                      % optional, remove the line if not wanted
 \fax{fax (optional)}                          % optional, remove the line if not wanted
 \email{email (optional)}                      % optional, remove the line if not wanted
+\homepage{homepage (optional)}                % optional, remove the line if not wanted
 \extrainfo{additional information (optional)} % optional, remove the line if not wanted
 \photo[64pt]{picture}                         % '64pt' is the height the picture must be resized to and 'picture' is the name of the picture file; optional, remove the line if not wanted
 \quote{Some quote (optional)}                 % optional, remove the line if not wanted
 
+% for BibTeX numerical labels
+%\makeatletter
+%\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}
+%\makeatother
+
+% bibliography with mutiple entries
+%\usepackage{multibib}
+%\newcites{book,misc}{{Books},{Others}}
+
 %\nopagenumbers{}                             % uncomment to suppress automatic page numbering for CVs longer than one page
-
-
 %----------------------------------------------------------------------------------
 %            content
 %----------------------------------------------------------------------------------
@@ -60,9 +68,9 @@
 \cventry{year--year}{Job title}{Employer}{City}{}{Description line 1\newline{}Description line 2}% arguments 3 to 6 are optional
 
 \section{Languages}
-\cvlanguage{language 1}{Skill level}{Comment}
-\cvlanguage{language 2}{Skill level}{Comment}
-\cvlanguage{language 3}{Skill level}{Comment}
+\cvlanguage{Language 1}{Skill level}{Comment}
+\cvlanguage{Language 2}{Skill level}{Comment}
+\cvlanguage{Language 3}{Skill level}{Comment}
 
 \section{Computer skills}
 \cvcomputer{category 1}{XXX, YYY, ZZZ}{category 4}{XXX, YYY, ZZZ}
@@ -83,13 +91,22 @@
 
 \section{Extra 2}
 \cvlistdoubleitem[\Neutral]{Item 1}{Item 4}
-\cvlistdoubleitem[\Neutral]{Item 2}{Item 5}
+\cvlistdoubleitem[\Neutral]{Item 2}{Item 5\cite{book1}}
 \cvlistdoubleitem[\Neutral]{Item 3}{}
 
-% Publications from a BibTeX file
+% Publications from a BibTeX file without multibib\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}% for BibTeX numerical labels
 \nocite{*}
 \bibliographystyle{plain}
 \bibliography{publications}       % 'publications' is the name of a BibTeX file
+
+% Publications from a BibTeX file using the multibib package
+%\section{Publications}
+%\nocitebook{book1,book2}
+%\bibliographystylebook{plain}
+%\bibliographybook{publications}   % 'publications' is the name of a BibTeX file
+%\nocitemisc{misc1,misc2,misc3}
+%\bibliographystylemisc{plain}
+%\bibliographymisc{publications}   % 'publications' is the name of a BibTeX file
 
 \end{document}
 

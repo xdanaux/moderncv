@@ -1,11 +1,16 @@
-version 0.8 (xx Xxxx 2008)
+version 0.8 (24 May 2010)
+  - added support for multibib.
+  - added a command to indicate your personal homepage (\homepage{url}), as
+  requested by J. de Jong and A. Pairet.
   - corrected an alignment bug for text following a \quote with no immediate
-  \section, as kindly reported by J. Vermeulen.
+  \section, as kindly reported by J. Vermeulen and L. Saliou.
   - corrected a spacing bug when no blank line (or \par) is left after \maketitle.
   Thanks to A. Menzel for reporting the strange behaviour.
   - corrected the alignment of the extrainfo title part when no picture was used,
   as reported by M. Bana.
   - corrected the missplacement of pdf bookmarks as noticed by L. Fortunato.
+  - corrected several bugs linked to the code for checking for empty arguments in
+  \cventry, as reported by B. Ekran, L. Păncescu and E. Gregorio.
   - ...
 
 version 0.7 (17 June 2008)
@@ -32,7 +37,8 @@ version 0.6 (28 May 2007)
   U. Stöhr.
   - added color variants to the classic and casual style, as suggested by
   U. Stöhr.
-  - added a requested by A. Martin.
+  - added a page counter for resumes running longer than 1 page, as requested by
+  A. Martin. It can be disabled by the command \nopagenumbers{}.
   - added commands to include a mobile phone and fax number.
   - made the symbols used for the phone number, the email, ... customizable.
   To modify those symbols, just redefine \phonesymbol, emailsymbol, ...

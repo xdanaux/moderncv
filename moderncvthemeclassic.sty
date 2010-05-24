@@ -1,5 +1,5 @@
 %% start of file `moderncvthemeclassic.sty'.
-%% Copyright 2006-2008 Xavier Danaux (xdanaux@gmail.com).
+%% Copyright 2006-2010 Xavier Danaux (xdanaux@gmail.com).
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License version 1.3c,
@@ -10,7 +10,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{moderncvthemeclassic}[2008/06/17 v0.7 modern curriculum vitae style: classic]
+\ProvidesPackage{moderncvthemeclassic}[2010/05/24 v0.8 modern curriculum vitae style: classic]
 
 
 %-------------------------------------------------------------------------------
@@ -149,6 +149,7 @@
     \ifthenelse{\isundefined{\@phone}}{}{\maketitledetailsnewline\phonesymbol~\@phone}%
     \ifthenelse{\isundefined{\@fax}}{}{\maketitledetailsnewline\faxsymbol~\@fax}%
     \ifthenelse{\isundefined{\@email}}{}{\maketitledetailsnewline\emailsymbol~\emaillink{\@email}}%
+    \ifthenelse{\isundefined{\@homepage}}{}{\maketitledetailsnewline\homepagesymbol~\httplink{\@homepage}}%
     \ifthenelse{\isundefined{\@extrainfo}}{}{\maketitledetailsnewline\@extrainfo}%
   \end{minipage}%
   % optional photo

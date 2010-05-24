@@ -1,5 +1,5 @@
 %% start of file `moderncv.cls'.
-%% Copyright 2006-2008 Xavier Danaux (xdanaux@gmail.com).
+%% Copyright 2006-2010 Xavier Danaux (xdanaux@gmail.com).
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License version 1.3c,
@@ -10,7 +10,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{moderncv}[2008/11/17 v0.8 modern curriculum vitae document class]
+\ProvidesClass{moderncv}[2010/05/24 v0.8 modern curriculum vitae document class]
 
 
 %-------------------------------------------------------------------------------
@@ -83,29 +83,36 @@
 %-------------------------------------------------------------------------------
 %                required packages
 %-------------------------------------------------------------------------------
-% ifthen package
+% \AtEndPreamble hook (could load package etoolbox instead of defining it)
+%\RequirePackage{etoolbox}
+\let\@endpreamblehook\@empty
+\def\AtEndPreamble{\g@addto@macro\@endpreamblehook}
+\let\moderncv@document\document
+\def\document{\endgroup\@endpreamblehook\begingroup\moderncv@document}
+
+% if... then... else... constructs
 \RequirePackage{ifthen}
 
-% ifpdf package
+% pdf vs ps compilation
 \RequirePackage{ifpdf}
 
-% color package
+% color
 \ifpdf
   \RequirePackage[pdftex]{color}
 \else
   \RequirePackage[dvips]{color}
 \fi
 
-% fontenc package
+% font encoding
 \RequirePackage[T1]{fontenc}
 
 % scalable Computer Modern fonts
 %\usepackage{type1cm}
 
 % latin modern fonts
-\AtEndOfClass{%
+%\AtEndOfClass{%
   \if@lmodern
-    \RequirePackage{lmodern}\fi}
+    \RequirePackage{lmodern}\fi%}
 
 % symbols like \Telefon, \Mobilefone, \Letter and \Email
 \RequirePackage{marvosym}
@@ -121,47 +128,35 @@
 \addtolength{\marginparsep}{-5pt}
 \addtolength{\marginparwidth}{-10pt}
 
-% \AtEndPreamble hook
-\let\@endpreamblehook\@empty
-\def\AtEndPreamble{\g@addto@macro\@endpreamblehook}
-\let\moderncv@document\document
-\def\document{\endgroup\@endpreamblehook\begingroup\moderncv@document}
-
 % hyperrefs
 \RequirePackage{url}
-%\if@CJK
-\AtEndPreamble{%
-	\@ifpackageloaded{CJK}%
-		{%
-			\ifpdf%
-	  		\RequirePackage[pdftex,CJKbookmarks]{hyperref}%
-			\else%
-  			\RequirePackage[dvips,CJKbookmarks]{hyperref}\fi}%
-  	{%
-			\ifpdf%
-		  	\RequirePackage[pdftex]{hyperref}%
-			\else%
-  		\RequirePackage[dvips]{hyperref}\fi}%
-	\hypersetup{%
-	  breaklinks,%
-	  baseurl       = http://,%
-	  pdfborder     = 0 0 0,%
-	  pdfpagemode   = UseNone,%
-%    pdfstartview  = XYZ,%
-	  pdfstartpage  = 1,%
-	  pdfcreator    = \LaTeX{} with `moderncv' package,%
-	  pdfproducer   = \LaTeX{},%
-	  bookmarksopen = true}%
-	  }
-% TO BE CHECKED IF CANNOT BE INCLUDED IN ATENDPREAMBLE HOOK
-\AtEndOfClass{%
-  \AtBeginDocument{%
-    \hypersetup{%
-      pdfauthor     = \@firstname~\@familyname,%
-      pdftitle      = \@title,%
-      pdfsubject    = \@firstname~\@familyname,%
-      pdfkeywords   = \@firstname~\@familyname{} curriculum vit\ae{}}}}
 \urlstyle{tt}
+% load hyperred at the end of the preamble to pass options required by loaded packages (like CJK)
+\AtEndPreamble{
+  \@ifpackageloaded{CJK}
+    {
+      \ifpdf\RequirePackage[pdftex,CJKbookmarks]{hyperref}
+      \else\RequirePackage[dvips,CJKbookmarks]{hyperref}\fi}
+    {
+      \ifpdf\RequirePackage[pdftex]{hyperref}
+      \else\RequirePackage[dvips]{hyperref}\fi}
+  \AtBeginDocument{
+    \hypersetup{
+      breaklinks,
+      baseurl       = http://,
+      pdfborder     = 0 0 0,
+      pdfpagemode   = UseNone,% do not show thumbnails or bookmarks on opening
+%      pdfstartview  = FitH,
+      pdfstartpage  = 1,
+      pdfcreator    = \LaTeX{} with `moderncv' package,
+      pdfproducer   = \LaTeX{},
+      bookmarksopen = true,
+      pdfauthor     = \@firstname~\@familyname,
+      pdftitle      = \@title,
+      pdfsubject    = \@firstname~\@familyname,
+      pdfkeywords   = \@firstname~\@familyname{} curriculum vit\ae{}}}
+  \pagenumbering{arabic}% has to be issued after loading hyperref
+}
 
 % graphics
 \ifpdf
@@ -171,7 +166,7 @@
 
 % headers and footers
 \usepackage{fancyhdr}
-\fancypagestyle{plain}{%
+\fancypagestyle{plain}{
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
   \fancyhf{}}
@@ -203,7 +198,6 @@
 %\setlength\fboxrule{.4\p@}
 
 \pagestyle{empty}
-\pagenumbering{arabic}
 \raggedbottom
 \onecolumn
 
@@ -218,6 +212,7 @@
 \providecommand*{\phonesymbol}{\Telefon}
 \providecommand*{\faxsymbol}{\FAX}
 \providecommand*{\emailsymbol}{\Letter}
+\providecommand*{\homepagesymbol}{{\Large\ComputerMouse}}
 
 % colors
 \definecolor{firstnamecolor}{rgb}{0,0,0}
@@ -254,8 +249,8 @@
 \newcommand*{\moderncvtheme}[2][]{
   \def\@moderncvtheme{#2}
   \def\@moderncvthemeoptions{#1}}
-\moderncvtheme{casual}   % default theme
-\AtBeginDocument{\RequirePackage[\@moderncvthemeoptions]{moderncvtheme\@moderncvtheme}}
+\moderncvtheme{casual}% default theme
+\AtEndPreamble{\RequirePackage[\@moderncvthemeoptions]{moderncvtheme\@moderncvtheme}}
 
 
 %-------------------------------------------------------------------------------
@@ -269,6 +264,7 @@
 \newcommand*{\phone}[1]{\def\@phone{#1}}
 \renewcommand*{\fax}[1]{\def\@fax{#1}}
 \newcommand*{\email}[1]{\def\@email{#1}}
+\newcommand*{\homepage}[1]{\def\@homepage{#1}}
 \newcommand*{\extrainfo}[1]{\def\@extrainfo{#1}}
 \def\@photowidth{0pt}
 \newcommand*{\photo}[2][64pt]{\def\@photowidth{#1}\def\@photo{#2}}
@@ -317,8 +313,8 @@
 \recomputelengths
 
 % makes the cv title
+%\newcommand*{\maketitle}{}%
 \title{}% to avoid LaTeX complaining that \maketitle is a called without first a call to \title
-\newcommand*{\maketitle}{}%
 
 % draws a colored rectangle
 % usage: \colorrule[optional height]{width}
@@ -339,7 +335,7 @@
   \cvline[0.5ex]{}{%
     \subsectionstyle{#1}%
 %    \phantomsection{}% reset the anchor for hyperrefs
-%    \addcontentsline{toc}{chapter}{#1}% does not work, the bookmark is placed at the same level as sections (placed themself at part level to be visible, as hyperref does not allow sections without parents...)
+%    \addcontentsline{toc}{chapter}{#1}% does not work, the bookmark is placed at the same level as sections (placed themselves at part level to be visible, as hyperref does not allow sections without parents...)
   }}
 
 % usage: \cvline{margintext}{linetext}
@@ -407,26 +403,30 @@
 % usage: \nopagenumbers{}
 \newif\if@displaypagenumbers\@displaypagenumberstrue
 \newcommand*{\nopagenumbers}{\@displaypagenumbersfalse}
+\AtEndPreamble{%
 \AtBeginDocument{%
   \if@displaypagenumbers%
     \@ifundefined{r@lastpage}{}{%
       \ifthenelse{\pageref{lastpage} > 1}{%
-      \fancypagestyle{plain}{%
-        \fancyfoot[r]{\addressfont\color{quotecolor}\footnotesize\thepage/\pageref{lastpage}}}%
-      \pagestyle{plain}}{}}%
-  \AtEndDocument{\label{lastpage}}%
-  \fi}
+        \fancypagestyle{plain}{%
+          \fancyfoot[r]{\addressfont\color{quotecolor}\footnotesize\thepage/\pageref{lastpage}}}%
+        \pagestyle{plain}}{}}%
+    \AtEndDocument{\label{lastpage}}\else\fi}}
 
-% thebibliography environment, for use with BibTeX
+% thebibliography environment, for use with BibTeX and possibly multibib
 \newcommand{\refname}{Publications}
 \newlength{\bibindent}
 \setlength{\bibindent}{1.5em}
 % bibliography item label
 \newcommand*{\bibliographyitemlabel}{}% use \@biblabel{\arabic{enumiv}} for BibTeX labels
+%\newif\if@multibibfirstbib\@multibibfirstbibfalse
+% bibliography head (section, etc}, depending on whether multibib is used
+\newcommand*{\bibliographyhead}[1]{\section{#1}}
+\AtEndPreamble{\@ifpackageloaded{multibib}{\renewcommand*{\bibliographyhead}[1]{\subsection{#1}}}{}}
+% thebibliography environment definition
 \newenvironment{thebibliography}[1]%
   {%
-    \section{\refname}%
-%    \vspace*{-0.65em}%
+    \bibliographyhead{\refname}%
     \small%
     \begin{list}{\bibliographyitemlabel}%
       {%
