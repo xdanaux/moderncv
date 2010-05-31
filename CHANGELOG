@@ -1,3 +1,6 @@
+version 0.9 (31 May 2010)
+  - added support for the itemize, enumerate and description environments.
+
 version 0.8 (24 May 2010)
   - added support for multibib.
   - added a command to indicate your personal homepage (\homepage{url}), as
@@ -11,7 +14,6 @@ version 0.8 (24 May 2010)
   - corrected the missplacement of pdf bookmarks as noticed by L. Fortunato.
   - corrected several bugs linked to the code for checking for empty arguments in
   \cventry, as reported by B. Ekran, L. Păncescu and E. Gregorio.
-  - ...
 
 version 0.7 (17 June 2008)
   - corrected an outstanding spacing bug (space between cvlines longer

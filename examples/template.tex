@@ -35,10 +35,10 @@
 \photo[64pt]{picture}                         % '64pt' is the height the picture must be resized to and 'picture' is the name of the picture file; optional, remove the line if not wanted
 \quote{Some quote (optional)}                 % optional, remove the line if not wanted
 
-% for BibTeX numerical labels
-%\makeatletter
-%\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}
-%\makeatother
+% to show numerical labels in the bibliography; only useful if you make citations in your resume
+\makeatletter
+\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}
+\makeatother
 
 % bibliography with mutiple entries
 %\usepackage{multibib}
@@ -52,8 +52,8 @@
 \maketitle
 
 \section{Education}
-\cventry{year--year}{Degree}{Institution}{City}{\textit{Grade}}{Description}  % arguments 3 to 6 are optional
-\cventry{year--year}{Degree}{Institution}{City}{\textit{Grade}}{Description}  % arguments 3 to 6 are optional
+\cventry{year--year}{Degree}{Institution}{City}{\textit{Grade}}{Description}  % arguments 3 to 6 can be left empty
+\cventry{year--year}{Degree}{Institution}{City}{\textit{Grade}}{Description}
 
 \section{Master thesis}
 \cvline{title}{\emph{Title}}
@@ -62,10 +62,26 @@
 
 \section{Experience}
 \subsection{Vocational}
-\cventry{year--year}{Job title}{Employer}{City}{}{Description}                % arguments 3 to 6 are optional
-\cventry{year--year}{Job title}{Employer}{City}{}{Description}                % arguments 3 to 6 are optional
+\cventry{year--year}{Job title}{Employer}{City}{}{General description no longer than 1--2 lines.\newline{}%
+Detailed achievements:%
+\begin{itemize}%
+\item Achievement 1;
+\item Achievement 2, with sub-achievements:
+  \begin{itemize}%
+  \item Sub-achievement (a);
+  \item Sub-achievement (b), with sub-sub-achievements (don't do this!);
+    \begin{itemize}
+    \item Sub-sub-achievement i;
+    \item Sub-sub-achievement ii;
+    \item Sub-sub-achievement iii;
+    \end{itemize}
+  \item Sub-achievement (c);
+  \end{itemize}
+\item Achievement 3.
+\end{itemize}}
+\cventry{year--year}{Job title}{Employer}{City}{}{Description line 1\newline{}Description line 2}
 \subsection{Miscellaneous}
-\cventry{year--year}{Job title}{Employer}{City}{}{Description line 1\newline{}Description line 2}% arguments 3 to 6 are optional
+\cventry{year--year}{Job title}{Employer}{City}{}{Description}
 
 \section{Languages}
 \cvlanguage{Language 1}{Skill level}{Comment}
@@ -82,17 +98,17 @@
 \cvline{hobby 2}{\small Description}
 \cvline{hobby 3}{\small Description}
 
-\renewcommand{\listitemsymbol}{-} % change the symbol for lists
-
 \section{Extra 1}
 \cvlistitem{Item 1}
 \cvlistitem{Item 2}
 \cvlistitem[+]{Item 3}            % optional other symbol
 
+\renewcommand{\listitemsymbol}{-} % change the symbol for lists
+
 \section{Extra 2}
-\cvlistdoubleitem[\Neutral]{Item 1}{Item 4}
-\cvlistdoubleitem[\Neutral]{Item 2}{Item 5\cite{book1}}
-\cvlistdoubleitem[\Neutral]{Item 3}{}
+\cvlistdoubleitem{Item 1}{Item 4}
+\cvlistdoubleitem{Item 2}{Item 5 \cite{book1}}
+\cvlistdoubleitem{Item 3}{}
 
 % Publications from a BibTeX file without multibib\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}% for BibTeX numerical labels
 \nocite{*}

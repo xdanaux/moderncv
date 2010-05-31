@@ -206,7 +206,7 @@
 %                style commands definitions
 %-------------------------------------------------------------------------------
 % symbols used 
-\providecommand*{\listitemsymbol}{\textbullet}
+\providecommand*{\listitemsymbol}{\Neutral}%{{\fontencoding{U}\fontfamily{ding}\selectfont\tiny\symbol{'102}}}
 \providecommand*{\addresssymbol}{}
 \providecommand*{\mobilesymbol}{\Mobilefone}
 \providecommand*{\phonesymbol}{\Telefon}
@@ -449,6 +449,47 @@
   }
 \newcommand\newblock{\hskip .11em\@plus.33em\@minus.07em}
 \let\@openbib@code\@empty
+
+% itemize, enumerate and description environment
+\setlength{\leftmargini}   {1.2em}
+\leftmargin\leftmargini
+\setlength{\leftmarginii}  {1em}
+\setlength{\leftmarginiii} {1.87em}
+\setlength{\leftmarginiv}  {1.7em}
+\setlength{\leftmarginv}   {1em}
+\setlength{\leftmarginvi}  {1em}
+\setlength{\labelsep}      {.5em}
+\setlength{\labelwidth}    {\leftmargini}
+\addtolength{\labelwidth}  {-\labelsep}
+\@beginparpenalty -\@lowpenalty
+\@endparpenalty   -\@lowpenalty
+\@itempenalty     -\@lowpenalty
+% itemize labels
+\newcommand\labelitemi{\listitemsymbol{}}
+\newcommand\labelitemii{{\large\bfseries-}}
+\newcommand\labelitemiii{\textperiodcentered}%{\textasteriskcentered}
+\newcommand\labelitemiv{\textperiodcentered}
+% enumerate labels
+\renewcommand\theenumi{\@arabic\c@enumi}
+\renewcommand\theenumii{\@alph\c@enumii}
+\renewcommand\theenumiii{\@roman\c@enumiii}
+\renewcommand\theenumiv{\@Alph\c@enumiv}
+\newcommand\labelenumi{\theenumi.}
+\newcommand\labelenumii{(\theenumii)}
+\newcommand\labelenumiii{\theenumiii.}
+\newcommand\labelenumiv{\theenumiv.}
+\renewcommand\p@enumii{\theenumi}
+\renewcommand\p@enumiii{\p@enumii(\theenumii)}
+\renewcommand\p@enumiv{\p@enumiii\theenumiii}
+% description label
+\newcommand*\descriptionlabel[1]{\hspace\labelsep\normalfont\bfseries#1}
+% hooks to adjust spacing (idea by Jakob Schiotz; see http://dcwww.camd.dtu.dk/~schiotz/comp/LatexTips/tweaklist.sty)
+\RequirePackage{tweaklist}% distributed with moderncv, not found on ctan and slightly modified
+\renewcommand*{\itemhook}{
+  \setlength{\topsep}{0pt}%
+  \setlength{\itemsep}{0pt}}
+\renewcommand*{\enumhook}{\itemhook{}}
+\renewcommand*{\deschook}{\itemhook{}}
 
 % classical \today definition
 \def\today{\ifcase\month\or
