@@ -165,7 +165,7 @@
   \RequirePackage[dvips]{graphicx}\fi
 
 % headers and footers
-\usepackage{fancyhdr}
+\RequirePackage{fancyhdr}
 \fancypagestyle{plain}{
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
@@ -329,6 +329,14 @@
   \hspace{\separatorcolumnwidth}%
   \parbox[m]{\maincolumnwidth}{\sectionstyle{#1}}\\[1ex]}
 %  \cvline[1ex]{\color{sectionrectanglecolor}\rule[0]{\hintscolumnwidth}{1ex}}{\sectionstyle{#1}}}% gives bad alignment of rectangle; too bad m{width} columns seem not to work as a valid column definition for tabular environments
+% starred variant, which is identical but defined to allow its use (e.g. for natbib compatibility, who uses \section*{} for the bibliography header)
+\AtEndPreamble{%
+  \@ifpackageloaded{natbib}
+    {
+      \RequirePackage{suffix}
+      \WithSuffix\newcommand\section*{\section}
+    }{}
+}
 
 % usage: \subsection{title}
 \newcommand*{\subsection}[1]{%
