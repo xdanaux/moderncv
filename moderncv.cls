@@ -83,12 +83,12 @@
 %-------------------------------------------------------------------------------
 %                required packages
 %-------------------------------------------------------------------------------
-% \AtEndPreamble hook (could load package etoolbox instead of defining it)
-%\RequirePackage{etoolbox}
-\let\@endpreamblehook\@empty
-\def\AtEndPreamble{\g@addto@macro\@endpreamblehook}
-\let\moderncv@document\document
-\def\document{\endgroup\@endpreamblehook\begingroup\moderncv@document}
+% \AtEndPreamble hook (loading tetoolbox instead of defining the macro, as to avoid incompatibilities with etoolbox (and packages relying on it) defining the macro too)
+\RequirePackage{etoolbox}
+%\let\@endpreamblehook\@empty
+%\def\AtEndPreamble{\g@addto@macro\@endpreamblehook}
+%\let\moderncv@document\document
+%\def\document{\endgroup\@endpreamblehook\begingroup\moderncv@document}
 
 % if... then... else... constructs
 \RequirePackage{ifthen}

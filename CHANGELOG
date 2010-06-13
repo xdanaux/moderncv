@@ -1,8 +1,16 @@
+version 0.10 (13 June 2010)
+  - fixed a compatibility issue with the natbib package (natbib uses \section*
+  to format the bibliography title, while only \section was defined by moderncv),
+  as reported on launchpad (bug #393920).
+  - fixed a compatibility issues with (any package relying on) the etoolbox package,
+  due to the double definition of \AtEndPreamble, as reported by D. Becker.
+
 version 0.9 (31 May 2010)
   - added support for the itemize, enumerate and description environments.
 
 version 0.8 (24 May 2010)
-  - added support for multibib.
+  - added support for multibib. Also modified the template to illustrate how to show
+  labels in the bibliography, as requested by Tom D. R. and Stefan K.
   - added a command to indicate your personal homepage (\homepage{url}), as
   requested by J. de Jong and A. Pairet.
   - corrected an alignment bug for text following a \quote with no immediate
@@ -13,7 +21,8 @@ version 0.8 (24 May 2010)
   as reported by M. Bana.
   - corrected the missplacement of pdf bookmarks as noticed by L. Fortunato.
   - corrected several bugs linked to the code for checking for empty arguments in
-  \cventry, as reported by B. Ekran, L. Păncescu and E. Gregorio.
+  \cventry, as reported by B. Ekran (launchpad bug #268768), L. Păncescu and
+  E. Gregorio.
 
 version 0.7 (17 June 2008)
   - corrected an outstanding spacing bug (space between cvlines longer
