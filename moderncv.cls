@@ -93,15 +93,11 @@
 % if... then... else... constructs
 \RequirePackage{ifthen}
 
-% pdf vs ps compilation
-\RequirePackage{ifpdf}
+% latex vs pdflatex vs xelatex vs luatex compilation
+%\RequirePackage{ifpdf}
 
 % color
-\ifpdf
-  \RequirePackage[pdftex]{color}
-\else
-  \RequirePackage[dvips]{color}
-\fi
+\RequirePackage{color}
 
 % font encoding
 \RequirePackage[T1]{fontenc}
@@ -110,9 +106,8 @@
 %\usepackage{type1cm}
 
 % latin modern fonts
-%\AtEndOfClass{%
-  \if@lmodern
-    \RequirePackage{lmodern}\fi%}
+\if@lmodern
+  \RequirePackage{lmodern}\fi
 
 % symbols like \Telefon, \Mobilefone, \Letter and \Email
 \RequirePackage{marvosym}
@@ -134,12 +129,8 @@
 % load hyperred at the end of the preamble to pass options required by loaded packages (like CJK)
 \AtEndPreamble{
   \@ifpackageloaded{CJK}
-    {
-      \ifpdf\RequirePackage[pdftex,CJKbookmarks]{hyperref}
-      \else\RequirePackage[dvips,CJKbookmarks]{hyperref}\fi}
-    {
-      \ifpdf\RequirePackage[pdftex]{hyperref}
-      \else\RequirePackage[dvips]{hyperref}\fi}
+    {\RequirePackage[CJKbookmarks]{hyperref}}
+    {\RequirePackage[pdftex]{hyperref}}
   \AtBeginDocument{
     \hypersetup{
       breaklinks,
@@ -159,10 +150,7 @@
 }
 
 % graphics
-\ifpdf
-  \RequirePackage[pdftex]{graphicx}
-\else
-  \RequirePackage[dvips]{graphicx}\fi
+\RequirePackage{graphicx}
 
 % headers and footers
 \RequirePackage{fancyhdr}

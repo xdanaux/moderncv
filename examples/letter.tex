@@ -32,9 +32,8 @@
 \def\FileSubject{Cover letter}
 \def\FileKeyWords{\firstname \familyname, Cover letter}
 
-\renewcommand{\ttdefault}{pcr}
-
 \usepackage{url}
+\renewcommand{\ttdefault}{pcr}
 \urlstyle{tt}
 \ifpdf
   \usepackage[pdftex,pdfborder=0,breaklinks,baseurl=http://,pdfpagemode=None,pdfstartview=XYZ,pdfstartpage=1]{hyperref}
@@ -49,10 +48,10 @@
   \usepackage[dvips]{hyperref}
 \fi
 
+\renewcommand{\familydefault}{\sfdefault}% for use with a résumé using sans serif fonts;
+%\renewcommand{\familydefault}{\rmdefault}% for use with a résumé using sans serif fonts;
 
 \begin{document}
-\sffamily   % for use with a résumé using sans serif fonts;
-%\rmfamily  % for use with a résumé using serif fonts;
 \hfill%
 \begin{minipage}[t]{.6\textwidth}
 \raggedleft%
