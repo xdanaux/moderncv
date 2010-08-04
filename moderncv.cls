@@ -10,7 +10,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{moderncv}[2010/07/20 v0.11 modern curriculum vitae document class]
+\ProvidesClass{moderncv}[2010/08/03 v0.12 modern curriculum vitae document class]
 
 
 %-------------------------------------------------------------------------------
@@ -315,8 +315,8 @@
   \phantomsection{}% reset the anchor for hyperrefs
   \addcontentsline{toc}{part}{#1}%
   \hspace{\separatorcolumnwidth}%
-  \parbox[m]{\maincolumnwidth}{\sectionstyle{#1}}\\[1ex]}
-%  \cvline[1ex]{\color{sectionrectanglecolor}\rule[0]{\hintscolumnwidth}{1ex}}{\sectionstyle{#1}}}% gives bad alignment of rectangle; too bad m{width} columns seem not to work as a valid column definition for tabular environments
+  \parbox[m]{\maincolumnwidth}{\sectionstyle{#1}}%
+  \par\nobreak\vskip 1ex\@afterheading}% to avoid a pagebreak after the heading
 % starred variant, which is identical but defined to allow its use (e.g. for natbib compatibility, who uses \section*{} for the bibliography header)
 \AtEndPreamble{%
   \@ifpackageloaded{natbib}
@@ -328,11 +328,12 @@
 
 % usage: \subsection{title}
 \newcommand*{\subsection}[1]{%
-  \cvline[0.5ex]{}{%
-    \subsectionstyle{#1}%
-%    \phantomsection{}% reset the anchor for hyperrefs
-%    \addcontentsline{toc}{chapter}{#1}% does not work, the bookmark is placed at the same level as sections (placed themselves at part level to be visible, as hyperref does not allow sections without parents...)
-  }}
+  \begin{tabular}{@{}p{\hintscolumnwidth}@{\hspace{\separatorcolumnwidth}}p{\maincolumnwidth}@{}}%
+ 	  \raggedleft\hintfont{} &{\subsectionstyle{#1}}%
+  \end{tabular}%
+  \par\nobreak\vskip 0.5ex\@afterheading}% to avoid a pagebreak after the heading
+%  \phantomsection{}% reset the anchor for hyperrefs
+%  \addcontentsline{toc}{chapter}{#1}% does not work, the bookmark is placed at the same level as sections (placed themselves at part level to be visible, as hyperref does not allow sections without parents...)
 
 % usage: \cvline{margintext}{linetext}
 \newcommand*{\cvline}[3][.25em]{%
