@@ -64,10 +64,6 @@
 \newif\if@lmodern\@lmoderntrue
 \DeclareOption{nolmodern}{\@lmodernfalse}
 
-% nocolor option
-\newif\if@color\@colortrue
-\DeclareOption{nocolor}{\@colorfalse}
-
 % CJK option
 %\newif\if@CJK\@CJKfalse
 %\DeclareOption{CJK}{\@CJKtrue}

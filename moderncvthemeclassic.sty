@@ -36,6 +36,9 @@
 % grey
 \newif\if@colorgrey\@colorgreyfalse
 \DeclareOption{grey}{\@colorgreytrue}
+% black
+\newif\if@colorblack\@colorblackfalse
+\DeclareOption{black}{\@colorblacktrue}
 
 % roman option
 \newif\if@roman\@romanfalse
@@ -46,7 +49,7 @@
   \PackageWarning{moderncvthemeclassic}{Unknown option '\CurrentOption'}}
 
 % execute default options
-\ExecuteOptions{color}
+\ExecuteOptions{}
 
 % process given options
 \ProcessOptions\relax
@@ -87,6 +90,13 @@
   \definecolor{sectionrectanglecolor}{rgb}{0.75,0.75,0.75}
   \definecolor{sectiontitlecolor}{rgb}{0.35,0.35,0.35}
   \definecolor{subsectioncolor}{rgb}{0.35,0.35,0.35}\fi
+\if@colorblack
+  \definecolor{titlecolor}{rgb}{0,0,0}
+  \definecolor{quotecolor}{rgb}{0,0,0}
+  \definecolor{addresscolor}{rgb}{0,0,0}
+  \definecolor{sectionrectanglecolor}{rgb}{0,0,0}
+  \definecolor{sectiontitlecolor}{rgb}{0,0,0}
+  \definecolor{subsectioncolor}{rgb}{0,0,0}\fi
 
 % fonts
 \if@roman
