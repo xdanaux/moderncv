@@ -33,6 +33,9 @@
 % red
 \newif\if@colorred\@colorredfalse
 \DeclareOption{red}{\@colorredtrue}
+% purple
+\newif\if@colorpurple\@colorpurplefalse
+\DeclareOption{purple}{\@colorpurpletrue}
 % grey
 \newif\if@colorgrey\@colorgreyfalse
 \DeclareOption{grey}{\@colorgreytrue}
@@ -85,6 +88,11 @@
   \definecolor{sectiontitlecolor}{rgb}{0.95,0.20,0.20}
   \definecolor{subsectioncolor}{rgb}{0.95,0.20,0.20}
   \definecolor{footersymbolcolor}{rgb}{0.95,0.20,0.20}\fi
+\if@colorpurple
+  \definecolor{sectionrectanglecolor}{rgb}{0.40,0.23,0.80}
+  \definecolor{sectiontitlecolor}{rgb}{0.50,0.33,0.80}
+  \definecolor{subsectioncolor}{rgb}{0.50,0.33,0.80}
+  \definecolor{addresscolor}{rgb}{0.40,0.23,0.70}\fi
 \if@colorgrey
   \definecolor{sectionrectanglecolor}{rgb}{0.75,0.75,0.75}
   \definecolor{sectiontitlecolor}{rgb}{0.35,0.35,0.35}

@@ -1,6 +1,10 @@
 version 0.13 (xx August 2010)
  - added a "black" color option to render the resume in black & white, as suggested
   by F. Bicarri.
+ - removed the pdflatex option when loading hyperref to enable other engines
+  (e.g., dvips, xetex), leftover from the v 0.11 cleanup, as reported by
+  K. Amaterasu and P. Mavrogiorgos.
+ - added a "purple" color option, as proposed by B. Ravel.
 
 version 0.12 (03 August 2010)
   - prevents pagebreaks after sections and subsections (launchpad bug #409902),
