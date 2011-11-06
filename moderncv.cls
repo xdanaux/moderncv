@@ -126,7 +126,7 @@
 \AtEndPreamble{
   \@ifpackageloaded{CJK}
     {\RequirePackage[CJKbookmarks]{hyperref}}
-    {\RequirePackage[pdftex]{hyperref}}
+    {\RequirePackage{hyperref}}
   \AtBeginDocument{
     \hypersetup{
       breaklinks,
