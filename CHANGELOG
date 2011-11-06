@@ -1,4 +1,4 @@
-version 0.13 (xx August 2010)
+version 0.13 (06 November 2010)
  - added a "black" color option to render the resume in black & white, as suggested
   by F. Bicarri.
  - removed the pdflatex option when loading hyperref to enable other engines
