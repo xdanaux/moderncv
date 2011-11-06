@@ -156,6 +156,9 @@
   \fancyhf{}}
 \pagestyle{plain}
 
+% advanced command arguments
+\RequirePackage{xargs}
+
 % compatibility package with older versions of moderncv
 \RequirePackageWithOptions{moderncvcompatibility}
 
@@ -171,6 +174,8 @@
 \setlength{\parskip}{0pt}
 \setlength\columnsep{10\p@}
 \setlength\columnseprule{0\p@}
+\setlength\fboxsep{3\p@}
+\setlength\fboxrule{.4\p@}
 
 % TO BE TESTED
 %\setlength\arraycolsep{5\p@}
@@ -178,8 +183,6 @@
 %\setlength\arrayrulewidth{.4\p@}
 %\setlength\doublerulesep{2\p@}
 %\setlength\tabbingsep{\labelsep}
-%\setlength\fboxsep{3\p@}
-%\setlength\fboxrule{.4\p@}
 
 \pagestyle{empty}
 \raggedbottom
@@ -250,8 +253,7 @@
 \newcommand*{\email}[1]{\def\@email{#1}}
 \newcommand*{\homepage}[1]{\def\@homepage{#1}}
 \newcommand*{\extrainfo}[1]{\def\@extrainfo{#1}}
-\def\@photowidth{0pt}
-\newcommand*{\photo}[2][64pt]{\def\@photowidth{#1}\def\@photo{#2}}
+\newcommandx*{\photo}[3][1=64pt,2=0.4pt,usedefault]{\def\@photowidth{#1}\def\@photoframewidth{#2}\def\@photo{#3}}% the 1st (optional) argument is the width of the photo, the 2nd (optional) argument is the thickness of the frame around it.
 \newcommand*{\quote}[1]{\def\@quote{#1}}
 
 % length used by the moderncv layout

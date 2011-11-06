@@ -5,6 +5,9 @@ version 0.13 (xx August 2010)
   (e.g., dvips, xetex), leftover from the v 0.11 cleanup, as reported by
   K. Amaterasu and P. Mavrogiorgos.
  - added a "purple" color option, as proposed by B. Ravel.
+ - added a 3rd optional argument to the \photo command to control the thickness of
+ the framebox. Setting it to 0pt will disable the frame around the photo, as
+ requested by T. Krennwallner.
 
 version 0.12 (03 August 2010)
   - prevents pagebreaks after sections and subsections (launchpad bug #409902),

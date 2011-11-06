@@ -175,7 +175,10 @@
     {%
       \hspace*{\separatorcolumnwidth}%
       \begin{minipage}[b]{\maketitlepicturewidth}%
-        \raggedleft{}\addressfont\color{addresscolor}%  required to correctly align content
+        \raggedleft{}\addressfont\color{addresscolor}% required to correctly align content
+        \setlength\fboxrule{\@photoframewidth}%
+        \ifdim\@photoframewidth=0pt%
+          \setlength{\fboxsep}{0pt}\fi%
         \framebox{\includegraphics[width=\maketitlepicturewidth]{\@photo}}%
       \end{minipage}}\\[3em]%
   % optional quote
