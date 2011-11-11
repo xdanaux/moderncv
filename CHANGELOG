@@ -1,13 +1,17 @@
-version 0.13 (06 November 2010)
+version 0.13.1 (11 November 2011)
+ - correct a bug introduced by v0.13 in the classic style when no \photo is used,
+ as reported by S. Gislais (launchpad bug #888702).
+
+version 0.13 (06 November 2011)
  - added a "black" color option to render the resume in black & white, as suggested
   by F. Bicarri.
  - removed the pdflatex option when loading hyperref to enable other engines
   (e.g., dvips, xetex), leftover from the v 0.11 cleanup, as reported by
-  K. Amaterasu and P. Mavrogiorgos.
+  K. Amaterasu and P. Mavrogiorgos (launchpad bugs #754693 and #859834).
  - added a "purple" color option, as proposed by B. Ravel.
  - added a 3rd optional argument to the \photo command to control the thickness of
  the framebox. Setting it to 0pt will disable the frame around the photo, as
- requested by T. Krennwallner.
+ requested by T. Krennwallner (launchpad byg #664568).
 
 version 0.12 (03 August 2010)
   - prevents pagebreaks after sections and subsections (launchpad bug #409902),
