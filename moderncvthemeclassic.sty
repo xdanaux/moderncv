@@ -132,15 +132,15 @@
 \ifnum\maketitlenamemaxwidth<\maketitlenamefullwidth\setlength{\maketitlenamewidth}{\maketitlenamemaxwidth}\else\setlength{\maketitlenamewidth}{\maketitlenamefullwidth}\fi
 %   other lengths
 \newlength{\maketitlepicturewidth}
-\setlength{\maketitlepicturewidth}{\@photowidth}
 \newlength{\maketitledetailswidth}
 %   recompute theme-specific lengths, called by class to recompute all lengths
 \renewcommand*{\recomputethemelengths}{%
   \setlength{\maketitledetailswidth}{\textwidth}%
   \addtolength{\maketitledetailswidth}{-\maketitlenamewidth}%
-  \ifthenelse{\lengthtest{\maketitlepicturewidth=0pt}}%
+  \ifthenelse{\isundefined{\@photo}}%
   	{}%
-  	{\addtolength{\maketitledetailswidth}{-\separatorcolumnwidth}%
+  	{\setlength{\maketitlepicturewidth}{\@photowidth}
+  	\addtolength{\maketitledetailswidth}{-\separatorcolumnwidth}%
   	\addtolength{\maketitledetailswidth}{-\maketitlepicturewidth}}}
 \recomputethemelengths
 \newif\if@firstdetailselement\@firstdetailselementtrue
