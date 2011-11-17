@@ -127,13 +127,12 @@
   \@ifpackageloaded{CJK}
     {\RequirePackage[unicode]{hyperref}}
     {\RequirePackage{hyperref}}
-  \AtBeginDocument{
     \hypersetup{
       breaklinks,
       baseurl       = http://,
       pdfborder     = 0 0 0,
       pdfpagemode   = UseNone,% do not show thumbnails or bookmarks on opening
-%      pdfstartview  = FitH,
+      pdfpagelabels = false,% to avoid a warning setting it automatically to false anyway, because hyperref detects \thepage as undefined (why?)
       pdfstartpage  = 1,
       pdfcreator    = \LaTeX{} with `moderncv' package,
       pdfproducer   = \LaTeX{},
@@ -141,7 +140,7 @@
       pdfauthor     = \@firstname~\@familyname,
       pdftitle      = \@title,
       pdfsubject    = \@firstname~\@familyname,
-      pdfkeywords   = \@firstname~\@familyname{} curriculum vit\ae{}}}
+      pdfkeywords   = \@firstname~\@familyname{} curriculum vit\ae{}}
   \pagenumbering{arabic}% has to be issued after loading hyperref
 }
 
