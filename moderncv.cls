@@ -125,7 +125,7 @@
 % load hyperred at the end of the preamble to pass options required by loaded packages (like CJK)
 \AtEndPreamble{
   \@ifpackageloaded{CJK}
-    {\RequirePackage[CJKbookmarks]{hyperref}}
+    {\RequirePackage[unicode]{hyperref}}
     {\RequirePackage{hyperref}}
   \AtBeginDocument{
     \hypersetup{
@@ -170,8 +170,8 @@
 \setlength\lineskip{1\p@}
 \setlength\normallineskip{1\p@}
 \renewcommand\baselinestretch{}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{0pt}
+\setlength{\parindent}{0\p@}
+\setlength{\parskip}{0\p@}
 \setlength\columnsep{10\p@}
 \setlength\columnseprule{0\p@}
 \setlength\fboxsep{3\p@}
@@ -232,12 +232,16 @@
 \providecommand*{\subsectionstyle}[1]{{\subsectionfont\color{subsectioncolor}#1}}
 \providecommand*{\hintstyle}[1]{{\hintfont\color{hintcolor}#1}}
 
-% themes: casual (default), classic, ...
+% makes the cv title
+\newcommand*{\maketitle}{}%
+\title{}% to avoid LaTeX complaining that \maketitle is a called without first a call to \title
+
+% makes the cv footer
+\newcommand*{\makefooter}
+
+% loads a style
 \newcommand*{\moderncvtheme}[2][]{
-  \def\@moderncvtheme{#2}
-  \def\@moderncvthemeoptions{#1}}
-\moderncvtheme{casual}% default theme
-\AtEndPreamble{\RequirePackage[\@moderncvthemeoptions]{moderncvtheme\@moderncvtheme}}
+  \RequirePackage[#1]{moderncvtheme#2}}
 
 
 %-------------------------------------------------------------------------------
@@ -296,11 +300,7 @@
   \renewcommand{\headwidth}{\textwidth}%
   \recomputethemelengths}
 \setlength{\hintscolumnwidth}{0.15\textwidth}
-\recomputelengths
-
-% makes the cv title
-%\newcommand*{\maketitle}{}%
-\title{}% to avoid LaTeX complaining that \maketitle is a called without first a call to \title
+\AtBeginDocument{\recomputelengths}
 
 % draws a colored rectangle
 % usage: \colorrule[optional height]{width}

@@ -123,14 +123,11 @@
 % styles
 
 % maketitle
-%   setmaketitlenamemaxwidth to the full name length, capped by \maketitlenamemaxwidth
+%   set \maketitlenamewidth to the desired length, or leave it up to moderncv to try to optimize it
 \newlength{\maketitlenamemaxwidth}
 \setlength{\maketitlenamemaxwidth}{.525\textwidth}
-\newlength{\maketitlenamefullwidth}
-\settowidth{\maketitlenamefullwidth}{\firstnamestyle{\@firstname~}\familynamestyle{\@familyname}}
 \newlength{\maketitlenamewidth}
-\ifnum\maketitlenamemaxwidth<\maketitlenamefullwidth\setlength{\maketitlenamewidth}{\maketitlenamemaxwidth}\else\setlength{\maketitlenamewidth}{\maketitlenamefullwidth}\fi
-%   other lengths
+\setlength{\maketitlenamewidth}{0pt}
 \newlength{\maketitlepicturewidth}
 \newlength{\maketitledetailswidth}
 %   recompute theme-specific lengths, called by class to recompute all lengths
@@ -142,7 +139,6 @@
   	{\setlength{\maketitlepicturewidth}{\@photowidth}
   	\addtolength{\maketitledetailswidth}{-\separatorcolumnwidth}%
   	\addtolength{\maketitledetailswidth}{-\maketitlepicturewidth}}}
-\recomputethemelengths
 \newif\if@firstdetailselement\@firstdetailselementtrue
 \newcommand*{\maketitledetailsnewline}{
   \if@firstdetailselement%
@@ -150,6 +146,15 @@
   \else%
     \\[.2em]\fi}
 \renewcommand*{\maketitle}{%
+  % recompute lengths (necessary to delay the computation of \maketitlenamefullwidth until \maketitle because of potential CJK requirement in \@firstname and \@familyname)
+  \ifdim\maketitlenamewidth=0pt%
+    \newlength{\maketitlenamefullwidth}%
+    \settowidth{\maketitlenamefullwidth}{\firstnamestyle{\@firstname~}\familynamestyle{\@familyname}}%
+    \ifnum\maketitlenamemaxwidth<\maketitlenamefullwidth%
+      \setlength{\maketitlenamewidth}{\maketitlenamemaxwidth}%
+    \else%
+      \setlength{\maketitlenamewidth}{\maketitlenamefullwidth}\fi\fi
+  \recomputethemelengths{}%
   % name and title
   \begin{minipage}[b]{\maketitlenamewidth}%
     \firstnamestyle{\@firstname~}\familynamestyle{\@familyname}%

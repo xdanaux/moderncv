@@ -1,5 +1,5 @@
-- The \cvsection command seems to be unable to handle a Chinese argument, using
-  CJK.
+- When using CJK, the last \clearpage required for fancyhdr to work properly kills
+  the "lastpage" counter, hence also the page numbering.
 - Moderncv produces an error ("lonely \item--perhaps a missing list environment")
   when used with bibentry, through the output is actually correct. Amongst other,
   this causes compilation by LyX to stop.

@@ -123,26 +123,6 @@
 
 % styles
 
-% maketitle
-\renewcommand*{\maketitle}{%
-  {%
-    \ifthenelse{\isundefined{\@photo}}%
-      {}%
-      {%
-      \setlength\fboxrule{\@photoframewidth}%
-        \ifdim\@photoframewidth=0pt%
-          \setlength{\fboxsep}{0pt}\fi%
-        {\color{firstnamecolor}\framebox{\includegraphics[width=\@photowidth]{\@photo}}}}%
-    \hfill%
-%    \raggedleft{\firstnamestyle{\MakeLowercase{\@firstname}}\familynamestyle{\MakeLowercase{\@familyname}}}\\[-.35em]}%
-    \raggedleft{\firstnamestyle{\@firstname}~\familynamestyle{\@familyname}}\\[-.35em]}%
-  {\color{firstnamecolor}\rule{\textwidth}{.25ex}\\[2.5em]}%
-% optional quote
-  \ifthenelse{\isundefined{\@quote}}%
-    {}%
-    {{\centering{}\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
-  \par}% to avoid weird spacing bug at the first section if no blank line is left after \maketitle
-
 % cv footer
 \newif\if@firstfooterelement\@firstfooterelementtrue
 \providecommand*{\footersymbol}{}
@@ -150,7 +130,6 @@
   \if@firstfooterelement%
   \else%
     { ~~\color{footersymbolcolor}\textbullet~~~}\fi}
-\providecommand*{\makefooter}{}
 \renewcommand*{\makefooter}{%
   \fancypagestyle{plain}{%
     \fancyfoot[c]{%
@@ -169,7 +148,27 @@
       \ifthenelse{\isundefined{\@extrainfo}}{}{\footersymbol\@extrainfo\@firstfooterelementfalse}}}%
   }%
   \pagestyle{plain}}
-\AtBeginDocument{\makefooter}
+
+% maketitle
+\renewcommand*{\maketitle}{%
+  \makefooter{}%
+  {%
+    \ifthenelse{\isundefined{\@photo}}%
+      {}%
+      {%
+      \setlength\fboxrule{\@photoframewidth}%
+        \ifdim\@photoframewidth=0pt%
+          \setlength{\fboxsep}{0pt}\fi%
+        {\color{firstnamecolor}\framebox{\includegraphics[width=\@photowidth]{\@photo}}}}%
+    \hfill%
+%    \raggedleft{\firstnamestyle{\MakeLowercase{\@firstname}}\familynamestyle{\MakeLowercase{\@familyname}}}\\[-.35em]}%
+    \raggedleft{\firstnamestyle{\@firstname}~\familynamestyle{\@familyname}}\\[-.35em]}%
+  {\color{firstnamecolor}\rule{\textwidth}{.25ex}\\[2.5em]}%
+% optional quote
+  \ifthenelse{\isundefined{\@quote}}%
+    {}%
+    {{\centering{}\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
+  \par}% to avoid weird spacing bug at the first section if no blank line is left after \maketitle
 
 
 \endinput
