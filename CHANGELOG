@@ -1,4 +1,4 @@
-version 0.14 (xx November 2011)
+version 0.14 (04 December 2011)
  - adds support for CJK, thanks to the help of P. D'Apice.
  - the use of \recomputelengths after modifying any length in the preamble is now
  unnecessary; \recomputelength is automatically called at the start of the document.
