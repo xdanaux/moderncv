@@ -64,10 +64,6 @@
 \newif\if@lmodern\@lmoderntrue
 \DeclareOption{nolmodern}{\@lmodernfalse}
 
-% CJK option
-%\newif\if@CJK\@CJKfalse
-%\DeclareOption{CJK}{\@CJKtrue}
-
 % execute default options
 \ExecuteOptions{a4paper,11pt,color,final}
 
@@ -89,17 +85,11 @@
 % if... then... else... constructs
 \RequirePackage{ifthen}
 
-% latex vs pdflatex vs xelatex vs luatex compilation
-%\RequirePackage{ifpdf}
-
 % color
 \RequirePackage{color}
 
 % font encoding
 \RequirePackage[T1]{fontenc}
-
-% scalable Computer Modern fonts
-%\usepackage{type1cm}
 
 % latin modern fonts
 \if@lmodern
@@ -107,9 +97,6 @@
 
 % symbols like \Telefon, \Mobilefone, \Letter and \Email
 \RequirePackage{marvosym}
-
-% extended characters of T1 in .ps + other guillemets
-%\RequirePackage{ae,aecompl,aeguill}
 
 % page geometry
 \addtolength{\oddsidemargin}{-54pt}
