@@ -176,7 +176,7 @@
 \setlength\fboxsep{3\p@}
 \setlength\fboxrule{.4\p@}
 
-% TO BE TESTED
+% Not required
 %\setlength\arraycolsep{5\p@}
 %\setlength\tabcolsep{6\p@}
 %\setlength\arrayrulewidth{.4\p@}
@@ -264,6 +264,7 @@
 \newlength{\quotewidth}
 % section lengths
 \newlength{\hintscolumnwidth}
+\setlength{\hintscolumnwidth}{0.15\textwidth}
 \newlength{\separatorcolumnwidth}
 \setlength{\separatorcolumnwidth}{0.025\textwidth}
 \newlength{\maincolumnwidth}
@@ -297,9 +298,8 @@
   \setlength{\listdoubleitemmaincolumnwidth}{0.475\listdoubleitemmaincolumnwidth}%
   % fancyhdr lengths
   \renewcommand{\headwidth}{\textwidth}%
-  \recomputethemelengths}
-\setlength{\hintscolumnwidth}{0.15\textwidth}
-\AtBeginDocument{\recomputelengths}
+  \recomputethemelengths{}}
+\AtBeginDocument{\recomputelengths{}}
 
 % draws a colored rectangle
 % usage: \colorrule[optional height]{width}
