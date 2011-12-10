@@ -1,6 +1,8 @@
 version 0.15 (xx December 2011)
  - corrects list spacing.
  - corrects inconsistent use of sans serif fonts in roman layout option.
+ - the lmodern fonts are now automatically loaded only if installed on the system.
+ The "nolmodern" option is now therefore obsolete.
 
 version 0.14 (04 December 2011)
  - adds support for CJK, thanks to the help of P. D'Apice.

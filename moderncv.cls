@@ -60,10 +60,6 @@
 \DeclareOption{draft}{\setlength\overfullrule{5pt}}
 \DeclareOption{final}{\setlength\overfullrule{0pt}}
 
-% nolmodern option
-\newif\if@lmodern\@lmoderntrue
-\DeclareOption{nolmodern}{\@lmodernfalse}
-
 % execute default options
 \ExecuteOptions{a4paper,11pt,color,final}
 
@@ -88,12 +84,10 @@
 % color
 \RequirePackage{color}
 
-% font encoding
-\RequirePackage[T1]{fontenc}
-
-% latin modern fonts
-\if@lmodern
-  \RequirePackage{lmodern}\fi
+% automatic loading of latin modern fonts if present on the system
+\IfFileExists{lmodern.sty}
+  {\RequirePackage[T1]{fontenc}\RequirePackage{lmodern}}
+  {}
 
 % symbols like \Telefon, \Mobilefone, \Letter and \Email
 \RequirePackage{marvosym}
