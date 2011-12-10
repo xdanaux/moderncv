@@ -92,14 +92,6 @@
 % symbols like \Telefon, \Mobilefone, \Letter and \Email
 \RequirePackage{marvosym}
 
-% page geometry
-\addtolength{\oddsidemargin}{-54pt}
-\addtolength{\textwidth}{109pt}
-\addtolength{\topmargin}{-70pt}
-\addtolength{\textheight}{122pt}
-\addtolength{\marginparsep}{-5pt}
-\addtolength{\marginparwidth}{-10pt}
-
 % hyperrefs
 \RequirePackage{url}
 \urlstyle{tt}
