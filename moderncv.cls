@@ -468,6 +468,8 @@
 \RequirePackage{tweaklist}% distributed with moderncv, not found on ctan and slightly modified
 \renewcommand*{\itemhook}{
   \setlength{\topsep}{0pt}%
+  \setlength{\parsep}{0pt}%
+	\setlength{\parskip}{0pt}%
   \setlength{\itemsep}{0pt}}
 \renewcommand*{\enumhook}{\itemhook{}}
 \renewcommand*{\deschook}{\itemhook{}}
