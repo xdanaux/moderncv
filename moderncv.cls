@@ -61,7 +61,7 @@
 \DeclareOption{final}{\setlength\overfullrule{0pt}}
 
 % execute default options
-\ExecuteOptions{a4paper,11pt,color,final}
+\ExecuteOptions{a4paper,11pt,final}
 
 % process given options
 \ProcessOptions\relax
