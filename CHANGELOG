@@ -1,3 +1,7 @@
+version 0.15 (xx December 2011)
+ - corrects list spacing.
+ - corrects inconsistent use of sans serif fonts in roman layout option.
+
 version 0.14 (04 December 2011)
  - adds support for CJK, thanks to the help of P. D'Apice.
  - the use of \recomputelengths after modifying any length in the preamble is now

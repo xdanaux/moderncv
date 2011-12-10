@@ -206,7 +206,7 @@
 \providecommand*{\quotefont}{}
 \providecommand*{\sectionfont}{}
 \providecommand*{\subsectionfont}{}
-\providecommand*{\hintfont}{\small\sffamily}
+\providecommand*{\hintfont}{\small}
 
 % styles
 \providecommand*{\firstnamestyle}[1]{{\firstnamefont\color{firstnamecolor}#1}}
@@ -469,7 +469,7 @@
 \renewcommand*{\itemhook}{
   \setlength{\topsep}{0pt}%
   \setlength{\parsep}{0pt}%
-	\setlength{\parskip}{0pt}%
+  \setlength{\parskip}{0pt}%
   \setlength{\itemsep}{0pt}}
 \renewcommand*{\enumhook}{\itemhook{}}
 \renewcommand*{\deschook}{\itemhook{}}
