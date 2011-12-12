@@ -56,12 +56,16 @@
 \DeclareOption{11pt}{\renewcommand\@ptsize{1}}
 \DeclareOption{12pt}{\renewcommand\@ptsize{2}}
 
+% font type options
+\DeclareOption{sans}{\renewcommand{\familydefault}{\sfdefault}}
+\DeclareOption{roman}{\renewcommand{\familydefault}{\rmdefault}}
+
 % draft/final option
 \DeclareOption{draft}{\setlength\overfullrule{5pt}}
 \DeclareOption{final}{\setlength\overfullrule{0pt}}
 
 % execute default options
-\ExecuteOptions{a4paper,11pt,final}
+\ExecuteOptions{a4paper,11pt,sans,final}
 
 % process given options
 \ProcessOptions\relax
@@ -82,7 +86,7 @@
 \RequirePackage{ifthen}
 
 % color
-\RequirePackage{color}
+\RequirePackage{xcolor}
 
 % automatic loading of latin modern fonts if present on the system
 \IfFileExists{lmodern.sty}
@@ -92,7 +96,7 @@
 % symbols like \Telefon, \Mobilefone, \Letter and \Email
 \RequirePackage{marvosym}
 
-% hyperrefs
+% hyper links
 \RequirePackage{url}
 \urlstyle{tt}
 % load hyperred at the end of the preamble to pass options required by loaded packages (like CJK)
@@ -128,6 +132,9 @@
   \fancyhf{}}
 \pagestyle{plain}
 
+% lengths calculations
+\RequirePackage{calc}
+
 % advanced command arguments
 \RequirePackage{xargs}
 
@@ -162,63 +169,61 @@
 
 
 %-------------------------------------------------------------------------------
-%                style commands definitions
+%                design commands definitions
 %-------------------------------------------------------------------------------
-% symbols used 
-\providecommand*{\listitemsymbol}{\Neutral}%{{\fontencoding{U}\fontfamily{ding}\selectfont\tiny\symbol{'102}}}
-\providecommand*{\addresssymbol}{}
-\providecommand*{\mobilesymbol}{\Mobilefone}
-\providecommand*{\phonesymbol}{\Telefon}
-\providecommand*{\faxsymbol}{\FAX}
-\providecommand*{\emailsymbol}{\Letter}
-\providecommand*{\homepagesymbol}{{\Large\ComputerMouse}}
+% symbols
+%   itemize labels
+\newcommand*{\labelitemi}{\textcolor{color1}{\Neutral}}% alternative" \fontencoding{U}\fontfamily{ding}\selectfont\tiny\symbol{'102}
+\newcommand*{\labelitemii}{\textcolor{color1}{\large\bfseries-}}
+\newcommand*{\labelitemiii}{\textcolor{color1}{\textperiodcentered}}% alternative: \textasteriskcentered; both force the use of the CMSY font, even when lmodern fonts are used :(
+\newcommand*{\labelitemiv}{\textcolor{color1}{\textperiodcentered}}
+%   enumerate labels
+\renewcommand{\theenumi}{\@arabic\c@enumi}
+\renewcommand{\theenumii}{\@alph\c@enumii}
+\renewcommand{\theenumiii}{\@roman\c@enumiii}
+\renewcommand{\theenumiv}{\@Alph\c@enumiv}
+%   other symbols
+\newcommand*{\listitemsymbol}{\labelitemi}
+\newcommand*{\addresssymbol}{}
+\newcommand*{\mobilesymbol}{\Mobilefone}
+\newcommand*{\phonesymbol}{\Telefon}
+\newcommand*{\faxsymbol}{\FAX}
+\newcommand*{\emailsymbol}{\Letter}
+\newcommand*{\homepagesymbol}{{\Large\ComputerMouse}}
 
 % colors
-\definecolor{firstnamecolor}{rgb}{0,0,0}
-\definecolor{familynamecolor}{rgb}{0,0,0}
-\definecolor{titlecolor}{rgb}{0,0,0}
-\definecolor{addresscolor}{rgb}{0,0,0}
-\definecolor{quotecolor}{rgb}{0,0,0}
-\definecolor{sectionrectanglecolor}{rgb}{0,0,0}
-\definecolor{sectiontitlecolor}{rgb}{0,0,0}
-\definecolor{subsectioncolor}{rgb}{0,0,0}
-\definecolor{hintcolor}{rgb}{0,0,0}
+\definecolor{color0}{rgb}{0,0,0}% main default color, normally left to black
+\definecolor{color1}{rgb}{0,0,0}% primary theme color
+\definecolor{color2}{rgb}{0,0,0}% secondary theme color
+\definecolor{color3}{rgb}{0,0,0}% tertiary theme color
 
 % fonts
-\providecommand*{\firstnamefont}{}
-\providecommand*{\familynamefont}{}
-\providecommand*{\titlefont}{}
-\providecommand*{\addressfont}{}
-\providecommand*{\quotefont}{}
-\providecommand*{\sectionfont}{}
-\providecommand*{\subsectionfont}{}
-\providecommand*{\hintfont}{\small}
+\newcommand*{\namefont}{}
+\newcommand*{\titlefont}{}
+\newcommand*{\addressfont}{}
+\newcommand*{\quotefont}{}
+\newcommand*{\sectionfont}{}
+\newcommand*{\subsectionfont}{}
+\newcommand*{\hintfont}{}
+\AtBeginDocument{\normalfont\color{color0}}
 
-% styles
-\providecommand*{\firstnamestyle}[1]{{\firstnamefont\color{firstnamecolor}#1}}
-\providecommand*{\familynamestyle}[1]{{\familynamefont\color{familynamecolor}#1}}
-\providecommand*{\titlestyle}[1]{{\titlefont\color{titlecolor}#1}}
-\providecommand*{\addresstyle}[1]{{\addressfont\color{addresscolor}#1}}
-\providecommand*{\quotestyle}[1]{{\quotefont\color{quotecolor}#1}}
-\providecommand*{\sectionstyle}[1]{{\sectionfont\color{sectiontitlecolor}#1}}
-\providecommand*{\subsectionstyle}[1]{{\subsectionfont\color{subsectioncolor}#1}}
-\providecommand*{\hintstyle}[1]{{\hintfont\color{hintcolor}#1}}
+% loads a style scheme
+\newcommand*{\moderncvstyle}[1]{
+  \RequirePackage{moderncvstyle#1}}
+  
+% loads a color scheme
+\newcommand*{\moderncvcolor}[1]{
+  \RequirePackage{moderncvcolor#1}}
 
-% makes the cv title
-\newcommand*{\maketitle}{}%
-\title{}% to avoid LaTeX complaining that \maketitle is a called without first a call to \title
-
-% makes the cv footer
-\newcommand*{\makefooter}
-
-% loads a style
-\newcommand*{\moderncvtheme}[2][]{
-  \RequirePackage[#1]{moderncvtheme#2}}
+% recompute all automatic lengths
+\newcommand*{\recomputelengths}{}
+\AtBeginDocument{\recomputelengths{}}
 
 
 %-------------------------------------------------------------------------------
 %                structure commands definitions
 %-------------------------------------------------------------------------------
+% cv elements
 \newcommand*{\firstname}[1]{\def\@firstname{#1}}
 \newcommand*{\familyname}[1]{\def\@familyname{#1}}
 \renewcommand*{\title}[1]{\def\@title{#1}}
@@ -232,62 +237,18 @@
 \newcommandx*{\photo}[3][1=64pt,2=0.4pt,usedefault]{\def\@photowidth{#1}\def\@photoframewidth{#2}\def\@photo{#3}}% the 1st (optional) argument is the width of the photo, the 2nd (optional) argument is the thickness of the frame around it.
 \newcommand*{\quote}[1]{\def\@quote{#1}}
 
-% length used by the moderncv layout
-% quote length
-\newlength{\quotewidth}
-% section lengths
-\newlength{\hintscolumnwidth}
-\setlength{\hintscolumnwidth}{0.15\textwidth}
-\newlength{\separatorcolumnwidth}
-\setlength{\separatorcolumnwidth}{0.025\textwidth}
-\newlength{\maincolumnwidth}
-% doubleitem lengths
-\newlength{\doubleitemmaincolumnwidth}
-% listitem lengths
-\newlength{\listitemsymbolwidth}
-\settowidth{\listitemsymbolwidth}{\listitemsymbol{}~}
-\newlength{\listitemmaincolumnwidth}
-% listdoubleitem lengths
-\newlength{\listdoubleitemmaincolumnwidth}
-% recompute all the lengths that depends on the text width
-\newcommand*{\recomputethemelengths}{}
-\newcommand*{\recomputelengths}{%
-  \setlength{\quotewidth}{0.65\textwidth}%
-  % main lenghts
-  \setlength{\maincolumnwidth}{\textwidth}%
-  \addtolength{\maincolumnwidth}{-\separatorcolumnwidth}%
-  \addtolength{\maincolumnwidth}{-\hintscolumnwidth}%
-  % listitem lengths
-  \setlength{\listitemmaincolumnwidth}{\maincolumnwidth}%
-  \addtolength{\listitemmaincolumnwidth}{-\listitemsymbolwidth}%
-  % doubleitem lengths
-  \setlength{\doubleitemmaincolumnwidth}{\maincolumnwidth}%
-  \addtolength{\doubleitemmaincolumnwidth}{-\hintscolumnwidth}%
-  \addtolength{\doubleitemmaincolumnwidth}{-\separatorcolumnwidth}%
-  \setlength{\doubleitemmaincolumnwidth}{0.5\doubleitemmaincolumnwidth}%
-  % listdoubleitem lengths
-  \setlength{\listdoubleitemmaincolumnwidth}{\maincolumnwidth}%
-  \addtolength{\listdoubleitemmaincolumnwidth}{-\listitemsymbolwidth}%
-  \setlength{\listdoubleitemmaincolumnwidth}{0.475\listdoubleitemmaincolumnwidth}%
-  % fancyhdr lengths
-  \renewcommand{\headwidth}{\textwidth}%
-  \recomputethemelengths{}}
-\AtBeginDocument{\recomputelengths{}}
+% makes the cv title
+% usage: \maketitle
+\newcommand*{\maketitle}{}%
+\title{}% to avoid LaTeX complaining that \maketitle is a called without first a call to \title
 
-% draws a colored rectangle
-% usage: \colorrule[optional height]{width}
-%\newcommand*{\colorrule}[2][1ex]{{\color{sectionrectanglecolor}{\rule{#2}{#1}}}}
+% makes the cv footer
+% usage: \makefooter
+\newcommand*{\makefooter}
 
+% makes a cv section
 % usage: \section{<title>}
-\newcommand*{\section}[1]{%
-  \vspace*{2.5ex}%
-  \parbox[m]{\hintscolumnwidth}{\raggedleft\hintfont{\color{sectionrectanglecolor}\rule{\hintscolumnwidth}{1ex}}}%
-  \phantomsection{}% reset the anchor for hyperrefs
-  \addcontentsline{toc}{part}{#1}%
-  \hspace{\separatorcolumnwidth}%
-  \parbox[m]{\maincolumnwidth}{\sectionstyle{#1}}%
-  \par\nobreak\vskip 1ex\@afterheading}% to avoid a pagebreak after the heading
-% starred variant, which is identical but defined to allow its use (e.g. for natbib compatibility, who uses \section*{} for the bibliography header)
+\newcommand*{\section}[1]{}
 \AtEndPreamble{%
   \@ifpackageloaded{natbib}
     {
@@ -296,89 +257,67 @@
     }{}
 }
 
+% makes a cv subsection
 % usage: \subsection{title}
-\newcommand*{\subsection}[1]{%
-  \begin{tabular}{@{}p{\hintscolumnwidth}@{\hspace{\separatorcolumnwidth}}p{\maincolumnwidth}@{}}%
- 	  \raggedleft\hintfont{} &{\subsectionstyle{#1}}%
-  \end{tabular}%
-  \par\nobreak\vskip 0.5ex\@afterheading}% to avoid a pagebreak after the heading
-%  \phantomsection{}% reset the anchor for hyperrefs
-%  \addcontentsline{toc}{chapter}{#1}% does not work, the bookmark is placed at the same level as sections (placed themselves at part level to be visible, as hyperref does not allow sections without parents...)
+\newcommand*{\subsection}[1]{}
 
-% usage: \cvline{margintext}{linetext}
-\newcommand*{\cvline}[3][.25em]{%
-  \begin{tabular}{@{}p{\hintscolumnwidth}@{\hspace{\separatorcolumnwidth}}p{\maincolumnwidth}@{}}%
- 	  \raggedleft\hintfont{#2} &{#3}%
-  \end{tabular}\\[#1]}
+% makes a cv line with a header and a corresponding text
+% usage: \cvitem[spacing]{header}{text}
+\newcommand*{\cvitem}[3][.25em]{}
 
-% usage: \cvdoubleitem{subtitle}{text}{subtitle}{text}
-\newcommand*{\cvdoubleitem}[4]{%
- \cvline{#1}{\begin{minipage}[t]{\doubleitemmaincolumnwidth}#2\end{minipage}%
- \hfill%
- \begin{minipage}[t]{\hintscolumnwidth}\raggedleft\hintfont{#3}\end{minipage}\hspace*{\separatorcolumnwidth}\begin{minipage}[t]{\doubleitemmaincolumnwidth}#4\end{minipage}}}
+% makes a cv line 2 headers and their corresponding text
+% usage: \cvdoubleitem[spacing]{header1}{text1}{header2}{text2}
+\newcommand*{\cvdoubleitem}[5][.25em]{}
 
-% usage: \cvlistitem[symbol]{point1}
-\newcommand*{\cvlistitem}[2][\listitemsymbol{}]{%
-  \cvline[0pt]{}{#1~\begin{minipage}[t]{\listitemmaincolumnwidth}#2\end{minipage}}}
+% makes a cv line with a list item
+% usage: \cvlistitem[label]{item}
+\newcommand*{\cvlistitem}[2][\listitemsymbol{}]{}
 
-% usage: \cvlistdoubleitem[symbol]{point1}{point2}
-\newcommand*{\cvlistdoubleitem}[3][\listitemsymbol{}]{%
-  \cvline[0pt]{}{#1~\begin{minipage}[t]{\listdoubleitemmaincolumnwidth}#2\end{minipage}%
-  \hfill%
-  \ifthenelse{\equal{#3}{}}%
-    {}%
-    {#1~\begin{minipage}[t]{\listdoubleitemmaincolumnwidth}#3\end{minipage}}}}
+% makes a cv line with 2 list items
+% usage: \cvlistdoubleitem[label]{item1}{item2}
+\newcommand*{\cvlistdoubleitem}[3][\listitemsymbol{}]{}
 
+% makes a typical cv job / education entry
 % usage: \cventry{years}{degree/job title}{institution/employer}{localization}{optionnal: grade/...}{optional: comment/job description}
-\newcommand*{\cventry}[6]{%
-  \cvline{#1}{%
-    {\bfseries#2}%
-    \ifthenelse{\equal{#3}{}}{}{, {\slshape#3}}%
-    \ifthenelse{\equal{#4}{}}{}{, #4}%
-    \ifthenelse{\equal{#5}{}}{}{, #5}%
-    .%
-    \ifx&#6&%
-      \else{\newline{}\begin{minipage}[t]{\linewidth}\small#6\end{minipage}}\fi%
-  }}%
+\newcommand*{\cventry}[6]{}
 
-% usage (inside 'language' cvsection environment): \cvlanguage{name}{level}{comment}
-\newcommand*{\cvlanguage}[3]{%
-  \cvline{#1}{\begin{minipage}[t]{.225\maincolumnwidth}\textbf{#2}\end{minipage}\hfill\begin{minipage}[t]{0.725\maincolumnwidth}\raggedleft\footnotesize\itshape #3\end{minipage}}}
+% makes a cv entry with a proficiency comment
+% usage: \cvitemwithcomment{header}{text}{comment}
+\newcommand*{\cvitemwithcomment}[3]{}
 
-% usage (inside 'computer skills' cvsection environment): \cvcomputer{category}{programs}{category}{programs}
-\newcommand*{\cvcomputer}[4]{%
-  \cvdoubleitem{#1}{\small#2}{#3}{\small#4}}
-
+% makes a generic hyperlink
 % usage: \link[optional text]{link}
 \newcommand*{\link}[2][]{%
   \ifthenelse{\equal{#1}{}}%
     {\href{#2}{#2}}%
     {\href{#2}{#1}}}
 
+% makes a http hyperlink
 % usage: \httplink[optional text]{link}
 \newcommand*{\httplink}[2][]{%
   \ifthenelse{\equal{#1}{}}%
     {\href{http://#2}{#2}}%
     {\href{http://#2}{#1}}}
 
+% makes an email hyperlink
 % usage: \emaillink[optional text]{link}
 \newcommand*{\emaillink}[2][]{%
   \ifthenelse{\equal{#1}{}}%
     {\href{mailto:#2}{#2}}%
     {\href{mailto:#2}{#1}}}
 
-% usage: \nopagenumbers{}
+% page numbers in footer if more than 1 page
 \newif\if@displaypagenumbers\@displaypagenumberstrue
 \newcommand*{\nopagenumbers}{\@displaypagenumbersfalse}
 \AtEndPreamble{%
-\AtBeginDocument{%
-  \if@displaypagenumbers%
-    \@ifundefined{r@lastpage}{}{%
-      \ifthenelse{\pageref{lastpage} > 1}{%
-        \fancypagestyle{plain}{%
-          \fancyfoot[r]{\addressfont\color{quotecolor}\footnotesize\thepage/\pageref{lastpage}}}%
-        \pagestyle{plain}}{}}%
-    \AtEndDocument{\label{lastpage}}\else\fi}}
+  \AtBeginDocument{%
+    \if@displaypagenumbers%
+      \@ifundefined{r@lastpage}{}{%
+        \ifthenelse{\pageref{lastpage} > 1}{%
+          \fancypagestyle{plain}{%
+            \fancyfoot[r]{\addressfont\color{color2}\footnotesize\thepage/\pageref{lastpage}}}%
+          \pagestyle{plain}}{}}%
+      \AtEndDocument{\label{lastpage}}\else\fi}}
 
 % thebibliography environment, for use with BibTeX and possibly multibib
 \newcommand{\refname}{Publications}
@@ -391,56 +330,24 @@
 \newcommand*{\bibliographyhead}[1]{\section{#1}}
 \AtEndPreamble{\@ifpackageloaded{multibib}{\renewcommand*{\bibliographyhead}[1]{\subsection{#1}}}{}}
 % thebibliography environment definition
-\newenvironment{thebibliography}[1]%
-  {%
-    \bibliographyhead{\refname}%
-    \small%
-    \begin{list}{\bibliographyitemlabel}%
-      {%
-        \setlength{\topsep}{0pt}%
-        \setlength{\labelwidth}{\hintscolumnwidth}%
-        \setlength{\labelsep}{\separatorcolumnwidth}%
-        \leftmargin\labelwidth%
-        \advance\leftmargin\labelsep%
-        \@openbib@code%
-        \usecounter{enumiv}%
-        \let\p@enumiv\@empty%
-        \renewcommand\theenumiv{\@arabic\c@enumiv}}%
-        \sloppy\clubpenalty4000\widowpenalty4000%
-%        \sfcode`\.\@m%
-%        \sfcode `\=1000\relax%
-  }%
-  {%
-    \def\@noitemerr{\@latex@warning{Empty `thebibliography' environment}}%
-    \end{list}%
-  }
+\newenvironment{thebibliography}[1]{}{}
 \newcommand\newblock{\hskip .11em\@plus.33em\@minus.07em}
 \let\@openbib@code\@empty
 
 % itemize, enumerate and description environment
-\setlength{\leftmargini}   {1.2em}
+\setlength{\leftmargini}   {1em}
 \leftmargin\leftmargini
-\setlength{\leftmarginii}  {1em}
-\setlength{\leftmarginiii} {1.87em}
-\setlength{\leftmarginiv}  {1.7em}
-\setlength{\leftmarginv}   {1em}
-\setlength{\leftmarginvi}  {1em}
-\setlength{\labelsep}      {.5em}
-\setlength{\labelwidth}    {\leftmargini}
+\setlength{\leftmarginii}  {\leftmargini}
+\setlength{\leftmarginiii} {\leftmargini}
+\setlength{\leftmarginiv}  {\leftmargini}
+\setlength{\leftmarginv}   {\leftmargini}
+\setlength{\leftmarginvi}  {\leftmargini}
+\setlength{\labelsep}      {.5em}% this is the distance between the label and the body, but it pushes the label to the left rather than pushing the body to the right (to do the latter, modify \leftmargin(i)
+\setlength{\labelwidth}    {\leftmargini}% unfortunately, \labelwidth is not defined by item level (i.e. no \labeliwidth, \labeliiwidth, etc)
 \addtolength{\labelwidth}  {-\labelsep}
 \@beginparpenalty -\@lowpenalty
 \@endparpenalty   -\@lowpenalty
 \@itempenalty     -\@lowpenalty
-% itemize labels
-\newcommand\labelitemi{\listitemsymbol{}}
-\newcommand\labelitemii{{\large\bfseries-}}
-\newcommand\labelitemiii{\textperiodcentered}%{\textasteriskcentered}
-\newcommand\labelitemiv{\textperiodcentered}
-% enumerate labels
-\renewcommand\theenumi{\@arabic\c@enumi}
-\renewcommand\theenumii{\@alph\c@enumii}
-\renewcommand\theenumiii{\@roman\c@enumiii}
-\renewcommand\theenumiv{\@Alph\c@enumiv}
 \newcommand\labelenumi{\theenumi.}
 \newcommand\labelenumii{(\theenumii)}
 \newcommand\labelenumiii{\theenumiii.}
@@ -465,6 +372,12 @@
   January\or February\or March\or April\or May\or June\or
   July\or August\or September\or October\or November\or December\fi
   \space\number\day, \number\year}
+
+%\newcommand{\widthofautobox}[1]{%
+%  \widthof{\begin{tabular}{@{}l@{}}#1\end{tabular}}}
+
+%\newcommand{\autobox}[2][b]{%
+%  \parbox[#1]{\widthofautobox{#2}}{#2}}
 
 
 \endinput

@@ -6,11 +6,12 @@
 % available at http://www.latex-project.org/lppl/.
 
 
-\documentclass[11pt,a4paper]{moderncv}
+\documentclass[11pt,a4paper,sans]{moderncv}   % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
 
 % moderncv themes
-\moderncvtheme[blue]{casual}                  % optional argument are 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'roman' (for roman fonts, instead of sans serif fonts)
-%\moderncvtheme[green]{classic}               % idem
+\moderncvstyle{casual}                        % style options are 'casual' (default) and 'classic' 
+\moderncvcolor{blue}                         % color options 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
+%\renewcommand{\familydefault}{\sfdefault}     % to set the default font; use '\sfdefault' for the default sans serif font, '\rmdefault' for the default roman one, or any tex font name
 
 % character encoding
 \usepackage[utf8]{inputenc}                   % replace by the encoding you are using
@@ -19,7 +20,6 @@
 % adjust the page margins
 \usepackage[scale=0.8]{geometry}
 %\setlength{\hintscolumnwidth}{3cm}           % if you want to change the width of the column with the dates
-%\setlength{\maketitlenamewidth}{10cm}}       % only for the classic theme, if you want to change the width of your name placeholder (to leave more space for your address details
 
 % personal data
 \firstname{John}
@@ -35,10 +35,10 @@
 \photo[64pt][0.4pt]{picture}                  % '64pt' is the height the picture must be resized to, 0.4pt is the thickness of the frame around it (put it to 0pt for no frame) and 'picture' is the name of the picture file; optional, remove the line if not wanted
 \quote{Some quote (optional)}                 % optional, remove the line if not wanted
 
-% to show numerical labels in the bibliography; only useful if you make citations in your resume
-\makeatletter
-\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}
-\makeatother
+% to show numerical labels in the bibliography (default is to show no labels); only useful if you make citations in your resume
+%\makeatletter
+%\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}
+%\makeatother
 
 % bibliography with mutiple entries
 %\usepackage{multibib}
@@ -102,13 +102,13 @@ Detailed achievements:%
 \section{Extra 1}
 \cvlistitem{Item 1}
 \cvlistitem{Item 2}
-\cvlistitem[+]{Item 3}                       % optional other symbol
+\cvlistitem{Item 3}
 
 \renewcommand{\listitemsymbol}{-}            % change the symbol for lists
 
 \section{Extra 2}
 \cvlistdoubleitem{Item 1}{Item 4}
-\cvlistdoubleitem{Item 2}{Item 5 \cite{book1}}
+\cvlistdoubleitem{Item 2}{Item 5\cite{book1}}
 \cvlistdoubleitem{Item 3}{}
 
 % Publications from a BibTeX file without multibib\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}% for BibTeX numerical labels
@@ -129,4 +129,4 @@ Detailed achievements:%
 \end{document}
 
 
-%% end of file `template_en.tex'.
+%% end of file `template.tex'.

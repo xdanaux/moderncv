@@ -53,10 +53,10 @@
 %  \cvline[#1]{#2}{#3\vspace*{.75em}}}   % the \vspace*{} inside the cvline environment is a hack... (should conceptually be outside the environment)
 
 % compatibility with versions <= 0.5
-\newcommand*{\cvitem}[2]{\cvline{#1}{#2}}
-\newcommand*{\moderncvstyle}[1]{\moderncvtheme{#1}}
+%\newcommand*{\cvitem}[2]{\cvline{#1}{#2}}
+%\newcommand*{\moderncvstyle}[1]{\moderncvtheme{#1}}
 
-% compatibility with versions <=0.7
+% compatibility with versions <= 0.7
 \newcommand*{\closesection}{}
 \newcommand*{\emptysection}{}
 \newcommand*{\sethintscolumnlength}[1]{%
@@ -65,6 +65,14 @@
 \newcommand*{\sethintscolumntowidth}[1]{%
   \settowidth{\hintscolumnwidth}{#1}%
   \recomputelengths}
+
+% compatibility with versions <= 0.15
+\newcommand*{\cvline}[2]{\cvitem{#1}{#2}}
+\newcommand*{\cvlanguage}[3]{\cvitemwithcomment{#1}{#2}{#3}}
+\newcommand*{\cvcomputer}[4]{\cvdoubleitem{#1}{\small#2}{#3}{\small#4}}
+\newcommand*{\moderncvtheme}[2][blue]{%
+  \moderncvcolor{#1}%
+  \moderncvstyle{#2}}
 
 \endinput
 
