@@ -30,16 +30,13 @@
 % fonts
 \renewcommand*{\namefont}{\fontsize{38}{40}\mdseries\upshape}
 \renewcommand*{\addressfont}{\normalsize\mdseries\slshape\small}
-\renewcommand*{\quotefont}{\large\slshape}
-\renewcommand*{\sectionfont}{\Large\mdseries\upshape}
-\renewcommand*{\subsectionfont}{\large\mdseries\upshape}
 
 % cv footer
 \newif\if@firstfooterelement\@firstfooterelementtrue
 \newcommand*{\footersymbol}{%
   \if@firstfooterelement%
   \else%
-    {~~~\color{color1}\textbullet~~~}\fi\@firstfooterelementfalse}% \textbullet forces the use of the CMSY font, even when lmodern fonts are used :(
+    {~~~\color{color2}\textbullet~~~}\fi\@firstfooterelementfalse}% \textbullet forces the use of the CMSY font, even when lmodern fonts are used :(
 \renewcommand*{\makefooter}{%
   \fancypagestyle{plain}{%
     \fancyfoot[c]{%

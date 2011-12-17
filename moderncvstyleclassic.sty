@@ -29,17 +29,17 @@
 % fonts
 \renewcommand*{\namefont}{\fontsize{34}{36}\mdseries\upshape}
 \renewcommand*{\titlefont}{\LARGE\mdseries\slshape}
-\renewcommand*{\addressfont}{\normalsize\mdseries\slshape}
+\renewcommand*{\addressfont}{\normalsize\mdseries\slshape\small}
 \renewcommand*{\quotefont}{\large\slshape}
 \renewcommand*{\sectionfont}{\Large\mdseries\upshape}
 \renewcommand*{\subsectionfont}{\large\mdseries\upshape}
-\renewcommand*{\hintfont}{\small}
+\renewcommand*{\hintfont}{}
 
 % styles
 \newcommand*{\namestyle}[1]{{\namefont\color{color0}#1}}
 \newcommand*{\titlestyle}[1]{{\titlefont\color{color2}#1}}
-\newcommand*{\addresstyle}[1]{{\addressfont\color{color1}#1}}
-\newcommand*{\quotestyle}[1]{{\quotefont\color{color2}#1}}
+\newcommand*{\addressstyle}[1]{{\addressfont\color{color1}#1}}
+\newcommand*{\quotestyle}[1]{{\quotefont\color{color1}#1}}
 \newcommand*{\sectionstyle}[1]{{\sectionfont\color{color1}#1}}
 \newcommand*{\subsectionstyle}[1]{{\subsectionfont\color{color1}#1}}
 \newcommand*{\hintstyle}[1]{{\hintfont\color{color0}#1}}
@@ -79,7 +79,7 @@
   \else%
     \\[.2em]\fi%
   \@firstdetailselementfalse%
-  \addressfont\color{color1}}
+  \addressfont\color{color2}}
 \renewcommand*{\maketitle}{%
   % optional detailed information box
   \newbox{\maketitledetailsbox}%
