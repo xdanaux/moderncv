@@ -185,11 +185,11 @@
 %   other symbols
 \newcommand*{\listitemsymbol}{\labelitemi}
 \newcommand*{\addresssymbol}{}
-\newcommand*{\mobilesymbol}{\Mobilefone}
-\newcommand*{\phonesymbol}{\Telefon}
-\newcommand*{\faxsymbol}{\FAX}
-\newcommand*{\emailsymbol}{\Letter}
-\newcommand*{\homepagesymbol}{{\Large\ComputerMouse}}
+\newcommand*{\mobilesymbol}{\Mobilefone~}
+\newcommand*{\phonesymbol}{\Telefon~}
+\newcommand*{\faxsymbol}{\FAX~}
+\newcommand*{\emailsymbol}{\Letter~}
+\newcommand*{\homepagesymbol}{{\Large\ComputerMouse}~}
 
 % colors
 \definecolor{color0}{rgb}{0,0,0}% main default color, normally left to black

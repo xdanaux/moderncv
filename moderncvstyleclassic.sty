@@ -21,37 +21,6 @@
 %-------------------------------------------------------------------------------
 %                package options
 %-------------------------------------------------------------------------------
-% color options
-% blue (default option)
-%\DeclareOption{blue}{}
-% orange
-\newif\if@colororange\@colororangefalse
-%\DeclareOption{orange}{\@colororangetrue}
-% green
-\newif\if@colorgreen\@colorgreenfalse
-%\DeclareOption{green}{\@colorgreentrue}
-% red
-\newif\if@colorred\@colorredfalse
-%\DeclareOption{red}{\@colorredtrue}
-% purple
-\newif\if@colorpurple\@colorpurplefalse
-%\DeclareOption{purple}{\@colorpurpletrue}
-% grey
-\newif\if@colorgrey\@colorgreyfalse
-%\DeclareOption{grey}{\@colorgreytrue}
-% black
-\newif\if@colorblack\@colorblackfalse
-%\DeclareOption{black}{\@colorblacktrue}
-
-% unused options
-%\DeclareOption*{
-%  \PackageWarning{moderncvstyleclassic}{Unknown option '\CurrentOption'}}
-
-% execute default options
-%\ExecuteOptions{}
-
-% process given options
-%\ProcessOptions\relax
 
 
 %-------------------------------------------------------------------------------
@@ -92,20 +61,14 @@
 \renewcommand*{\recomputelengths}{%
   \setlength{\quotewidth}{0.65\textwidth}%
   % main lenghts
-  \setlength{\maincolumnwidth}{\textwidth}%
-  \addtolength{\maincolumnwidth}{-\separatorcolumnwidth}%
-  \addtolength{\maincolumnwidth}{-\hintscolumnwidth}%
+  \setlength{\maincolumnwidth}{\textwidth-\separatorcolumnwidth-\hintscolumnwidth}%
   % listitem lengths
-  \setlength{\listitemmaincolumnwidth}{\maincolumnwidth}%
-  \addtolength{\listitemmaincolumnwidth}{-\listitemsymbolwidth}%
+  \setlength{\listitemmaincolumnwidth}{\maincolumnwidth-\listitemsymbolwidth}%
   % doubleitem lengths
-  \setlength{\doubleitemmaincolumnwidth}{\maincolumnwidth}%
-  \addtolength{\doubleitemmaincolumnwidth}{-\hintscolumnwidth}%
-  \addtolength{\doubleitemmaincolumnwidth}{-\separatorcolumnwidth}%
+  \setlength{\doubleitemmaincolumnwidth}{\maincolumnwidth-\hintscolumnwidth-\separatorcolumnwidth}%
   \setlength{\doubleitemmaincolumnwidth}{0.5\doubleitemmaincolumnwidth}%
   % listdoubleitem lengths
-  \setlength{\listdoubleitemmaincolumnwidth}{\maincolumnwidth}%
-  \addtolength{\listdoubleitemmaincolumnwidth}{-\listitemsymbolwidth}%
+  \setlength{\listdoubleitemmaincolumnwidth}{\maincolumnwidth-\listitemsymbolwidth}%
   \setlength{\listdoubleitemmaincolumnwidth}{0.475\listdoubleitemmaincolumnwidth}%
   % fancyhdr lengths
   \renewcommand{\headwidth}{\textwidth}}
@@ -122,13 +85,13 @@
   \newbox{\maketitledetailsbox}%
   \savebox{\maketitledetailsbox}{%
     \begin{tabular}[b]{@{}r@{}}%
-      \ifthenelse{\isundefined{\@addressstreet}}{}{\maketitledetailsnewline\addresssymbol~\@addressstreet}%
+      \ifthenelse{\isundefined{\@addressstreet}}{}{\maketitledetailsnewline\addresssymbol\@addressstreet}%
       \ifthenelse{\isundefined{\@addresscity}}{}{\maketitledetailsnewline\@addresscity}%
-      \ifthenelse{\isundefined{\@mobile}}{}{\maketitledetailsnewline\mobilesymbol~\@mobile}%
-      \ifthenelse{\isundefined{\@phone}}{}{\maketitledetailsnewline\phonesymbol~\@phone}%
-      \ifthenelse{\isundefined{\@fax}}{}{\maketitledetailsnewline\faxsymbol~\@fax}%
-      \ifthenelse{\isundefined{\@email}}{}{\maketitledetailsnewline\emailsymbol~\emaillink{\@email}}%
-      \ifthenelse{\isundefined{\@homepage}}{}{\maketitledetailsnewline\homepagesymbol~\httplink{\@homepage}}%
+      \ifthenelse{\isundefined{\@mobile}}{}{\maketitledetailsnewline\mobilesymbol\@mobile}%
+      \ifthenelse{\isundefined{\@phone}}{}{\maketitledetailsnewline\phonesymbol\@phone}%
+      \ifthenelse{\isundefined{\@fax}}{}{\maketitledetailsnewline\faxsymbol\@fax}%
+      \ifthenelse{\isundefined{\@email}}{}{\maketitledetailsnewline\emailsymbol\emaillink{\@email}}%
+      \ifthenelse{\isundefined{\@homepage}}{}{\maketitledetailsnewline\homepagesymbol\httplink{\@homepage}}%
       \ifthenelse{\isundefined{\@extrainfo}}{}{\maketitledetailsnewline\@extrainfo}%
     \end{tabular}
   }%
@@ -193,8 +156,6 @@
    \hspace*{\separatorcolumnwidth}%
    \begin{minipage}[t]{\doubleitemmaincolumnwidth}#5\end{minipage}}}
 
-%\renewcommand*{\cvlistitem}[2][\listitemsymbol]{%
-%  \cvitem[0pt]{}{#1~\begin{minipage}[t]{\listitemmaincolumnwidth}#2\end{minipage}}}
 \renewcommand*{\cvlistitem}[2][.25em]{%
   \cvitem[#1]{}{\listitemsymbol~\begin{minipage}[t]{\listitemmaincolumnwidth}#2\end{minipage}}}
 
@@ -206,7 +167,7 @@
     {#1~\begin{minipage}[t]{\listdoubleitemmaincolumnwidth}#3\end{minipage}}}}
 
 \renewcommand*{\cventry}[6]{%
-  \cvline{#1}{%
+  \cvitem{#1}{%
     {\bfseries#2}%
     \ifthenelse{\equal{#3}{}}{}{, {\slshape#3}}%
     \ifthenelse{\equal{#4}{}}{}{, #4}%
