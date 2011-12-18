@@ -1,9 +1,21 @@
-version 0.15 (xx December 2011)
+version 0.15 (19 December 2011)
  - corrects list spacing.
  - corrects inconsistent use of sans serif fonts in roman layout option.
  - the lmodern fonts are now automatically loaded only if installed on the system.
  The "nolmodern" option is now therefore obsolete.
  - complete code refactoring separating themes in separate styles and colors.
+ - renamed \cvline to \cvitem, \cvlanguage to \cvitemwithcomment and \cvcomputer
+ to \cvdoubleitem (the old command name still work and redirect to the new ones,
+ but are deprecated).
+ - removed the arbitrary minipage widths of skill proficiency vs comment in
+ \cvitemwithcomments. The skill proficiency is now typeset exactly as given (i.e.
+ one one line if no linebreaks are implicitly given) and the comment uses the
+ remaining horizontal space.
+ - changed the optional argument of \cvlistitem and \cvlistdoubleitem to specify
+ the vertical skip after the item (as for \cvitem, cvitemwithcomments, etc).
+ The way to change the list symbol is to redefine \listitemsymbol.
+ - added a new style on top of classic and casual: oldstyle.
+ - loads the microtype package to improve typography.
 
 version 0.14 (04 December 2011)
  - adds support for CJK, thanks to the help of P. D'Apice.

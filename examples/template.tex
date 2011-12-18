@@ -10,8 +10,9 @@
 
 % moderncv themes
 \moderncvstyle{casual}                        % style options are 'casual' (default) and 'classic' 
-\moderncvcolor{blue}                         % color options 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
-%\renewcommand{\familydefault}{\sfdefault}     % to set the default font; use '\sfdefault' for the default sans serif font, '\rmdefault' for the default roman one, or any tex font name
+\moderncvcolor{blue}                          % color options 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
+%\renewcommand{\familydefault}{\sfdefault}    % to set the default font; use '\sfdefault' for the default sans serif font, '\rmdefault' for the default roman one, or any tex font name
+%\nopagenumbers{}                             % uncomment to suppress automatic page numbering for CVs longer than one page
 
 % character encoding
 \usepackage[utf8]{inputenc}                   % replace by the encoding you are using
@@ -26,12 +27,12 @@
 \familyname{Doe}
 \title{Resumé title (optional)}               % optional, remove the line if not wanted
 \address{street and number}{postcode city}    % optional, remove the line if not wanted
-\mobile{mobile (optional)}                    % optional, remove the line if not wanted
-\phone{phone (optional)}                      % optional, remove the line if not wanted
-\fax{fax (optional)}                          % optional, remove the line if not wanted
-\email{email (optional)}                      % optional, remove the line if not wanted
-\homepage{homepage (optional)}                % optional, remove the line if not wanted
-\extrainfo{additional information (optional)} % optional, remove the line if not wanted
+\mobile{+1~(234)~567~890}                     % optional, remove the line if not wanted
+\phone{+2~(345)~678~901}                      % optional, remove the line if not wanted
+\fax{+3~(456)~789~012}                        % optional, remove the line if not wanted
+\email{john@doe.org}                          % optional, remove the line if not wanted
+\homepage{www.johndoe.com}                    % optional, remove the line if not wanted
+\extrainfo{additional information}            % optional, remove the line if not wanted
 \photo[64pt][0.4pt]{picture}                  % '64pt' is the height the picture must be resized to, 0.4pt is the thickness of the frame around it (put it to 0pt for no frame) and 'picture' is the name of the picture file; optional, remove the line if not wanted
 \quote{Some quote (optional)}                 % optional, remove the line if not wanted
 
@@ -43,13 +44,11 @@
 % bibliography with mutiple entries
 %\usepackage{multibib}
 %\newcites{book,misc}{{Books},{Others}}
-
-%\nopagenumbers{}                             % uncomment to suppress automatic page numbering for CVs longer than one page
 %----------------------------------------------------------------------------------
 %            content
 %----------------------------------------------------------------------------------
 \begin{document}
-%\begin{CJK*}{UTF8}{gbsn}                    % to typeset your resume in Chinese using CJK
+%\begin{CJK*}{UTF8}{gbsn}                     % to typeset your resume in Chinese using CJK
 \maketitle
 
 \section{Education}
@@ -57,9 +56,9 @@
 \cventry{year--year}{Degree}{Institution}{City}{\textit{Grade}}{Description}
 
 \section{Master thesis}
-\cvline{title}{\emph{Title}}
-\cvline{supervisors}{Supervisors}
-\cvline{description}{\small Short thesis abstract}
+\cvitem{title}{\emph{Title}}
+\cvitem{supervisors}{Supervisors}
+\cvitem{description}{Short thesis abstract}
 
 \section{Experience}
 \subsection{Vocational}
@@ -85,26 +84,26 @@ Detailed achievements:%
 \cventry{year--year}{Job title}{Employer}{City}{}{Description}
 
 \section{Languages}
-\cvlanguage{Language 1}{Skill level}{Comment}
-\cvlanguage{Language 2}{Skill level}{Comment}
-\cvlanguage{Language 3}{Skill level}{Comment}
+\cvitemwithcomment{Language 1}{Skill level}{Comment}
+\cvitemwithcomment{Language 2}{Skill level}{Comment}
+\cvitemwithcomment{Language 3}{Skill level}{Comment}
 
 \section{Computer skills}
-\cvcomputer{category 1}{XXX, YYY, ZZZ}{category 4}{XXX, YYY, ZZZ}
-\cvcomputer{category 2}{XXX, YYY, ZZZ}{category 5}{XXX, YYY, ZZZ}
-\cvcomputer{category 3}{XXX, YYY, ZZZ}{category 6}{XXX, YYY, ZZZ}
+\cvdoubleitem{category 1}{XXX, YYY, ZZZ}{category 4}{XXX, YYY, ZZZ}
+\cvdoubleitem{category 2}{XXX, YYY, ZZZ}{category 5}{XXX, YYY, ZZZ}
+\cvdoubleitem{category 3}{XXX, YYY, ZZZ}{category 6}{XXX, YYY, ZZZ}
 
 \section{Interests}
-\cvline{hobby 1}{\small Description}
-\cvline{hobby 2}{\small Description}
-\cvline{hobby 3}{\small Description}
+\cvitem{hobby 1}{Description}
+\cvitem{hobby 2}{Description}
+\cvitem{hobby 3}{Description}
 
 \section{Extra 1}
 \cvlistitem{Item 1}
 \cvlistitem{Item 2}
 \cvlistitem{Item 3}
 
-\renewcommand{\listitemsymbol}{-}            % change the symbol for lists
+\renewcommand{\listitemsymbol}{-~}            % change the symbol for lists
 
 \section{Extra 2}
 \cvlistdoubleitem{Item 1}{Item 4}
@@ -114,18 +113,18 @@ Detailed achievements:%
 % Publications from a BibTeX file without multibib\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}% for BibTeX numerical labels
 \nocite{*}
 \bibliographystyle{plain}
-\bibliography{publications}                  % 'publications' is the name of a BibTeX file
+\bibliography{publications}                   % 'publications' is the name of a BibTeX file
 
 % Publications from a BibTeX file using the multibib package
 %\section{Publications}
 %\nocitebook{book1,book2}
 %\bibliographystylebook{plain}
-%\bibliographybook{publications}             % 'publications' is the name of a BibTeX file
+%\bibliographybook{publications}              % 'publications' is the name of a BibTeX file
 %\nocitemisc{misc1,misc2,misc3}
 %\bibliographystylemisc{plain}
-%\bibliographymisc{publications}             % 'publications' is the name of a BibTeX file
+%\bibliographymisc{publications}              % 'publications' is the name of a BibTeX file
 
-%\clearpage\end{CJK*}                        % if you are typesetting your resume in Chinese using CJK; the \clearpage is required for fancyhdr to work correctly with CJK, though it kills the page numbering by making \lastpage undefined
+%\clearpage\end{CJK*}                         % if you are typesetting your resume in Chinese using CJK; the \clearpage is required for fancyhdr to work correctly with CJK, though it kills the page numbering by making \lastpage undefined
 \end{document}
 
 

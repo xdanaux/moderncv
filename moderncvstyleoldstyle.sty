@@ -1,4 +1,4 @@
-%% start of file `moderncvstyleclassic.sty'.
+%% start of file `moderncvstyleoldstyle.sty'.
 %% Copyright 2006-2011 Xavier Danaux (xdanaux@gmail.com).
 %
 % This work may be distributed and/or modified under the
@@ -10,7 +10,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{moderncvstyleclassic}[2011/12/04 v0.14 modern curriculum vitae style scheme: classic]
+\ProvidesPackage{moderncvstyleoldstyle}[2011/12/04 v0.14 modern curriculum vitae style: oldstyle]
 
 
 %-------------------------------------------------------------------------------
@@ -24,34 +24,46 @@
 
 
 %-------------------------------------------------------------------------------
-%                style scheme definition
+%                style definition
 %-------------------------------------------------------------------------------
 % fonts
+\IfFileExists{kurier.sty}
+  {\RequirePackage[light,math]{kurier}}
+  {}
 \renewcommand*{\namefont}{\fontsize{34}{36}\mdseries\upshape}
 \renewcommand*{\titlefont}{\LARGE\mdseries\slshape}
-\renewcommand*{\addressfont}{\small\mdseries\slshape}
-\renewcommand*{\quotefont}{\large\slshape}
-\renewcommand*{\sectionfont}{\Large\mdseries\upshape}
-\renewcommand*{\subsectionfont}{\large\mdseries\upshape}
-\renewcommand*{\hintfont}{}
+\renewcommand*{\addressfont}{\small\mdseries}
+\renewcommand*{\quotefont}{\large\itshape}
+\renewcommand*{\sectionfont}{\Large\bfseries\upshape}
+\renewcommand*{\subsectionfont}{\large\bfseries\itshape}
+\renewcommand*{\hintfont}{\bfseries}
 
 % styles
 \newcommand*{\namestyle}[1]{{\namefont\color{color0}#1}}
 \newcommand*{\titlestyle}[1]{{\titlefont\color{color2}#1}}
-\newcommand*{\addressstyle}[1]{{\addressfont\color{color1}#1}}
+\newcommand*{\addressstyle}[1]{{\addressfont\color{color2}#1}}
 \newcommand*{\quotestyle}[1]{{\quotefont\color{color1}#1}}
 \newcommand*{\sectionstyle}[1]{{\sectionfont\color{color1}#1}}
 \newcommand*{\subsectionstyle}[1]{{\subsectionfont\color{color1}#1}}
 \newcommand*{\hintstyle}[1]{{\hintfont\color{color0}#1}}
 
+% symbols
+\renewcommand*{\listitemsymbol}{\labelitemi~}
+\renewcommand*{\addresssymbol}{}
+\renewcommand*{\mobilesymbol}{\textbf{M}~}
+\renewcommand*{\phonesymbol}{\textbf{T}~}
+\renewcommand*{\faxsymbol}{\textbf{F}~}
+\renewcommand*{\emailsymbol}{\textbf{E}~}
+\renewcommand*{\homepagesymbol}{}
+
 % length used
 \newlength{\quotewidth}
 \newlength{\hintscolumnwidth}
-\setlength{\hintscolumnwidth}{0.15\textwidth}
+\setlength{\hintscolumnwidth}{0.3\textwidth}%
 \newlength{\separatorcolumnwidth}
-\setlength{\separatorcolumnwidth}{0.025\textwidth}
+\setlength{\separatorcolumnwidth}{0.025\textwidth}%
 \newlength{\maincolumnwidth}
-\newlength{\doubleitemmaincolumnwidth}
+\newlength{\doubleitemcolumnwidth}
 \newlength{\listitemsymbolwidth}
 \settowidth{\listitemsymbolwidth}{\listitemsymbol}
 \newlength{\listitemmaincolumnwidth}
@@ -61,17 +73,27 @@
 \renewcommand*{\recomputelengths}{%
   \setlength{\quotewidth}{0.65\textwidth}%
   % main lenghts
-  \setlength{\maincolumnwidth}{\textwidth-\separatorcolumnwidth-\hintscolumnwidth}%
+  \setlength{\maincolumnwidth}{\textwidth-\hintscolumnwidth-\separatorcolumnwidth}%
   % listitem lengths
   \setlength{\listitemmaincolumnwidth}{\maincolumnwidth-\listitemsymbolwidth}%
   % doubleitem lengths
-  \setlength{\doubleitemmaincolumnwidth}{\maincolumnwidth-\hintscolumnwidth-\separatorcolumnwidth-\separatorcolumnwidth}%
-  \setlength{\doubleitemmaincolumnwidth}{0.5\doubleitemmaincolumnwidth}%
+  \setlength{\doubleitemcolumnwidth}{\maincolumnwidth-\separatorcolumnwidth}%
+  \setlength{\doubleitemcolumnwidth}{0.5\doubleitemcolumnwidth}%
   % listdoubleitem lengths
   \setlength{\listdoubleitemmaincolumnwidth}{\maincolumnwidth-\listitemsymbolwidth-\separatorcolumnwidth-\listitemsymbolwidth}%
   \setlength{\listdoubleitemmaincolumnwidth}{0.5\listdoubleitemmaincolumnwidth}%
   % fancyhdr lengths
   \renewcommand{\headwidth}{\textwidth}}
+
+\newcommand{\makeinfo}[1]{%
+  \newbox{\makeinfobox}%
+  \savebox{\makeinfobox}{\parbox[b]{\hintscolumnwidth}{\if@DEBUG\rule{20cm}{.1pt}\\\fi#1}}%
+  \newlength{\makeinfoheight}%
+  \setlength{\makeinfoheight}{\totalheightof{\usebox{\makeinfobox}}}% the total height of the parbox is the sum of its height (\the\ht\makeinfobox) and its depth (\the\dp\makeinfobox); the \totalheightof command is provided by the "calc" package
+  \usebox{\makeinfobox}\vspace*{-\makeinfoheight}%
+  \newlength{\leftcolumnwidth}%
+  \setlength{\leftcolumnwidth}{\hintscolumnwidth+\separatorcolumnwidth}
+  \par\nointerlineskip\vspace*{-\parskip}\vspace*{-2.5ex}\leftskip=\leftcolumnwidth\if@DEBUG\rule{20cm}{.1pt}\fi}% the -2.5ex vertical slip is to counter the 2.5ex skip of sections
 
 \newif\if@firstdetailselement\@firstdetailselementtrue
 \newcommand*{\maketitledetailsnewline}{
@@ -80,81 +102,63 @@
     \\[.2em]\fi%
   \@firstdetailselementfalse%
   \addressfont\color{color2}}
-\renewcommand*{\maketitle}{%
-  % optional detailed information box
-  \newbox{\maketitledetailsbox}%
-  \savebox{\maketitledetailsbox}{%
-    \begin{tabular}[b]{@{}r@{}}%
-      \ifthenelse{\isundefined{\@addressstreet}}{}{\maketitledetailsnewline\addresssymbol\@addressstreet}%
-      \ifthenelse{\isundefined{\@addresscity}}{}{\maketitledetailsnewline\@addresscity}%
-      \ifthenelse{\isundefined{\@mobile}}{}{\maketitledetailsnewline\mobilesymbol\@mobile}%
-      \ifthenelse{\isundefined{\@phone}}{}{\maketitledetailsnewline\phonesymbol\@phone}%
-      \ifthenelse{\isundefined{\@fax}}{}{\maketitledetailsnewline\faxsymbol\@fax}%
-      \ifthenelse{\isundefined{\@email}}{}{\maketitledetailsnewline\emailsymbol\emaillink{\@email}}%
-      \ifthenelse{\isundefined{\@homepage}}{}{\maketitledetailsnewline\homepagesymbol\httplink{\@homepage}}%
-      \ifthenelse{\isundefined{\@extrainfo}}{}{\maketitledetailsnewline\@extrainfo}%
-    \end{tabular}
-  }%
+\renewcommand*{\maketitle}{
   % optional picture box
   \newbox{\maketitlepicturebox}%
   \savebox{\maketitlepicturebox}{%
     \ifthenelse{\isundefined{\@photo}}%
     {}%
     {%
-      \hspace*{\separatorcolumnwidth}%
       \color{color1}%
       \setlength\fboxrule{\@photoframewidth}%
       \ifdim\@photoframewidth=0pt%
         \setlength{\fboxsep}{0pt}\fi%
       \framebox{\includegraphics[width=\@photowidth]{\@photo}}}}%
   % name and title
-  \newlength{\maketitledetailswidth}\settowidth{\maketitledetailswidth}{\usebox{\maketitledetailsbox}}%
   \newlength{\maketitlepicturewidth}\settowidth{\maketitlepicturewidth}{\usebox{\maketitlepicturebox}}%
-  \newlength{\maketitlenamewidth}\setlength{\maketitlenamewidth}{\textwidth-\maketitledetailswidth-\maketitlepicturewidth}%
+  \newlength{\maketitlenamewidth}\setlength{\maketitlenamewidth}{\textwidth-\maketitlepicturewidth}%
   \begin{minipage}[b]{\maketitlenamewidth}%
     \namestyle{\@firstname\ \@familyname}%
     \ifthenelse{\equal{\@title}{}}{}{\\[1.25em]\titlestyle{\@title}}%
   \end{minipage}%
-  % detailed information
-  \usebox{\maketitledetailsbox}%
   % optional photo
   \usebox{\maketitlepicturebox}\\[3em]%
-  % optional quote
+   % optional quote
   \ifthenelse{\isundefined{\@quote}}%
     {}%
     {{\centering{}\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
-  }
+  % optional details
+  \makeinfo{%
+    \ifthenelse{\isundefined{\@addressstreet}}{}{\maketitledetailsnewline\addresssymbol\@addressstreet}%
+    \ifthenelse{\isundefined{\@addresscity}}{}{\maketitledetailsnewline\@addresscity}%
+    \ifthenelse{\isundefined{\@mobile}}{}{\maketitledetailsnewline\mobilesymbol\@mobile}%
+    \ifthenelse{\isundefined{\@phone}}{}{\maketitledetailsnewline\phonesymbol\@phone}%
+    \ifthenelse{\isundefined{\@fax}}{}{\maketitledetailsnewline\faxsymbol\@fax}%
+    \ifthenelse{\isundefined{\@email}}{}{\maketitledetailsnewline\emailsymbol\emaillink{\@email}}%
+    \ifthenelse{\isundefined{\@homepage}}{}{\maketitledetailsnewline\homepagesymbol\httplink{\@homepage}}%
+    \ifthenelse{\isundefined{\@extrainfo}}{}{\maketitledetailsnewline\@extrainfo}}}
 
 \renewcommand*{\section}[1]{%
   \vspace*{2.5ex}%
-  \parbox[m]{\hintscolumnwidth}{\raggedleft\hintfont{\color{color1}\rule{\hintscolumnwidth}{1ex}}}%
   \phantomsection{}% reset the anchor for hyperrefs
   \addcontentsline{toc}{part}{#1}%
-  \hspace{\separatorcolumnwidth}%
   \parbox[m]{\maincolumnwidth}{\sectionstyle{#1}}%
   \par\nobreak\vskip 1ex\@afterheading}% to avoid a pagebreak after the heading
 % starred variant, which is identical but defined to allow its use (e.g. for natbib compatibility, who uses \section*{} for the bibliography header)
 
 \renewcommand*{\subsection}[1]{%
-  \begin{tabular}{@{}p{\hintscolumnwidth}@{\hspace{\separatorcolumnwidth}}p{\maincolumnwidth}@{}}%
- 	  \raggedleft\hintfont{} &{\subsectionstyle{#1}}%
-  \end{tabular}%
+  \subsectionstyle{#1}%
   \par\nobreak\vskip 0.5ex\@afterheading}% to avoid a pagebreak after the heading
 %  \phantomsection{}% reset the anchor for hyperrefs
 %  \addcontentsline{toc}{chapter}{#1}% does not work, the bookmark is placed at the same level as sections (placed themselves at part level to be visible, as hyperref does not allow sections without parents...)
 
 \renewcommand*{\cvitem}[3][.25em]{%
-  \begin{tabular}{@{}p{\hintscolumnwidth}@{\hspace{\separatorcolumnwidth}}p{\maincolumnwidth}@{}}%
- 	  \raggedleft\hintfont{#2} &{#3}%
-  \end{tabular}\\[#1]}
+  \ifthenelse{\equal{#2}{}}{}{{\hintfont#2}: }{#3}\\[#1]}
 
 \renewcommand*{\cvdoubleitem}[5][.25em]{%
- \cvitem[#1]{#2}{%
-   \begin{minipage}[t]{\doubleitemmaincolumnwidth}#3\end{minipage}%
-   \hfill% fill of \separatorcolumnwidth
-   \begin{minipage}[t]{\hintscolumnwidth}\raggedleft\hintfont{#4}\end{minipage}%
-   \hspace*{\separatorcolumnwidth}%
-   \begin{minipage}[t]{\doubleitemmaincolumnwidth}#5\end{minipage}}}
+  \begin{minipage}[t]{\doubleitemcolumnwidth}{\hintfont#2}: #3\end{minipage}%
+  \hfill% fill of \separatorcolumnwidth
+  \begin{minipage}[t]{\doubleitemcolumnwidth}{\hintfont#4}: #5\end{minipage}\\[#1]}
 
 \renewcommand*{\cvlistitem}[2][.25em]{%
   \cvitem[#1]{}{\listitemsymbol\begin{minipage}[t]{\listitemmaincolumnwidth}#2\end{minipage}}}
@@ -166,27 +170,38 @@
     {}%
     {\listitemsymbol\begin{minipage}[t]{\listdoubleitemmaincolumnwidth}#3\end{minipage}}}}
 
+\newbox{\cventryyearbox}
+\newlength{\cventrytitleboxwidth}
 \renewcommand*{\cventry}[7][.25em]{%
-  \cvitem[#1]{#2}{%
-    {\bfseries#3}%
-    \ifthenelse{\equal{#4}{}}{}{, {\slshape#4}}%
-    \ifthenelse{\equal{#5}{}}{}{, #5}%
-    \ifthenelse{\equal{#6}{}}{}{, #6}%
-    .%
+  \savebox{\cventryyearbox}{%
+    \hspace*{\separatorcolumnwidth}%
+    {\hintfont#2}}%
+  \setlength{\cventrytitleboxwidth}{\widthof{\usebox{\cventryyearbox}}}%
+  \setlength{\cventrytitleboxwidth}{\maincolumnwidth-\cventrytitleboxwidth}%
+  \begin{minipage}{\maincolumnwidth}%
+    \parbox[t]{\cventrytitleboxwidth}{%
+      {\bfseries#3}%
+      \ifthenelse{\equal{#4}{}}{}{, {\slshape#4}}%
+      \ifthenelse{\equal{#5}{}}{}{, #5}%
+      \ifthenelse{\equal{#6}{}}{}{, #6}%
+      .}%
+    \usebox{\cventryyearbox}%
     \ifx&#7&%
-      \else{\newline{}\begin{minipage}[t]{\linewidth}\small#7\end{minipage}}\fi}}
+    \else{%
+      \newline{}\begin{minipage}[t]{\maincolumnwidth}\small#7\end{minipage}}\fi%
+  \end{minipage}\\[#1]}
+
 
 \newbox{\cvitemwithcommentmainbox}
 \newlength{\cvitemwithcommentmainlength}
 \newlength{\cvitemwithcommentcommentlength}
 \renewcommand*{\cvitemwithcomment}[4][.25em]{%
-  \savebox{\cvitemwithcommentmainbox}{{\bfseries#3}}%
+  \savebox{\cvitemwithcommentmainbox}{\ifthenelse{\equal{#2}{}}{}{{\hintfont#2}: }#3}%
   \setlength{\cvitemwithcommentmainlength}{\widthof{\usebox{\cvitemwithcommentmainbox}}}%
   \setlength{\cvitemwithcommentcommentlength}{\maincolumnwidth-\separatorcolumnwidth-\cvitemwithcommentmainlength}%
-  \cvitem[#1]{#2}{%
-    \begin{minipage}[t]{\cvitemwithcommentmainlength}\textbf{#3}\end{minipage}%
-    \hfill% fill of \separatorcolumnwidth
-    \begin{minipage}[t]{\cvitemwithcommentcommentlength}\raggedleft\small\itshape#4\end{minipage}}}
+  \begin{minipage}[t]{\cvitemwithcommentmainlength}\ifthenelse{\equal{#2}{}}{}{{\hintfont#2}: }#3\end{minipage}%
+  \hfill% fill of \separatorcolumnwidth
+  \begin{minipage}[t]{\cvitemwithcommentcommentlength}\raggedleft\small\itshape#4\end{minipage}\\[#1]}
 
 \renewenvironment{thebibliography}[1]%
   {%
@@ -216,4 +231,4 @@
 \endinput
 
 
-%% end of file `moderncvstyleclassic.sty'.
+%% end of file `moderncvstyleoldstyle.sty'.

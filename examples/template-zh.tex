@@ -9,8 +9,9 @@
 \documentclass[11pt,a4paper,sans]{moderncv}   % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
 
 % moderncv 主题
-\moderncvstyle{casual}                        % 选项参数是 ‘casual’ 和 ‘classic’
+\moderncvstyle{casual}                        % 选项参数是 ‘casual’, ‘classic’ 和 ’oldstyle’
 \moderncvcolor{blue}                          % 选项参数是 ‘blue’ (默认)、‘orange’、‘green’、‘red’、‘purple’ 和 ‘grey’
+%\nopagenumbers{}                             % 消除注释以取消自动页码生成功能
 
 % 字符编码
 \usepackage[utf8]{inputenc}                   % 替换你正在使用的编码
@@ -25,9 +26,9 @@
 \familyname{李}
 \title{简历题目 (可选项)}                      % 可选项、如不需要可删除本行
 \address{街道及门牌号}{邮编及城市}             % 可选项、如不需要可删除本行
-\mobile{手机 (可选项)}                         % 可选项、如不需要可删除本行
-\phone{电话 (可选项)}                          % 可选项、如不需要可删除本行
-\fax{传真 (可选项)}                            % 可选项、如不需要可删除本行
+\mobile{+1~(234)~567~890}                         % 可选项、如不需要可删除本行
+\phone{+2~(345)~678~901}                          % 可选项、如不需要可删除本行
+\fax{+3~(456)~789~012}                            % 可选项、如不需要可删除本行
 \email{xiaolong@li.com.cn}                    % 可选项、如不需要可删除本行
 \homepage{www.xialongli.com}                  % 可选项、如不需要可删除本行
 \extrainfo{附加信息 (可选项)}                  % 可选项、如不需要可删除本行
@@ -42,8 +43,6 @@
 % 分类索引
 %\usepackage{multibib}
 %\newcites{book,misc}{{Books},{Others}}
-
-%\nopagenumbers{}                             % 消除注释以取消自动页码生成功能
 %----------------------------------------------------------------------------------
 %            内容
 %----------------------------------------------------------------------------------
@@ -56,9 +55,9 @@
 \cventry{年 -- 年}{学位}{院校}{城市}{\textit{成绩}}{说明}
 
 \section{毕业论文}
-\cvline{题目}{\emph{题目}}
-\cvline{导师}{导师}
-\cvline{说明}{\small 论文简介}
+\cvitem{题目}{\emph{题目}}
+\cvitem{导师}{导师}
+\cvitem{说明}{\small 论文简介}
 
 \section{工作背景}
 \subsection{专业}
@@ -84,19 +83,19 @@
 \cventry{年 -- 年}{职位}{公司}{城市}{}{说明}
 
 \section{语言技能}
-\cvlanguage{语言 1}{水平}{评价}
-\cvlanguage{语言 2}{水平}{评价}
-\cvlanguage{语言 3}{水平}{评价}
+\cvitemwithcomment{语言 1}{水平}{评价}
+\cvitemwithcomment{语言 2}{水平}{评价}
+\cvitemwithcomment{语言 3}{水平}{评价}
 
 \section{计算机技能}
-\cvcomputer{类别 1}{XXX, YYY, ZZZ}{类别 4}{XXX, YYY, ZZZ}
-\cvcomputer{类别 2}{XXX, YYY, ZZZ}{类别 5}{XXX, YYY, ZZZ}
-\cvcomputer{类别 3}{XXX, YYY, ZZZ}{类别 6}{XXX, YYY, ZZZ}
+\cvdoubleitem{类别 1}{XXX, YYY, ZZZ}{类别 4}{XXX, YYY, ZZZ}
+\cvdoubleitem{类别 2}{XXX, YYY, ZZZ}{类别 5}{XXX, YYY, ZZZ}
+\cvdoubleitem{类别 3}{XXX, YYY, ZZZ}{类别 6}{XXX, YYY, ZZZ}
 
 \section{个人兴趣}
-\cvline{爱好 1}{\small 说明}
-\cvline{爱好 2}{\small 说明}
-\cvline{爱好 3}{\small 说明}
+\cvitem{爱好 1}{\small 说明}
+\cvitem{爱好 2}{\small 说明}
+\cvitem{爱好 3}{\small 说明}
 
 \section{其他 1}
 \cvlistitem{项目 1}

@@ -138,6 +138,9 @@
 % advanced command arguments
 \RequirePackage{xargs}
 
+% micro-typography (e.g., character  protrusion, font expansion, hyphenatable letterspacing)
+\RequirePackage{microtype}
+
 % compatibility package with older versions of moderncv
 \RequirePackageWithOptions{moderncvcompatibility}
 
@@ -183,7 +186,7 @@
 \renewcommand{\theenumiii}{\@roman\c@enumiii}
 \renewcommand{\theenumiv}{\@Alph\c@enumiv}
 %   other symbols
-\newcommand*{\listitemsymbol}{\labelitemi}
+\newcommand*{\listitemsymbol}{\labelitemi~}
 \newcommand*{\addresssymbol}{}
 \newcommand*{\mobilesymbol}{\Mobilefone~}
 \newcommand*{\phonesymbol}{\Telefon~}
@@ -271,19 +274,19 @@
 
 % makes a cv line with a list item
 % usage: \cvlistitem[label]{item}
-\newcommand*{\cvlistitem}[2][\listitemsymbol{}]{}
+\newcommand*{\cvlistitem}[2][\listitemsymbol]{}
 
 % makes a cv line with 2 list items
 % usage: \cvlistdoubleitem[label]{item1}{item2}
-\newcommand*{\cvlistdoubleitem}[3][\listitemsymbol{}]{}
+\newcommand*{\cvlistdoubleitem}[3][\listitemsymbol]{}
 
 % makes a typical cv job / education entry
 % usage: \cventry{years}{degree/job title}{institution/employer}{localization}{optionnal: grade/...}{optional: comment/job description}
 \newcommand*{\cventry}[6]{}
 
 % makes a cv entry with a proficiency comment
-% usage: \cvitemwithcomment{header}{text}{comment}
-\newcommand*{\cvitemwithcomment}[3]{}
+% usage: \cvitemwithcomment[spacing]{header}{text}{comment}
+\newcommand*{\cvitemwithcomment}[4]{}
 
 % makes a generic hyperlink
 % usage: \link[optional text]{link}
