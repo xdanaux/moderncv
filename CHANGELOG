@@ -1,6 +1,10 @@
+version 0.15.1 (23 December 2011)
+ - corrected a bug in the classic style causing the address font and color not being
+  carried over newlines, as reported by J. Smith
+
 version 0.15 (19 December 2011)
- - corrects list spacing.
- - corrects inconsistent use of sans serif fonts in roman layout option.
+ - corrected list spacing.
+ - corrected inconsistent use of sans serif fonts in roman layout option.
  - the lmodern fonts are now automatically loaded only if installed on the system.
  The "nolmodern" option is now therefore obsolete.
  - complete code refactoring separating themes in separate styles and colors.
@@ -15,15 +19,15 @@ version 0.15 (19 December 2011)
  the vertical skip after the item (as for \cvitem, cvitemwithcomments, etc).
  The way to change the list symbol is to redefine \listitemsymbol.
  - added a new style on top of classic and casual: oldstyle.
- - loads the microtype package to improve typography.
+ - loaded the microtype package to improve typography.
 
 version 0.14 (04 December 2011)
- - adds support for CJK, thanks to the help of P. D'Apice.
+ - added support for CJK, thanks to the help of P. D'Apice.
  - the use of \recomputelengths after modifying any length in the preamble is now
  unnecessary; \recomputelength is automatically called at the start of the document.
 
 version 0.13.1 (11 November 2011)
- - correct a bug introduced by v0.13 in the classic style when no \photo is used,
+ - corrected a bug introduced by v0.13 in the classic style when no \photo is used,
  as reported by S. Gislais (launchpad bug #888702).
 
 version 0.13 (06 November 2011)
@@ -38,7 +42,7 @@ version 0.13 (06 November 2011)
  requested by T. Krennwallner (launchpad byg #664568).
 
 version 0.12 (03 August 2010)
-  - prevents pagebreaks after sections and subsections (launchpad bug #409902),
+  - prevented pagebreaks after sections and subsections (launchpad bug #409902),
   as originally reported by C. Gaspoz and fixed by launchpad user tentotwo).
 
 version 0.11 (20 July 2010)

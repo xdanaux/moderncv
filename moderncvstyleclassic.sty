@@ -78,12 +78,12 @@
   \if@firstdetailselement%
   \else%
     \\[.2em]\fi%
-  \@firstdetailselementfalse%
-  \addressfont\color{color2}}
+  \@firstdetailselementfalse}
 \renewcommand*{\maketitle}{%
   % optional detailed information box
   \newbox{\maketitledetailsbox}%
   \savebox{\maketitledetailsbox}{%
+    \addressfont\color{color2}%
     \begin{tabular}[b]{@{}r@{}}%
       \ifthenelse{\isundefined{\@addressstreet}}{}{\maketitledetailsnewline\addresssymbol\@addressstreet}%
       \ifthenelse{\isundefined{\@addresscity}}{}{\maketitledetailsnewline\@addresscity}%
