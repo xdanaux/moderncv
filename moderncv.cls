@@ -252,6 +252,7 @@
 % makes a cv section
 % usage: \section{<title>}
 \newcommand*{\section}[1]{}
+% starred variant, which is identical but defined to allow its use (e.g. for natbib compatibility, who uses \section*{} for the bibliography header)
 \AtEndPreamble{%
   \@ifpackageloaded{natbib}
     {

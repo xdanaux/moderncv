@@ -1,6 +1,6 @@
 version 0.15.1 (23 December 2011)
  - corrected a bug in the classic style causing the address font and color not being
-  carried over newlines, as reported by J. Smith
+  carried over newlines, as reported by J. Smith.
 
 version 0.15 (19 December 2011)
  - corrected list spacing.
