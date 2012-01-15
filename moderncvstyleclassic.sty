@@ -1,5 +1,5 @@
 %% start of file `moderncvstyleclassic.sty'.
-%% Copyright 2006-2011 Xavier Danaux (xdanaux@gmail.com).
+%% Copyright 2006-2012 Xavier Danaux (xdanaux@gmail.com).
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License version 1.3c,
@@ -10,7 +10,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{moderncvstyleclassic}[2011/12/23 v0.15.1 modern curriculum vitae style scheme: classic]
+\ProvidesPackage{moderncvstyleclassic}[2012/01/15 v0.16 modern curriculum vitae style scheme: classic]
 
 
 %-------------------------------------------------------------------------------
@@ -47,7 +47,7 @@
 % length used
 \newlength{\quotewidth}
 \newlength{\hintscolumnwidth}
-\setlength{\hintscolumnwidth}{0.15\textwidth}
+\setlength{\hintscolumnwidth}{0.175\textwidth}
 \newlength{\separatorcolumnwidth}
 \setlength{\separatorcolumnwidth}{0.025\textwidth}
 \newlength{\maincolumnwidth}
@@ -125,9 +125,12 @@
     {{\centering{}\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
   }
 
+\newlength{\baseletterheight}
+\settoheight{\baseletterheight}{\sectionstyle{o}}
+\setlength{\baseletterheight}{\baseletterheight-0.95ex}
 \renewcommand*{\section}[1]{%
   \vspace*{2.5ex}%
-  \parbox[t]{\hintscolumnwidth}{\strut\raggedleft\raisebox{.08em}{\hintfont{\color{color1}\rule{\hintscolumnwidth}{1ex}}}}%
+  \parbox[t]{\hintscolumnwidth}{\strut\raggedleft\raisebox{\baseletterheight}{\color{color1}\rule{\hintscolumnwidth}{0.95ex}}}%
   \phantomsection{}% reset the anchor for hyperrefs
   \addcontentsline{toc}{part}{#1}%
   \hspace{\separatorcolumnwidth}%

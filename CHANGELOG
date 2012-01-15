@@ -1,4 +1,4 @@
-version 0.16 (dd MMM 2012)
+version 0.16 (15 Jan 2012)
  - added starred versions of \section and \subsection (that are identical to their
  non-starred version, to e.g. enable biblatex support as requested by S. Verberkt
  (launchpad bug #913102).
