@@ -253,17 +253,13 @@
 % usage: \section{<title>}
 \newcommand*{\section}[1]{}
 % starred variant, which is identical but defined to allow its use (e.g. for natbib compatibility, who uses \section*{} for the bibliography header)
-\AtEndPreamble{%
-  \@ifpackageloaded{natbib}
-    {
-      \RequirePackage{suffix}
-      \WithSuffix\newcommand\section*{\section}
-    }{}
-}
+\RequirePackage{suffix}
+\AtBeginDocument{\WithSuffix\newcommand\section*{\section}}
 
 % makes a cv subsection
 % usage: \subsection{title}
 \newcommand*{\subsection}[1]{}
+\AtBeginDocument{\WithSuffix\newcommand\subsection*{\subsection}}
 
 % makes a cv line with a header and a corresponding text
 % usage: \cvitem[spacing]{header}{text}

@@ -1,6 +1,11 @@
+version 0.16 (dd MMM 2012)
+ - adds starred versions of \section and \subsection (that are identical to their
+ non-starred version, to e.g. enable biblatex support as requested by S. Verberkt
+ (launchpad bug #913102).
+
 version 0.15.1 (23 December 2011)
- - corrected a bug in the classic style causing the address font and color not being
-  carried over newlines, as reported by J. Smith.
+ - corrected a bug in the classic style causing the address font and color not
+ being carried over newlines, as reported by J. Smith.
 
 version 0.15 (19 December 2011)
  - corrected list spacing.
@@ -39,7 +44,7 @@ version 0.13 (06 November 2011)
  - added a "purple" color option, as proposed by B. Ravel.
  - added a 3rd optional argument to the \photo command to control the thickness of
  the framebox. Setting it to 0pt will disable the frame around the photo, as
- requested by T. Krennwallner (launchpad byg #664568).
+ requested by T. Krennwallner (launchpad bug #664568).
 
 version 0.12 (03 August 2010)
   - prevented pagebreaks after sections and subsections (launchpad bug #409902),
