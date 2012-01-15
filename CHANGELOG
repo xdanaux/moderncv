@@ -1,7 +1,9 @@
 version 0.16 (dd MMM 2012)
- - adds starred versions of \section and \subsection (that are identical to their
+ - added starred versions of \section and \subsection (that are identical to their
  non-starred version, to e.g. enable biblatex support as requested by S. Verberkt
  (launchpad bug #913102).
+ - corrected a misalignment of the colored rule in front of the section titles in
+ the classic and casual styles, as reported by P. Neidhardt (launchpad bug #915910).
 
 version 0.15.1 (23 December 2011)
  - corrected a bug in the classic style causing the address font and color not

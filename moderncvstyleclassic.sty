@@ -127,11 +127,11 @@
 
 \renewcommand*{\section}[1]{%
   \vspace*{2.5ex}%
-  \parbox[m]{\hintscolumnwidth}{\raggedleft\hintfont{\color{color1}\rule{\hintscolumnwidth}{1ex}}}%
+  \parbox[t]{\hintscolumnwidth}{\strut\raggedleft\raisebox{.08em}{\hintfont{\color{color1}\rule{\hintscolumnwidth}{1ex}}}}%
   \phantomsection{}% reset the anchor for hyperrefs
   \addcontentsline{toc}{part}{#1}%
   \hspace{\separatorcolumnwidth}%
-  \parbox[m]{\maincolumnwidth}{\sectionstyle{#1}}%
+  \parbox[t]{\maincolumnwidth}{\strut\sectionstyle{#1}}%
   \par\nobreak\vskip 1ex\@afterheading}% to avoid a pagebreak after the heading
 
 \renewcommand*{\subsection}[1]{%
