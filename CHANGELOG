@@ -1,6 +1,8 @@
 version 0.17 (xx Jan 2012)
  - changed the footer algorithm of style casual to avoid starting lines with
  the footer symbol.
+ - aligned the space before and after the title across styles.
+ - added an optional title to the casual style.
 
 version 0.16 (15 Jan 2012)
  - added starred versions of \section and \subsection (that are identical to their
