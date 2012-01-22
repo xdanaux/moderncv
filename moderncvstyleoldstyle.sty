@@ -174,7 +174,7 @@
 \newlength{\cventrytitleboxwidth}
 \renewcommand*{\cventry}[7][.25em]{%
   \savebox{\cventryyearbox}{%
-    \hspace*{\separatorcolumnwidth}%
+    \hspace*{2\separatorcolumnwidth}%
     {\hintfont#2}}%
   \setlength{\cventrytitleboxwidth}{\widthof{\usebox{\cventryyearbox}}}%
   \setlength{\cventrytitleboxwidth}{\maincolumnwidth-\cventrytitleboxwidth}%
@@ -186,10 +186,11 @@
       \ifthenelse{\equal{#6}{}}{}{, #6}%
       .}%
     \usebox{\cventryyearbox}%
-    \ifx&#7&%
+  \end{minipage}%
+  \ifx&#7&%
     \else{%
       \newline{}\begin{minipage}[t]{\maincolumnwidth}\small#7\end{minipage}}\fi%
-  \end{minipage}\\[#1]}
+  \\[#1]}
 
 
 \newbox{\cvitemwithcommentmainbox}

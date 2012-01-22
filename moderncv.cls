@@ -99,7 +99,7 @@
 % hyper links
 \RequirePackage{url}
 \urlstyle{tt}
-% load hyperred at the end of the preamble to pass options required by loaded packages (like CJK)
+% load hyperref at the end of the preamble to pass options required by loaded packages (like CJK)
 \AtEndPreamble{
   \@ifpackageloaded{CJK}
     {\RequirePackage[unicode]{hyperref}}
@@ -313,9 +313,9 @@
   \AtBeginDocument{%
     \if@displaypagenumbers%
       \@ifundefined{r@lastpage}{}{%
-        \ifthenelse{\pageref{lastpage} > 1}{%
+        \ifthenelse{\pageref{lastpage}>1}{%
           \fancypagestyle{plain}{%
-            \fancyfoot[r]{\addressfont\color{color2}\footnotesize\thepage/\pageref{lastpage}}}%
+            \fancyfoot[r]{\color{color2}\footnotesize\itshape\thepage/\pageref{lastpage}}}%
           \pagestyle{plain}}{}}%
       \AtEndDocument{\label{lastpage}}\else\fi}}
 

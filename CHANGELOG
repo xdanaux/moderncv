@@ -1,3 +1,7 @@
+version 0.17 (xx Jan 2012)
+ - changed the footer algorithm of style casual to avoid starting lines with
+ the footer symbol.
+
 version 0.16 (15 Jan 2012)
  - added starred versions of \section and \subsection (that are identical to their
  non-starred version, to e.g. enable biblatex support as requested by S. Verberkt
