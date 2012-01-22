@@ -4,6 +4,7 @@ version 0.17 (xx Jan 2012)
  - aligned the space before and after the title across styles.
  - added an optional title to the casual style.
  - changed the definition of the font styles to avoid undesired extra spacing.
+ - added a Spanish template, kindly provided by I. Buitrón.
 
 version 0.16 (15 Jan 2012)
  - added starred versions of \section and \subsection (that are identical to their
