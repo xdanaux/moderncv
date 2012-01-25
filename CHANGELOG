@@ -1,4 +1,4 @@
-version 0.17 (xx Jan 2012)
+version 0.17 (25 Jan 2012)
  - changed the footer algorithm of style casual to avoid starting lines with
  the footer symbol.
  - aligned the space before and after the title across styles.
