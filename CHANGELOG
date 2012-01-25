@@ -5,6 +5,8 @@ version 0.17 (xx Jan 2012)
  - added an optional title to the casual style.
  - changed the definition of the font styles to avoid undesired extra spacing.
  - added a Spanish template, kindly provided by I. Buitrón.
+ - corrected the vertical misalignment between the page number and the center
+ footer in the casual style.
 
 version 0.16 (15 Jan 2012)
  - added starred versions of \section and \subsection (that are identical to their

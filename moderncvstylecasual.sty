@@ -32,34 +32,29 @@
 \renewcommand*{\addressfont}{\small\mdseries\slshape}
 
 % cv footer
-%   internal command to print a footer symbol to separate footer elements when
-%   required (i.e. when the element is not the first)
-\newif\if@firstfooterelement\@firstfooterelementtrue
+%   footer symbol used to separate footer elements
 \newcommand*{\footersymbol}{%
-  \if@firstfooterelement%
-  \else%
-    { ~~\color{color2}\textbullet~~~}\fi}% \textbullet forces the use of the CMSY font, even when latin modern fonts are used :(
+    {~~~\textbullet~~~}}% \textbullet forces the use of the CMSY font, even when latin modern fonts are used :(
 %   internal command to add an element to the footer
 %   it collects the elements in a temporary box, and checks when to flush the box
-%   and resets \@firstfooterelement
 \newsavebox{\footertempabox}%
 \newsavebox{\footertempbbox}%
 \newlength{\footerwidth}%
 \newlength{\footerboxwidth}%
-\newcommand*{\addtofooter}[1]{%
-  \savebox{\footertempbbox}{\usebox{\footertempabox}\footersymbol#1}%
+%   adds an element to the footer, separated by footersymbol
+%   usage: \addtofooter[footersymbol]{element}
+\newcommand*{\addtofooter}[2][\footersymbol]{%
+  \savebox{\footertempbbox}{\usebox{\footertempabox}#1#2}%
   \settowidth{\footerboxwidth}{\usebox{\footertempbbox}}%
   \ifnum\footerboxwidth<\footerwidth%
     \savebox{\footertempabox}{\usebox{\footertempbbox}}
-    \@firstfooterelementfalse%
   \else%
     \flushfooter{}\\%
-    \savebox{\footertempabox}{#1}%
-    \savebox{\footertempbbox}{#1}%
-    \@firstfooterelementfalse\fi}
+    \savebox{\footertempabox}{#2}%
+    \savebox{\footertempbbox}{#2}\fi}
 %   internal command to flush the footer
 \newcommand*{\flushfooter}{%
-  \usebox{\footertempabox}%
+  \strut\usebox{\footertempabox}%
   \savebox{\footertempabox}{}%
   \savebox{\footertempbbox}{}}
 \renewcommand*{\makefooter}{%
@@ -68,11 +63,10 @@
     \fancyfoot[c]{%
       \parbox{\footerwidth}{%
         \centering%
-        \addressfont\color{color2}%
-        \ifthenelse{\isundefined{\@addressstreet}}{}{%
-          \addresssymbol\@addressstreet%
-          \ifthenelse{\isundefined{\@addresscity}}{}{~--~\@addresscity}\\}%
-        \ifthenelse{\isundefined{\@mobile}}{}{\addtofooter{\mobilesymbol\@mobile}}%
+        \color{color2}\addressfont%
+        \ifthenelse{\isundefined{\@addressstreet}}{}{\addtofooter[]{\addresssymbol\@addressstreet}%
+          \ifthenelse{\isundefined{\@addresscity}}{}{\addtofooter[~--~]{\@addresscity}}\flushfooter}%
+        \ifthenelse{\isundefined{\@mobile}}{}{\addtofooter[]{\mobilesymbol\@mobile}}%
         \ifthenelse{\isundefined{\@phone}}{}{\addtofooter{\phonesymbol\@phone}}%
         \ifthenelse{\isundefined{\@fax}}{}{\addtofooter{\faxsymbol\@fax}}%
         \ifthenelse{\isundefined{\@email}}{}{\addtofooter{\emailsymbol\emaillink{\@email}}}%
