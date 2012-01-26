@@ -283,7 +283,7 @@
 
 % makes a cv entry with a proficiency comment
 % usage: \cvitemwithcomment[spacing]{header}{text}{comment}
-\newcommand*{\cvitemwithcomment}[4]{}
+\newcommand*{\cvitemwithcomment}[4][.25em]{}
 
 % makes a generic hyperlink
 % usage: \link[optional text]{link}

@@ -37,26 +37,26 @@
     {~~~\textbullet~~~}}% \textbullet forces the use of the CMSY font, even when latin modern fonts are used :(
 %   internal command to add an element to the footer
 %   it collects the elements in a temporary box, and checks when to flush the box
-\newsavebox{\footertempabox}%
-\newsavebox{\footertempbbox}%
+\newsavebox{\footerbox}%
+\newsavebox{\footertempbox}%
 \newlength{\footerwidth}%
 \newlength{\footerboxwidth}%
 %   adds an element to the footer, separated by footersymbol
 %   usage: \addtofooter[footersymbol]{element}
 \newcommand*{\addtofooter}[2][\footersymbol]{%
-  \savebox{\footertempbbox}{\usebox{\footertempabox}#1#2}%
-  \settowidth{\footerboxwidth}{\usebox{\footertempbbox}}%
+  \savebox{\footertempbox}{\usebox{\footerbox}#1#2}%
+  \settowidth{\footerboxwidth}{\usebox{\footertempbox}}%
   \ifnum\footerboxwidth<\footerwidth%
-    \savebox{\footertempabox}{\usebox{\footertempbbox}}
+    \savebox{\footerbox}{\usebox{\footertempbox}}
   \else%
     \flushfooter{}\\%
-    \savebox{\footertempabox}{#2}%
-    \savebox{\footertempbbox}{#2}\fi}
+    \savebox{\footerbox}{#2}%
+    \savebox{\footertempbox}{#2}\fi}
 %   internal command to flush the footer
 \newcommand*{\flushfooter}{%
-  \strut\usebox{\footertempabox}%
-  \savebox{\footertempabox}{}%
-  \savebox{\footertempbbox}{}}
+  \strut\usebox{\footerbox}%
+  \savebox{\footerbox}{}%
+  \savebox{\footertempbox}{}}
 \renewcommand*{\makefooter}{%
   \setlength{\footerwidth}{0.8\textwidth}%
   \fancypagestyle{plain}{%
