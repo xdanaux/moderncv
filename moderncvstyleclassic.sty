@@ -142,13 +142,13 @@
   \phantomsection{}% reset the anchor for hyperrefs
   \addcontentsline{toc}{subsection}{#1}%
   \begin{tabular}{@{}p{\hintscolumnwidth}@{\hspace{\separatorcolumnwidth}}p{\maincolumnwidth}@{}}%
- 	  \raggedleft\hintfont{} &{\strut\subsectionstyle{#1}}%
+ 	  \raggedleft\hintstyle{} &{\strut\subsectionstyle{#1}}%
   \end{tabular}%
   \par\nobreak\addvspace{0.5ex}\@afterheading}% to avoid a pagebreak after the heading
 
 \renewcommand*{\cvitem}[3][.25em]{%
   \begin{tabular}{@{}p{\hintscolumnwidth}@{\hspace{\separatorcolumnwidth}}p{\maincolumnwidth}@{}}%
- 	  \raggedleft\hintfont{#2} &{#3}%
+ 	  \raggedleft\hintstyle{#2} &{#3}%
   \end{tabular}%
   \par\addvspace{#1}}
 
@@ -156,7 +156,7 @@
  \cvitem[#1]{#2}{%
    \begin{minipage}[t]{\doubleitemmaincolumnwidth}#3\end{minipage}%
    \hfill% fill of \separatorcolumnwidth
-   \begin{minipage}[t]{\hintscolumnwidth}\raggedleft\hintfont{#4}\end{minipage}%
+   \begin{minipage}[t]{\hintscolumnwidth}\raggedleft\hintstyle{#4}\end{minipage}%
    \hspace*{\separatorcolumnwidth}%
    \begin{minipage}[t]{\doubleitemmaincolumnwidth}#5\end{minipage}}}
 
@@ -188,7 +188,7 @@
   \setlength{\cvitemwithcommentmainlength}{\widthof{\usebox{\cvitemwithcommentmainbox}}}%
   \setlength{\cvitemwithcommentcommentlength}{\maincolumnwidth-\separatorcolumnwidth-\cvitemwithcommentmainlength}%
   \cvitem[#1]{#2}{%
-    \begin{minipage}[t]{\cvitemwithcommentmainlength}\textbf{#3}\end{minipage}%
+    \begin{minipage}[t]{\cvitemwithcommentmainlength}\bfseries#3\end{minipage}%
     \hfill% fill of \separatorcolumnwidth
     \begin{minipage}[t]{\cvitemwithcommentcommentlength}\raggedleft\small\itshape#4\end{minipage}}}
 

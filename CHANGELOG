@@ -1,10 +1,12 @@
 version 0.18 (xx Feb 2012)
  - corrected the handling of pdf bookmarks, as suggested on stackexchange by
  U. Fischer.
- - corrected the spacing between sections and subsections by using \addvspace
+ - improved the spacing between sections and subsections by using \addvspace
  instead of \vspace.
  - corrected the spacing between entries with nested itemize environments
  (temporary solution working only for single line items).
+ - added a check in the oldstyle style for an empty 4th argument in the
+ \cvdoubleitem definition, to avoid printing a colon without preceding label.
  
 
 version 0.17 (25 Jan 2012)

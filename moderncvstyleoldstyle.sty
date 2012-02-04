@@ -153,13 +153,13 @@
   \par\nobreak\addvspace{0.5ex}\@afterheading}% to avoid a pagebreak after the heading
 
 \renewcommand*{\cvitem}[3][.25em]{%
-  \ifthenelse{\equal{#2}{}}{}{{\hintfont#2}: }{#3}%
+  \ifthenelse{\equal{#2}{}}{}{\hintstyle{#2}: }{#3}%
   \par\addvspace{#1}}
 
 \renewcommand*{\cvdoubleitem}[5][.25em]{%
-  \begin{minipage}[t]{\doubleitemcolumnwidth}{\hintfont#2}: #3\end{minipage}%
+  \begin{minipage}[t]{\doubleitemcolumnwidth}\hintstyle{#2}: #3\end{minipage}%
   \hfill% fill of \separatorcolumnwidth
-  \begin{minipage}[t]{\doubleitemcolumnwidth}{\hintfont#4}: #5\end{minipage}%
+  \begin{minipage}[t]{\doubleitemcolumnwidth}\ifthenelse{\equal{#4}{}}{}{\hintstyle{#4}: }#5\end{minipage}%
   \par\addvspace{#1}}
 
 \renewcommand*{\cvlistitem}[2][.25em]{%
@@ -177,7 +177,7 @@
 \renewcommand*{\cventry}[7][.25em]{%
   \savebox{\cventryyearbox}{%
     \hspace*{2\separatorcolumnwidth}%
-    {\hintfont#2}}%
+    \hintstyle{#2}}%
   \setlength{\cventrytitleboxwidth}{\widthof{\usebox{\cventryyearbox}}}%
   \setlength{\cventrytitleboxwidth}{\maincolumnwidth-\cventrytitleboxwidth}%
   \begin{minipage}{\maincolumnwidth}%
@@ -199,17 +199,17 @@
       \end{minipage}}\fi%
   \par\addvspace{#1}}
 
-
 \newbox{\cvitemwithcommentmainbox}
 \newlength{\cvitemwithcommentmainlength}
 \newlength{\cvitemwithcommentcommentlength}
 \renewcommand*{\cvitemwithcomment}[4][.25em]{%
-  \savebox{\cvitemwithcommentmainbox}{\ifthenelse{\equal{#2}{}}{}{{\hintfont#2}: }#3}%
+  \savebox{\cvitemwithcommentmainbox}{\ifthenelse{\equal{#2}{}}{}{\hintstyle{#2}: }#3}%
   \setlength{\cvitemwithcommentmainlength}{\widthof{\usebox{\cvitemwithcommentmainbox}}}%
   \setlength{\cvitemwithcommentcommentlength}{\maincolumnwidth-\separatorcolumnwidth-\cvitemwithcommentmainlength}%
-  \begin{minipage}[t]{\cvitemwithcommentmainlength}\ifthenelse{\equal{#2}{}}{}{{\hintfont#2}: }#3\end{minipage}%
+  \begin{minipage}[t]{\cvitemwithcommentmainlength}\ifthenelse{\equal{#2}{}}{}{\hintstyle{#2}: }#3\end{minipage}%
   \hfill% fill of \separatorcolumnwidth
-  \begin{minipage}[t]{\cvitemwithcommentcommentlength}\raggedleft\small\itshape#4\end{minipage}\\[#1]}
+  \begin{minipage}[t]{\cvitemwithcommentcommentlength}\raggedleft\small\itshape#4\end{minipage}%
+  \par\addvspace{#1}}
 
 \renewenvironment{thebibliography}[1]%
   {%
