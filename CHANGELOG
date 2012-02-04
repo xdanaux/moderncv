@@ -1,4 +1,4 @@
-version 0.18 (xx Feb 2012)
+version 0.18 (05 Feb 2012)
  - corrected the handling of pdf bookmarks, as suggested on stackexchange by
  U. Fischer.
  - improved the spacing between sections and subsections by using \addvspace
