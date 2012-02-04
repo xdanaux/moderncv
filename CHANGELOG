@@ -7,6 +7,7 @@ version 0.18 (xx Feb 2012)
  (temporary solution working only for single line items).
  - added a check in the oldstyle style for an empty 4th argument in the
  \cvdoubleitem definition, to avoid printing a colon without preceding label.
+ - added a new style on top of classic, casual and oldstyle: banking.
  
 
 version 0.17 (25 Jan 2012)

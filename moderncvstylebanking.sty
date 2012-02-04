@@ -1,0 +1,212 @@
+%% start of file `moderncvstylebanking.sty'.
+%% Copyright 2006-2012 Xavier Danaux (xdanaux@gmail.com).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+%-------------------------------------------------------------------------------
+%                identification
+%-------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{moderncvstylebanking}[2012/01/25 v0.17 modern curriculum vitae scheme: banking]
+
+
+%-------------------------------------------------------------------------------
+%                required packages
+%-------------------------------------------------------------------------------
+
+
+%-------------------------------------------------------------------------------
+%                package options
+%-------------------------------------------------------------------------------
+\RequirePackage{tgpagella}
+\renewcommand*{\familydefault}{\rmdefault}
+
+
+%-------------------------------------------------------------------------------
+%                style definition
+%-------------------------------------------------------------------------------
+% fonts
+\renewcommand*{\namefont}{\Huge\bfseries\upshape}
+\renewcommand*{\titlefont}{\LARGE\mdseries\slshape}
+\renewcommand*{\addressfont}{\normalsize\mdseries\upshape}
+\renewcommand*{\quotefont}{\large\slshape}
+\renewcommand*{\sectionfont}{\Large\bfseries\upshape}
+\renewcommand*{\subsectionfont}{\large\upshape\fontseries{sb}\selectfont}
+\renewcommand*{\hintfont}{\bfseries}
+
+% styles
+\newcommand*{\namestyle}[1]{{\namefont\textcolor{color1}{#1}}}
+\newcommand*{\titlestyle}[1]{{\titlefont\textcolor{color2}{#1}}}
+\newcommand*{\addressstyle}[1]{{\addressfont\textcolor{color1}{#1}}}
+\newcommand*{\quotestyle}[1]{{\quotefont\textcolor{color1}{#1}}}
+\newcommand*{\sectionstyle}[1]{{\sectionfont\textcolor{color1}{#1}}}
+\newcommand*{\subsectionstyle}[1]{{\subsectionfont\textcolor{color1}{#1}}}
+\newcommand*{\hintstyle}[1]{{\hintfont\textcolor{color0}{#1}}}
+
+% length used
+\newlength{\quotewidth}
+\newlength{\hintscolumnwidth}
+\setlength{\hintscolumnwidth}{0.3\textwidth}%
+\newlength{\separatorcolumnwidth}
+\setlength{\separatorcolumnwidth}{0.025\textwidth}%
+\newlength{\maincolumnwidth}
+\newlength{\doubleitemcolumnwidth}
+\newlength{\listitemsymbolwidth}
+\settowidth{\listitemsymbolwidth}{\listitemsymbol}
+\newlength{\listitemmaincolumnwidth}
+\newlength{\listdoubleitemmaincolumnwidth}
+
+% recompute all the lengths that depends on the text width
+\renewcommand*{\recomputelengths}{%
+  \setlength{\quotewidth}{0.65\textwidth}%
+  % main lenghts
+  \setlength{\maincolumnwidth}{\textwidth}%
+  % listitem lengths
+  \setlength{\listitemmaincolumnwidth}{\maincolumnwidth-\listitemsymbolwidth}%
+  % doubleitem lengths
+  \setlength{\doubleitemcolumnwidth}{\maincolumnwidth-\separatorcolumnwidth}%
+  \setlength{\doubleitemcolumnwidth}{0.5\doubleitemcolumnwidth}%
+  % listdoubleitem lengths
+  \setlength{\listdoubleitemmaincolumnwidth}{\maincolumnwidth-\listitemsymbolwidth-\separatorcolumnwidth-\listitemsymbolwidth}%
+  \setlength{\listdoubleitemmaincolumnwidth}{0.5\listdoubleitemmaincolumnwidth}%
+  % fancyhdr lengths
+  \renewcommand{\headwidth}{\textwidth}}
+
+% cv footer
+\newcommand*{\maketitlesymbol}{%
+    {~~~\textbullet~~~}}% \textbullet forces the use of the CMSY font, even when latin modern fonts are used :(
+%   internal command to add an element to the footer
+%   it collects the elements in a temporary box, and checks when to flush the box
+\newsavebox{\maketitlebox}%
+\newsavebox{\maketitletempbox}%
+\newlength{\maketitlewidth}%
+\newlength{\maketitleboxwidth}%
+%   adds an element to the maketitle, separated by maketitlesymbol
+%   usage: \addtomaketitle[maketitlesymbol]{element}
+\newcommand*{\addtomaketitle}[2][\maketitlesymbol]{%
+  \savebox{\maketitletempbox}{\usebox{\maketitlebox}#1#2}%
+  \settowidth{\maketitleboxwidth}{\usebox{\maketitletempbox}}%
+  \ifnum\maketitleboxwidth<\maketitlewidth%
+    \savebox{\maketitlebox}{\usebox{\maketitletempbox}}
+  \else%
+    \flushmaketitle{}\\%
+    \savebox{\maketitlebox}{#2}%
+    \savebox{\maketitletempbox}{#2}\fi}
+%   internal command to flush the maketitle
+\newcommand*{\flushmaketitle}{%
+  \strut\usebox{\maketitlebox}%
+  \savebox{\maketitlebox}{}%
+  \savebox{\maketitletempbox}{}}
+\renewcommand*{\maketitle}{%
+  \setlength{\maketitlewidth}{0.8\textwidth}%
+  \hfil%
+  \parbox{\maketitlewidth}{%
+    \centering%
+    % name (title is not visible)
+    \namestyle{\@firstname~\@familyname}\\%
+    % detailed information
+    \color{color2}\addressfont%
+    \ifthenelse{\isundefined{\@addressstreet}}{}{\addtomaketitle[]{\addresssymbol\@addressstreet}%
+      \ifthenelse{\isundefined{\@addresscity}}{}{\addtomaketitle[~--~]{\@addresscity}}\flushmaketitle}%
+    \ifthenelse{\isundefined{\@mobile}}{}{\addtomaketitle[]{\mobilesymbol\@mobile}}%
+    \ifthenelse{\isundefined{\@phone}}{}{\addtomaketitle{\phonesymbol\@phone}}%
+    \ifthenelse{\isundefined{\@fax}}{}{\addtomaketitle{\faxsymbol\@fax}}%
+    \ifthenelse{\isundefined{\@email}}{}{\addtomaketitle{\emailsymbol\emaillink{\@email}}}%
+    \ifthenelse{\isundefined{\@homepage}}{}{\addtomaketitle{\homepagesymbol\httplink{\@homepage}}}%
+    \ifthenelse{\isundefined{\@extrainfo}}{}{\addtomaketitle{\@extrainfo}}%
+    \flushmaketitle}\\[2.5em]%
+     % optional quote
+    \ifthenelse{\isundefined{\@quote}}%
+      {}%
+      {{\centering\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
+    \par}% to avoid weird spacing bug at the first section if no blank line is left after \maketitle
+
+\renewcommand*{\section}[1]{%
+  \par\addvspace{2.5ex}%
+  \phantomsection{}%
+  \addcontentsline{toc}{section}{#1}%
+  \strut\sectionstyle{#1}%
+  {\color{color1}\hrule}%
+  \par\nobreak\addvspace{1ex}\@afterheading}
+
+\newcommand{\subsectionfill}{\cleaders\hbox to 0.35em{\scriptsize.}\hfill}% for a dashed fill
+\renewcommand*{\subsection}[1]{%
+  \par\addvspace{1ex}%
+  \phantomsection{}%
+  \addcontentsline{toc}{subsection}{#1}%
+  \strut\subsectionstyle{#1}{\color{color1}{\subsectionfill}}%
+  \par\nobreak\addvspace{0.5ex}\@afterheading}
+
+\renewcommand*{\cvitem}[3][.25em]{%
+  \ifthenelse{\equal{#2}{}}{}{\hintstyle{#2}: }{#3}%
+  \par\addvspace{#1}}
+
+\renewcommand*{\cvdoubleitem}[5][.25em]{%
+  \begin{minipage}[t]{\doubleitemcolumnwidth}\hintstyle{#2}: #3\end{minipage}%
+  \hfill% fill of \separatorcolumnwidth
+  \begin{minipage}[t]{\doubleitemcolumnwidth}\ifthenelse{\equal{#4}{}}{}{\hintstyle{#4}: }#5\end{minipage}%
+  \par\addvspace{#1}}
+
+\renewcommand*{\cvlistitem}[2][.25em]{%
+  \listitemsymbol#2%
+  \par\addvspace{#1}}
+
+\renewcommand*{\cvlistdoubleitem}[3][.25em]{%
+  \cvitem[#1]{}{\listitemsymbol\begin{minipage}[t]{\listdoubleitemmaincolumnwidth}#2\end{minipage}%
+  \hfill% fill of \separatorcolumnwidth
+  \ifthenelse{\equal{#3}{}}%
+    {}%
+    {\listitemsymbol\begin{minipage}[t]{\listdoubleitemmaincolumnwidth}#3\end{minipage}}}}
+
+\renewcommand*{\cventry}[7][.25em]{
+  \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}%
+	  {\bfseries #4} & {\bfseries #5} \\%
+	  {\itshape #3\ifthenelse{\equal{#6}{}}{}{, #6}} & {\itshape #2}\\%
+  \end{tabular*}%
+  \ifx&#7&%
+    \else{\\\vbox{\small#7}}\fi%
+  \par\addvspace{#1}}
+
+\newbox{\cvitemwithcommentmainbox}
+\newlength{\cvitemwithcommentmainlength}
+\newlength{\cvitemwithcommentcommentlength}
+\renewcommand*{\cvitemwithcomment}[4][.25em]{%
+  \savebox{\cvitemwithcommentmainbox}{\ifthenelse{\equal{#2}{}}{}{\hintstyle{#2}: }#3}%
+  \setlength{\cvitemwithcommentmainlength}{\widthof{\usebox{\cvitemwithcommentmainbox}}}%
+  \setlength{\cvitemwithcommentcommentlength}{\maincolumnwidth-\separatorcolumnwidth-\cvitemwithcommentmainlength}%
+  \begin{minipage}[t]{\cvitemwithcommentmainlength}\ifthenelse{\equal{#2}{}}{}{\hintstyle{#2}: }#3\end{minipage}%
+  \hfill% fill of \separatorcolumnwidth
+  \begin{minipage}[t]{\cvitemwithcommentcommentlength}\raggedleft\small\itshape#4\end{minipage}%
+  \par\addvspace{#1}}
+
+\renewenvironment{thebibliography}[1]%
+  {%
+    \bibliographyhead{\refname}%
+%    \small%
+    \begin{list}{\bibliographyitemlabel}%
+      {%
+        \setlength{\topsep}{0pt}%
+        \setlength{\labelwidth}{0pt}%
+        \setlength{\labelsep}{0pt}%
+        \leftmargin\labelwidth%
+        \advance\leftmargin\labelsep%
+        \@openbib@code%
+        \usecounter{enumiv}%
+        \let\p@enumiv\@empty%
+        \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+        \sloppy\clubpenalty4000\widowpenalty4000%
+%        \sfcode`\.\@m%
+%        \sfcode `\=1000\relax%
+  }%
+  {%
+    \def\@noitemerr{\@latex@warning{Empty `thebibliography' environment}}%
+    \end{list}%
+  }
+
+\endinput
+
+
+%% end of file `moderncvstylebanking.sty'.
