@@ -1,3 +1,7 @@
+version 0.18 (xx Feb 2012)
+- corrects the handling of pdf bookmarks, as suggested on stackexchange by
+U. Fischer.
+
 version 0.17 (25 Jan 2012)
  - changed the footer algorithm of style casual to avoid starting lines with
  the footer symbol.

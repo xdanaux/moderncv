@@ -114,6 +114,7 @@
       pdfcreator    = \LaTeX{} with `moderncv' package,
       pdfproducer   = \LaTeX{},
       bookmarksopen = true,
+      bookmarksdepth= 2,% to show sections and subsections
       pdfauthor     = \@firstname~\@familyname,
       pdftitle      = \@title,
       pdfsubject    = \@firstname~\@familyname,
@@ -278,8 +279,8 @@
 \newcommand*{\cvlistdoubleitem}[3][\listitemsymbol]{}
 
 % makes a typical cv job / education entry
-% usage: \cventry{years}{degree/job title}{institution/employer}{localization}{optionnal: grade/...}{optional: comment/job description}
-\newcommand*{\cventry}[6]{}
+% usage: \cventry[spacing]{years}{degree/job title}{institution/employer}{localization}{optionnal: grade/...}{optional: comment/job description}
+\newcommand*{\cventry}[7][.25em]{}
 
 % makes a cv entry with a proficiency comment
 % usage: \cvitemwithcomment[spacing]{header}{text}{comment}

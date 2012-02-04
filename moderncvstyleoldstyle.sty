@@ -139,18 +139,19 @@
     \ifthenelse{\isundefined{\@extrainfo}}{}{\maketitledetailsnewline\@extrainfo}}}
 
 \renewcommand*{\section}[1]{%
-  \vspace*{2.5ex}%
+  \par\vspace{2.5ex}%
   \phantomsection{}% reset the anchor for hyperrefs
-  \addcontentsline{toc}{part}{#1}%
+  \addcontentsline{toc}{section}{#1}%
   \parbox[m]{\maincolumnwidth}{\sectionstyle{#1}}%
   \par\nobreak\vskip 1ex\@afterheading}% to avoid a pagebreak after the heading
-% starred variant, which is identical but defined to allow its use (e.g. for natbib compatibility, who uses \section*{} for the bibliography header)
 
+\newif\@if
 \renewcommand*{\subsection}[1]{%
+  \par%
+  \phantomsection{}% reset the anchor for hyperrefs
+  \addcontentsline{toc}{subsection}{#1}%
   \subsectionstyle{#1}%
   \par\nobreak\vskip 0.5ex\@afterheading}% to avoid a pagebreak after the heading
-%  \phantomsection{}% reset the anchor for hyperrefs
-%  \addcontentsline{toc}{chapter}{#1}% does not work, the bookmark is placed at the same level as sections (placed themselves at part level to be visible, as hyperref does not allow sections without parents...)
 
 \renewcommand*{\cvitem}[3][.25em]{%
   \ifthenelse{\equal{#2}{}}{}{{\hintfont#2}: }{#3}\\[#1]}
