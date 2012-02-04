@@ -176,11 +176,11 @@
 %                design commands definitions
 %-------------------------------------------------------------------------------
 % symbols
-%   itemize labels
-\newcommand*{\labelitemi}{\textcolor{color1}{\Neutral}}% alternative" \fontencoding{U}\fontfamily{ding}\selectfont\tiny\symbol{'102}
-\newcommand*{\labelitemii}{\textcolor{color1}{\large\bfseries-}}
-\newcommand*{\labelitemiii}{\textcolor{color1}{\textperiodcentered}}% alternative: \textasteriskcentered; both force the use of the CMSY font, even when lmodern fonts are used :(
-\newcommand*{\labelitemiv}{\textcolor{color1}{\textperiodcentered}}
+%   itemize labels (the struts were added to correct inter-item spacing (works for single line items, until a solution is found for multi-line ones...)
+\newcommand*{\labelitemi}{\strut\textcolor{color1}{\Neutral}}% alternative" \fontencoding{U}\fontfamily{ding}\selectfont\tiny\symbol{'102}
+\newcommand*{\labelitemii}{\strut\textcolor{color1}{\large\bfseries-}}
+\newcommand*{\labelitemiii}{\strut\textcolor{color1}{\textperiodcentered}}% alternative: \textasteriskcentered; both force the use of the CMSY font, even when lmodern fonts are used :(
+\newcommand*{\labelitemiv}{\strut\textcolor{color1}{\textperiodcentered}}
 %   enumerate labels
 \renewcommand{\theenumi}{\@arabic\c@enumi}
 \renewcommand{\theenumii}{\@alph\c@enumii}

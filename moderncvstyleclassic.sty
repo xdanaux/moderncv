@@ -122,34 +122,35 @@
   % optional quote
   \ifthenelse{\isundefined{\@quote}}%
     {}%
-    {{\centering{}\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
-  }
+    {{\centering\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
+  \par}% to avoid weird spacing bug at the first section if no blank line is left after \maketitle
 
 \newlength{\baseletterheight}
 \settoheight{\baseletterheight}{\sectionstyle{o}}
 \setlength{\baseletterheight}{\baseletterheight-0.95ex}
 \renewcommand*{\section}[1]{%
-  \par\vspace{2.5ex}%
+  \par\addvspace{2.5ex}%
   \phantomsection{}% reset the anchor for hyperrefs
   \addcontentsline{toc}{section}{#1}%
   \parbox[t]{\hintscolumnwidth}{\strut\raggedleft\raisebox{\baseletterheight}{\color{color1}\rule{\hintscolumnwidth}{0.95ex}}}%
   \hspace{\separatorcolumnwidth}%
   \parbox[t]{\maincolumnwidth}{\strut\sectionstyle{#1}}%
-  \par\nobreak\vskip 1ex\@afterheading}% to avoid a pagebreak after the heading
+  \par\nobreak\addvspace{1ex}\@afterheading}% to avoid a pagebreak after the heading
 
 \renewcommand*{\subsection}[1]{%
-  \par%
+  \par\addvspace{1ex}%
   \phantomsection{}% reset the anchor for hyperrefs
   \addcontentsline{toc}{subsection}{#1}%
   \begin{tabular}{@{}p{\hintscolumnwidth}@{\hspace{\separatorcolumnwidth}}p{\maincolumnwidth}@{}}%
- 	  \raggedleft\hintfont{} &{\subsectionstyle{#1}}%
+ 	  \raggedleft\hintfont{} &{\strut\subsectionstyle{#1}}%
   \end{tabular}%
-  \par\nobreak\vskip 0.5ex\@afterheading}% to avoid a pagebreak after the heading
+  \par\nobreak\addvspace{0.5ex}\@afterheading}% to avoid a pagebreak after the heading
 
 \renewcommand*{\cvitem}[3][.25em]{%
   \begin{tabular}{@{}p{\hintscolumnwidth}@{\hspace{\separatorcolumnwidth}}p{\maincolumnwidth}@{}}%
  	  \raggedleft\hintfont{#2} &{#3}%
-  \end{tabular}\\[#1]}
+  \end{tabular}%
+  \par\addvspace{#1}}
 
 \renewcommand*{\cvdoubleitem}[5][.25em]{%
  \cvitem[#1]{#2}{%
@@ -175,7 +176,7 @@
     \ifthenelse{\equal{#4}{}}{}{, {\slshape#4}}%
     \ifthenelse{\equal{#5}{}}{}{, #5}%
     \ifthenelse{\equal{#6}{}}{}{, #6}%
-    .%
+    .\strut%
     \ifx&#7&%
       \else{\newline{}\begin{minipage}[t]{\linewidth}\small#7\end{minipage}}\fi}}
 
@@ -194,7 +195,7 @@
 \renewenvironment{thebibliography}[1]%
   {%
     \bibliographyhead{\refname}%
-    \small%
+%    \small%
     \begin{list}{\bibliographyitemlabel}%
       {%
         \setlength{\topsep}{0pt}%

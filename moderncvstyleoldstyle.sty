@@ -126,7 +126,7 @@
    % optional quote
   \ifthenelse{\isundefined{\@quote}}%
     {}%
-    {{\centering{}\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
+    {{\centering\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
   % optional details
   \makeinfo{%
     \ifthenelse{\isundefined{\@addressstreet}}{}{\maketitledetailsnewline\addresssymbol\@addressstreet}%
@@ -139,27 +139,28 @@
     \ifthenelse{\isundefined{\@extrainfo}}{}{\maketitledetailsnewline\@extrainfo}}}
 
 \renewcommand*{\section}[1]{%
-  \par\vspace{2.5ex}%
+  \par\addvspace{2.5ex}%
   \phantomsection{}% reset the anchor for hyperrefs
   \addcontentsline{toc}{section}{#1}%
-  \parbox[m]{\maincolumnwidth}{\sectionstyle{#1}}%
-  \par\nobreak\vskip 1ex\@afterheading}% to avoid a pagebreak after the heading
+  \strut\sectionstyle{#1}%
+  \par\nobreak\addvspace{1ex}\@afterheading}% to avoid a pagebreak after the heading
 
-\newif\@if
 \renewcommand*{\subsection}[1]{%
-  \par%
+  \par\addvspace{1ex}%
   \phantomsection{}% reset the anchor for hyperrefs
   \addcontentsline{toc}{subsection}{#1}%
-  \subsectionstyle{#1}%
-  \par\nobreak\vskip 0.5ex\@afterheading}% to avoid a pagebreak after the heading
+  \strut\subsectionstyle{#1}%
+  \par\nobreak\addvspace{0.5ex}\@afterheading}% to avoid a pagebreak after the heading
 
 \renewcommand*{\cvitem}[3][.25em]{%
-  \ifthenelse{\equal{#2}{}}{}{{\hintfont#2}: }{#3}\\[#1]}
+  \ifthenelse{\equal{#2}{}}{}{{\hintfont#2}: }{#3}%
+  \par\addvspace{#1}}
 
 \renewcommand*{\cvdoubleitem}[5][.25em]{%
   \begin{minipage}[t]{\doubleitemcolumnwidth}{\hintfont#2}: #3\end{minipage}%
   \hfill% fill of \separatorcolumnwidth
-  \begin{minipage}[t]{\doubleitemcolumnwidth}{\hintfont#4}: #5\end{minipage}\\[#1]}
+  \begin{minipage}[t]{\doubleitemcolumnwidth}{\hintfont#4}: #5\end{minipage}%
+  \par\addvspace{#1}}
 
 \renewcommand*{\cvlistitem}[2][.25em]{%
   \cvitem[#1]{}{\listitemsymbol\begin{minipage}[t]{\listitemmaincolumnwidth}#2\end{minipage}}}
@@ -181,17 +182,22 @@
   \setlength{\cventrytitleboxwidth}{\maincolumnwidth-\cventrytitleboxwidth}%
   \begin{minipage}{\maincolumnwidth}%
     \parbox[t]{\cventrytitleboxwidth}{%
+      \strut%
       {\bfseries#3}%
       \ifthenelse{\equal{#4}{}}{}{, {\slshape#4}}%
       \ifthenelse{\equal{#5}{}}{}{, #5}%
       \ifthenelse{\equal{#6}{}}{}{, #6}%
-      .}%
+      .\strut}%
     \usebox{\cventryyearbox}%
   \end{minipage}%
   \ifx&#7&%
     \else{%
-      \newline{}\begin{minipage}[t]{\maincolumnwidth}\small#7\end{minipage}}\fi%
-  \\[#1]}
+      \newline{}%
+      \begin{minipage}[t]{\maincolumnwidth}%
+        \small%
+        #7%
+      \end{minipage}}\fi%
+  \par\addvspace{#1}}
 
 
 \newbox{\cvitemwithcommentmainbox}
@@ -208,7 +214,7 @@
 \renewenvironment{thebibliography}[1]%
   {%
     \bibliographyhead{\refname}%
-    \small%
+%    \small%
     \begin{list}{\bibliographyitemlabel}%
       {%
         \setlength{\topsep}{0pt}%

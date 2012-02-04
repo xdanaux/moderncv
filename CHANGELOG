@@ -1,6 +1,11 @@
 version 0.18 (xx Feb 2012)
-- corrects the handling of pdf bookmarks, as suggested on stackexchange by
-U. Fischer.
+ - corrected the handling of pdf bookmarks, as suggested on stackexchange by
+ U. Fischer.
+ - corrected the spacing between sections and subsections by using \addvspace
+ instead of \vspace.
+ - corrected the spacing between entries with nested itemize environments
+ (temporary solution working only for single line items).
+ 
 
 version 0.17 (25 Jan 2012)
  - changed the footer algorithm of style casual to avoid starting lines with

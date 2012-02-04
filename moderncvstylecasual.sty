@@ -92,9 +92,9 @@
   \parbox[b]{\textwidth-\maketitlepicturewidth}{%
     \raggedleft\namefont{\color{color2!50}\@firstname} {\color{color2}\@familyname}}\\[-.35em]% alternate design: \MakeLowercase and no space
   {\color{color2!50}\rule{\textwidth}{.25ex}}%
-% optional title
+  % optional title
   \ifthenelse{\equal{\@title}{}}{}{\\[1.25em]\raggedleft\titlestyle{\@title}}\\[2.5em]%
-% optional quote
+  % optional quote
   \ifthenelse{\isundefined{\@quote}}%
     {}%
     {{\centering\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
