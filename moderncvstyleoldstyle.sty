@@ -129,8 +129,8 @@
     {{\centering\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
   % optional details
   \makeinfo{%
-    \ifthenelse{\isundefined{\@addressstreet}}{}{\maketitledetailsnewline\addresssymbol\@addressstreet}%
-    \ifthenelse{\isundefined{\@addresscity}}{}{\maketitledetailsnewline\@addresscity}%
+    \ifthenelse{\isundefined{\@addressstreet}}{}{\maketitledetailsnewline\addresssymbol\@addressstreet%
+      \ifthenelse{\equal{\@addresscity}{}}{}{\maketitledetailsnewline\@addresscity}}% if \addresstreet is defined, \addresscity will always be defined but could be empty
     \ifthenelse{\isundefined{\@mobile}}{}{\maketitledetailsnewline\mobilesymbol\@mobile}%
     \ifthenelse{\isundefined{\@phone}}{}{\maketitledetailsnewline\phonesymbol\@phone}%
     \ifthenelse{\isundefined{\@fax}}{}{\maketitledetailsnewline\faxsymbol\@fax}%

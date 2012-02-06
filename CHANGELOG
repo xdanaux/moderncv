@@ -4,6 +4,8 @@ version 0.19 (xx Feb 2012)
  - improved the pdf metadata, as reported by S. Wunsch (launchpad bug #922476).
  - fixed a footersymbol bug in the casual style when no mobile number was given,
  as reported by S. Wunsch (launchpad bug #922470).
+ - fixed a display bug when an address was given without postcode/city, as reported by
+ O.Shaneh (launchpad bug #670263).
 
 version 0.18 (05 Feb 2012)
  - corrected the handling of pdf bookmarks, as suggested on stackexchange by
