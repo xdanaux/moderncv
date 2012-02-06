@@ -1,3 +1,8 @@
+version 0.19 (xx Feb 2012)
+ - reintroduced the ability to force the width reserved to display the name
+ in the resume header for the classic style (\maketitlenamewidth).
+ - improved the pdf metadata, as reported by S. Wunsch (launchpad bug #922476).
+
 version 0.18 (05 Feb 2012)
  - corrected the handling of pdf bookmarks, as suggested on stackexchange by
  U. Fischer.

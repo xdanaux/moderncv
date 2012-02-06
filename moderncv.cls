@@ -111,14 +111,14 @@
       pdfpagemode   = UseNone,% do not show thumbnails or bookmarks on opening
       pdfpagelabels = false,% to avoid a warning setting it automatically to false anyway, because hyperref detects \thepage as undefined (why?)
       pdfstartpage  = 1,
-      pdfcreator    = \LaTeX{} with `moderncv' package,
-      pdfproducer   = \LaTeX{},
+      pdfcreator    = {\LaTeX{} with `moderncv' package},
+%      pdfproducer   = {\LaTeX{}},% will/should be set automatically to the correct TeX engine used
       bookmarksopen = true,
       bookmarksdepth= 2,% to show sections and subsections
-      pdfauthor     = \@firstname~\@familyname,
-      pdftitle      = \@title,
-      pdfsubject    = \@firstname~\@familyname,
-      pdfkeywords   = \@firstname~\@familyname{} curriculum vit\ae{}}
+      pdfauthor     = {\@firstname{}~\@familyname{}},
+      pdftitle      = {\@firstname{}~\@familyname{} -- \@title{}},
+      pdfsubject    = {Resum\'{e} of \@firstname{}~\@familyname{}},
+      pdfkeywords   = {\@firstname{}~\@familyname{}, curriculum vit\ae{}, resum\'{e}}}
   \pagenumbering{arabic}% has to be issued after loading hyperref
 }
 
