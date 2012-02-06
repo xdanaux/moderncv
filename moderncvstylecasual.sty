@@ -41,17 +41,23 @@
 \newsavebox{\footertempbox}%
 \newlength{\footerwidth}%
 \newlength{\footerboxwidth}%
+\newif\if@firstfooterelement\@firstfooterelementtrue%
 %   adds an element to the footer, separated by footersymbol
 %   usage: \addtofooter[footersymbol]{element}
 \newcommand*{\addtofooter}[2][\footersymbol]{%
-  \savebox{\footertempbox}{\usebox{\footerbox}#1#2}%
+  \if@firstfooterelement%
+    \savebox{\footertempbox}{\usebox{\footerbox}#2}%
+  \else%
+    \savebox{\footertempbox}{\usebox{\footerbox}#1#2}\fi%
   \settowidth{\footerboxwidth}{\usebox{\footertempbox}}%
   \ifnum\footerboxwidth<\footerwidth%
-    \savebox{\footerbox}{\usebox{\footertempbox}}
+    \savebox{\footerbox}{\usebox{\footertempbox}}%
+    \@firstfooterelementfalse%
   \else%
     \flushfooter{}\\%
     \savebox{\footerbox}{#2}%
-    \savebox{\footertempbox}{#2}\fi}
+    \savebox{\footertempbox}{#2}%
+    \@firstfooterelementfalse\fi}
 %   internal command to flush the footer
 \newcommand*{\flushfooter}{%
   \strut\usebox{\footerbox}%
@@ -65,8 +71,8 @@
         \centering%
         \color{color2}\addressfont%
         \ifthenelse{\isundefined{\@addressstreet}}{}{\addtofooter[]{\addresssymbol\@addressstreet}%
-          \ifthenelse{\isundefined{\@addresscity}}{}{\addtofooter[~--~]{\@addresscity}}\flushfooter}%
-        \ifthenelse{\isundefined{\@mobile}}{}{\addtofooter[]{\mobilesymbol\@mobile}}%
+          \ifthenelse{\isundefined{\@addresscity}}{}{\addtofooter[~--~]{\@addresscity}}\flushfooter\@firstfooterelementtrue\\}%
+        \ifthenelse{\isundefined{\@mobile}}{}{\addtofooter{\mobilesymbol\@mobile}}%
         \ifthenelse{\isundefined{\@phone}}{}{\addtofooter{\phonesymbol\@phone}}%
         \ifthenelse{\isundefined{\@fax}}{}{\addtofooter{\faxsymbol\@fax}}%
         \ifthenelse{\isundefined{\@email}}{}{\addtofooter{\emailsymbol\emaillink{\@email}}}%
