@@ -73,6 +73,11 @@
   % fancyhdr lengths
   \renewcommand{\headwidth}{\textwidth}}
 
+
+% optional maketitle width to force a certain width (if set to 0pt, the width is calculated automatically)
+\newlength{\maketitlenamewidth}
+\setlength{\maketitlenamewidth}{0pt}% dummy value
+% internal maketitle command to issue a new line only when required
 \newif\if@firstdetailselement\@firstdetailselementtrue
 \newcommand*{\maketitledetailsnewline}{
   \if@firstdetailselement%
@@ -103,20 +108,23 @@
     {%
       \hspace*{\separatorcolumnwidth}%
       \color{color1}%
-      \setlength\fboxrule{\@photoframewidth}%
+      \setlength{\fboxrule}{\@photoframewidth}%
       \ifdim\@photoframewidth=0pt%
         \setlength{\fboxsep}{0pt}\fi%
       \framebox{\includegraphics[width=\@photowidth]{\@photo}}}}%
   % name and title
   \newlength{\maketitledetailswidth}\settowidth{\maketitledetailswidth}{\usebox{\maketitledetailsbox}}%
   \newlength{\maketitlepicturewidth}\settowidth{\maketitlepicturewidth}{\usebox{\maketitlepicturebox}}%
-  \newlength{\maketitlenamewidth}\setlength{\maketitlenamewidth}{\textwidth-\maketitledetailswidth-\maketitlepicturewidth}%
+  \ifthenelse{\lengthtest{\maketitlenamewidth=0pt}}% check for dummy value (equivalent to \ifdim\maketitlenamewidth=0pt)
+    {\setlength{\maketitlenamewidth}{\textwidth-\maketitledetailswidth-\maketitlepicturewidth}}%
+    {}%
   \begin{minipage}[b]{\maketitlenamewidth}%
     \namestyle{\@firstname\ \@familyname}%
     \ifthenelse{\equal{\@title}{}}{}{\\[1.25em]\titlestyle{\@title}}%
   \end{minipage}%
+  \hfill%
   % detailed information
-  \usebox{\maketitledetailsbox}%
+  \llap{\usebox{\maketitledetailsbox}}% \llap is used to suppress the width of the box, allowing overlap if the value of maketitlenamewidth is forced
   % optional photo
   \usebox{\maketitlepicturebox}\\[2.5em]%
   % optional quote
