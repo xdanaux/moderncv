@@ -1,11 +1,11 @@
-version 0.19 (xx Feb 2012)
+version 0.19 (06 Feb 2012)
  - reintroduced the ability to force the width reserved to display the name
  in the resume header for the classic style (\maketitlenamewidth).
  - improved the pdf metadata, as reported by S. Wunsch (launchpad bug #922476).
  - fixed a footersymbol bug in the casual style when no mobile number was given,
  as reported by S. Wunsch (launchpad bug #922470).
- - fixed a display bug when an address was given without postcode/city, as reported by
- O.Shaneh (launchpad bug #670263).
+ - fixed a display bug when an address was given without postcode/city, as
+ reported by O.Shaneh (launchpad bug #670263).
 
 version 0.18 (05 Feb 2012)
  - corrected the handling of pdf bookmarks, as suggested on stackexchange by
@@ -29,11 +29,12 @@ version 0.17 (25 Jan 2012)
  footer in the casual style.
 
 version 0.16 (15 Jan 2012)
- - added starred versions of \section and \subsection (that are identical to their
- non-starred version, to e.g. enable biblatex support as requested by S. Verberkt
- (launchpad bug #913102).
- - corrected a misalignment of the colored rule in front of the section titles in
- the classic and casual styles, as reported by P. Neidhardt (launchpad bug #915910).
+ - added starred versions of \section and \subsection (that are identical to
+ their non-starred version, to e.g. enable biblatex support as requested by
+ S. Verberkt (launchpad bug #913102).
+ - corrected a misalignment of the colored rule in front of the section titles
+ in the classic and casual styles, as reported by P. Neidhardt (launchpad bug
+ #915910).
 
 version 0.15.1 (23 December 2011)
  - corrected a bug in the classic style causing the address font and color not
@@ -42,16 +43,16 @@ version 0.15.1 (23 December 2011)
 version 0.15 (19 December 2011)
  - corrected list spacing.
  - corrected inconsistent use of sans serif fonts in roman layout option.
- - the lmodern fonts are now automatically loaded only if installed on the system.
- The "nolmodern" option is now therefore obsolete.
+ - the lmodern fonts are now automatically loaded only if installed on the
+ system. The "nolmodern" option is now therefore obsolete.
  - complete code refactoring separating themes in separate styles and colors.
  - renamed \cvline to \cvitem, \cvlanguage to \cvitemwithcomment and \cvcomputer
  to \cvdoubleitem (the old command name still work and redirect to the new ones,
  but are deprecated).
  - removed the arbitrary minipage widths of skill proficiency vs comment in
- \cvitemwithcomments. The skill proficiency is now typeset exactly as given (i.e.
- one one line if no linebreaks are implicitly given) and the comment uses the
- remaining horizontal space.
+ \cvitemwithcomments. The skill proficiency is now typeset exactly as given
+ (i.e. one one line if no linebreaks are implicitly given) and the comment uses
+ the remaining horizontal space.
  - changed the optional argument of \cvlistitem and \cvlistdoubleitem to specify
  the vertical skip after the item (as for \cvitem, cvitemwithcomments, etc).
  The way to change the list symbol is to redefine \listitemsymbol.
@@ -60,22 +61,23 @@ version 0.15 (19 December 2011)
 
 version 0.14 (04 December 2011)
  - added support for CJK, thanks to the help of P. D'Apice.
- - the use of \recomputelengths after modifying any length in the preamble is now
- unnecessary; \recomputelength is automatically called at the start of the document.
+ - the use of \recomputelengths after modifying any length in the preamble is
+ now unnecessary; \recomputelength is automatically called at the start of the
+ document.
 
 version 0.13.1 (11 November 2011)
- - corrected a bug introduced by v0.13 in the classic style when no \photo is used,
- as reported by S. Gislais (launchpad bug #888702).
+ - corrected a bug introduced by v0.13 in the classic style when no \photo is
+ used, as reported by S. Gislais (launchpad bug #888702).
 
 version 0.13 (06 November 2011)
- - added a "black" color option to render the resume in black & white, as suggested
- by F. Bicarri.
+ - added a "black" color option to render the resume in black & white, as
+ suggested by F. Bicarri.
  - removed the pdflatex option when loading hyperref to enable other engines
  (e.g., dvips, xetex), leftover from the v 0.11 cleanup, as reported by
  K. Amaterasu and P. Mavrogiorgos (launchpad bugs #754693 and #859834).
  - added a "purple" color option, as proposed by B. Ravel.
- - added a 3rd optional argument to the \photo command to control the thickness of
- the framebox. Setting it to 0pt will disable the frame around the photo, as
+ - added a 3rd optional argument to the \photo command to control the thickness
+ of the framebox. Setting it to 0pt will disable the frame around the photo, as
  requested by T. Krennwallner (launchpad bug #664568).
 
 version 0.12 (03 August 2010)
@@ -91,28 +93,29 @@ version 0.11 (20 July 2010)
 
 version 0.10 (13 June 2010)
   - fixed a compatibility issue with the natbib package (natbib uses \section*
-  to format the bibliography title, while only \section was defined by moderncv),
-  as reported on launchpad (launchpad bug #393920).
-  - fixed a compatibility issues with (any package relying on) the etoolbox package,
-  due to the double definition of \AtEndPreamble, as reported by D. Becker.
+  to format the bibliography title, while only \section was defined by
+  moderncv), as reported on launchpad (launchpad bug #393920).
+  - fixed a compatibility issues with (any package relying on) the etoolbox
+  package, due to the double definition of \AtEndPreamble, as reported by
+  D. Becker.
 
 version 0.9 (31 May 2010)
   - added support for the itemize, enumerate and description environments.
 
 version 0.8 (24 May 2010)
-  - added support for multibib. Also modified the template to illustrate how to show
-  labels in the bibliography, as requested by Tom D. R. and Stefan K.
+  - added support for multibib. Also modified the template to illustrate how to
+  show labels in the bibliography, as requested by Tom D. R. and Stefan K.
   - added a command to indicate your personal homepage (\homepage{url}), as
   requested by J. de Jong and A. Pairet.
   - corrected an alignment bug for text following a \quote with no immediate
   \section, as kindly reported by J. Vermeulen and L. Saliou.
-  - corrected a spacing bug when no blank line (or \par) is left after \maketitle.
-  Thanks to A. Menzel for reporting the strange behaviour.
-  - corrected the alignment of the extrainfo title part when no picture was used,
-  as reported by M. Bana.
+  - corrected a spacing bug when no blank line (or \par) is left after
+  \maketitle. Thanks to A. Menzel for reporting the strange behaviour.
+  - corrected the alignment of the extrainfo title part when no picture was
+  used, as reported by M. Bana.
   - corrected the missplacement of pdf bookmarks as noticed by L. Fortunato.
-  - corrected several bugs linked to the code for checking for empty arguments in
-  \cventry, as reported by B. Ekran (launchpad bug #268768), L. Păncescu and
+  - corrected several bugs linked to the code for checking for empty arguments
+  in \cventry, as reported by B. Ekran (launchpad bug #268768), L. Păncescu and
   E. Gregorio.
 
 version 0.7 (17 June 2008)
@@ -129,9 +132,9 @@ version 0.7 (17 June 2008)
   - deprecated the commands \sethintscolumnlength and \sethintscolumntowidth.
   Instead, just set \hintscolumnwidth to the desired length by using the regular
   \setlength or \settowidth commands, and call \recomputelengths.
-  - added the ability to control the width of the name placeholder in the classic
-  theme, by setting the length \maketitlenamewidth. Again, don't forget to call
-  \recomputelengths afterward.
+  - added the ability to control the width of the name placeholder in the
+  classic theme, by setting the length \maketitlenamewidth. Again, don't forget
+  to call \recomputelengths afterward.
 
 version 0.6 (28 May 2007)
   - corrected some spacing bugs and cleaned up the code.
