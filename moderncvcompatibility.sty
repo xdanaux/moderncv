@@ -10,7 +10,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{moderncvcompatibility}[2012/02/06 v0.19 modern curriculum vitae compatibility patches]
+\ProvidesPackage{moderncvcompatibility}[2012/02/06 v0.19 modern curriculum vitae and letter compatibility patches]
 
 
 %-------------------------------------------------------------------------------
@@ -73,6 +73,11 @@
 \newcommand*{\moderncvtheme}[2][blue]{%
   \moderncvcolor{#1}%
   \moderncvstyle{#2}}
+
+% compatibility with versions <= 0.19
+\newcommand*{\maketitle}{\makecvtitle}%
+\title{}% to avoid LaTeX complaining that \maketitle is a called without first a call to \title
+
 
 \endinput
 

@@ -10,13 +10,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{moderncv}[2012/02/06 v0.19 modern curriculum vitae document class]
-
-
-%-------------------------------------------------------------------------------
-%                debugging
-%-------------------------------------------------------------------------------
-\newif\if@DEBUG\@DEBUGfalse
+\ProvidesClass{moderncv}[2012/02/06 v0.19 modern curriculum vitae and letter document class]
 
 
 %-------------------------------------------------------------------------------
@@ -96,10 +90,9 @@
 % symbols like \Telefon, \Mobilefone, \Letter and \Email
 \RequirePackage{marvosym}
 
-% hyper links
+% hyper links (hyperref is loaded at the end of the preamble to pass options required by loaded packages such as CJK)
 \RequirePackage{url}
 \urlstyle{tt}
-% load hyperref at the end of the preamble to pass options required by loaded packages (like CJK)
 \AtEndPreamble{
   \@ifpackageloaded{CJK}
     {\RequirePackage[unicode]{hyperref}}
@@ -131,6 +124,20 @@
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
   \fancyhf{}}
+% page numbers in footer if more than 1 page
+\newif\if@displaypagenumbers\@displaypagenumberstrue
+\newcommand*{\nopagenumbers}{\@displaypagenumbersfalse}
+\AtEndPreamble{%
+  \AtBeginDocument{%
+    \if@displaypagenumbers%
+      \@ifundefined{r@lastpage}{}{%
+        \ifthenelse{\pageref{lastpage}>1}{%
+          \newlength{\pagenumberwidth}%
+          \settowidth{\pagenumberwidth}{\color{color2}\addressfont\itshape\strut\thepage/\pageref{lastpage}}%
+          \fancypagestyle{plain}{%
+            \fancyfoot[r]{\parbox{\pagenumberwidth}{\color{color2}\addressfont\itshape\strut\thepage/\pageref{lastpage}}}}% the parbox is required to ensure alignment with a possible center footer (e.g., as in the casual style)
+          \pagestyle{plain}}{}}%
+      \AtEndDocument{\label{lastpage}}\else\fi}}
 \pagestyle{plain}
 
 % lengths calculations
@@ -167,14 +174,30 @@
 %\setlength\doublerulesep{2\p@}
 %\setlength\tabbingsep{\labelsep}
 
-\pagestyle{empty}
 \raggedbottom
 \onecolumn
 
 
 %-------------------------------------------------------------------------------
-%                design commands definitions
+%                overall design commands definitions
 %-------------------------------------------------------------------------------
+% elements
+\newcommand*{\firstname}[1]{\def\@firstname{#1}}
+\newcommand*{\familyname}[1]{\def\@familyname{#1}}
+\renewcommand*{\title}[1]{\def\@title{#1}}
+\newcommand*{\address}[2]{\def\@addressstreet{#1}\def\@addresscity{#2}}
+\newcommand*{\mobile}[1]{\def\@mobile{#1}}
+\newcommand*{\phone}[1]{\def\@phone{#1}}
+\renewcommand*{\fax}[1]{\def\@fax{#1}}
+\newcommand*{\email}[1]{\def\@email{#1}}
+\newcommand*{\homepage}[1]{\def\@homepage{#1}}
+
+% colors
+\definecolor{color0}{rgb}{0,0,0}% main default color, normally left to black
+\definecolor{color1}{rgb}{0,0,0}% primary theme color
+\definecolor{color2}{rgb}{0,0,0}% secondary theme color
+\definecolor{color3}{rgb}{0,0,0}% tertiary theme color
+
 % symbols
 %   itemize labels (the struts were added to correct inter-item spacing (works for single line items, until a solution is found for multi-line ones...)
 \newcommand*{\labelitemi}{\strut\textcolor{color1}{\Neutral}}% alternative" \fontencoding{U}\fontfamily{ding}\selectfont\tiny\symbol{'102}
@@ -195,21 +218,12 @@
 \newcommand*{\emailsymbol}{\Letter~}
 \newcommand*{\homepagesymbol}{{\Large\ComputerMouse}~}
 
-% colors
-\definecolor{color0}{rgb}{0,0,0}% main default color, normally left to black
-\definecolor{color1}{rgb}{0,0,0}% primary theme color
-\definecolor{color2}{rgb}{0,0,0}% secondary theme color
-\definecolor{color3}{rgb}{0,0,0}% tertiary theme color
-
-% fonts
-\newcommand*{\namefont}{}
-\newcommand*{\titlefont}{}
-\newcommand*{\addressfont}{}
-\newcommand*{\quotefont}{}
-\newcommand*{\sectionfont}{}
-\newcommand*{\subsectionfont}{}
-\newcommand*{\hintfont}{}
+%fonts
 \AtBeginDocument{\normalfont\color{color0}}
+
+% makes the footer (normally used both for the resume and the letter)
+% usage: \makefooter
+\newcommand*{\makefooter}{}%
 
 % loads a style scheme
 \newcommand*{\moderncvstyle}[1]{
@@ -220,69 +234,71 @@
   \RequirePackage{moderncvcolor#1}}
 
 % recompute all automatic lengths
-\newcommand*{\recomputelengths}{}
+\newcommand*{\recomputelengths}{\recomputecvlengths}
 \AtBeginDocument{\recomputelengths{}}
 
 
 %-------------------------------------------------------------------------------
-%                structure commands definitions
+%                resume design commands definitions
 %-------------------------------------------------------------------------------
-% cv elements
-\newcommand*{\firstname}[1]{\def\@firstname{#1}}
-\newcommand*{\familyname}[1]{\def\@familyname{#1}}
-\renewcommand*{\title}[1]{\def\@title{#1}}
-\newcommand*{\address}[2]{\def\@addressstreet{#1}\def\@addresscity{#2}}
-\newcommand*{\mobile}[1]{\def\@mobile{#1}}
-\newcommand*{\phone}[1]{\def\@phone{#1}}
-\renewcommand*{\fax}[1]{\def\@fax{#1}}
-\newcommand*{\email}[1]{\def\@email{#1}}
-\newcommand*{\homepage}[1]{\def\@homepage{#1}}
+% elements
 \newcommand*{\extrainfo}[1]{\def\@extrainfo{#1}}
 \newcommandx*{\photo}[3][1=64pt,2=0.4pt,usedefault]{\def\@photowidth{#1}\def\@photoframewidth{#2}\def\@photo{#3}}% the 1st (optional) argument is the width of the photo, the 2nd (optional) argument is the thickness of the frame around it.
 \newcommand*{\quote}[1]{\def\@quote{#1}}
 
-% makes the cv title
-% usage: \maketitle
-\newcommand*{\maketitle}{}%
-\title{}% to avoid LaTeX complaining that \maketitle is a called without first a call to \title
+% fonts
+\newcommand*{\namefont}{}
+\newcommand*{\titlefont}{}
+\newcommand*{\addressfont}{}
+\newcommand*{\quotefont}{}
+\newcommand*{\sectionfont}{}
+\newcommand*{\subsectionfont}{}
+\newcommand*{\hintfont}{}
 
-% makes the cv footer
-% usage: \makefooter
-\newcommand*{\makefooter}
+% recompute all resume lengths
+\newcommand*{\recomputecvlengths}{}
 
-% makes a cv section
+% makes the resume title
+% usage: \makecvtitle
+\newcommand*{\makecvtitle}{}%
+
+% makes the resume footer
+% usage: \makecvfooter
+\newcommand*{\makecvfooter}{\makefooter}%
+
+% makes a resume section
 % usage: \section{<title>}
 \newcommand*{\section}[1]{}
 % starred variant, which is identical but defined to allow its use (e.g. for natbib compatibility, who uses \section*{} for the bibliography header)
 \RequirePackage{suffix}
 \AtBeginDocument{\WithSuffix\newcommand\section*{\section}}
 
-% makes a cv subsection
+% makes a resume subsection
 % usage: \subsection{title}
 \newcommand*{\subsection}[1]{}
 \AtBeginDocument{\WithSuffix\newcommand\subsection*{\subsection}}
 
-% makes a cv line with a header and a corresponding text
+% makes a resume line with a header and a corresponding text
 % usage: \cvitem[spacing]{header}{text}
 \newcommand*{\cvitem}[3][.25em]{}
 
-% makes a cv line 2 headers and their corresponding text
+% makes a resume line 2 headers and their corresponding text
 % usage: \cvdoubleitem[spacing]{header1}{text1}{header2}{text2}
 \newcommand*{\cvdoubleitem}[5][.25em]{}
 
-% makes a cv line with a list item
+% makes a resume line with a list item
 % usage: \cvlistitem[label]{item}
 \newcommand*{\cvlistitem}[2][\listitemsymbol]{}
 
-% makes a cv line with 2 list items
+% makes a resume line with 2 list items
 % usage: \cvlistdoubleitem[label]{item1}{item2}
 \newcommand*{\cvlistdoubleitem}[3][\listitemsymbol]{}
 
-% makes a typical cv job / education entry
+% makes a typical resume job / education entry
 % usage: \cventry[spacing]{years}{degree/job title}{institution/employer}{localization}{optionnal: grade/...}{optional: comment/job description}
 \newcommand*{\cventry}[7][.25em]{}
 
-% makes a cv entry with a proficiency comment
+% makes a resume entry with a proficiency comment
 % usage: \cvitemwithcomment[spacing]{header}{text}{comment}
 \newcommand*{\cvitemwithcomment}[4][.25em]{}
 
@@ -307,23 +323,8 @@
     {\href{mailto:#2}{#2}}%
     {\href{mailto:#2}{#1}}}
 
-% page numbers in footer if more than 1 page
-\newif\if@displaypagenumbers\@displaypagenumberstrue
-\newcommand*{\nopagenumbers}{\@displaypagenumbersfalse}
-\AtEndPreamble{%
-  \AtBeginDocument{%
-    \if@displaypagenumbers%
-      \@ifundefined{r@lastpage}{}{%
-        \ifthenelse{\pageref{lastpage}>1}{%
-          \newlength{\pagenumberwidth}%
-          \settowidth{\pagenumberwidth}{\color{color2}\addressfont\itshape\strut\thepage/\pageref{lastpage}}%
-          \fancypagestyle{plain}{%
-            \fancyfoot[r]{\parbox{\pagenumberwidth}{\color{color2}\addressfont\itshape\strut\thepage/\pageref{lastpage}}}}% the parbox is required to ensure alignment with a possible center footer (e.g., as in the casual style)
-          \pagestyle{plain}}{}}%
-      \AtEndDocument{\label{lastpage}}\else\fi}}
-
 % thebibliography environment, for use with BibTeX and possibly multibib
-\newcommand{\refname}{Publications}
+\newcommand*{\refname}{Publications}
 \newlength{\bibindent}
 \setlength{\bibindent}{1.5em}
 % bibliography item label
@@ -334,7 +335,7 @@
 \AtEndPreamble{\@ifpackageloaded{multibib}{\renewcommand*{\bibliographyhead}[1]{\subsection{#1}}}{}}
 % thebibliography environment definition
 \newenvironment{thebibliography}[1]{}{}
-\newcommand\newblock{\hskip .11em\@plus.33em\@minus.07em}
+\newcommand*{\newblock}{\hskip .11em\@plus.33em\@minus.07em}
 \let\@openbib@code\@empty
 
 % itemize, enumerate and description environment
@@ -381,6 +382,32 @@
 
 %\newcommand{\autobox}[2][b]{%
 %  \parbox[#1]{\widthofautobox{#2}}{#2}}
+
+
+%-------------------------------------------------------------------------------
+%                letter design commands definitions
+%-------------------------------------------------------------------------------
+% elements
+\newcommand*{\recipient}[2]{\def\@recipientname{#1}\def\@recipientaddress{#2}}
+\renewcommand*{\date}[1]{\def\@date{#1}}
+\newcommand*{\opening}[1]{\def\@opening{#1}}
+\newcommand*{\closing}[1]{\def\@closing{#1}}
+\newcommand*{\enclosure}[1]{\def\@enclosure{#1}}
+
+% recompute all letter lengths
+\newcommand*{\recomputeletterlengths}{}
+
+% makes the letter title
+% usage: \makelettertitle
+\newcommand*{\makelettertitle}{}%
+
+% makes the letter footer
+% usage: \makeletterfooter
+\newcommand*{\makeletterfooter}{\makefooter}%
+
+% makes the letter closing
+% usage: \makeletterclosing
+\newcommand*{\makeletterclosing}{}%
 
 
 \endinput

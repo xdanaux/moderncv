@@ -1,3 +1,11 @@
+version 0.20 (xx Mar 2012)
+ - added commands to generate letters for every resume style: \recipient, \date,
+ \opening, \closing, \enclosure, \makelettertitle and \makeletterclosing. The
+ old \maketitle and \makefooter commands are now deprecated and replaced by
+ \makecvtitle (resp. \makelettertitle) and \makecvfooter (resp. \makeletterfooter).
+ - changed the alignment algorithm for the personal data display in the oldstyle
+ style, as to align on the baseline of the first line with the surrounding text.
+
 version 0.19 (06 Feb 2012)
  - reintroduced the ability to force the width reserved to display the name
  in the resume header for the classic style (\maketitlenamewidth).
