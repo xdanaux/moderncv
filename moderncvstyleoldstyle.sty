@@ -49,7 +49,7 @@
 % fonts
 \renewcommand*{\namefont}{\fontsize{34}{36}\mdseries\upshape}
 \renewcommand*{\titlefont}{\LARGE\mdseries\slshape}
-\renewcommand*{\addressfont}{\small\mdseries}
+\renewcommand*{\addressfont}{\normalsize\mdseries}
 \renewcommand*{\quotefont}{\large\itshape}
 \renewcommand*{\sectionfont}{\Large\bfseries\upshape}
 \renewcommand*{\subsectionfont}{\large\bfseries\itshape}
@@ -98,19 +98,11 @@
   \savebox{\makecvinfobox}{\parbox[t]{\hintscolumnwidth}{#1}}%
   \newlength{\makecvinfoheight}%
   \setlength{\makecvinfoheight}{\totalheightof{\usebox{\makecvinfobox}}}% the total height of the parbox is the sum of its height (\the\ht\makeinfobox) and its depth (\the\dp\makeinfobox); the \totalheightof command is provided by the "calc" package
-  \usebox{\makecvinfobox}\vspace*{-\makecvinfoheight}%
+  \usebox{\makecvinfobox}\vspace{-\makecvinfoheight}%
   \newlength{\leftcolumnwidth}%
   \setlength{\leftcolumnwidth}{\hintscolumnwidth+\separatorcolumnwidth}%
-  \par\vspace*{-\baselineskip}\vspace*{-\parskip}\leftskip=\leftcolumnwidth}
+  \par\vspace{-\baselineskip}\vspace{-\parskip}\leftskip=\leftcolumnwidth}
 
-\newif\if@firstdetailselement\@firstdetailselementtrue
-\newcommand*{\makecvtitledetailsnewline}{
-  \if@firstdetailselement%
-    \strut% to ensure baseline alignment with the first section, that also contains a \strut
-  \else%
-    \\[.2em]\fi%
-  \@firstdetailselementfalse%
-  \addressfont\color{color2}}
 \renewcommand*{\makecvtitle}{
   % optional picture box
   \newbox{\makecvtitlepicturebox}%
@@ -138,14 +130,15 @@
     {{\centering\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
   % optional details
   \makecvinfo{%
-    \ifthenelse{\isundefined{\@addressstreet}}{}{\makecvtitledetailsnewline\addresssymbol\@addressstreet%
-      \ifthenelse{\equal{\@addresscity}{}}{}{\makecvtitledetailsnewline\@addresscity}}% if \addresstreet is defined, \addresscity will always be defined but could be empty
-    \ifthenelse{\isundefined{\@mobile}}{}{\makecvtitledetailsnewline\mobilesymbol\@mobile}%
-    \ifthenelse{\isundefined{\@phone}}{}{\makecvtitledetailsnewline\phonesymbol\@phone}%
-    \ifthenelse{\isundefined{\@fax}}{}{\makecvtitledetailsnewline\faxsymbol\@fax}%
-    \ifthenelse{\isundefined{\@email}}{}{\makecvtitledetailsnewline\emailsymbol\emaillink{\@email}}%
-    \ifthenelse{\isundefined{\@homepage}}{}{\makecvtitledetailsnewline\homepagesymbol\httplink{\@homepage}}%
-    \ifthenelse{\isundefined{\@extrainfo}}{}{\makecvtitledetailsnewline\@extrainfo}}}
+    \addressfont\color{color2}%
+    \ifthenelse{\isundefined{\@addressstreet}}{}{\makenewline\addresssymbol\@addressstreet%
+      \ifthenelse{\equal{\@addresscity}{}}{}{\makenewline\@addresscity}}% if \addresstreet is defined, \addresscity will always be defined but could be empty
+    \ifthenelse{\isundefined{\@mobile}}{}{\makenewline\mobilesymbol\@mobile}%
+    \ifthenelse{\isundefined{\@phone}}{}{\makenewline\phonesymbol\@phone}%
+    \ifthenelse{\isundefined{\@fax}}{}{\makenewline\faxsymbol\@fax}%
+    \ifthenelse{\isundefined{\@email}}{}{\makenewline\emailsymbol\emaillink{\@email}}%
+    \ifthenelse{\isundefined{\@homepage}}{}{\makenewline\homepagesymbol\httplink{\@homepage}}%
+    \ifthenelse{\isundefined{\@extrainfo}}{}{\makenewline\@extrainfo}}}
 
 \renewcommand*{\section}[1]{%
   \par\addvspace{2.5ex}%
@@ -249,24 +242,24 @@
 %                letter style definition
 %-------------------------------------------------------------------------------
 % commands
-\newlength{\textwidthdelta}%
+%\newlength{\textwidthdelta}%
 \renewcommand*{\recomputeletterlengths}{%
   \recomputecvlengths{}%
   \setlength{\parskip}{6\p@}%
   \leftskip=0pt%
-  \setlength{\textwidthdelta}{+\marginparwidth+\marginparsep}%
+%  \setlength{\textwidthdelta}{+\marginparwidth+\marginparsep}%
   \setlength{\marginparwidth}{\hintscolumnwidth}%
   \setlength{\marginparsep}{2\separatorcolumnwidth}%
-  \addtolength{\textwidthdelta}{-\marginparwidth-\marginparsep}%
+%  \addtolength{\textwidthdelta}{-\marginparwidth-\marginparsep}%
 %  \changepage{}{\textwidthdelta}{-\textwidthdelta}{}{}{}{}{}{}%\changepage{<textheight>}{<textwidth>}{<evensidemargin>}{<oddsidemargin>}{<columnsep>}{<topmargin>}{<headheight>}{<headsep>}{<footskip>}
   \changepage{}{-\marginparwidth-\marginparsep}{}{}{}{}{}{}{}%\changepage{<textheight>}{<textwidth>}{<evensidemargin>}{<oddsidemargin>}{<columnsep>}{<topmargin>}{<headheight>}{<headsep>}{<footskip>}
   }
 
-\renewcommand*{\makelettertitle}{
+\renewcommand*{\makelettertitle}{%
   \recomputeletterlengths{}%
   % recipient block
-  {\bfseries \@recipientname}\\%
-  \upshape \@recipientaddress\\[1em]%
+  {\bfseries\@recipientname}\\%
+  \upshape\@recipientaddress\\[1em]%
   % date
   \@date\\[2em]%
   % opening
@@ -275,26 +268,26 @@
   \hspace{0pt}%
   \marginpar{%
     \addressfont\textcolor{color2}{%
-      {\bfseries \@firstname~\@familyname}\@firstdetailselementfalse%
-      \ifthenelse{\isundefined{\@addressstreet}}{}{\makecvtitledetailsnewline\addresssymbol\@addressstreet%
-        \ifthenelse{\equal{\@addresscity}{}}{}{\makecvtitledetailsnewline\@addresscity}}%
-      \ifthenelse{\isundefined{\@mobile}}{}{\makecvtitledetailsnewline\mobilesymbol\@mobile}%
-      \ifthenelse{\isundefined{\@phone}}{}{\makecvtitledetailsnewline\phonesymbol\@phone}%
-      \ifthenelse{\isundefined{\@fax}}{}{\makecvtitledetailsnewline\faxsymbol\@fax}%
-      \ifthenelse{\isundefined{\@email}}{}{\makecvtitledetailsnewline\emailsymbol\emaillink{\@email}}%
-      \ifthenelse{\isundefined{\@homepage}}{}{\makecvtitledetailsnewline\homepagesymbol\httplink{\@homepage}}%
-      \ifthenelse{\isundefined{\@extrainfo}}{}{\makecvtitledetailsnewline\@extrainfo}}}%
+      {\bfseries\@firstname~\@familyname}\@firstdetailselementfalse%
+      \ifthenelse{\isundefined{\@addressstreet}}{}{\makenewline\addresssymbol\@addressstreet%
+        \ifthenelse{\equal{\@addresscity}{}}{}{\makenewline\@addresscity}}%
+      \ifthenelse{\isundefined{\@mobile}}{}{\makenewline\mobilesymbol\@mobile}%
+      \ifthenelse{\isundefined{\@phone}}{}{\makenewline\phonesymbol\@phone}%
+      \ifthenelse{\isundefined{\@fax}}{}{\makenewline\faxsymbol\@fax}%
+      \ifthenelse{\isundefined{\@email}}{}{\makenewline\emailsymbol\emaillink{\@email}}%
+      \ifthenelse{\isundefined{\@homepage}}{}{\makenewline\homepagesymbol\httplink{\@homepage}}%
+      \ifthenelse{\isundefined{\@extrainfo}}{}{\makenewline\@extrainfo}}}%
   % ensure no extra spacing after \makelettertitle due to a possible blank line
 %  \ignorespacesafterend% not working
-  \par\vspace*{-\baselineskip}\vspace*{-\parskip}}
+  \par\vspace{-\baselineskip}\vspace{-\parskip}}
 
 \renewcommand*{\makeletterclosing}{
-  \@closing\\[3em]
-  {\bfseries \@firstname~\@familyname}%
+  \@closing\\[3em]%
+  {\bfseries\@firstname~\@familyname}%
   \ifthenelse{\isundefined{\@enclosure}}{}{%
     \\%
     \vfill%
-    {\color{color2}\itshape Enclosure: \@enclosure}}}
+    {\color{color2}\itshape{}Enclosure: \@enclosure}}}
 
 
 \endinput

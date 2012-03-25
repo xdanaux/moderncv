@@ -25,11 +25,16 @@
 
 
 %-------------------------------------------------------------------------------
-%                style scheme definition
+%                overall style definition
+%-------------------------------------------------------------------------------
+
+
+%-------------------------------------------------------------------------------
+%                resume style definition
 %-------------------------------------------------------------------------------
 % fonts
 \renewcommand*{\namefont}{\fontsize{38}{40}\mdseries\upshape}
-\renewcommand*{\addressfont}{\small\mdseries\slshape}
+\renewcommand*{\addressfont}{\normalsize\mdseries\slshape}
 
 % cv footer
 %   footer symbol used to separate footer elements
@@ -105,6 +110,11 @@
     {}%
     {{\centering\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
   \par}% to avoid weird spacing bug at the first section if no blank line is left after \maketitle
+
+
+%-------------------------------------------------------------------------------
+%                letter style definition
+%-------------------------------------------------------------------------------
 
 
 \endinput

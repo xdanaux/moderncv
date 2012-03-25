@@ -258,6 +258,15 @@
 % recompute all resume lengths
 \newcommand*{\recomputecvlengths}{}
 
+% internal maketitle command to issue a new line only when required
+\newif\if@firstdetailselement\@firstdetailselementtrue
+\newcommand*{\makenewline}{
+  \if@firstdetailselement%
+    \strut% to ensure baseline alignment, e.g. with when put in the margin vs sections that also contains a \strut
+  \else%
+    \\\fi%
+  \@firstdetailselementfalse}
+
 % makes the resume title
 % usage: \makecvtitle
 \newcommand*{\makecvtitle}{}%
