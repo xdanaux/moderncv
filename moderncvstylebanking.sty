@@ -10,7 +10,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{moderncvstylebanking}[2012/02/06 v0.19 modern curriculum vitae and letter style scheme: banking]
+\ProvidesPackage{moderncvstylebanking}[2012/03/26 v1.0 modern curriculum vitae and letter style scheme: banking]
 
 
 %-------------------------------------------------------------------------------
@@ -26,56 +26,9 @@
 
 
 %-------------------------------------------------------------------------------
-%                style definition
+%                overall style definition
 %-------------------------------------------------------------------------------
-% fonts
-\renewcommand*{\namefont}{\Huge\bfseries\upshape}
-\renewcommand*{\titlefont}{\LARGE\mdseries\slshape}
-\renewcommand*{\addressfont}{\normalsize\mdseries\upshape}
-\renewcommand*{\quotefont}{\large\slshape}
-\renewcommand*{\sectionfont}{\Large\bfseries\upshape}
-\renewcommand*{\subsectionfont}{\large\upshape\fontseries{sb}\selectfont}
-\renewcommand*{\hintfont}{\bfseries}
-
-% styles
-\newcommand*{\namestyle}[1]{{\namefont\textcolor{color1}{#1}}}
-\newcommand*{\titlestyle}[1]{{\titlefont\textcolor{color2}{#1}}}
-\newcommand*{\addressstyle}[1]{{\addressfont\textcolor{color1}{#1}}}
-\newcommand*{\quotestyle}[1]{{\quotefont\textcolor{color1}{#1}}}
-\newcommand*{\sectionstyle}[1]{{\sectionfont\textcolor{color1}{#1}}}
-\newcommand*{\subsectionstyle}[1]{{\subsectionfont\textcolor{color1}{#1}}}
-\newcommand*{\hintstyle}[1]{{\hintfont\textcolor{color0}{#1}}}
-
-% length used
-\newlength{\quotewidth}
-\newlength{\hintscolumnwidth}
-\setlength{\hintscolumnwidth}{0.3\textwidth}%
-\newlength{\separatorcolumnwidth}
-\setlength{\separatorcolumnwidth}{0.025\textwidth}%
-\newlength{\maincolumnwidth}
-\newlength{\doubleitemcolumnwidth}
-\newlength{\listitemsymbolwidth}
-\settowidth{\listitemsymbolwidth}{\listitemsymbol}
-\newlength{\listitemmaincolumnwidth}
-\newlength{\listdoubleitemmaincolumnwidth}
-
-% recompute all the lengths that depends on the text width
-\renewcommand*{\recomputelengths}{%
-  \setlength{\quotewidth}{0.65\textwidth}%
-  % main lenghts
-  \setlength{\maincolumnwidth}{\textwidth}%
-  % listitem lengths
-  \setlength{\listitemmaincolumnwidth}{\maincolumnwidth-\listitemsymbolwidth}%
-  % doubleitem lengths
-  \setlength{\doubleitemcolumnwidth}{\maincolumnwidth-\separatorcolumnwidth}%
-  \setlength{\doubleitemcolumnwidth}{0.5\doubleitemcolumnwidth}%
-  % listdoubleitem lengths
-  \setlength{\listdoubleitemmaincolumnwidth}{\maincolumnwidth-\listitemsymbolwidth-\separatorcolumnwidth-\listitemsymbolwidth}%
-  \setlength{\listdoubleitemmaincolumnwidth}{0.5\listdoubleitemmaincolumnwidth}%
-  % fancyhdr lengths
-  \renewcommand{\headwidth}{\textwidth}}
-
-% cv footer
+% commands
 \newcommand*{\maketitlesymbol}{%
     {~~~\textbullet~~~}}% \textbullet forces the use of the CMSY font, even when latin modern fonts are used :(
 %   internal command to add an element to the footer
@@ -108,7 +61,7 @@
     % name (title is not visible)
     \namestyle{\@firstname~\@familyname}\\%
     % detailed information
-    \color{color2}\addressfont%
+    \addressfont\color{color2}%
     \ifthenelse{\isundefined{\@addressstreet}}{}{\addtomaketitle[]{\addresssymbol\@addressstreet}%
       \ifthenelse{\equal{\@addresscity}{}}{}{\addtomaketitle[~--~]{\@addresscity}}\flushmaketitle}% if \addresstreet is defined, \addresscity will always be defined but could be empty
     \ifthenelse{\isundefined{\@mobile}}{}{\addtomaketitle[]{\mobilesymbol\@mobile}}%
@@ -117,16 +70,72 @@
     \ifthenelse{\isundefined{\@email}}{}{\addtomaketitle{\emailsymbol\emaillink{\@email}}}%
     \ifthenelse{\isundefined{\@homepage}}{}{\addtomaketitle{\homepagesymbol\httplink{\@homepage}}}%
     \ifthenelse{\isundefined{\@extrainfo}}{}{\addtomaketitle{\@extrainfo}}%
-    \flushmaketitle}\\[2.5em]%
-     % optional quote
-    \ifthenelse{\isundefined{\@quote}}%
-      {}%
-      {{\centering\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
-    \par}% to avoid weird spacing bug at the first section if no blank line is left after \maketitle
+    \flushmaketitle}\\[2.5em]}% need to force a \par after this to avoid weird spacing bug at the first section if no blank line is left after \maketitle
+
+
+%-------------------------------------------------------------------------------
+%                resume style definition
+%-------------------------------------------------------------------------------
+% fonts
+\renewcommand*{\namefont}{\Huge\bfseries\upshape}
+\renewcommand*{\titlefont}{\LARGE\mdseries\slshape}
+\renewcommand*{\addressfont}{\small\mdseries\upshape}
+\renewcommand*{\quotefont}{\large\slshape}
+\renewcommand*{\sectionfont}{\Large\bfseries\upshape}
+\renewcommand*{\subsectionfont}{\large\upshape\fontseries{sb}\selectfont}
+\renewcommand*{\hintfont}{\bfseries}
+
+% styles
+\newcommand*{\namestyle}[1]{{\namefont\textcolor{color1}{#1}}}
+\newcommand*{\titlestyle}[1]{{\titlefont\textcolor{color2}{#1}}}
+\newcommand*{\addressstyle}[1]{{\addressfont\textcolor{color1}{#1}}}
+\newcommand*{\quotestyle}[1]{{\quotefont\textcolor{color1}{#1}}}
+\newcommand*{\sectionstyle}[1]{{\sectionfont\textcolor{color1}{#1}}}
+\newcommand*{\subsectionstyle}[1]{{\subsectionfont\textcolor{color1}{#1}}}
+\newcommand*{\hintstyle}[1]{{\hintfont\textcolor{color0}{#1}}}
+
+% lengths
+\newlength{\quotewidth}
+\newlength{\hintscolumnwidth}
+\setlength{\hintscolumnwidth}{0.3\textwidth}%
+\newlength{\separatorcolumnwidth}
+\setlength{\separatorcolumnwidth}{0.025\textwidth}%
+\newlength{\maincolumnwidth}
+\newlength{\doubleitemcolumnwidth}
+\newlength{\listitemsymbolwidth}
+\settowidth{\listitemsymbolwidth}{\listitemsymbol}
+\newlength{\listitemmaincolumnwidth}
+\newlength{\listdoubleitemmaincolumnwidth}
+
+% commands
+\renewcommand*{\recomputelengths}{%
+  \setlength{\quotewidth}{0.65\textwidth}%
+  % main lenghts
+  \setlength{\maincolumnwidth}{\textwidth}%
+  % listitem lengths
+  \setlength{\listitemmaincolumnwidth}{\maincolumnwidth-\listitemsymbolwidth}%
+  % doubleitem lengths
+  \setlength{\doubleitemcolumnwidth}{\maincolumnwidth-\separatorcolumnwidth}%
+  \setlength{\doubleitemcolumnwidth}{0.5\doubleitemcolumnwidth}%
+  % listdoubleitem lengths
+  \setlength{\listdoubleitemmaincolumnwidth}{\maincolumnwidth-\listitemsymbolwidth-\separatorcolumnwidth-\listitemsymbolwidth}%
+  \setlength{\listdoubleitemmaincolumnwidth}{0.5\listdoubleitemmaincolumnwidth}%
+  % fancyhdr lengths
+  \renewcommand{\headwidth}{\textwidth}}
+
+\renewcommand*{\makecvtitle}{%
+  % recompute lengths (in case we are switching from letter to resume, or vice versa)
+  \recomputecvlengths%
+  \maketitle%
+  % optional quote
+  \ifthenelse{\isundefined{\@quote}}%
+    {}%
+    {{\centering\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
+  \par}% to avoid weird spacing bug at the first section if no blank line is left after \maketitle}
 
 \renewcommand*{\section}[1]{%
   \par\addvspace{2.5ex}%
-  \phantomsection{}%
+  \phantomsection{}% reset the anchor for hyperrefs
   \addcontentsline{toc}{section}{#1}%
   \strut\sectionstyle{#1}%
   {\color{color1}\hrule}%
@@ -205,6 +214,48 @@
     \def\@noitemerr{\@latex@warning{Empty `thebibliography' environment}}%
     \end{list}%
   }
+
+
+%-------------------------------------------------------------------------------
+%                letter style definition
+%-------------------------------------------------------------------------------
+% commands
+\renewcommand*{\recomputeletterlengths}{
+  \recomputecvlengths%
+  \setlength{\parskip}{6\p@}}
+
+\renewcommand*{\makelettertitle}{%
+  % recompute lengths (in case we are switching from letter to resume, or vice versa)
+  \recomputeletterlengths%
+  % sender block
+  \maketitle%
+  \par%
+   % recipient block
+  \begin{minipage}[t]{.5\textwidth}
+    \raggedright%
+    \addressfont%
+    {\bfseries\upshape\@recipientname}\\%
+    \@recipientaddress%
+  \end{minipage}
+  % date
+  \hfill % US style
+%  \\[1em] % UK style
+  \hbox{\today}\\[2em]% US informal style: "April 6, 2006"; UK formal style: "05/04/2006"
+  % opening
+  \raggedright%
+  \@opening\\[1.5em]%
+  % ensure no extra spacing after \makelettertitle due to a possible blank line
+%  \ignorespacesafterend% not working
+  \hspace{0pt}\par\vspace{-\baselineskip}\vspace{-\parskip}}
+
+\renewcommand*{\makeletterclosing}{
+  \@closing\\[3em]%
+  {\bfseries \@firstname~\@familyname}%
+  \ifthenelse{\isundefined{\@enclosure}}{}{%
+    \\%
+    \vfill%
+    {\color{color2}\itshape Enclosure: \@enclosure}}}
+
 
 \endinput
 

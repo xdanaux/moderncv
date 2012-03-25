@@ -10,7 +10,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{moderncvstylecasual}[2012/02/06 v0.19 modern curriculum vitae and letter style scheme: casual]
+\ProvidesPackage{moderncvstylecasual}[2012/03/26 v1.0 modern curriculum vitae and letter style scheme: casual]
 
 
 %-------------------------------------------------------------------------------
@@ -27,16 +27,7 @@
 %-------------------------------------------------------------------------------
 %                overall style definition
 %-------------------------------------------------------------------------------
-
-
-%-------------------------------------------------------------------------------
-%                resume style definition
-%-------------------------------------------------------------------------------
-% fonts
-\renewcommand*{\namefont}{\fontsize{38}{40}\mdseries\upshape}
-\renewcommand*{\addressfont}{\normalsize\mdseries\slshape}
-
-% cv footer
+% commands
 %   footer symbol used to separate footer elements
 \newcommand*{\footersymbol}{%
     {~~~\textbullet~~~}}% \textbullet forces the use of the CMSY font, even when latin modern fonts are used :(
@@ -59,7 +50,7 @@
     \savebox{\footerbox}{\usebox{\footertempbox}}%
     \@firstfooterelementfalse%
   \else%
-    \flushfooter{}\\%
+    \flushfooter\\%
     \savebox{\footerbox}{#2}%
     \savebox{\footertempbox}{#2}%
     \@firstfooterelementfalse\fi}
@@ -68,7 +59,45 @@
   \strut\usebox{\footerbox}%
   \savebox{\footerbox}{}%
   \savebox{\footertempbox}{}}
-\renewcommand*{\makefooter}{%
+
+
+%-------------------------------------------------------------------------------
+%                resume style definition
+%-------------------------------------------------------------------------------
+% fonts
+\renewcommand*{\namefont}{\fontsize{38}{40}\mdseries\upshape}
+\renewcommand*{\addressfont}{\normalsize\mdseries\slshape}
+
+% commands
+\renewcommand*{\makecvtitle}{%
+  % ensure footer with personal information
+  \makecvfooter%
+  % optional picture
+  \newbox{\makecvtitlepicturebox}%
+  \savebox{\makecvtitlepicturebox}{%
+    \ifthenelse{\isundefined{\@photo}}%
+      {}%
+      {%
+       \setlength\fboxrule{\@photoframewidth}%
+       \ifdim\@photoframewidth=0pt%
+         \setlength{\fboxsep}{0pt}\fi%
+       {\color{color1}\framebox{\includegraphics[width=\@photowidth]{\@photo}}}}}%
+  \usebox{\makecvtitlepicturebox}%
+  % name
+  \@initializelength{\makecvtitlepicturewidth}%
+  \settowidth{\makecvtitlepicturewidth}{\usebox{\makecvtitlepicturebox}}%
+  \parbox[b]{\textwidth-\makecvtitlepicturewidth}{%
+    \raggedleft\namefont{\color{color2!50}\@firstname} {\color{color2}\@familyname}}\\[-.35em]% alternate design: \MakeLowercase and no space
+  {\color{color2!50}\rule{\textwidth}{.25ex}}%
+  % optional title
+  \ifthenelse{\equal{\@title}{}}{}{\\[1.25em]\raggedleft\titlestyle{\@title}}\\[2.5em]%
+  % optional quote
+  \ifthenelse{\isundefined{\@quote}}%
+    {}%
+    {{\centering\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
+  \par}% to avoid weird spacing bug at the first section if no blank line is left after \maketitle
+
+\renewcommand*{\makecvfooter}{%
   \setlength{\footerwidth}{0.8\textwidth}%
   \fancypagestyle{plain}{%
     \fancyfoot[c]{%
@@ -86,35 +115,60 @@
         \flushfooter}}}%
   \pagestyle{plain}}
 
-% maketitle
-\renewcommand*{\maketitle}{%
-  \makefooter{}%
-  \newbox{\maketitlepicturebox}%
-  \savebox{\maketitlepicturebox}{%
-    \ifthenelse{\isundefined{\@photo}}%
-      {}%
-      {%
-       \setlength\fboxrule{\@photoframewidth}%
-       \ifdim\@photoframewidth=0pt%
-         \setlength{\fboxsep}{0pt}\fi%
-       {\color{color1}\framebox{\includegraphics[width=\@photowidth]{\@photo}}}}}%
-  \usebox{\maketitlepicturebox}%
-  \newlength{\maketitlepicturewidth}\settowidth{\maketitlepicturewidth}{\usebox{\maketitlepicturebox}}%
-  \parbox[b]{\textwidth-\maketitlepicturewidth}{%
-    \raggedleft\namefont{\color{color2!50}\@firstname} {\color{color2}\@familyname}}\\[-.35em]% alternate design: \MakeLowercase and no space
-  {\color{color2!50}\rule{\textwidth}{.25ex}}%
-  % optional title
-  \ifthenelse{\equal{\@title}{}}{}{\\[1.25em]\raggedleft\titlestyle{\@title}}\\[2.5em]%
-  % optional quote
-  \ifthenelse{\isundefined{\@quote}}%
-    {}%
-    {{\centering\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
-  \par}% to avoid weird spacing bug at the first section if no blank line is left after \maketitle
-
 
 %-------------------------------------------------------------------------------
 %                letter style definition
 %-------------------------------------------------------------------------------
+\renewcommand*{\makelettertitle}{%
+  % recompute lengths (in case we are switching from letter to resume, or vice versa)
+  \recomputeletterlengths%
+  % ensure footer with personal information
+  \makeletterfooter%
+  % recipient block
+  \begin{minipage}[t]{.5\textwidth}
+    \raggedright%
+    \addressfont%
+    {\bfseries\upshape\@recipientname}\\%
+    \@recipientaddress%
+  \end{minipage}
+  % date
+  \hfill% US style
+%  \\[1em]% UK style
+  \hbox{\today}\\[2em]% US informal style: "April 6, 2006"; UK formal style: "05/04/2006"
+  % opening
+  \raggedright%
+  \@opening\\[1.5em]%
+  % ensure no extra spacing after \makelettertitle due to a possible blank line
+%  \ignorespacesafterend% not working
+  \hspace{0pt}\par\vspace{-\baselineskip}\vspace{-\parskip}}
+
+\renewcommand*{\makeletterfooter}{%
+  \setlength{\footerwidth}{0.8\textwidth}%
+  \fancypagestyle{plain}{%
+    \fancyfoot[c]{%
+      \parbox{\footerwidth}{%
+        \centering%
+        \addressfont\color{color2}%
+        {\bfseries\upshape\@firstname~\@familyname}\\
+        \ifthenelse{\isundefined{\@addressstreet}}{}{\addtofooter[]{\addresssymbol\@addressstreet}%
+          \ifthenelse{\equal{\@addresscity}{}}{}{\addtofooter[~--~]{\@addresscity}}\flushfooter\@firstfooterelementtrue\\}% if \addresstreet is defined, \addresscity will always be defined but could be empty
+        \ifthenelse{\isundefined{\@mobile}}{}{\addtofooter{\mobilesymbol\@mobile}}%
+        \ifthenelse{\isundefined{\@phone}}{}{\addtofooter{\phonesymbol\@phone}}%
+        \ifthenelse{\isundefined{\@fax}}{}{\addtofooter{\faxsymbol\@fax}}%
+        \ifthenelse{\isundefined{\@email}}{}{\addtofooter{\emailsymbol\emaillink{\@email}}}%
+        \ifthenelse{\isundefined{\@homepage}}{}{\addtofooter{\homepagesymbol\httplink{\@homepage}}}%
+        \ifthenelse{\isundefined{\@extrainfo}}{}{\addtofooter{\@extrainfo}}%
+        \flushfooter}}}%
+  \pagestyle{plain}}
+
+\renewcommand*{\makeletterclosing}{
+  \@closing\\[3em]%
+  {\bfseries\@firstname~\@familyname}%
+  \ifthenelse{\isundefined{\@enclosure}}{}{%
+    \\%
+    \vfil%
+    {\color{color2}\itshape Enclosure: \@enclosure}}%
+    \vfil}
 
 
 \endinput

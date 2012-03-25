@@ -10,7 +10,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{moderncvstyleclassic}[2012/02/06 v0.19 modern curriculum vitae and letter style scheme: classic]
+\ProvidesPackage{moderncvstyleclassic}[2012/03/26 v1.0 modern curriculum vitae and letter style scheme: classic]
 
 
 %-------------------------------------------------------------------------------
@@ -34,7 +34,7 @@
 % fonts
 \renewcommand*{\namefont}{\fontsize{34}{36}\mdseries\upshape}
 \renewcommand*{\titlefont}{\LARGE\mdseries\slshape}
-\renewcommand*{\addressfont}{\normalsize\mdseries\slshape}
+\renewcommand*{\addressfont}{\small\mdseries\slshape}
 \renewcommand*{\quotefont}{\large\slshape}
 \renewcommand*{\sectionfont}{\Large\mdseries\upshape}
 \renewcommand*{\subsectionfont}{\large\mdseries\upshape}
@@ -78,11 +78,12 @@
   % fancyhdr lengths
   \renewcommand{\headwidth}{\textwidth}}
 
-
 % optional maketitle width to force a certain width (if set to 0pt, the width is calculated automatically)
 \newlength{\makecvtitlenamewidth}
 \setlength{\makecvtitlenamewidth}{0pt}% dummy value
 \renewcommand*{\makecvtitle}{%
+  % recompute lengths (in case we are switching from letter to resume, or vice versa)
+  \recomputecvlengths%
   % optional detailed information box
   \newbox{\makecvtitledetailsbox}%
   \savebox{\makecvtitledetailsbox}{%
@@ -232,7 +233,8 @@
   \setlength{\parskip}{6\p@}}
 
 \renewcommand*{\makelettertitle}{%
-  \recomputeletterlengths{}%
+  % recompute lengths (in case we are switching from letter to resume, or vice versa)
+  \recomputeletterlengths%
   % sender contact info
   \hfill%
   \begin{minipage}{.5\textwidth}%
@@ -251,12 +253,13 @@
   % recipient block
   \begin{minipage}[t]{.5\textwidth}
     \raggedright%
-    {\bfseries\@recipientname}\\%
-    \itshape\@recipientaddress%
+    \addressfont%
+    {\bfseries\upshape\@recipientname}\\%
+    \@recipientaddress%
   \end{minipage}
   % date
-  \hfill % US style
-%  \\[1em] % UK style
+  \hfill% US style
+%  \\[1em]% UK style
   \hbox{\today}\\[2em]% US informal style: "April 6, 2006"; UK formal style: "05/04/2006"
   % opening
   \raggedright%

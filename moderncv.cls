@@ -10,7 +10,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{moderncv}[2012/02/06 v0.19 modern curriculum vitae and letter document class]
+\ProvidesClass{moderncv}[2012/03/26 v1.0 modern curriculum vitae and letter document class]
 
 
 %-------------------------------------------------------------------------------
@@ -218,7 +218,7 @@
 \newcommand*{\emailsymbol}{\Letter~}
 \newcommand*{\homepagesymbol}{{\Large\ComputerMouse}~}
 
-%fonts
+% fonts
 \AtBeginDocument{\normalfont\color{color0}}
 
 % makes the footer (normally used both for the resume and the letter)
@@ -233,9 +233,13 @@
 \newcommand*{\moderncvcolor}[1]{
   \RequirePackage{moderncvcolor#1}}
 
-% recompute all automatic lengths
+% recomputes all automatic lengths
 \newcommand*{\recomputelengths}{\recomputecvlengths}
 \AtBeginDocument{\recomputelengths{}}
+
+% creates a length if not yet defined
+\newcommand*{\@initializelength}[1]{%
+  \ifdefined#1\else\newlength{#1}\fi}
 
 
 %-------------------------------------------------------------------------------

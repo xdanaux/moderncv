@@ -10,7 +10,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{moderncvstyleoldstyle}[2012/02/06 v0.19 modern curriculum vitae and letter style scheme: oldstyle]
+\ProvidesPackage{moderncvstyleoldstyle}[2012/03/26 v1.0 modern curriculum vitae and letter style scheme: oldstyle]
 
 
 %-------------------------------------------------------------------------------
@@ -49,7 +49,7 @@
 % fonts
 \renewcommand*{\namefont}{\fontsize{34}{36}\mdseries\upshape}
 \renewcommand*{\titlefont}{\LARGE\mdseries\slshape}
-\renewcommand*{\addressfont}{\normalsize\mdseries}
+\renewcommand*{\addressfont}{\small\mdseries}
 \renewcommand*{\quotefont}{\large\itshape}
 \renewcommand*{\sectionfont}{\Large\bfseries\upshape}
 \renewcommand*{\subsectionfont}{\large\bfseries\itshape}
@@ -104,6 +104,8 @@
   \par\vspace{-\baselineskip}\vspace{-\parskip}\leftskip=\leftcolumnwidth}
 
 \renewcommand*{\makecvtitle}{
+  % recompute lengths (in case we are switching from letter to resume, or vice versa)
+  \recomputecvlengths%
   % optional picture box
   \newbox{\makecvtitlepicturebox}%
   \savebox{\makecvtitlepicturebox}{%
@@ -256,10 +258,12 @@
   }
 
 \renewcommand*{\makelettertitle}{%
-  \recomputeletterlengths{}%
+  % recompute lengths (in case we are switching from letter to resume, or vice versa)
+  \recomputeletterlengths%
   % recipient block
-  {\bfseries\@recipientname}\\%
-  \upshape\@recipientaddress\\[1em]%
+  {\addressfont%
+    {\bfseries\upshape\@recipientname}\\%
+    \@recipientaddress}\\[1em]%
   % date
   \@date\\[2em]%
   % opening
