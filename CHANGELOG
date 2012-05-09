@@ -1,4 +1,6 @@
-version 1.0 (26 Mar 2012)
+version 1.1.0 (xx Apr 2012)
+
+version 1.0.0 (26 Mar 2012)
  - added commands to generate letters for every resume style: \recipient, \date,
  \opening, \closing, \enclosure, \makelettertitle and \makeletterclosing. The
  old \maketitle and \makefooter commands are now deprecated and replaced by
@@ -6,7 +8,7 @@ version 1.0 (26 Mar 2012)
  - changed the alignment algorithm for the personal data display in the oldstyle
  style, as to align on the baseline of the first line with the surrounding text.
 
-version 0.19 (06 Feb 2012)
+version 0.19.0 (06 Feb 2012)
  - reintroduced the ability to force the width reserved to display the name
  in the resume header for the classic style (\maketitlenamewidth).
  - improved the pdf metadata, as reported by S. Wunsch (launchpad bug #922476).
@@ -15,7 +17,7 @@ version 0.19 (06 Feb 2012)
  - fixed a display bug when an address was given without postcode/city, as
  reported by O.Shaneh (launchpad bug #670263).
 
-version 0.18 (05 Feb 2012)
+version 0.18.0 (05 Feb 2012)
  - corrected the handling of pdf bookmarks, as suggested on stackexchange by
  U. Fischer.
  - improved the spacing between sections and subsections by using \addvspace
@@ -26,7 +28,7 @@ version 0.18 (05 Feb 2012)
  \cvdoubleitem definition, to avoid printing a colon without preceding label.
  - added a new style on top of classic, casual and oldstyle: banking.
 
-version 0.17 (25 Jan 2012)
+version 0.17.0 (25 Jan 2012)
  - changed the footer algorithm of style casual to avoid starting lines with
  the footer symbol.
  - aligned the space before and after the title across styles.
@@ -36,7 +38,7 @@ version 0.17 (25 Jan 2012)
  - corrected the vertical misalignment between the page number and the center
  footer in the casual style.
 
-version 0.16 (15 Jan 2012)
+version 0.16.0 (15 Jan 2012)
  - added starred versions of \section and \subsection (that are identical to
  their non-starred version, to e.g. enable biblatex support as requested by
  S. Verberkt (launchpad bug #913102).
@@ -48,7 +50,7 @@ version 0.15.1 (23 December 2011)
  - corrected a bug in the classic style causing the address font and color not
  being carried over newlines, as reported by J. Smith.
 
-version 0.15 (19 December 2011)
+version 0.15.0 (19 December 2011)
  - corrected list spacing.
  - corrected inconsistent use of sans serif fonts in roman layout option.
  - the lmodern fonts are now automatically loaded only if installed on the
@@ -67,7 +69,7 @@ version 0.15 (19 December 2011)
  - added a new style on top of classic and casual: oldstyle.
  - loaded the microtype package to improve typography.
 
-version 0.14 (04 December 2011)
+version 0.14.0 (04 December 2011)
  - added support for CJK, thanks to the help of P. D'Apice.
  - the use of \recomputelengths after modifying any length in the preamble is
  now unnecessary; \recomputelength is automatically called at the start of the
@@ -77,7 +79,7 @@ version 0.13.1 (11 November 2011)
  - corrected a bug introduced by v0.13 in the classic style when no \photo is
  used, as reported by S. Gislais (launchpad bug #888702).
 
-version 0.13 (06 November 2011)
+version 0.13.0 (06 November 2011)
  - added a "black" color option to render the resume in black & white, as
  suggested by F. Bicarri.
  - removed the pdflatex option when loading hyperref to enable other engines
@@ -88,18 +90,18 @@ version 0.13 (06 November 2011)
  of the framebox. Setting it to 0pt will disable the frame around the photo, as
  requested by T. Krennwallner (launchpad bug #664568).
 
-version 0.12 (03 August 2010)
+version 0.12.0 (03 August 2010)
   - prevented pagebreaks after sections and subsections (launchpad bug #409902),
   as originally reported by C. Gaspoz and fixed by launchpad user tentotwo).
 
-version 0.11 (20 July 2010)
+version 0.11.0 (20 July 2010)
   - removed the \ifpdf check when loading the graphicx package, as graphicx does
   does check internally and this was preventing proper functionning with xelatex
   and luatex, as reported by A. Trautmann. The same check was also removed
   everywhere else  in the document (i.e. when loading the color and hyperref
   packages).
 
-version 0.10 (13 June 2010)
+version 0.10.0 (13 June 2010)
   - fixed a compatibility issue with the natbib package (natbib uses \section*
   to format the bibliography title, while only \section was defined by
   moderncv), as reported on launchpad (launchpad bug #393920).
@@ -107,10 +109,10 @@ version 0.10 (13 June 2010)
   package, due to the double definition of \AtEndPreamble, as reported by
   D. Becker.
 
-version 0.9 (31 May 2010)
+version 0.9.0 (31 May 2010)
   - added support for the itemize, enumerate and description environments.
 
-version 0.8 (24 May 2010)
+version 0.8.0 (24 May 2010)
   - added support for multibib. Also modified the template to illustrate how to
   show labels in the bibliography, as requested by Tom D. R. and Stefan K.
   - added a command to indicate your personal homepage (\homepage{url}), as
@@ -126,7 +128,7 @@ version 0.8 (24 May 2010)
   in \cventry, as reported by B. Ekran (launchpad bug #268768), L. Păncescu and
   E. Gregorio.
 
-version 0.7 (17 June 2008)
+version 0.7.0 (17 June 2008)
   - corrected an outstanding spacing bug (space between cvlines longer
   than 1 line).
   - removed the need to use \closesection and \emptysection as internal
@@ -144,7 +146,7 @@ version 0.7 (17 June 2008)
   classic theme, by setting the length \maketitlenamewidth. Again, don't forget
   to call \recomputelengths afterward.
 
-version 0.6 (28 May 2007)
+version 0.6.0 (28 May 2007)
   - corrected some spacing bugs and cleaned up the code.
   - corrected a bug in the bibliography file of the examples spotted by
   U. Stöhr.
@@ -159,7 +161,7 @@ version 0.6 (28 May 2007)
   C. Knuepfer.
   - rewrote the examples.
 
-version 0.5 (9 September 2006)
+version 0.5.0 (9 September 2006)
   - added a \photo command to display a picture. That command takes the name of
   the file with the picture as argument, and the desired height as optional
   argument.
@@ -178,11 +180,11 @@ version 0.5 (9 September 2006)
     \vfill{\hfill{\scriptsize Produced \today.}}
   at the end of your CV, as suggested by F. Hammann.
 
-version 0.4 (2 May 2006)
+version 0.4.0 (2 May 2006)
   - removed the dependency on the geometry package, so that users can now invoke
   it themselve, and easily change the geometry of the page.
 
-version 0.3 (10 April 2006)
+version 0.3.0 (10 April 2006)
   - moderncv now uses the 'longtable' class, allowing cv sections to split
   across multiple pages.
   - the different lengths used by moderncv are now customizable! In particular,
@@ -203,7 +205,7 @@ version 0.3 (10 April 2006)
   - corrected a spacing problem in the cventry command, as pointed out and
   solved by B. Eßmann.
 
-version 0.2 (6 March 2006)
+version 0.2.0 (6 March 2006)
   - rewrite of the code to have the styles (fonts, colours, headers and footers)
   be defined in different files than the class. The styles are now defined in a
   separate file per style, named moderncvstyle<style_name>. It should now be
@@ -223,5 +225,5 @@ version 0.2 (6 March 2006)
   consistency purpose. For compatibility reasons, the command \cvresume still
   works, but should be avoided.
 
-version 0.1 (1 March 2006)
+version 0.1.0 (1 March 2006)
   - first release.
