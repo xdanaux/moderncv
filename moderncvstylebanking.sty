@@ -155,7 +155,7 @@
   {\color{color1}\hrule}%
   \par\nobreak\addvspace{1ex}\@afterheading}
 
-\newcommand{\subsectionfill}{\cleaders\hbox to 0.35em{\scriptsize.}\hfill}% for a dashed fill
+\newcommand{\subsectionfill}{\xleaders\hbox to 0.35em{\scriptsize.}\hfill}% different subsectionfills will not be perfectly aligned, but remaining space at the end of the fill will be distributed evenly between leaders, so it will be barely visible
 \renewcommand*{\subsection}[1]{%
   \par\addvspace{1ex}%
   \phantomsection{}%
