@@ -1,4 +1,8 @@
-version 1.1.0 (xx Apr 2012)
+version 1.1.0 (xx Jul 2012)
+ - prepared moderncv for fontspec font loading (still commented in code).
+ - changed the handling of the "sans" and "roman" class options, to be reflected
+ at the beginning of the document and override style font choices.
+ - turned unicode support in hyperref on by default.
 
 version 1.0.0 (26 Mar 2012)
  - added commands to generate letters for every resume style: \recipient, \date,
