@@ -3,6 +3,11 @@ version 1.1.0 (xx Jul 2012)
  - changed the handling of the "sans" and "roman" class options, to be reflected
  at the beginning of the document and override style font choices.
  - turned unicode support in hyperref on by default.
+ - tweaked the usage of \textbullet to avoid the fall-back to Computer Modern
+ fonts and prepared the usage of symbols from the MarVoSym font for fontspec
+ (LauLaTeX or XeLaTeX).
+ - tweaked the \subsectionfill of the "banking" style to distribute extra space
+ evenly between leaders.
 
 version 1.0.0 (26 Mar 2012)
  - added commands to generate letters for every resume style: \recipient, \date,
