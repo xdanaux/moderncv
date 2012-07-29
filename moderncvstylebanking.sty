@@ -21,13 +21,27 @@
 %-------------------------------------------------------------------------------
 %                package options
 %-------------------------------------------------------------------------------
-\RequirePackage{tgpagella}
-\renewcommand*{\familydefault}{\rmdefault}
 
 
 %-------------------------------------------------------------------------------
 %                overall style definition
 %-------------------------------------------------------------------------------
+% fonts
+%\ifxetexorluatex
+%  \setmainfont{Tex-Gyre Pagella}
+%  \setsansfont{Tex-Gyre Pagella}
+%  \setmathfont{Tex-Gyre Pagella}
+%  \setmathfont[range=\mathit,\mathsfit]{Tex-Gyre Pagella Italic}
+%  \setmathfont[range=\mathbfup,\mathbfsfup]{Tex-Gyre Pagella Bold}
+%  \setmathfont[range=\mathbfit,\mathbfsfit]{Tex-Gyre Pagella Bold Italic}
+%\else
+  \IfFileExists{tgpagella.sty}%
+    {%
+      \RequirePackage{tgpagella}%
+      \renewcommand*{\familydefault}{\rmdefault}}%
+    {}
+%\fi
+
 % commands
 \newcommand*{\maketitlesymbol}{%
     {~~~\textbullet~~~}}% \textbullet forces the use of the CMSY font, even when latin modern fonts are used :(

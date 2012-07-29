@@ -78,14 +78,39 @@
 
 % if... then... else... constructs
 \RequirePackage{ifthen}
+% TODO: move to xifthen and \isempty{<arg>} instead of \equal{<arg>}{}
+
+% TODO: replace \newcommand by \NewDocumentCommand (LaTeX 3)
 
 % color
 \RequirePackage{xcolor}
 
-% automatic loading of latin modern fonts if present on the system
-\IfFileExists{lmodern.sty}
-  {\RequirePackage[T1]{fontenc}\RequirePackage{lmodern}}
-  {}
+% font loading
+%\usepackage{ifxetex,ifluatex}
+%\newif\ifxetexorluatex
+%\ifxetex
+%  \xetexorluatextrue
+%\else
+%  \ifluatex
+%    \xetexorluatextrue
+%  \else
+%    \xetexorluatexfalse
+%  \fi
+%\fi
+% automatic loading of latin modern fonts
+%\ifxetexorluatex
+%  \RequirePackage{fontspec}
+%  \defaultfontfeatures{Ligatures=TeX}
+%  \RequirePackage{unicode-math}
+%  \setmainfont{Latin Modern}
+%  \setsansfont{Latin Modern Sans}
+%  \setmathfont{Latin Modern Math}
+%\else
+  \RequirePackage[T1]{fontenc}
+  \IfFileExists{lmodern.sty}%
+    {\RequirePackage{lmodern}}%
+    {}
+%\fi
 
 % symbols like \Telefon, \Mobilefone, \Letter and \Email
 \RequirePackage{marvosym}

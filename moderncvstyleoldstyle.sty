@@ -29,9 +29,18 @@
 %                overall style definition
 %-------------------------------------------------------------------------------
 % fonts
-\IfFileExists{kurier.sty}
-  {\RequirePackage[light,math]{kurier}}
-  {}
+%\ifxetexorluatex
+%  \setmainfont[Numbers={OldStyle,Proportional}, BoldFont={Kurier Bold}, ItalicFont={Kurier Light Italic}, BoldItalicFont={Kurier Bold Italic}]{Kurier Light}
+%  \setsansfont[Numbers={OldStyle,Proportional}, BoldFont={Kurier Bold}, ItalicFont={Kurier Light Italic}, BoldItalicFont={Kurier Bold Italic}]{Kurier Light}
+%  \setmathfont{Kurier Light}
+%  \setmathfont[range=\mathit,\mathsfit]{Kurier Light Italic}
+%  \setmathfont[range=\mathbfup,\mathbfsfup]{Kurier Bold}
+%  \setmathfont[range=\mathbfit,\mathbfsfit]{Kurier Bold Italic}
+%\else
+  \IfFileExists{kurier.sty}%
+    {\RequirePackage[light,math]{kurier}}%
+    {}
+%\fi
 
 % symbols
 \renewcommand*{\listitemsymbol}{\labelitemi~}

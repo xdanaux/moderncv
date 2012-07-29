@@ -26,6 +26,16 @@
 %-------------------------------------------------------------------------------
 %                overall style definition
 %-------------------------------------------------------------------------------
+% fonts
+%\ifxetexorluatex
+%  \setmainfont{Latin Modern Roman}
+%  \setsansfont{Latin Modern Sans}
+%  \setmathfont{Latin Modern Math}
+%\else
+  \IfFileExists{lmodern.sty}%
+    {\RequirePackage{lmodern}}%
+    {}
+%\fi
 
 
 %-------------------------------------------------------------------------------
