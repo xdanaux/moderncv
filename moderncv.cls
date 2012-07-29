@@ -51,15 +51,15 @@
 \DeclareOption{12pt}{\renewcommand\@ptsize{2}}
 
 % font type options
-\DeclareOption{sans}{\renewcommand{\familydefault}{\sfdefault}}
-\DeclareOption{roman}{\renewcommand{\familydefault}{\rmdefault}}
+\DeclareOption{sans}{\AtBeginDocument{\renewcommand{\familydefault}{\sfdefault}}}
+\DeclareOption{roman}{\AtBeginDocument{\renewcommand{\familydefault}{\rmdefault}}}
 
 % draft/final option
 \DeclareOption{draft}{\setlength\overfullrule{5pt}}
 \DeclareOption{final}{\setlength\overfullrule{0pt}}
 
 % execute default options
-\ExecuteOptions{a4paper,11pt,sans,final}
+\ExecuteOptions{a4paper,11pt,final}
 
 % process given options
 \ProcessOptions\relax
