@@ -112,8 +112,14 @@
     {}
 %\fi
 
-% symbols like \Telefon, \Mobilefone, \Letter and \Email
-\RequirePackage{marvosym}
+% MarVoSym font for symbols
+%\RequirePackage{marvosym}
+\newcommand*{\marvosymbol}[1]{}
+%\ifxetexorluatex
+%  \renewcommand*{\marvosymbol}[1]{{\fontspec{MarVoSym}\char#1}}
+%\else
+  \renewcommand*{\marvosymbol}[1]{{\fontfamily{mvs}\fontencoding{U}\fontseries{m}\fontshape{n}\selectfont\char#1}}
+%\fi
 
 % hyper links (hyperref is loaded at the end of the preamble to pass options required by loaded packages such as CJK)
 \RequirePackage{url}
@@ -211,7 +217,7 @@
 \newcommand*{\address}[2]{\def\@addressstreet{#1}\def\@addresscity{#2}}
 \newcommand*{\mobile}[1]{\def\@mobile{#1}}
 \newcommand*{\phone}[1]{\def\@phone{#1}}
-\renewcommand*{\fax}[1]{\def\@fax{#1}}
+\newcommand*{\fax}[1]{\def\@fax{#1}}
 \newcommand*{\email}[1]{\def\@email{#1}}
 \newcommand*{\homepage}[1]{\def\@homepage{#1}}
 
@@ -223,10 +229,10 @@
 
 % symbols
 %   itemize labels (the struts were added to correct inter-item spacing (works for single line items, until a solution is found for multi-line ones...)
-\newcommand*{\labelitemi}{\strut\textcolor{color1}{\Neutral}}% alternative" \fontencoding{U}\fontfamily{ding}\selectfont\tiny\symbol{'102}
+\newcommand*{\labelitemi}{\strut\textcolor{color1}{\marvosymbol{123}}}% equivalent to \Neutral from marvosym package; alternative: \fontencoding{U}\fontfamily{ding}\selectfont\tiny\symbol{'102}
 \newcommand*{\labelitemii}{\strut\textcolor{color1}{\large\bfseries-}}
-\newcommand*{\labelitemiii}{\strut\textcolor{color1}{\textperiodcentered}}% alternative: \textasteriskcentered; both force the use of the CMSY font, even when lmodern fonts are used :(
-\newcommand*{\labelitemiv}{\strut\textcolor{color1}{\textperiodcentered}}
+\newcommand*{\labelitemiii}{\strut\textcolor{color1}{\rmfamily\textperiodcentered}}% alternative: \textasteriskcentered; the \rmfamily is required to force Latin Modern fonts when using sans serif, as OMS/lmss/m/n is not defined and gets substituted by OMS/cmsy/m/n
+\newcommand*{\labelitemiv}{\labelitemiii}
 %   enumerate labels
 \renewcommand{\theenumi}{\@arabic\c@enumi}
 \renewcommand{\theenumii}{\@alph\c@enumii}
@@ -235,11 +241,11 @@
 %   other symbols
 \newcommand*{\listitemsymbol}{\labelitemi~}
 \newcommand*{\addresssymbol}{}
-\newcommand*{\mobilesymbol}{\Mobilefone~}
-\newcommand*{\phonesymbol}{\Telefon~}
-\newcommand*{\faxsymbol}{\FAX~}
-\newcommand*{\emailsymbol}{\Letter~}
-\newcommand*{\homepagesymbol}{{\Large\ComputerMouse}~}
+\newcommand*{\mobilesymbol}{}
+\newcommand*{\phonesymbol}{}
+\newcommand*{\faxsymbol}{}
+\newcommand*{\emailsymbol}{}
+\newcommand*{\homepagesymbol}{}
 
 % fonts
 \AtBeginDocument{\normalfont\color{color0}}

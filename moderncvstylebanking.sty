@@ -44,7 +44,7 @@
 
 % commands
 \newcommand*{\maketitlesymbol}{%
-    {~~~\textbullet~~~}}% \textbullet forces the use of the CMSY font, even when latin modern fonts are used :(
+    {~~~{\rmfamily\textbullet}~~~}}% the \rmfamily is required to force Latin Modern fonts when using sans serif, as OMS/lmss/m/n is not defined and gets substituted by OMS/cmsy/m/n
 %   internal command to add an element to the footer
 %   it collects the elements in a temporary box, and checks when to flush the box
 \newsavebox{\maketitlebox}%
