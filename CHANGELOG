@@ -8,6 +8,9 @@ version 1.1.0 (xx Jul 2012)
  (LauLaTeX or XeLaTeX).
  - tweaked the \subsectionfill of the "banking" style to distribute extra space
  evenly between leaders.
+ - added two options to change the "Enclosure" string used for the letter
+ enclosure: either specify another string as optional argument to \enclosure,
+ or redefine \enclname (as suggested by D. Wille).
 
 version 1.0.0 (26 Mar 2012)
  - added commands to generate letters for every resume style: \recipient, \date,

@@ -196,7 +196,7 @@
 \setlength\fboxsep{3\p@}
 \setlength\fboxrule{.4\p@}
 
-% Not required
+% not required
 %\setlength\arraycolsep{5\p@}
 %\setlength\tabcolsep{6\p@}
 %\setlength\arrayrulewidth{.4\p@}
@@ -249,6 +249,10 @@
 
 % fonts
 \AtBeginDocument{\normalfont\color{color0}}
+
+% strings for internationalisation
+\newcommand*{\refname}{Publications}
+\newcommand*{\enclname}{Enclosure}
 
 % makes the footer (normally used both for the resume and the letter)
 % usage: \makefooter
@@ -366,7 +370,6 @@
     {\href{mailto:#2}{#1}}}
 
 % thebibliography environment, for use with BibTeX and possibly multibib
-\newcommand*{\refname}{Publications}
 \newlength{\bibindent}
 \setlength{\bibindent}{1.5em}
 % bibliography item label
@@ -434,22 +437,25 @@
 \renewcommand*{\date}[1]{\def\@date{#1}}
 \newcommand*{\opening}[1]{\def\@opening{#1}}
 \newcommand*{\closing}[1]{\def\@closing{#1}}
-\newcommand*{\enclosure}[1]{\def\@enclosure{#1}}
+\newcommand*{\enclosure}[2][]{%
+  % if an optional argument is provided, use it to redefine \enclname
+  \ifthenelse{\equal{#1}{}}{}{\renewcommand*{\enclname}{#1}}%
+  \def\@enclosure{#2}}
 
 % recompute all letter lengths
 \newcommand*{\recomputeletterlengths}{}
 
 % makes the letter title
 % usage: \makelettertitle
-\newcommand*{\makelettertitle}{}%
+\newcommand*{\makelettertitle}{}
 
 % makes the letter footer
 % usage: \makeletterfooter
-\newcommand*{\makeletterfooter}{\makefooter}%
+\newcommand*{\makeletterfooter}{\makefooter}
 
 % makes the letter closing
 % usage: \makeletterclosing
-\newcommand*{\makeletterclosing}{}%
+\newcommand*{\makeletterclosing}{}
 
 
 \endinput
