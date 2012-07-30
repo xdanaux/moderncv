@@ -10,7 +10,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{moderncv}[2012/03/26 v1.0 modern curriculum vitae and letter document class]
+\ProvidesClass{moderncv}[2012/07/29 v1.1 modern curriculum vitae and letter document class]
 
 
 %-------------------------------------------------------------------------------
