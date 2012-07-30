@@ -1,3 +1,10 @@
+version 1.1.1 (30 Jul 2012)
+ - fixed a compatibility issue introduced in version 1.0.0 when
+ \maketitlenamewidth was renamed to \makecvtitlenamewidth, as reported by Peppe
+ on launchpad (launchpad bug #1030802). The template now correctly uses
+ \makecvtitlenamewidth, and \maketitlenamewidth was created as an alias for
+ backward compatibility.
+
 version 1.1.0 (29 Jul 2012)
  - fixed the switching from letter to resume, correcting spacing errors when a
  letter is typeset before the resume, as noticed by U. Gabor.
@@ -32,7 +39,7 @@ version 0.19.0 (06 Feb 2012)
  - fixed a footersymbol bug in the casual style when no mobile number was given,
  as reported by S. Wunsch (launchpad bug #922470).
  - fixed a display bug when an address was given without postcode/city, as
- reported by O.Shaneh (launchpad bug #670263).
+ reported by O. Shaneh (launchpad bug #670263).
 
 version 0.18.0 (05 Feb 2012)
  - corrected the handling of pdf bookmarks, as suggested on stackexchange by
