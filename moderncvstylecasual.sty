@@ -70,6 +70,8 @@
 
 % commands
 \renewcommand*{\makecvtitle}{%
+  % recompute lengths (in case we are switching from letter to resume, or vice versa)
+  \recomputecvlengths%
   % ensure footer with personal information
   \makecvfooter%
   % optional picture

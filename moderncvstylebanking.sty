@@ -129,7 +129,7 @@
 \newlength{\listdoubleitemmaincolumnwidth}
 
 % commands
-\renewcommand*{\recomputelengths}{%
+\renewcommand*{\recomputecvlengths}{%
   \setlength{\quotewidth}{0.65\textwidth}%
   % main lenghts
   \setlength{\maincolumnwidth}{\textwidth}%
@@ -142,7 +142,9 @@
   \setlength{\listdoubleitemmaincolumnwidth}{\maincolumnwidth-\listitemsymbolwidth-\separatorcolumnwidth-\listitemsymbolwidth}%
   \setlength{\listdoubleitemmaincolumnwidth}{0.5\listdoubleitemmaincolumnwidth}%
   % fancyhdr lengths
-  \renewcommand{\headwidth}{\textwidth}}
+  \renewcommand{\headwidth}{\textwidth}%
+  % regular lengths
+  \setlength{\parskip}{0\p@}}
 
 \renewcommand*{\makecvtitle}{%
   % recompute lengths (in case we are switching from letter to resume, or vice versa)

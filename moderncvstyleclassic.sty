@@ -93,7 +93,9 @@
   \setlength{\listdoubleitemmaincolumnwidth}{\maincolumnwidth-\listitemsymbolwidth-\separatorcolumnwidth-\listitemsymbolwidth}%
   \setlength{\listdoubleitemmaincolumnwidth}{0.5\listdoubleitemmaincolumnwidth}%
   % fancyhdr lengths
-  \renewcommand{\headwidth}{\textwidth}}
+  \renewcommand{\headwidth}{\textwidth}%
+  % regular lengths
+  \setlength{\parskip}{0\p@}}
 
 % optional maketitle width to force a certain width (if set to 0pt, the width is calculated automatically)
 \newlength{\makecvtitlenamewidth}
@@ -245,7 +247,7 @@
 %                letter style definition
 %-------------------------------------------------------------------------------
 % commands
-\renewcommand*{\recomputeletterlengths}{
+\renewcommand*{\recomputeletterlengths}{%
   \recomputecvlengths%
   \setlength{\parskip}{6\p@}}
 

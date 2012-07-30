@@ -87,7 +87,15 @@
 \newlength{\listdoubleitemmaincolumnwidth}
 
 % commands
+\setlength{\marginparwidth}{0\p@}%
+\setlength{\marginparsep}{0\p@}
 \renewcommand*{\recomputecvlengths}{%
+  % regular lengths
+  \changepage{}{+\marginparwidth+\marginparsep}{}{}{}{}{}{}{}% if a letter was typeset before the resume, \marginparwidth and \marginparsep will be non-zero; otherwise, this has no effect
+  \setlength{\marginparwidth}{0\p@}%
+  \setlength{\marginparsep}{0\p@}
+  \setlength{\parskip}{0\p@}%
+  % maketitle lengths
   \setlength{\quotewidth}{0.65\textwidth}%
   % main lenghts
   \setlength{\maincolumnwidth}{\textwidth-\hintscolumnwidth-\separatorcolumnwidth}%
@@ -255,7 +263,7 @@
 % commands
 %\newlength{\textwidthdelta}%
 \renewcommand*{\recomputeletterlengths}{%
-  \recomputecvlengths{}%
+  \recomputecvlengths%
   \setlength{\parskip}{6\p@}%
   \leftskip=0pt%
 %  \setlength{\textwidthdelta}{+\marginparwidth+\marginparsep}%

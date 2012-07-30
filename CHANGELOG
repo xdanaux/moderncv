@@ -1,4 +1,6 @@
-version 1.1.0 (xx Jul 2012)
+version 1.1.0 (29 Jul 2012)
+ - fixed the switching from letter to resume, correcting spacing errors when a
+ letter is typeset before the resume (as noticed by Ulrich G.).
  - prepared moderncv for fontspec font loading (still commented in code).
  - changed the handling of the "sans" and "roman" class options, to be reflected
  at the beginning of the document and override style font choices.
