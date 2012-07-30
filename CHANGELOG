@@ -1,6 +1,9 @@
 version 1.1.0 (29 Jul 2012)
  - fixed the switching from letter to resume, correcting spacing errors when a
- letter is typeset before the resume (as noticed by Ulrich G.).
+ letter is typeset before the resume, as noticed by U. Gabor.
+ - fixed the vertical alignment of the footers, as reported by T. Homa.
+ Footers are now aligned to the bottom and the letter and cv footers are
+ perfectly aligned in the "casual" style.
  - prepared moderncv for fontspec font loading (still commented in code).
  - changed the handling of the "sans" and "roman" class options, to be reflected
  at the beginning of the document and override style font choices.
@@ -12,7 +15,7 @@ version 1.1.0 (29 Jul 2012)
  evenly between leaders.
  - added two options to change the "Enclosure" string used for the letter
  enclosure: either specify another string as optional argument to \enclosure,
- or redefine \enclname (as suggested by D. Wille).
+ or redefine \enclname, as suggested by D. Wille.
 
 version 1.0.0 (26 Mar 2012)
  - added commands to generate letters for every resume style: \recipient, \date,
