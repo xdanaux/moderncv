@@ -1,3 +1,6 @@
+- Moderncv is incompatible with biblatex.
+- Footnotes generates errors (though the output seem correct when running with
+  "-interaction=nonstopmode")
 - When using CJK, the last \clearpage required for fancyhdr to work properly kills
   the "lastpage" counter, hence also the page numbering.
 - Moderncv produces an error ("lonely \item--perhaps a missing list environment")
