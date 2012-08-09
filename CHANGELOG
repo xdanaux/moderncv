@@ -1,3 +1,7 @@
+version 1.1.2 (09 Aug 2012)
+ - fixed a regression bug introduced in version 1.0.0 in the footer of the
+ "casual" style, as discovered on tex.stackexchange (question #66316).
+
 version 1.1.1 (30 Jul 2012)
  - fixed a compatibility issue introduced in version 1.0.0 when
  \maketitlenamewidth was renamed to \makecvtitlenamewidth, as reported by Peppe

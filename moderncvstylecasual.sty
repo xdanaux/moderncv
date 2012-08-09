@@ -53,6 +53,7 @@
     \flushfooter\\%
     \savebox{\footerbox}{#2}%
     \savebox{\footertempbox}{#2}%
+    \settowidth{\footerboxwidth}{\usebox{\footerbox}}%
     \@firstfooterelementfalse\fi}
 %   internal command to flush the footer
 \newcommand*{\flushfooter}{%
