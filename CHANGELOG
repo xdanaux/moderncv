@@ -1,3 +1,8 @@
+version 1.1.3 (10 Aug 2012)
+ - corrected a longstanding issue causing hyperref to issue two warnings
+ regarding its "pdfpagelabels" option, as pointed out and solved by P. Leifeld
+ (launchpad bug #1035466).
+
 version 1.1.2 (09 Aug 2012)
  - fixed a regression bug introduced in version 1.0.0 in the footer of the
  "casual" style, as discovered on tex.stackexchange (question #66316).

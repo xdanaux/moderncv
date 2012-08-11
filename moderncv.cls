@@ -125,13 +125,12 @@
 \RequirePackage{url}
 \urlstyle{tt}
 \AtEndPreamble{
-  \RequirePackage[unicode]{hyperref}
+  \RequirePackage[unicode,pdfpagelabels=false]{hyperref}% unicode is required for unicode pdf metadata, pdfpagelabels=false is required to avoid a warning setting it automatically to false anyway, because hyperref detects \thepage as undefined (why?)
   \hypersetup{
     breaklinks,
     baseurl       = http://,
     pdfborder     = 0 0 0,
     pdfpagemode   = UseNone,% do not show thumbnails or bookmarks on opening
-    pdfpagelabels = false,% to avoid a warning setting it automatically to false anyway, because hyperref detects \thepage as undefined (why?)
     pdfstartpage  = 1,
     pdfcreator    = {\LaTeX{} with 'moderncv' package},
 %    pdfproducer   = {\LaTeX{}},% will/should be set automatically to the correct TeX engine used
