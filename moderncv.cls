@@ -291,6 +291,15 @@
 \newcommand*{\subsectionfont}{}
 \newcommand*{\hintfont}{}
 
+% styles
+\newcommand*{\namestyle}[1]{{\namefont#1}}
+\newcommand*{\titlestyle}[1]{{\titlefont#1}}
+\newcommand*{\addressstyle}[1]{{\addressfont#1}}
+\newcommand*{\quotestyle}[1]{{\quotefont#1}}
+\newcommand*{\sectionstyle}[1]{{\sectionfont#1}}
+\newcommand*{\subsectionstyle}[1]{{\subsectionfont#1}}
+\newcommand*{\hintstyle}[1]{{\hintfont#1}}
+
 % recompute all resume lengths
 \newcommand*{\recomputecvlengths}{}
 
@@ -305,11 +314,11 @@
 
 % makes the resume title
 % usage: \makecvtitle
-\newcommand*{\makecvtitle}{}%
+\newcommand*{\makecvtitle}{}
 
 % makes the resume footer
 % usage: \makecvfooter
-\newcommand*{\makecvfooter}{\makefooter}%
+\newcommand*{\makecvfooter}{\makefooter}
 
 % makes a resume section
 % usage: \section{<title>}
