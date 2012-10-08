@@ -69,18 +69,16 @@
 %-------------------------------------------------------------------------------
 %                required packages
 %-------------------------------------------------------------------------------
-% \AtEndPreamble hook (loading tetoolbox instead of defining the macro, as to avoid incompatibilities with etoolbox (and packages relying on it) defining the macro too)
+% \AtEndPreamble hook (loading etoolbox instead of defining the macro, as to avoid incompatibilities with etoolbox (and packages relying on it) defining the macro too)
 \RequirePackage{etoolbox}
 %\let\@endpreamblehook\@empty
 %\def\AtEndPreamble{\g@addto@macro\@endpreamblehook}
-%\let\moderncv@document\document
-%\def\document{\endgroup\@endpreamblehook\begingroup\moderncv@document}
+%\let\document@original\document
+%\def\document{\endgroup\@endpreamblehook\begingroup\document@original}
 
 % if... then... else... constructs
 \RequirePackage{ifthen}
 % TODO: move to xifthen and \isempty{<arg>} instead of \equal{<arg>}{}
-
-% TODO: replace \newcommand by \NewDocumentCommand (LaTeX 3)
 
 % color
 \RequirePackage{xcolor}
@@ -171,10 +169,11 @@
 % lengths calculations
 \RequirePackage{calc}
 
-% advanced command arguments
+% advanced command arguments (LaTeX 3)
 \RequirePackage{xargs}
+% TODO (?): replace all \newcommand by \NewDocumentCommand
 
-% micro-typography (e.g., character  protrusion, font expansion, hyphenatable letterspacing)
+% micro-typography (e.g., character protrusion, font expansion, hyphenatable letterspacing)
 \RequirePackage{microtype}
 
 % compatibility package with older versions of moderncv
