@@ -58,22 +58,30 @@
 \newsavebox{\maketitletempbox}%
 \newlength{\maketitlewidth}%
 \newlength{\maketitleboxwidth}%
+\newif\if@firstmaketitleelement\@firstmaketitleelementtrue%
 %   adds an element to the maketitle, separated by maketitlesymbol
 %   usage: \addtomaketitle[maketitlesymbol]{element}
 \newcommand*{\addtomaketitle}[2][\maketitlesymbol]{%
-  \savebox{\maketitletempbox}{\usebox{\maketitlebox}#1#2}%
+  \if@firstmaketitleelement%
+    \savebox{\maketitletempbox}{\usebox{\maketitlebox}#2}%
+  \else%
+    \savebox{\maketitletempbox}{\usebox{\maketitlebox}#1#2}\fi%
   \settowidth{\maketitleboxwidth}{\usebox{\maketitletempbox}}%
   \ifnum\maketitleboxwidth<\maketitlewidth%
-    \savebox{\maketitlebox}{\usebox{\maketitletempbox}}
+    \savebox{\maketitlebox}{\usebox{\maketitletempbox}}%
+    \@firstmaketitleelementfalse%
   \else%
     \flushmaketitle{}\\%
     \savebox{\maketitlebox}{#2}%
-    \savebox{\maketitletempbox}{#2}\fi}
+    \savebox{\maketitletempbox}{#2}%
+    \settowidth{\maketitleboxwidth}{\usebox{\maketitlebox}}%
+    \@firstmaketitleelementfalse\fi}
 %   internal command to flush the maketitle
 \newcommand*{\flushmaketitle}{%
   \strut\usebox{\maketitlebox}%
   \savebox{\maketitlebox}{}%
-  \savebox{\maketitletempbox}{}}
+  \savebox{\maketitletempbox}{}%
+  \setlength{\maketitleboxwidth}{0pt}}
 \renewcommand*{\maketitle}{%
   \setlength{\maketitlewidth}{0.8\textwidth}%
   \hfil%
@@ -83,9 +91,9 @@
     \namestyle{\@firstname~\@familyname}\\%
     % detailed information
     \addressfont\color{color2}%
-    \ifthenelse{\isundefined{\@addressstreet}}{}{\addtomaketitle[]{\addresssymbol\@addressstreet}%
-      \ifthenelse{\equal{\@addresscity}{}}{}{\addtomaketitle[~--~]{\@addresscity}}\flushmaketitle}% if \addresstreet is defined, \addresscity will always be defined but could be empty
-    \ifthenelse{\isundefined{\@mobile}}{}{\addtomaketitle[]{\mobilesymbol\@mobile}}%
+    \ifthenelse{\isundefined{\@addressstreet}}{}{\addtomaketitle{\addresssymbol\@addressstreet}%
+      \ifthenelse{\equal{\@addresscity}{}}{}{\addtomaketitle[~--~]{\@addresscity}}\flushmaketitle\@firstmaketitleelementtrue\\}% if \addresstreet is defined, \addresscity will always be defined but could be empty
+    \ifthenelse{\isundefined{\@mobile}}{}{\addtomaketitle{\mobilesymbol\@mobile}}%
     \ifthenelse{\isundefined{\@phone}}{}{\addtomaketitle{\phonesymbol\@phone}}%
     \ifthenelse{\isundefined{\@fax}}{}{\addtomaketitle{\faxsymbol\@fax}}%
     \ifthenelse{\isundefined{\@email}}{}{\addtomaketitle{\emailsymbol\emaillink{\@email}}}%
