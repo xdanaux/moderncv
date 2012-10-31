@@ -192,12 +192,12 @@
 \setlength\columnseprule{0\p@}
 \setlength\fboxsep{3\p@}
 \setlength\fboxrule{.4\p@}
+\setlength\arrayrulewidth{.4\p@}
+\setlength\doublerulesep{2\p@}
 
-% not required
+% not set on purpose
 %\setlength\arraycolsep{5\p@}
 %\setlength\tabcolsep{6\p@}
-%\setlength\arrayrulewidth{.4\p@}
-%\setlength\doublerulesep{2\p@}
 %\setlength\tabbingsep{\labelsep}
 
 \raggedbottom
