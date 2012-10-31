@@ -87,8 +87,9 @@
   \hfil%
   \parbox{\maketitlewidth}{%
     \centering%
-    % name (title is not visible)
-    \namestyle{\@firstname~\@familyname}\\%
+    % name and title
+    \namestyle{\@firstname~\@familyname}%
+    \ifthenelse{\isundefined{\@title}}{}{\titlestyle{~|~\@title}}\\%
     % detailed information
     \addressfont\color{color2}%
     \ifthenelse{\isundefined{\@addressstreet}}{}{\addtomaketitle{\addresssymbol\@addressstreet}%
@@ -107,8 +108,8 @@
 %-------------------------------------------------------------------------------
 % fonts
 \renewcommand*{\namefont}{\Huge\bfseries\upshape}
-\renewcommand*{\titlefont}{\LARGE\mdseries\slshape}
-\renewcommand*{\addressfont}{\small\mdseries\upshape}
+\renewcommand*{\titlefont}{\Huge\mdseries\upshape}
+\renewcommand*{\addressfont}{\normalsize\mdseries\upshape}
 \renewcommand*{\quotefont}{\large\slshape}
 \renewcommand*{\sectionfont}{\Large\bfseries\upshape}
 \renewcommand*{\subsectionfont}{\large\upshape\fontseries{sb}\selectfont}
@@ -116,7 +117,7 @@
 
 % styles
 \renewcommand*{\namestyle}[1]{{\namefont\textcolor{color1}{#1}}}
-\renewcommand*{\titlestyle}[1]{{\titlefont\textcolor{color2}{#1}}}
+\renewcommand*{\titlestyle}[1]{{\titlefont\textcolor{color2!85}{#1}}}
 \renewcommand*{\addressstyle}[1]{{\addressfont\textcolor{color1}{#1}}}
 \renewcommand*{\quotestyle}[1]{{\quotefont\textcolor{color1}{#1}}}
 \renewcommand*{\sectionstyle}[1]{{\sectionfont\textcolor{color1}{#1}}}
