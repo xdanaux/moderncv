@@ -123,7 +123,8 @@
 \RequirePackage{url}
 \urlstyle{tt}
 \AtEndPreamble{
-  \RequirePackage[unicode,pdfpagelabels=false]{hyperref}% unicode is required for unicode pdf metadata, pdfpagelabels=false is required to avoid a warning setting it automatically to false anyway, because hyperref detects \thepage as undefined (why?)
+  \pagenumbering{arabic}% has to be issued before loading hyperref, as to set \thepage and hence to avoid hyperref issuing a warning and setting pdfpagelabels=false
+  \RequirePackage[unicode]{hyperref}% unicode is required for unicode pdf metadata
   \hypersetup{
     breaklinks,
     baseurl       = http://,
@@ -137,9 +138,7 @@
     pdfauthor     = {\@firstname{}~\@familyname{}},
     pdftitle      = {\@firstname{}~\@familyname{} -- \@title{}},
     pdfsubject    = {Resum\'{e} of \@firstname{}~\@familyname{}},
-    pdfkeywords   = {\@firstname{}~\@familyname{}, curriculum vit\ae{}, resum\'{e}}}
-  \pagenumbering{arabic}% has to be issued after loading hyperref
-}
+    pdfkeywords   = {\@firstname{}~\@familyname{}, curriculum vit\ae{}, resum\'{e}}}}
 
 % graphics
 \RequirePackage{graphicx}
