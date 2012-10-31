@@ -192,7 +192,7 @@
   \par\addvspace{#1}}
 
 \renewcommand*{\cvlistitem}[2][.25em]{%
-  \listitemsymbol#2%
+  \listitemsymbol\begin{minipage}[t]{\listitemmaincolumnwidth}#2\end{minipage}%
   \par\addvspace{#1}}
 
 \renewcommand*{\cvlistdoubleitem}[3][.25em]{%
