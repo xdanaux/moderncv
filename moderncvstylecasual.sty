@@ -94,11 +94,11 @@
     \raggedleft\namefont{\color{color2!50}\@firstname} {\color{color2}\@familyname}}\\[-.35em]% alternate design: \MakeLowercase and no space
   {\color{color2!50}\rule{\textwidth}{.25ex}}%
   % optional title
-  \ifthenelse{\equal{\@title}{}}{}{\\[1.25em]\raggedleft\titlestyle{\@title}}\\[2.5em]%
+  \ifthenelse{\equal{\@title}{}}{}{\\[1.25em]\null\hfill\titlestyle{\@title}}\\[2.5em]% \null is required as there is no box on the line after \\, so glue (and leaders) disappears; this is in contrast to after \par, where the next line starts with an indent box (even after \noindent).
   % optional quote
   \ifthenelse{\isundefined{\@quote}}%
     {}%
-    {{\centering\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
+    {{\null\hfill\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\hfill\null\\[2.5em]}}%
   \par}% to avoid weird spacing bug at the first section if no blank line is left after \maketitle
 
 \renewcommand*{\makecvfooter}{%
