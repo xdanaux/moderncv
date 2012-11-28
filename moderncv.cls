@@ -84,7 +84,7 @@
 \RequirePackage{xcolor}
 
 % font loading
-%\usepackage{ifxetex,ifluatex}
+%\RequirePackage{ifxetex,ifluatex}
 %\newif\ifxetexorluatex
 %\ifxetex
 %  \xetexorluatextrue
