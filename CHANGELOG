@@ -1,5 +1,10 @@
+version 1.2.1 (04 Dec 2012)
+ - fixed a regression bug introduced in version 1.2.0 in the header of the
+ "banking" style when no title is used, as reported on tex.stackexchange
+ (question #85427).
+
 version 1.2.0 (31 Oct 2012)
- - updated the banking style header to include the option to show a title.
+ - updated the "banking" style header to include the option to show a title.
  - set the values of \arrayrulewidth and \doublerulesep to their standard values
  (0.4pt and 2pt resp.) to enable the drawing of rules in tabulars and arrays by
  default.

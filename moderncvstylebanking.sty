@@ -89,7 +89,7 @@
     \centering%
     % name and title
     \namestyle{\@firstname~\@familyname}%
-    \ifthenelse{\isundefined{\@title}}{}{\titlestyle{~|~\@title}}\\%
+    \ifthenelse{\equal{\@title}{}}{}{\titlestyle{~|~\@title}}\\% \isundefined doesn't work on \@title, as LaTeX itself defines \@title (before it possibly gets redefined by \title) 
     % detailed information
     \addressfont\color{color2}%
     \ifthenelse{\isundefined{\@addressstreet}}{}{\addtomaketitle{\addresssymbol\@addressstreet}%
