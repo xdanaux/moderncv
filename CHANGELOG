@@ -7,6 +7,7 @@ version 1.3.0 (xx xxx 201x)
  - added a 3rd, fully optional (can be omitted or left blank) argument to
  \address to specify a country, as requested on launchpad (launchpad bug
  #1063995).
+ - replaced the usage of the xargs package by the xparse one.
 
 version 1.2.1 (04 Dec 2012)
  - fixed a regression bug introduced in version 1.2.0 in the header of the

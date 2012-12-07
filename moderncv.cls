@@ -170,7 +170,7 @@
 \RequirePackage{calc}
 
 % advanced command arguments (LaTeX 3)
-\RequirePackage{xargs,xparse}
+\RequirePackage{xparse}
 % TODO (?): replace all \newcommand by \NewDocumentCommand
 
 % micro-typography (e.g., character protrusion, font expansion, hyphenatable letterspacing)
@@ -299,7 +299,9 @@
 %                resume design commands definitions
 %-------------------------------------------------------------------------------
 % elements
-\newcommandx*{\photo}[3][1=64pt,2=0.4pt,usedefault]{\def\@photowidth{#1}\def\@photoframewidth{#2}\def\@photo{#3}}% the 1st (optional) argument is the width of the photo, the 2nd (optional) argument is the thickness of the frame around it.
+% defines one's picture (optional)
+% usage: photo[<picture width>][<picture frame thickness>]{<picture filename>}
+\NewDocumentCommand{\photo}{O{64pt}O{0.4pt}m}{\def\@photowidth{#1}\def\@photoframewidth{#2}\def\@photo{#3}}
 \newcommand*{\quote}[1]{\def\@quote{#1}}
 
 % fonts
