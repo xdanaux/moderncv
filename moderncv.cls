@@ -129,7 +129,7 @@
     breaklinks,
     baseurl       = http://,
     pdfborder     = 0 0 0,
-    pdfpagemode   = UseNone,% do not show thumbnails or bookmarks on opening
+    pdfpagemode   = UseNone,
     pdfstartpage  = 1,
     pdfcreator    = {\LaTeX{} with 'moderncv' package},
 %    pdfproducer   = {\LaTeX{}},% will/should be set automatically to the correct TeX engine used
@@ -169,7 +169,7 @@
 \RequirePackage{calc}
 
 % advanced command arguments (LaTeX 3)
-\RequirePackage{xargs}
+\RequirePackage{xargs,xparse}
 % TODO (?): replace all \newcommand by \NewDocumentCommand
 
 % micro-typography (e.g., character protrusion, font expansion, hyphenatable letterspacing)
@@ -208,15 +208,37 @@
 %                overall design commands definitions
 %-------------------------------------------------------------------------------
 % elements
+% defines one's first name
+% usage: \firstname{<firstname>}
 \newcommand*{\firstname}[1]{\def\@firstname{#1}}
+% defines one's family name
+% usage: \familyname{<familyname>}
 \newcommand*{\familyname}[1]{\def\@familyname{#1}}
+% defines one's title (optional)
+% usage: \title{<title>}
 \renewcommand*{\title}[1]{\def\@title{#1}}
-\newcommand*{\address}[2]{\def\@addressstreet{#1}\def\@addresscity{#2}}
+% defines one's address (optional)
+% usage: \address{<street>}{<city>}{<country>}
+% where the <city> and <country> arguments can be omitted or provided empty
+\NewDocumentCommand{\address}{mG{}G{}}{\def\@addressstreet{#1}\def\@addresscity{#2}\def\@addresscountry{#3}}
+% defines one's mobile phone number (optional)
+% usage: \mobile{<number>}
 \newcommand*{\mobile}[1]{\def\@mobile{#1}}
+% defines one's fixed phone number (optional)
+% usage: \phone{<number>}
 \newcommand*{\phone}[1]{\def\@phone{#1}}
+% defines one's fax number (optional)
+% usage: \fax{<number>}
 \newcommand*{\fax}[1]{\def\@fax{#1}}
+% defines one's email address (optional)
+% usage: \email{<email>}
 \newcommand*{\email}[1]{\def\@email{#1}}
+% defines one's home page (optional)
+% usage: \homepage{<url>}
 \newcommand*{\homepage}[1]{\def\@homepage{#1}}
+% defines additional personal information (optional)
+% usage: \extrainfo{<text>}
+\newcommand*{\extrainfo}[1]{\def\@extrainfo{#1}}
 
 % colors
 \definecolor{color0}{rgb}{0,0,0}% main default color, normally left to black
@@ -276,7 +298,6 @@
 %                resume design commands definitions
 %-------------------------------------------------------------------------------
 % elements
-\newcommand*{\extrainfo}[1]{\def\@extrainfo{#1}}
 \newcommandx*{\photo}[3][1=64pt,2=0.4pt,usedefault]{\def\@photowidth{#1}\def\@photoframewidth{#2}\def\@photo{#3}}% the 1st (optional) argument is the width of the photo, the 2nd (optional) argument is the thickness of the frame around it.
 \newcommand*{\quote}[1]{\def\@quote{#1}}
 

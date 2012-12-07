@@ -109,7 +109,8 @@
     \addressfont\color{color2}%
     \begin{tabular}[b]{@{}r@{}}%
       \ifthenelse{\isundefined{\@addressstreet}}{}{\makenewline\addresssymbol\@addressstreet%
-        \ifthenelse{\equal{\@addresscity}{}}{}{\makenewline\@addresscity}}% if \addresstreet is defined, \addresscity will always be defined but could be empty
+        \ifthenelse{\equal{\@addresscity}{}}{}{\makenewline\@addresscity}% if \addresstreet is defined, \addresscity and addresscountry will always be defined but could be empty
+        \ifthenelse{\equal{\@addresscountry}{}}{}{\makenewline\@addresscountry}}%
       \ifthenelse{\isundefined{\@mobile}}{}{\makenewline\mobilesymbol\@mobile}%
       \ifthenelse{\isundefined{\@phone}}{}{\makenewline\phonesymbol\@phone}%
       \ifthenelse{\isundefined{\@fax}}{}{\makenewline\faxsymbol\@fax}%
@@ -261,7 +262,8 @@
     \addressfont\textcolor{color2}{%
       {\bfseries\upshape\@firstname~\@familyname}\@firstdetailselementfalse%
       \ifthenelse{\isundefined{\@addressstreet}}{}{\makenewline\addresssymbol\@addressstreet%
-        \ifthenelse{\equal{\@addresscity}{}}{}{\makenewline\@addresscity}}%
+        \ifthenelse{\equal{\@addresscity}{}}{}{\makenewline\@addresscity}% if \addresstreet is defined, \addresscity and addresscountry will always be defined but could be empty
+        \ifthenelse{\equal{\@addresscountry}{}}{}{\makenewline\@addresscountry}}%
       \ifthenelse{\isundefined{\@mobile}}{}{\makenewline\mobilesymbol\@mobile}%
       \ifthenelse{\isundefined{\@phone}}{}{\makenewline\phonesymbol\@phone}%
       \ifthenelse{\isundefined{\@fax}}{}{\makenewline\faxsymbol\@fax}%
