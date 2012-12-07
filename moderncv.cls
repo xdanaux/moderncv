@@ -120,6 +120,7 @@
 %\fi
 
 % hyper links (hyperref is loaded at the end of the preamble to pass options required by loaded packages such as CJK)
+\newcommand*\pdfpagemode{UseNone}% do not show thumbnails or bookmarks on opening (on supporting browsers); set \pdfpagemode to "UseOutlines" to show bookmarks
 \RequirePackage{url}
 \urlstyle{tt}
 \AtEndPreamble{
@@ -129,7 +130,7 @@
     breaklinks,
     baseurl       = http://,
     pdfborder     = 0 0 0,
-    pdfpagemode   = UseNone,
+    pdfpagemode   = \pdfpagemode,
     pdfstartpage  = 1,
     pdfcreator    = {\LaTeX{} with 'moderncv' package},
 %    pdfproducer   = {\LaTeX{}},% will/should be set automatically to the correct TeX engine used
