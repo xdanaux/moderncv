@@ -166,6 +166,22 @@
       \AtEndDocument{\label{lastpage}}\else\fi}}
 \pagestyle{plain}
 
+% reduced list spacing
+% package providing hooks into lists
+%   originally developped by Jakob Schiotz (see http://dcwww.camd.dtu.dk/~schiotz/comp/LatexTips/tweaklist.sty)
+%   modified and distributed with moderncv(not available otherwise on ctan)
+\RequirePackage{tweaklist}
+\renewcommand*{\itemhook}{%
+  \@minipagetrue% removes spacing before lists as they use \addvspace, which doesn't add vertical space inside minipages
+  \@noparlisttrue% removes spacing at end of lists, caused by \par
+  \setlength{\topsep}{0pt}% normally not required thanks to \@minipagetrue
+  \setlength{\partopsep}{0pt}% normally not required thanks to \@minipagetrue
+  \setlength{\parsep}{0pt}% not required when \itemsep and \parskip are set to 0pt (?)
+  \setlength{\parskip}{0pt}%
+  \setlength{\itemsep}{0pt}}
+\renewcommand*{\enumhook}{\itemhook{}}
+\renewcommand*{\deschook}{\itemhook{}}
+
 % lengths calculations
 \RequirePackage{calc}
 
@@ -436,15 +452,6 @@
 \renewcommand\p@enumiv{\p@enumiii\theenumiii}
 % description label
 \newcommand*\descriptionlabel[1]{\hspace\labelsep\normalfont\bfseries#1}
-% hooks to adjust spacing (idea by Jakob Schiotz; see http://dcwww.camd.dtu.dk/~schiotz/comp/LatexTips/tweaklist.sty)
-\RequirePackage{tweaklist}% distributed with moderncv, not found on ctan and slightly modified
-\renewcommand*{\itemhook}{
-  \setlength{\topsep}{0pt}%
-  \setlength{\parsep}{0pt}%
-  \setlength{\parskip}{0pt}%
-  \setlength{\itemsep}{0pt}}
-\renewcommand*{\enumhook}{\itemhook{}}
-\renewcommand*{\deschook}{\itemhook{}}
 
 % classical \today definition
 \def\today{\ifcase\month\or
