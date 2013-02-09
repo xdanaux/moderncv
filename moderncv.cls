@@ -415,6 +415,98 @@
     {\href{mailto:#2}{#2}}%
     {\href{mailto:#2}{#1}}}
 
+% cvcolumns environment, where every column is created through \cvcolumn
+% usage: \begin{cvcolumns}
+%          \cvcolumn[width]{head}{content}
+%          \cvcolumn[width]{head}{content}
+%          ...
+%        \end{cvcolumns}
+% where "width" is the width as a fraction of the line length (between 0 and 1), "head" is the column header and "content" its content
+\newcounter{cvcolumnscounter}% counter for the number of columns
+\newcounter{cvcolumnsautowidthcounter}% counter for the number of columns with no column width provided, and which will then be equally distributed
+\newcounter{tmpiteratorcounter}% counter for any temporary purpose (e.g., iterating loops)
+\newlength{\cvcolumnsdummywidth}\setlength{\cvcolumnsdummywidth}{1000pt}% dummy width for total width, in order to enable arithmetics (TeX has no float variables, only integer counters or lengths)
+\newlength{\cvcolumnswidth}% total width available for head / content
+\newlength{\cvcolumnsautowidth}% total width of columns with no explicit width provided
+\newlength{\cvcolumnautowidth}% width of one of the columns with no explicit width provided (based on equal distribution of remaining space)
+\newif\if@cvcolumns@head@empty% whether or not at least one of the columns has a header
+\newenvironment*{cvcolumns}%
+  {% at environment opening: reset counters, lengths and ifs
+    \setcounter{cvcolumnscounter}{0}%
+    \setcounter{cvcolumnsautowidthcounter}{0}%
+    \setlength{\cvcolumnsautowidth}{\cvcolumnsdummywidth}%
+    \setlength{\cvcolumnautowidth}{0pt}%
+    \@cvcolumns@head@emptytrue}%
+  {% at environment closing: typeset environment
+    % compute the width of each cvcolumn, considering a spacing of \separatorcolumnwidth and the columns with set width
+    \ifnum\thecvcolumnscounter>0%
+      \setlength{\cvcolumnswidth}{\maincolumnwidth-\value{cvcolumnscounter}\separatorcolumnwidth+\separatorcolumnwidth}%
+      \setlength{\cvcolumnautowidth}{\cvcolumnswidth*\ratio{\cvcolumnsautowidth}{\cvcolumnsdummywidth}/\value{cvcolumnsautowidthcounter}}\fi%
+    % pre-aggregate the tabular definition, heading and content (required before creating the tabular, as the tabular environment doesn't like loops --- probably because "&" generates a \endgroup)
+    % - the tabular definition is the aggregation of the different "\cvcolumn<i>@def" (by default "p{\cvcolumnautowidth}"), separated by "@{\hspace*{\separatorcolumnwidth}}"
+    % - the tabular heading is the aggregation of the different "\cvcolumn<i>@head", separated by "&"
+    % - the tabular content is the aggregation of the different "\cvcolumn<i>@content", separated by "&"
+    % to aggregate the different elements, \protected@edef or \g@addto@macro is required to avoid that \cvcolumns@def, -@head and -@content get expanded in subsequent redefinitions, which would cause errors due to the expansions of \hspace, of \subsectionstyle and possibly of user content/argument such as font commands
+    \def\cvcolumns@def{}%
+    \def\cvcolumns@head{}%
+    \def\cvcolumns@content{}%
+    \setcounter{tmpiteratorcounter}{0}%
+    % loop based on \g@addto@macro
+    \loop\ifnum\thetmpiteratorcounter<\thecvcolumnscounter%
+      \ifnum\thetmpiteratorcounter=0\else%
+        \g@addto@macro\cvcolumns@def{@{\hspace*{\separatorcolumnwidth}}}%
+        \g@addto@macro\cvcolumns@head{&}%
+        \g@addto@macro\cvcolumns@content{&}\fi%
+      \expandafter\g@addto@macro\expandafter\cvcolumns@def\expandafter{\csname cvcolumn\roman{tmpiteratorcounter}@def\endcsname}%
+      \expandafter\g@addto@macro\expandafter\cvcolumns@head\expandafter{\csname cvcolumn\roman{tmpiteratorcounter}@head\endcsname}%
+      \expandafter\g@addto@macro\expandafter\cvcolumns@content\expandafter{\csname cvcolumn\roman{tmpiteratorcounter}@content\endcsname}%
+      \stepcounter{tmpiteratorcounter}%
+      \repeat%
+%    % same loop based on \protected@edef
+%    \loop\ifnum\thetmpiteratorcounter<\thecvcolumnscounter%
+%      \ifnum\thetmpiteratorcounter=0\else%
+%        \protected@edef\cvcolumns@def{\cvcolumns@def @{\hspace*{\separatorcolumnwidth}}}%
+%        \protected@edef\cvcolumns@head{\cvcolumns@head &}%
+%        \protected@edef\cvcolumns@content{\cvcolumns@content &}\fi%
+%      \expandafter\protected@edef\expandafter\cvcolumns@def\expandafter{\expandafter\cvcolumns@def\expandafter\protect\csname cvcolumn\roman{tmpiteratorcounter}@def\endcsname}%
+%      \expandafter\protected@edef\expandafter\cvcolumns@head\expandafter{\expandafter\cvcolumns@head\expandafter\protect\csname cvcolumn\roman{tmpiteratorcounter}@head\endcsname}%
+%      \expandafter\protected@edef\expandafter\cvcolumns@content\expandafter{\expandafter\cvcolumns@content\expandafter\protect\csname cvcolumn\roman{tmpiteratorcounter}@content\endcsname}%
+%      \stepcounter{tmpiteratorcounter}%
+%      \repeat%
+    % create the tabular
+    \cvitem{}{%
+      \begin{tabular}{\cvcolumns@def}%
+        \if@cvcolumns@head@empty\else%
+          \cvcolumns@head\\[-.8em]%
+          {\color{color1}\rule{\maincolumnwidth}{.25pt}}\\\fi%
+        \cvcolumns@content%
+      \end{tabular}}}
+
+% cvcolumn command, to create a column inside a cvcolumns environment
+% usage: \cvcolumn[width]{head}{content}
+% where "width" is the width as a fraction of the line length (between 0 and 1), "head" is the column header and "content" its content ("head" and "content" can contain "\\", "\newline" or any other paragraph command such as "itemize")
+\newcommand*{\cvcolumn}[3][\cvcolumnautowidth]{%
+%  \def\cvcolumn@width{}%
+  \ifthenelse{\equal{#1}{\cvcolumnautowidth}}%
+    {% if no width fraction is provided, count this column as auto-adjusted and set its width to \cvcolumnsautowidth
+      \stepcounter{cvcolumnsautowidthcounter}%
+      \expandafter\expandafter\expandafter\def\expandafter\csname cvcolumn\roman{cvcolumnscounter}@def\endcsname{p{\cvcolumnautowidth}}%
+      \expandafter\expandafter\expandafter\def\expandafter\csname cvcolumn\roman{cvcolumnscounter}@head\endcsname{\protect\parbox[b]{\cvcolumnautowidth}{\protect\subsectionstyle{#2}}}}%
+    {% if a width is provided, set the width of the column to it and decrease the available space for auto-adjusted columns
+      \addtolength{\cvcolumnsautowidth}{-#1\cvcolumnsdummywidth}%
+      \expandafter\expandafter\expandafter\def\expandafter\csname cvcolumn\roman{cvcolumnscounter}@def\endcsname{p{#1\cvcolumnswidth}}%
+      \expandafter\expandafter\expandafter\def\expandafter\csname cvcolumn\roman{cvcolumnscounter}@head\endcsname{\protect\parbox[b]{#1\cvcolumnswidth}{\protect\subsectionstyle{#2}}}}%
+  \ifthenelse{\equal{#2}{}}{}{\@cvcolumns@head@emptyfalse}%
+  \expandafter\expandafter\expandafter\def\expandafter\csname cvcolumn\roman{cvcolumnscounter}@content\endcsname{\protect\cvcolumncell{#3}}%
+  \stepcounter{cvcolumnscounter}}
+
+% internal cvcolumncell command, that enables a cvcolumn cell to contain paragraph commands (lists, newlines, etc)
+\newcommand*{\cvcolumncell}[1]{{% put cell inside a group, so that command redefinitions are only local
+  % roughly restore \\ to its regular definition (outside of tabular)
+  \renewcommand*{\\}{\newline}%
+  % enclose the contents of the cell inside a vertical box, to allow paragraph commands
+  \protect\vtop{#1}}}
+
 % thebibliography environment, for use with BibTeX and possibly multibib
 \newlength{\bibindent}
 \setlength{\bibindent}{1.5em}

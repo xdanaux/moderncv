@@ -41,7 +41,7 @@
 %\makeatletter
 %\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}
 %\makeatother
-%\renewcommand*{\bibliographyitemlabel}{[\arabic{enumiv}]% CONSIDER REPLACING THE ABOVE BY THIS
+%\renewcommand*{\bibliographyitemlabel}{[\arabic{enumiv}]}% CONSIDER REPLACING THE ABOVE BY THIS
 
 % bibliography with mutiple entries
 %\usepackage{multibib}
@@ -106,15 +106,20 @@ Detailed achievements:%
 \cvlistitem{Item 2}
 \cvlistitem{Item 3. This item is particularly long and therefore normally spans over several lines. Did you notice the indentation when the line wraps?}
 
-\renewcommand{\listitemsymbol}{-~}                 % change the symbol for lists
-
 \section{Extra 2}
 \cvlistdoubleitem{Item 1}{Item 4}
 \cvlistdoubleitem{Item 2}{Item 5\cite{book1}}
 \cvlistdoubleitem{Item 3}{Item 6. Like item 3 in the single column list before, this item is particularly long to wrap over several lines.}
 
+\section{References}
+\begin{cvcolumns}
+  \cvcolumn{Category 1}{\begin{itemize}\item Person 1\item Person 2\item Person 3\end{itemize}}
+  \cvcolumn{Category 2}{Amongst others:\begin{itemize}\item Person 1, and\item Person 2\end{itemize}(more upon request)}
+  \cvcolumn[0.5]{All the rest \& some more}{\textit{That} person, and \textbf{those} also (all available upon request).}
+\end{cvcolumns}
+
 % Publications from a BibTeX file without multibib
-%  for numerical labels: \renewcommand{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}
+%  for numerical labels: \renewcommand{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}% CONSIDER MERGING WITH PREAMBLE PART
 %  to redefine the heading string ("Publications"): \renewcommand{\refname}{Articles}
 \nocite{*}
 \bibliographystyle{plain}
