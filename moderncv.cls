@@ -136,10 +136,10 @@
 %    pdfproducer   = {\LaTeX{}},% will/should be set automatically to the correct TeX engine used
     bookmarksopen = true,
     bookmarksdepth= 2,% to show sections and subsections
-    pdfauthor     = {\@firstname{}~\@familyname{}},
-    pdftitle      = {\@firstname{}~\@familyname{} -- \@title{}},
-    pdfsubject    = {Resum\'{e} of \@firstname{}~\@familyname{}},
-    pdfkeywords   = {\@firstname{}~\@familyname{}, curriculum vit\ae{}, resum\'{e}}}}
+    pdfauthor     = {\@firstname{}~\@lastname{}},
+    pdftitle      = {\@firstname{}~\@lastname{} -- \@title{}},
+    pdfsubject    = {Resum\'{e} of \@firstname{}~\@lastname{}},
+    pdfkeywords   = {\@firstname{}~\@lastname{}, curriculum vit\ae{}, resum\'{e}}}}
 
 % graphics
 \RequirePackage{graphicx}
@@ -225,12 +225,9 @@
 %                overall design commands definitions
 %-------------------------------------------------------------------------------
 % elements
-% defines one's first name
-% usage: \firstname{<firstname>}
-\newcommand*{\firstname}[1]{\def\@firstname{#1}}
-% defines one's family name
-% usage: \familyname{<familyname>}
-\newcommand*{\familyname}[1]{\def\@familyname{#1}}
+% defines one's name
+% usage: \name{<firstname>}{<lastname>}
+\newcommand*{\name}[2]{\def\@firstname{#1}\def\@lastname{#2}}
 % defines one's title (optional)
 % usage: \title{<title>}
 \renewcommand*{\title}[1]{\def\@title{#1}}

@@ -138,7 +138,7 @@
   \newlength{\makecvtitlepicturewidth}\settowidth{\makecvtitlepicturewidth}{\usebox{\makecvtitlepicturebox}}%
   \newlength{\makecvtitlenamewidth}\setlength{\makecvtitlenamewidth}{\textwidth-\makecvtitlepicturewidth}%
   \begin{minipage}[b]{\makecvtitlenamewidth}%
-    \namestyle{\@firstname\ \@familyname}%
+    \namestyle{\@firstname\ \@lastname}%
     \ifthenelse{\equal{\@title}{}}{}{\\[1.25em]\titlestyle{\@title}}%
   \end{minipage}%
   % optional photo
@@ -290,7 +290,7 @@
   \hspace{0pt}%
   \marginpar{%
     \addressfont\textcolor{color2}{%
-      {\bfseries\@firstname~\@familyname}\@firstdetailselementfalse%
+      {\bfseries\@firstname~\@lastname}\@firstdetailselementfalse%
       \ifthenelse{\isundefined{\@addressstreet}}{}{\makenewline\addresssymbol\@addressstreet%
         \ifthenelse{\equal{\@addresscity}{}}{}{\makenewline\@addresscity}% if \addresstreet is defined, \addresscity and \addresscountry will always be defined but could be empty
         \ifthenelse{\equal{\@addresscountry}{}}{}{\makenewline\@addresscountry}}%
@@ -306,7 +306,7 @@
 
 \renewcommand*{\makeletterclosing}{
   \@closing\\[3em]%
-  {\bfseries\@firstname~\@familyname}%
+  {\bfseries\@firstname~\@lastname}%
   \ifthenelse{\isundefined{\@enclosure}}{}{%
     \\%
     \vfill%

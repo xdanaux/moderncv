@@ -1,3 +1,6 @@
+version 1.4.0 (dd MMM 2013)
+ - deprecated \firstname and \familyname in favour of \name{<first>}{<last>}.
+
 version 1.3.0 (09 Feb 2013)
  - added a new environment to create multiple columns: cvcolumns. Each column
  is then created by \cvcolumn[width]{header}{content}, where the optional width

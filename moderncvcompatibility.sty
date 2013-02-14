@@ -79,6 +79,12 @@
 \title{}% to avoid LaTeX complaining that \maketitle is a called without first a call to \title
 \newcommand*{\maketitlenamewidth}{\makecvtitlenamewidth}
 
+% compatibility with versions <= 1.3.0
+\newcommand*{\firstname}[1]{\def\@firstname{#1}}
+\newcommand*{\lastname}[1]{\def\@lastname{#1}}
+\newcommand*{\givenname}[1]{\def\@firstname{#1}}
+\newcommand*{\familyname}[1]{\def\@lastname{#1}}
+\def\@familyname{\@lastname}
 
 \endinput
 
