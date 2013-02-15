@@ -155,27 +155,27 @@
 \newlength{\baseletterheight}
 \settoheight{\baseletterheight}{\sectionstyle{o}}
 \setlength{\baseletterheight}{\baseletterheight-0.95ex}
-\renewcommand*{\section}[1]{%
+\RenewDocumentCommand{\section}{sm}{%
   \par\addvspace{2.5ex}%
   \phantomsection{}% reset the anchor for hyperrefs
-  \addcontentsline{toc}{section}{#1}%
+  \addcontentsline{toc}{section}{#2}%
   \parbox[t]{\hintscolumnwidth}{\strut\raggedleft\raisebox{\baseletterheight}{\color{color1}\rule{\hintscolumnwidth}{0.95ex}}}%
   \hspace{\separatorcolumnwidth}%
-  \parbox[t]{\maincolumnwidth}{\strut\sectionstyle{#1}}%
+  \parbox[t]{\maincolumnwidth}{\strut\sectionstyle{#2}}%
   \par\nobreak\addvspace{1ex}\@afterheading}% to avoid a pagebreak after the heading
 
-\renewcommand*{\subsection}[1]{%
+\RenewDocumentCommand{\subsection}{sm}{%
   \par\addvspace{1ex}%
   \phantomsection{}% reset the anchor for hyperrefs
-  \addcontentsline{toc}{subsection}{#1}%
+  \addcontentsline{toc}{subsection}{#2}%
   \begin{tabular}{@{}p{\hintscolumnwidth}@{\hspace{\separatorcolumnwidth}}p{\maincolumnwidth}@{}}%
- 	  \raggedleft\hintstyle{} &{\strut\subsectionstyle{#1}}%
+    \raggedleft\hintstyle{} &{\strut\subsectionstyle{#2}}%
   \end{tabular}%
   \par\nobreak\addvspace{0.5ex}\@afterheading}% to avoid a pagebreak after the heading
 
 \renewcommand*{\cvitem}[3][.25em]{%
   \begin{tabular}{@{}p{\hintscolumnwidth}@{\hspace{\separatorcolumnwidth}}p{\maincolumnwidth}@{}}%
- 	  \raggedleft\hintstyle{#2} &{#3}%
+    \raggedleft\hintstyle{#2} &{#3}%
   \end{tabular}%
   \par\addvspace{#1}}
 

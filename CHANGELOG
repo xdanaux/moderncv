@@ -1,5 +1,6 @@
 version 1.4.0 (dd MMM 2013)
  - deprecated \firstname and \familyname in favour of \name{<first>}{<last>}.
+ - removed the use of the suffix package.
 
 version 1.3.0 (09 Feb 2013)
  - added a new environment to create multiple columns: cvcolumns. Each column
@@ -16,7 +17,7 @@ version 1.3.0 (09 Feb 2013)
  \address to specify a country, as requested on launchpad (launchpad bug
  #1063995).
  - compacted list environments further.
- - replaced the usage of the xargs package by the xparse one.
+ - replaced the use of the xargs package by the xparse one.
 
 version 1.2.1 (04 Dec 2012)
  - fixed a regression bug introduced in version 1.2.0 in the header of the
@@ -70,8 +71,8 @@ version 1.1.0 (29 Jul 2012)
  - changed the handling of the "sans" and "roman" class options, to be reflected
  at the beginning of the document and override style font choices.
  - turned unicode support in hyperref on by default.
- - tweaked the usage of \textbullet to avoid the fall-back to Computer Modern
- fonts and prepared the usage of symbols from the MarVoSym font for fontspec
+ - tweaked the use of \textbullet to avoid the fall-back to Computer Modern
+ fonts and prepared the use of symbols from the MarVoSym font for fontspec
  (LauLaTeX or XeLaTeX).
  - tweaked the \subsectionfill of the "banking" style to distribute extra space
  evenly between leaders.

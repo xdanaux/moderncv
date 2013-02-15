@@ -167,20 +167,20 @@
     {{\centering\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
   \par}% to avoid weird spacing bug at the first section if no blank line is left after \maketitle}
 
-\renewcommand*{\section}[1]{%
+\RenewDocumentCommand{\section}{sm}{%
   \par\addvspace{2.5ex}%
   \phantomsection{}% reset the anchor for hyperrefs
-  \addcontentsline{toc}{section}{#1}%
-  \strut\sectionstyle{#1}%
+  \addcontentsline{toc}{section}{#2}%
+  \strut\sectionstyle{#2}%
   {\color{color1}\hrule}%
   \par\nobreak\addvspace{1ex}\@afterheading}
 
 \newcommand{\subsectionfill}{\xleaders\hbox to 0.35em{\scriptsize.}\hfill}% different subsectionfills will not be perfectly aligned, but remaining space at the end of the fill will be distributed evenly between leaders, so it will be barely visible
-\renewcommand*{\subsection}[1]{%
+\RenewDocumentCommand{\subsection}{sm}{%
   \par\addvspace{1ex}%
   \phantomsection{}%
-  \addcontentsline{toc}{subsection}{#1}%
-  \strut\subsectionstyle{#1}{\color{color1}{\subsectionfill}}%
+  \addcontentsline{toc}{subsection}{#2}%
+  \strut\subsectionstyle{#2}{\color{color1}{\subsectionfill}}%
   \par\nobreak\addvspace{0.5ex}\@afterheading}
 
 \renewcommand*{\cvitem}[3][.25em]{%

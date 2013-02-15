@@ -357,15 +357,12 @@
 
 % makes a resume section
 % usage: \section{<title>}
-\newcommand*{\section}[1]{}
-% starred variant, which is identical but defined to allow its use (e.g. for natbib compatibility, who uses \section*{} for the bibliography header)
-\RequirePackage{suffix}
-\AtBeginDocument{\WithSuffix\newcommand\section*{\section}}
+% identical starred and non-starred variants should be defined for compatibility with other packages (e.g. with natbib, that uses \section*{} for the bibliography header)
+\NewDocumentCommand{\section}{sm}{}
 
 % makes a resume subsection
 % usage: \subsection{title}
-\newcommand*{\subsection}[1]{}
-\AtBeginDocument{\WithSuffix\newcommand\subsection*{\subsection}}
+\NewDocumentCommand{\subsection}{sm}{}
 
 % makes a resume line with a header and a corresponding text
 % usage: \cvitem[spacing]{header}{text}

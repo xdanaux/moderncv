@@ -160,18 +160,18 @@
     \ifthenelse{\isundefined{\@homepage}}{}{\makenewline\homepagesymbol\httplink{\@homepage}}%
     \ifthenelse{\isundefined{\@extrainfo}}{}{\makenewline\@extrainfo}}}
 
-\renewcommand*{\section}[1]{%
+\RenewDocumentCommand{\section}{sm}{%
   \par\addvspace{2.5ex}%
   \phantomsection{}% reset the anchor for hyperrefs
-  \addcontentsline{toc}{section}{#1}%
-  \strut\sectionstyle{#1}%
+  \addcontentsline{toc}{section}{#2}%
+  \strut\sectionstyle{#2}%
   \par\nobreak\addvspace{1ex}\@afterheading}% to avoid a pagebreak after the heading
 
-\renewcommand*{\subsection}[1]{%
+\RenewDocumentCommand{\subsection}{sm}{%
   \par\addvspace{1ex}%
   \phantomsection{}% reset the anchor for hyperrefs
-  \addcontentsline{toc}{subsection}{#1}%
-  \strut\subsectionstyle{#1}%
+  \addcontentsline{toc}{subsection}{#2}%
+  \strut\subsectionstyle{#2}%
   \par\nobreak\addvspace{0.5ex}\@afterheading}% to avoid a pagebreak after the heading
 
 \renewcommand*{\cvitem}[3][.25em]{%
