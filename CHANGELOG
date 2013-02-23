@@ -1,4 +1,6 @@
 version 1.4.0 (dd MMM 2013)
+ - deprecated \phone, \mobile and \fax in favour of \phone[<type>], where <type>
+ can be "mobile", "fixed" (default) or "fax".
  - deprecated \firstname and \familyname in favour of \name{<first>}{<last>}.
  - removed the use of the suffix package.
 

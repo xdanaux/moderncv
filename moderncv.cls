@@ -235,17 +235,12 @@
 % usage: \address{<street>}{<city>}{<country>}
 % where the <city> and <country> arguments can be omitted or provided empty
 \NewDocumentCommand{\address}{mG{}G{}}{\def\@addressstreet{#1}\def\@addresscity{#2}\def\@addresscountry{#3}}
-% defines one's mobile phone number (optional)
-% usage: \mobile{<number>}
-\newcommand*{\mobile}[1]{\def\@mobile{#1}}
-% defines one's fixed phone number (optional)
-% usage: \phone{<number>}
-\newcommand*{\phone}[1]{\def\@phone{#1}}
-% defines one's fax number (optional)
-% usage: \fax{<number>}
-\newcommand*{\fax}[1]{\def\@fax{#1}}
-% defines one's email address (optional)
-% usage: \email{<email>}
+% adds a mobile/fixed/fax number to one's personal information (optional)
+% usage: \phone[<optional type>]{<number>}
+% where <optional type> should be either "mobile", "fixed" or "fax
+\RequirePackage{collection}
+\collectionnew{phones}
+\newcommand*{\phone}[2][fixed]{\collectionadd[#1]{phones}{#2}}
 \newcommand*{\email}[1]{\def\@email{#1}}
 % defines one's home page (optional)
 % usage: \homepage{<url>}

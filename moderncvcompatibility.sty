@@ -86,6 +86,15 @@
 \newcommand*{\familyname}[1]{\def\@lastname{#1}}
 \def\@familyname{\@lastname}
 
+% compatibility with versions <= 1.4.0
+\newcommand*{\mobile}[1]{\collectionadd[mobile]{phones}{#1}}
+%\newcommand*{\phone}[1]{\collectionadd[fixed]{phones}{#1}}% implicit, as \phone{...} defaults to \phone[fixed]{...}
+\newcommand*{\fax}[1]{\collectionadd[fax]{phones}{#1}}
+\newcommand*{\@mobile}{\collectionfindbykey{phones}{mobile}}
+\newcommand*{\@phone}{\collectionfindbykey{phones}{fixed}}
+\newcommand*{\@fax}{\collectionfindbykey{phones}{fax}}
+
+
 \endinput
 
 

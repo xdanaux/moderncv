@@ -1,6 +1,4 @@
 *xdanaux*
 *.sh
 examples/*.sh
-examples/template_casual_orange.tex
-examples/template_classic_green.tex
-examples/template_multibib.tex
+examples/template_*.tex
