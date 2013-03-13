@@ -45,9 +45,9 @@
 % symbols
 \renewcommand*{\listitemsymbol}{\labelitemi~}
 \renewcommand*{\addresssymbol}{}
-\renewcommand*{\mobilesymbol}{\textbf{M}~}
-\renewcommand*{\phonesymbol}{\textbf{T}~}
-\renewcommand*{\faxsymbol}{\textbf{F}~}
+\renewcommand*{\mobilephonesymbol}{\textbf{M}~}
+\renewcommand*{\fixedphonesymbol}{\textbf{T}~}
+\renewcommand*{\faxphonesymbol}{\textbf{F}~}
 \renewcommand*{\emailsymbol}{\textbf{E}~}
 \renewcommand*{\homepagesymbol}{}
 
@@ -153,9 +153,8 @@
     \ifthenelse{\isundefined{\@addressstreet}}{}{\makenewline\addresssymbol\@addressstreet%
       \ifthenelse{\equal{\@addresscity}{}}{}{\makenewline\@addresscity}% if \addresstreet is defined, \addresscity and \addresscountry will always be defined but could be empty
       \ifthenelse{\equal{\@addresscountry}{}}{}{\makenewline\@addresscountry}}%
-    \ifthenelse{\isundefined{\@mobile}}{}{\makenewline\mobilesymbol\@mobile}%
-    \ifthenelse{\isundefined{\@phone}}{}{\makenewline\phonesymbol\@phone}%
-    \ifthenelse{\isundefined{\@fax}}{}{\makenewline\faxsymbol\@fax}%
+    \collectionloop{phones}{% the key holds the phone type (=symbol command prefix), the item holds the number
+      \makenewline\csname\collectionloopkey phonesymbol\endcsname\collectionloopitem}%
     \ifthenelse{\isundefined{\@email}}{}{\makenewline\emailsymbol\emaillink{\@email}}%
     \ifthenelse{\isundefined{\@homepage}}{}{\makenewline\homepagesymbol\httplink{\@homepage}}%
     \ifthenelse{\isundefined{\@extrainfo}}{}{\makenewline\@extrainfo}}}
@@ -294,9 +293,8 @@
       \ifthenelse{\isundefined{\@addressstreet}}{}{\makenewline\addresssymbol\@addressstreet%
         \ifthenelse{\equal{\@addresscity}{}}{}{\makenewline\@addresscity}% if \addresstreet is defined, \addresscity and \addresscountry will always be defined but could be empty
         \ifthenelse{\equal{\@addresscountry}{}}{}{\makenewline\@addresscountry}}%
-      \ifthenelse{\isundefined{\@mobile}}{}{\makenewline\mobilesymbol\@mobile}%
-      \ifthenelse{\isundefined{\@phone}}{}{\makenewline\phonesymbol\@phone}%
-      \ifthenelse{\isundefined{\@fax}}{}{\makenewline\faxsymbol\@fax}%
+      \collectionloop{phones}{% the key holds the phone type (=symbol command prefix), the item holds the number
+        \makenewline\csname\collectionloopkey phonesymbol\endcsname\collectionloopitem}%
       \ifthenelse{\isundefined{\@email}}{}{\makenewline\emailsymbol\emaillink{\@email}}%
       \ifthenelse{\isundefined{\@homepage}}{}{\makenewline\homepagesymbol\httplink{\@homepage}}%
       \ifthenelse{\isundefined{\@extrainfo}}{}{\makenewline\@extrainfo}}}%

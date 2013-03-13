@@ -43,9 +43,9 @@
 %\fi
 
 % symbols
-\renewcommand*{\mobilesymbol}{\marvosymbol{72}~}
-\renewcommand*{\phonesymbol}{\marvosymbol{84}~}
-\renewcommand*{\faxsymbol}{\marvosymbol{117}~}
+\renewcommand*{\mobilephonesymbol}{\marvosymbol{72}~}
+\renewcommand*{\fixedphonesymbol}{\marvosymbol{84}~}
+\renewcommand*{\faxphonesymbol}{\marvosymbol{117}~}
 \renewcommand*{\emailsymbol}{\marvosymbol{66}~}
 \renewcommand*{\homepagesymbol}{{\Large\marvosymbol{205}}~}
 
@@ -96,9 +96,8 @@
       \ifthenelse{\equal{\@addresscity}{}}{}{\addtomaketitle[~--~]{\@addresscity}}% if \addresstreet is defined, \addresscity and \addresscountry will always be defined but could be empty
       \ifthenelse{\equal{\@addresscountry}{}}{}{\addtomaketitle[~--~]{\@addresscountry}}%
       \flushmaketitle\@firstmaketitleelementtrue\\}%
-    \ifthenelse{\isundefined{\@mobile}}{}{\addtomaketitle{\mobilesymbol\@mobile}}%
-    \ifthenelse{\isundefined{\@phone}}{}{\addtomaketitle{\phonesymbol\@phone}}%
-    \ifthenelse{\isundefined{\@fax}}{}{\addtomaketitle{\faxsymbol\@fax}}%
+    \collectionloop{phones}{% the key holds the phone type (=symbol command prefix), the item holds the number
+      \addtomaketitle{\csname\collectionloopkey phonesymbol\endcsname\collectionloopitem}}%
     \ifthenelse{\isundefined{\@email}}{}{\addtomaketitle{\emailsymbol\emaillink{\@email}}}%
     \ifthenelse{\isundefined{\@homepage}}{}{\addtomaketitle{\homepagesymbol\httplink{\@homepage}}}%
     \ifthenelse{\isundefined{\@extrainfo}}{}{\addtomaketitle{\@extrainfo}}%

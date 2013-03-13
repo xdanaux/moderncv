@@ -269,9 +269,9 @@
 %   other symbols
 \newcommand*{\listitemsymbol}{\labelitemi~}
 \newcommand*{\addresssymbol}{}
-\newcommand*{\mobilesymbol}{}
-\newcommand*{\phonesymbol}{}
-\newcommand*{\faxsymbol}{}
+\newcommand*{\mobilephonesymbol}{}
+\newcommand*{\fixedphonesymbol}{}
+\newcommand*{\faxphonesymbol}{}
 \newcommand*{\emailsymbol}{}
 \newcommand*{\homepagesymbol}{}
 
