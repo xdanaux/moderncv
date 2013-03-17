@@ -1,4 +1,4 @@
 *xdanaux*
 *.sh
 examples/*.sh
-examples/template_*.tex
+examples/*.diff
