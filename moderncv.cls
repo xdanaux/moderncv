@@ -161,7 +161,7 @@
           \newlength{\pagenumberwidth}%
           \settowidth{\pagenumberwidth}{\color{color2}\addressfont\itshape\strut\thepage/\pageref{lastpage}}%
           \fancypagestyle{plain}{%
-            \fancyfoot[r]{\parbox[b]{\pagenumberwidth}{\color{color2}\addressfont\itshape\strut\thepage/\pageref{lastpage}}}}% the parbox is required to ensure alignment with a possible center footer (e.g., as in the casual style)
+            \fancyfoot[r]{\parbox[b]{\pagenumberwidth}{\color{color2}\pagenumberfont\strut\thepage/\pageref{lastpage}}}}% the parbox is required to ensure alignment with a possible center footer (e.g., as in the casual style)
           \pagestyle{plain}}{}}%
       \AtEndDocument{\label{lastpage}}\else\fi}}
 \pagestyle{plain}
@@ -320,6 +320,7 @@
 \newcommand*{\sectionfont}{}
 \newcommand*{\subsectionfont}{}
 \newcommand*{\hintfont}{}
+\newcommand*{\pagenumberfont}{\addressfont\itshape}
 
 % styles
 \newcommand*{\namestyle}[1]{{\namefont#1}}
@@ -329,6 +330,7 @@
 \newcommand*{\sectionstyle}[1]{{\sectionfont#1}}
 \newcommand*{\subsectionstyle}[1]{{\subsectionfont#1}}
 \newcommand*{\hintstyle}[1]{{\hintfont#1}}
+\newcommand*{\pagenumberstyle}[1]{{\pagenumberfont#1}}
 
 % recompute all resume lengths
 \newcommand*{\recomputecvlengths}{}
