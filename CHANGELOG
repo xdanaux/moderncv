@@ -2,6 +2,12 @@ version 1.4.0 (dd MMM 2013)
  - deprecated \phone, \mobile and \fax in favour of \phone[<type>], where <type>
  can be "mobile", "fixed" (default) or "fax".
  - deprecated \firstname and \familyname in favour of \name{<first>}{<last>}.
+ - added a new mechanism to select amongs different possible icon sets:
+ \moderncvicons{<iconsetname>}, where <iconsetname> can be "marvosym" (used by
+ default in the "banking", "casual" and "classic" style variants) or "letters"
+ (used by default in the "oldstyle" style variant). \moderncvicons should
+ always be called after \moderncvstyle in order to override the style variants
+ defaults.
  - added a command to control the font of the page numbering: \pagenumberfont.
  - removed the use of the suffix package.
 

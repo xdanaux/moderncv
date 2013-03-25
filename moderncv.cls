@@ -110,15 +110,6 @@
     {}
 %\fi
 
-% MarVoSym font for symbols
-%\RequirePackage{marvosym}
-\newcommand*{\marvosymbol}[1]{}
-%\ifxetexorluatex
-%  \renewcommand*{\marvosymbol}[1]{{\fontspec{MarVoSym}\char#1}}
-%\else
-  \renewcommand*{\marvosymbol}[1]{{\fontfamily{mvs}\fontencoding{U}\fontseries{m}\fontshape{n}\selectfont\char#1}}
-%\fi
-
 % hyper links (hyperref is loaded at the end of the preamble to pass options required by loaded packages such as CJK)
 \newcommand*\pdfpagemode{UseNone}% do not show thumbnails or bookmarks on opening (on supporting browsers); set \pdfpagemode to "UseOutlines" to show bookmarks
 \RequirePackage{url}
@@ -257,7 +248,7 @@
 
 % symbols
 %   itemize labels (the struts were added to correct inter-item spacing (works for single line items, until a solution is found for multi-line ones...)
-\newcommand*{\labelitemi}{\strut\textcolor{color1}{\marvosymbol{123}}}% equivalent to \Neutral from marvosym package; alternative: \fontencoding{U}\fontfamily{ding}\selectfont\tiny\symbol{'102}
+\newcommand*{\labelitemi}{\strut\textcolor{color1}{\large\rmfamily\textbullet}}% the \rmfamily is required to force Latin Modern fonts when using sans serif, as OMS/lmss/m/n is not defined and gets substituted by OMS/cmsy/m/n
 \newcommand*{\labelitemii}{\strut\textcolor{color1}{\large\bfseries-}}
 \newcommand*{\labelitemiii}{\strut\textcolor{color1}{\rmfamily\textperiodcentered}}% alternative: \textasteriskcentered; the \rmfamily is required to force Latin Modern fonts when using sans serif, as OMS/lmss/m/n is not defined and gets substituted by OMS/cmsy/m/n
 \newcommand*{\labelitemiv}{\labelitemiii}
@@ -286,13 +277,20 @@
 % usage: \makefooter
 \newcommand*{\makefooter}{}%
 
-% loads a style scheme
+% loads a style variant
+% usage: \moderncvstyle{<style variant name>}
 \newcommand*{\moderncvstyle}[1]{
   \RequirePackage{moderncvstyle#1}}
   
 % loads a color scheme
+% usage: \moderncvcolor{<color scheme name>}
 \newcommand*{\moderncvcolor}[1]{
   \RequirePackage{moderncvcolor#1}}
+
+% loads an icons set
+% usage: \moderncvicons{<icon set name>}
+\newcommand*{\moderncvicons}[1]{
+  \RequirePackage{moderncvicons#1}}
 
 % recomputes all automatic lengths
 \newcommand*{\recomputelengths}{\recomputecvlengths}
