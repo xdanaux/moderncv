@@ -10,36 +10,30 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{moderncviconsmarvosym}[2013/03/28 v1.4.0 modern curriculum vitae and letter icons: marvosym]
+\ProvidesPackage{moderncviconsawesome}[2013/03/28 v1.4.0 modern curriculum vitae and letter icons: awesome]
 
 
 %-------------------------------------------------------------------------------
 %                required packages
 %-------------------------------------------------------------------------------
-% MarVoSym font
-%\RequirePackage{marvosym}
-\newcommand*{\marvosymbol}[1]{}
-%\ifxetexorluatex
-%  \renewcommand*{\marvosymbol}[1]{{\fontspec{MarVoSym}\char#1}}
-%\else
-  \renewcommand*{\marvosymbol}[1]{{\fontfamily{mvs}\fontencoding{U}\fontseries{m}\fontshape{n}\selectfont\char#1}}
-%\fi
+% Font Awesome font
+\RequirePackage{fontawesome}
 
 
 %-------------------------------------------------------------------------------
 %                symbols definition
 %-------------------------------------------------------------------------------
-\renewcommand*{\labelitemi}       {\strut\textcolor{color1}{\marvosymbol{123}}}            % equivalent to \Neutral from marvosym package; alternative: \fontencoding{U}\fontfamily{ding}\selectfont\tiny\symbol{'102}
+\renewcommand*{\labelitemi}       {\strut\textcolor{color1}{\tiny\faCircleBlank}}
 %\renewcommand*{\labelitemii}      {\strut\textcolor{color1}{\large\bfseries-}}            % no change from default in moderncv.cls
 %\renewcommand*{\labelitemiii}     {\strut\textcolor{color1}{\rmfamily\textperiodcentered}}% no change from default in moderncv.cls
 %\renewcommand*{\labelitemiv}      {\labelitemiii}                                         % no change from default in moderncv.cls
 
 \renewcommand*{\addresssymbol}    {}
-\renewcommand*{\mobilephonesymbol}{\marvosymbol{72}~}
-\renewcommand*{\fixedphonesymbol} {\marvosymbol{84}~}
-\renewcommand*{\faxphonesymbol}   {\marvosymbol{117}~}
-\renewcommand*{\emailsymbol}      {\marvosymbol{66}~}
-\renewcommand*{\homepagesymbol}   {{\Large\marvosymbol{205}}~}
+\renewcommand*{\mobilephonesymbol}{{\Large\faMobilePhone}~}
+\renewcommand*{\fixedphonesymbol} {\faPhone~}
+\renewcommand*{\faxphonesymbol}   {\faPrint~}              % alternative: \faFileAlt
+\renewcommand*{\emailsymbol}      {\faEnvelope~}           % alternative: \faInbox
+\renewcommand*{\homepagesymbol}   {\faGlobe~}              % alternative: \faHome
 
 
 \endinput
