@@ -1,5 +1,7 @@
 version 1.5.0 (xx MMM 2013)
  - added a new icon set: "awesome" (using the icons from the Font Awesome font).
+ - set the "awesome" icon set as the default for the "casual" and "banking"
+ style variants (can be changed back with \moderncvicons{marvosym}).
 
 version 1.4.0 (28 Mar 2013)
  - deprecated \phone, \mobile and \fax in favour of \phone[<type>], where <type>
