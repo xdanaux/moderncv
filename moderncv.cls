@@ -183,6 +183,9 @@
 % micro-typography (e.g., character protrusion, font expansion, hyphenatable letterspacing)
 \RequirePackage{microtype}
 
+% stack of key-value elements, used to save personal information
+\RequirePackage{moderncvcollection}
+
 % compatibility package with older versions of moderncv
 \RequirePackageWithOptions{moderncvcompatibility}
 
@@ -229,7 +232,6 @@
 % adds a mobile/fixed/fax number to one's personal information (optional)
 % usage: \phone[<optional type>]{<number>}
 % where <optional type> should be either "mobile", "fixed" or "fax
-\RequirePackage{collection}
 \collectionnew{phones}
 \newcommand*{\phone}[2][fixed]{\collectionadd[#1]{phones}{#2}}
 \newcommand*{\email}[1]{\def\@email{#1}}
