@@ -10,6 +10,7 @@ version 1.5.0 (xx MMM 2013)
  - added a letter icon ("W") for the homepage of the "letters" icon set.
  - forced some white space between the main text and the footer of the "casual"
  style variant.
+ - removed the rule below the headings of the cvcolumns environment.
 
 version 1.4.0 (28 Mar 2013)
  - deprecated \phone, \mobile and \fax in favour of \phone[<type>], where <type>

@@ -499,8 +499,9 @@
     \cvitem{}{%
       \begin{tabular}{\cvcolumns@def}%
         \if@cvcolumns@head@empty\else%
-          \cvcolumns@head\\[-.8em]%
-          {\color{color1}\rule{\maincolumnwidth}{.25pt}}\\\fi%
+          \cvcolumns@head%\\[-.8em]%
+%          {\color{color1}\rule{\maincolumnwidth}{.25pt}}%
+          \\\fi%
         \cvcolumns@content%
       \end{tabular}}}
 
