@@ -1,4 +1,7 @@
 version 1.5.0 (xx MMM 2013)
+ - added a command to showcase social accounts in one's personal information:
+ \social. The command currently handles automatically LinkedIn, Twitter and
+ Github accounts, and other links can be provided explicitly.
  - added a new icon set: "awesome" (using the icons from the Font Awesome font).
  - set the "awesome" icon set as the default for the "casual" and "banking"
  style variants (can be changed back with \moderncvicons{marvosym}).
@@ -8,7 +11,7 @@ version 1.5.0 (xx MMM 2013)
 
 version 1.4.0 (28 Mar 2013)
  - deprecated \phone, \mobile and \fax in favour of \phone[<type>], where <type>
- can be "mobile", "fixed" (default) or "fax". As part of the change, one can now
+ can be "fixed" (default), "mobile" or "fax". As part of the change, one can now
  use each of these multiple times, to e.g. display multiple mobile phone numbers.
  - deprecated \firstname and \familyname in favour of \name{<first>}{<last>}.
  - added a new mechanism to select amongs different possible icon sets:

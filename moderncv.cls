@@ -219,55 +219,86 @@
 %                overall design commands definitions
 %-------------------------------------------------------------------------------
 % elements
+%---------
 % defines one's name
 % usage: \name{<firstname>}{<lastname>}
 \newcommand*{\name}[2]{\def\@firstname{#1}\def\@lastname{#2}}
+
 % defines one's title (optional)
 % usage: \title{<title>}
 \renewcommand*{\title}[1]{\def\@title{#1}}
+
 % defines one's address (optional)
 % usage: \address{<street>}{<city>}{<country>}
 % where the <city> and <country> arguments can be omitted or provided empty
 \NewDocumentCommand{\address}{mG{}G{}}{\def\@addressstreet{#1}\def\@addresscity{#2}\def\@addresscountry{#3}}
-% adds a mobile/fixed/fax number to one's personal information (optional)
-% usage: \phone[<optional type>]{<number>}
-% where <optional type> should be either "mobile", "fixed" or "fax
-\collectionnew{phones}
-\newcommand*{\phone}[2][fixed]{\collectionadd[#1]{phones}{#2}}
+
+% defines one's email (optional)
+% usage: \email{<email adress>}
 \newcommand*{\email}[1]{\def\@email{#1}}
+
 % defines one's home page (optional)
 % usage: \homepage{<url>}
 \newcommand*{\homepage}[1]{\def\@homepage{#1}}
+
+% adds a fixed/mobile/fax number to one's personal information (optional)
+% usage: \phone[<optional type>]{<number>}
+% where <optional type> should be either "fixed" (default), "mobile" or "fax
+\collectionnew{phones}
+\newcommand*{\phone}[2][fixed]{\collectionadd[#1]{phones}{#2}}
+
+% adds a social link to one's personal information (optional)
+% usage: \social[<optional type>][<optional url>]{<account name>}
+% where <optional type> should be either "linkedin", "twitter" or "github"
+\collectionnew{socials}
+\NewDocumentCommand{\social}{O{}O{}m}{%
+  \ifthenelse{\equal{#2}{}}%
+    {%
+      \ifthenelse{\equal{#1}{linkedin}}{\collectionadd[linkedin]{socials}{\protect\httplink[#3]{www.linkedin.com/in/#3}}}{}%
+      \ifthenelse{\equal{#1}{twitter}} {\collectionadd[twitter]{socials} {\protect\httplink[#3]{www.twitter.com/#3}}}    {}%
+      \ifthenelse{\equal{#1}{github}}  {\collectionadd[github]{socials}  {\protect\httplink[#3]{www.github.com/#3}}}     {}%
+    }
+    {\collectionadd[#1]{socials}{\protect\httplink[#3]{#2}}}}
+
 % defines additional personal information (optional)
 % usage: \extrainfo{<text>}
 \newcommand*{\extrainfo}[1]{\def\@extrainfo{#1}}
 
 % colors
+%-------
 \definecolor{color0}{rgb}{0,0,0}% main default color, normally left to black
-\definecolor{color1}{rgb}{0,0,0}% primary theme color
-\definecolor{color2}{rgb}{0,0,0}% secondary theme color
-\definecolor{color3}{rgb}{0,0,0}% tertiary theme color
+\definecolor{color1}{rgb}{0,0,0}% primary scheme color
+\definecolor{color2}{rgb}{0,0,0}% secondary scheme color
+\definecolor{color3}{rgb}{0,0,0}% tertiary scheme color
 
 % symbols
-%   itemize labels (the struts were added to correct inter-item spacing (works for single line items, until a solution is found for multi-line ones...)
-\newcommand*{\labelitemi}{\strut\textcolor{color1}{\large\rmfamily\textbullet}}% the \rmfamily is required to force Latin Modern fonts when using sans serif, as OMS/lmss/m/n is not defined and gets substituted by OMS/cmsy/m/n
-\newcommand*{\labelitemii}{\strut\textcolor{color1}{\large\bfseries-}}
-\newcommand*{\labelitemiii}{\strut\textcolor{color1}{\rmfamily\textperiodcentered}}% alternative: \textasteriskcentered; the \rmfamily is required to force Latin Modern fonts when using sans serif, as OMS/lmss/m/n is not defined and gets substituted by OMS/cmsy/m/n
-\newcommand*{\labelitemiv}{\labelitemiii}
-%   enumerate labels
-\renewcommand{\theenumi}{\@arabic\c@enumi}
-\renewcommand{\theenumii}{\@alph\c@enumii}
-\renewcommand{\theenumiii}{\@roman\c@enumiii}
-\renewcommand{\theenumiv}{\@Alph\c@enumiv}
-%   other symbols
-\newcommand*{\listitemsymbol}{\labelitemi~}
-\newcommand*{\addresssymbol}{}
-\newcommand*{\mobilephonesymbol}{}
-\newcommand*{\fixedphonesymbol}{}
-\newcommand*{\faxphonesymbol}{}
-\newcommand*{\emailsymbol}{}
-\newcommand*{\homepagesymbol}{}
+%--------
+% itemize labels (the struts were added to correct inter-item spacing (works for single line items, until a solution is found for multi-line ones...)
+\newcommand*{\labelitemi}          {\strut\textcolor{color1}{\large\rmfamily\textbullet}}% the \rmfamily is required to force Latin Modern fonts when using sans serif, as OMS/lmss/m/n is not defined and gets substituted by OMS/cmsy/m/n
+\newcommand*{\labelitemii}         {\strut\textcolor{color1}{\large\bfseries-}}
+\newcommand*{\labelitemiii}        {\strut\textcolor{color1}{\rmfamily\textperiodcentered}}% alternative: \textasteriskcentered; the \rmfamily is required to force Latin Modern fonts when using sans serif, as OMS/lmss/m/n is not defined and gets substituted by OMS/cmsy/m/n
+\newcommand*{\labelitemiv}         {\labelitemiii}
 
+% enumerate labels
+\renewcommand{\theenumi}           {\@arabic\c@enumi}
+\renewcommand{\theenumii}          {\@alph\c@enumii}
+\renewcommand{\theenumiii}         {\@roman\c@enumiii}
+\renewcommand{\theenumiv}          {\@Alph\c@enumiv}
+
+% other symbols
+\newcommand*{\listitemsymbol}      {\labelitemi~}
+\newcommand*{\addresssymbol}       {}
+\newcommand*{\mobilephonesymbol}   {}
+\newcommand*{\fixedphonesymbol}    {}
+\newcommand*{\faxphonesymbol}      {}
+\newcommand*{\emailsymbol}         {}
+\newcommand*{\homepagesymbol}      {}
+\newcommand*{\linkedinsocialsymbol}{}
+\newcommand*{\twittersocialsymbol} {}
+\newcommand*{\githubsocialsymbol}  {}
+
+% other
+%------
 % fonts
 \AtBeginDocument{\normalfont\color{color0}}
 

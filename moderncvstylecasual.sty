@@ -112,6 +112,8 @@
           \addtofooter{\csname\collectionloopkey phonesymbol\endcsname\collectionloopitem}}%
         \ifthenelse{\isundefined{\@email}}{}{\addtofooter{\emailsymbol\emaillink{\@email}}}%
         \ifthenelse{\isundefined{\@homepage}}{}{\addtofooter{\homepagesymbol\httplink{\@homepage}}}%
+        \collectionloop{socials}{% the key holds the social type (=symbol command prefix), the item holds the link
+          \addtofooter{\csname\collectionloopkey socialsymbol\endcsname\collectionloopitem}}%
         \ifthenelse{\isundefined{\@extrainfo}}{}{\addtofooter{\@extrainfo}}%
         \ifthenelse{\lengthtest{\footerboxwidth=0pt}}{}{\flushfooter}% the lengthtest is required to avoid flushing an empty footer, which could cause a blank line due to the \\ after the address, if no other personal info is used
         }}}%
@@ -161,6 +163,8 @@
           \addtofooter{\csname\collectionloopkey phonesymbol\endcsname\collectionloopitem}}%
         \ifthenelse{\isundefined{\@email}}{}{\addtofooter{\emailsymbol\emaillink{\@email}}}%
         \ifthenelse{\isundefined{\@homepage}}{}{\addtofooter{\homepagesymbol\httplink{\@homepage}}}%
+        \collectionloop{socials}{% the key holds the social type (=symbol command prefix), the item holds the link
+          \addtofooter{\csname\collectionloopkey socialsymbol\endcsname\collectionloopitem}}%
         \ifthenelse{\isundefined{\@extrainfo}}{}{\addtofooter{\@extrainfo}}%
         \ifthenelse{\lengthtest{\footerboxwidth=0pt}}{}{\flushfooter}% the lengthtest is required to avoid flushing an empty footer, which could cause a blank line due to the \\ after the address, if no other personal info is used
         }}}%

@@ -146,6 +146,8 @@
       \makenewline\csname\collectionloopkey phonesymbol\endcsname\collectionloopitem}%
     \ifthenelse{\isundefined{\@email}}{}{\makenewline\emailsymbol\emaillink{\@email}}%
     \ifthenelse{\isundefined{\@homepage}}{}{\makenewline\homepagesymbol\httplink{\@homepage}}%
+    \collectionloop{socials}{% the key holds the social type (=symbol command prefix), the item holds the link
+      \makenewline\csname\collectionloopkey socialsymbol\endcsname\collectionloopitem}%
     \ifthenelse{\isundefined{\@extrainfo}}{}{\makenewline\@extrainfo}}}
 
 \RenewDocumentCommand{\section}{sm}{%
@@ -286,6 +288,8 @@
         \makenewline\csname\collectionloopkey phonesymbol\endcsname\collectionloopitem}%
       \ifthenelse{\isundefined{\@email}}{}{\makenewline\emailsymbol\emaillink{\@email}}%
       \ifthenelse{\isundefined{\@homepage}}{}{\makenewline\homepagesymbol\httplink{\@homepage}}%
+      \collectionloop{socials}{% the key holds the social type (=symbol command prefix), the item holds the link
+        \makenewline\csname\collectionloopkey socialsymbol\endcsname\collectionloopitem}%
       \ifthenelse{\isundefined{\@extrainfo}}{}{\makenewline\@extrainfo}}}%
   % ensure no extra spacing after \makelettertitle due to a possible blank line
 %  \ignorespacesafterend% not working
