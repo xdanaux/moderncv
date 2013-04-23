@@ -8,6 +8,8 @@ version 1.5.0 (xx MMM 2013)
  - forced all the icons of the "letters" icon set to be of the same width, for
  alignment purpose.
  - added a letter icon ("W") for the homepage of the "letters" icon set.
+ - forced some white space between the main text and the footer of the "casual"
+ style variant.
 
 version 1.4.0 (28 Mar 2013)
  - deprecated \phone, \mobile and \fax in favour of \phone[<type>], where <type>

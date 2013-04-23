@@ -104,6 +104,7 @@
       \parbox[b]{\footerwidth}{%
         \centering%
         \color{color2}\addressfont%
+        \vspace{\baselineskip}% forces a white line to ensure space between main text and footer (as footer height can't be known in advance)
         \ifthenelse{\isundefined{\@addressstreet}}{}{\addtofooter[]{\addresssymbol\@addressstreet}%
           \ifthenelse{\equal{\@addresscity}{}}{}{\addtofooter[~--~]{\@addresscity}}% if \addresstreet is defined, \addresscity and \addresscountry will always be defined but could be empty
           \ifthenelse{\equal{\@addresscountry}{}}{}{\addtofooter[~--~]{\@addresscountry}}%
@@ -153,6 +154,7 @@
       \parbox[b]{\footerwidth}{%
         \centering%
         \addressfont\color{color2}%
+        \vspace{\baselineskip}% forces a white line to ensure space between main text and footer (as footer height can't be known in advance)
         \vspace{-\baselineskip}% to cancel out the extra vertical space taken by the name (below) and ensure perfect alignment of letter and cv footers
         \strut{\bfseries\upshape\@firstname~\@lastname}\\% the \strut is required to ensure the line is exactly \baselineskip tall
         \ifthenelse{\isundefined{\@addressstreet}}{}{\addtofooter[]{\addresssymbol\@addressstreet}%
