@@ -1,3 +1,7 @@
+version 1.5.1 (29 Apr 2013)
+ - made sure that XeLaTeX or LuaLaTeX is in use before loading the awesome icon
+ set and if not, revert to the marvosym icon set.
+
 version 1.5.0 (23 Apr 2013)
  - added a command to showcase social accounts in one's personal information:
  \social. The command currently handles automatically LinkedIn, Twitter and
