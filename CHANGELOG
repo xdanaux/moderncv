@@ -1,3 +1,7 @@
+version 1.6.0 (xx MMM 2013)
+ - corrected the color of \addressstyle to match the one effectively used
+ (color2).
+
 version 1.5.1 (29 Apr 2013)
  - made sure that XeLaTeX or LuaLaTeX is in use before loading the awesome icon
  set and if not, revert to the marvosym icon set.
