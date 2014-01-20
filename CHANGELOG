@@ -1,6 +1,13 @@
 version 1.6.0 (xx MMM 2013)
+ - added an optional argument to \moderncvstyle to specify style options, i.e.
+ \moderncvstyle[options]{style}.
+ - added style options to the banking style, to specify how the section- and
+ subsectionrules should behave: "fullrules", "shortrules", "mixedrules" (full
+ rules for sections, short rules for subsections) and "norules".
  - corrected the color of \addressstyle to match the one effectively used
  (color2).
+ - added a check on the emptyness of \title when setting the hyperref document
+ properties.
 
 version 1.5.1 (29 Apr 2013)
  - made sure that XeLaTeX or LuaLaTeX is in use before loading the awesome icon
