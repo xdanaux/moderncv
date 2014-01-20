@@ -312,8 +312,8 @@
 
 % loads a style variant
 % usage: \moderncvstyle{<style variant name>}
-\newcommand*{\moderncvstyle}[1]{
-  \RequirePackage{moderncvstyle#1}}
+\newcommand*{\moderncvstyle}[2][]{
+  \RequirePackage[#1]{moderncvstyle#2}}
   
 % loads a color scheme
 % usage: \moderncvcolor{<color scheme name>}
