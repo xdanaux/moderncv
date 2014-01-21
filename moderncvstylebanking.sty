@@ -10,7 +10,25 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{moderncvstylebanking}[2013/04/29 v1.5.1 modern curriculum vitae and letter style scheme: banking]
+\ProvidesPackage{moderncvstylebanking}[2013/04/29 v1.5.1 modern curriculum vitae and letter style scheme: bank]
+
+\newcommand*{\sectionrule}{}
+\newcommand*{\subsectionrule}{}
+\DeclareOption{fullrules}{
+  \renewcommand*{\sectionrule}{\par\nobreak\vspace*{-.7\baselineskip}\leavevmode{\color{color1}\leaders\hbox{\rule{1pt}{0.4pt}}\hfill\kern0pt}}
+  \renewcommand*{\subsectionrule}{\par\nobreak\vspace*{-.7\baselineskip}\leavevmode{\color{color1}\xleaders\hbox to 0.35em{\scriptsize.}\hfill}}}% different subsectionrules will not be perfectly aligned, but remaining space at the end of the fill will be distributed evenly between leaders, so it will be barely visible}
+\DeclareOption{shortrules}{
+  \renewcommand*{\sectionrule}{\leavevmode{\color{color1}\leaders\hbox{\rule{1pt}{0.4pt}}\hfill\kern0pt}}
+  \renewcommand*{\subsectionrule}{\leavevmode{\color{color1}\xleaders\hbox to 0.35em{\scriptsize.}\hfill}}}% different subsectionrules will not be perfectly aligned, but remaining space at the end of the fill will be distributed evenly between leaders, so it will be barely visible}}
+\DeclareOption{mixedrules}{
+  \renewcommand*{\sectionrule}{\par\nobreak\vspace*{-.7\baselineskip}\leavevmode{\color{color1}\leaders\hbox{\rule{1pt}{0.4pt}}\hfill\kern0pt}}
+  \renewcommand*{\subsectionrule}{\leavevmode{\color{color1}\xleaders\hbox to 0.35em{\scriptsize.}\hfill}}}% different subsectionrules will not be perfectly aligned, but remaining space at the end of the fill will be distributed evenly between leaders, so it will be barely visible}}
+\DeclareOption{norules}{
+  \renewcommand*{\sectionrule}{}
+  \renewcommand*{\subsectionrule}{}}
+
+\ExecuteOptions{mixedrules}
+\ProcessOptions\relax
 
 
 %-------------------------------------------------------------------------------
@@ -164,15 +182,15 @@
   \phantomsection{}% reset the anchor for hyperrefs
   \addcontentsline{toc}{section}{#2}%
   \strut\sectionstyle{#2}%
-  {\color{color1}\hrule}%
+  \sectionrule%
   \par\nobreak\addvspace{1ex}\@afterheading}
 
-\newcommand{\subsectionfill}{\xleaders\hbox to 0.35em{\scriptsize.}\hfill}% different subsectionfills will not be perfectly aligned, but remaining space at the end of the fill will be distributed evenly between leaders, so it will be barely visible
 \RenewDocumentCommand{\subsection}{sm}{%
   \par\addvspace{1ex}%
   \phantomsection{}%
   \addcontentsline{toc}{subsection}{#2}%
-  \strut\subsectionstyle{#2}{\color{color1}{\subsectionfill}}%
+  \strut\subsectionstyle{#2}%
+  \subsectionrule%
   \par\nobreak\addvspace{0.5ex}\@afterheading}
 
 \renewcommand*{\cvitem}[3][.25em]{%
