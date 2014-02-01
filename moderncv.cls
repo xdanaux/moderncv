@@ -352,6 +352,12 @@
 \newcommand*{\subsectionfont}{}
 \newcommand*{\hintfont}{}
 \newcommand*{\pagenumberfont}{\addressfont\itshape}
+% fake small caps - cfr http://tex.stackexchange.com/questions/55664/fake-small-caps-with-xetex-fontspec
+%\def\fakesc{\bgroup\obeyspaces\fakescaux}
+%\def\fakescaux#1{\fakescauxii #1\relax\relax\egroup}
+%\def\fakescauxii#1{%
+%\ifx\relax#1\else \ifcat#1\@sptoken{} \expandafter\expandafter\expandafter\fakescauxii\else
+%\ifnum`#1=\uccode`#1 {\normalsize #1}\else {\footnotesize \uppercase{#1}}\fi \expandafter\expandafter\expandafter\fakescauxii\expandafter\fi\fi}
 
 % styles
 \newcommand*{\namestyle}[1]{{\namefont#1}}
