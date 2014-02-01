@@ -3,7 +3,8 @@ version 1.6.0 (xx MMM 2013)
  \moderncvstyle[options]{style}.
  - added style options to the banking style, to specify how the section- and
  subsectionrules should behave: "fullrules", "shortrules", "mixedrules"
-(default; full rules for sections, short rules for subsections) and "norules".
+(default; full rules for sections, short rules for subsections), "centered"
+(fullrules with centered title) and "norules" (norules, small caps font).
  - corrected the color of \addressstyle to match the one effectively used
  (color2).
  - added a check on the emptyness of \title when setting the hyperref document

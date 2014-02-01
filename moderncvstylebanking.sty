@@ -10,22 +10,18 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{moderncvstylebanking}[2013/04/29 v1.5.1 modern curriculum vitae and letter style scheme: bank]
+\ProvidesPackage{moderncvstylebanking}[2013/04/29 v1.5.1 modern curriculum vitae and letter style scheme: banking]
 
-\newcommand*{\sectionrule}{}
-\newcommand*{\subsectionrule}{}
-\DeclareOption{fullrules}{
-  \renewcommand*{\sectionrule}{\par\nobreak\vspace*{-.7\baselineskip}\leavevmode{\color{color1}\leaders\hbox{\rule{1pt}{0.4pt}}\hfill\kern0pt}}
-  \renewcommand*{\subsectionrule}{\par\nobreak\vspace*{-.7\baselineskip}\leavevmode{\color{color1}\xleaders\hbox to 0.35em{\scriptsize.}\hfill}}}% different subsectionrules will not be perfectly aligned, but remaining space at the end of the fill will be distributed evenly between leaders, so it will be barely visible}
-\DeclareOption{shortrules}{
-  \renewcommand*{\sectionrule}{\leavevmode{\color{color1}\leaders\hbox{\rule{1pt}{0.4pt}}\hfill\kern0pt}}
-  \renewcommand*{\subsectionrule}{\leavevmode{\color{color1}\xleaders\hbox to 0.35em{\scriptsize.}\hfill}}}% different subsectionrules will not be perfectly aligned, but remaining space at the end of the fill will be distributed evenly between leaders, so it will be barely visible}}
-\DeclareOption{mixedrules}{
-  \renewcommand*{\sectionrule}{\par\nobreak\vspace*{-.7\baselineskip}\leavevmode{\color{color1}\leaders\hbox{\rule{1pt}{0.4pt}}\hfill\kern0pt}}
-  \renewcommand*{\subsectionrule}{\leavevmode{\color{color1}\xleaders\hbox to 0.35em{\scriptsize.}\hfill}}}% different subsectionrules will not be perfectly aligned, but remaining space at the end of the fill will be distributed evenly between leaders, so it will be barely visible}}
-\DeclareOption{norules}{
-  \renewcommand*{\sectionrule}{}
-  \renewcommand*{\subsectionrule}{}}
+\newif\if@fullrules\@fullrulesfalse
+\DeclareOption{fullrules}{\@fullrulestrue\@mixedrulesfalse}
+\newif\if@shortrules\@shortrulesfalse
+\DeclareOption{shortrules}{\@shortrulestrue\@mixedrulesfalse}
+\newif\if@mixedrules\@mixedrulesfalse
+\DeclareOption{mixedrules}{\@mixedrulestrue}
+\newif\if@centeredrules\@centeredrulesfalse
+\DeclareOption{centeredrules}{\@centeredrulestrue\@mixedrulesfalse}
+\newif\if@norules\@norulesfalse
+\DeclareOption{norules}{\@norulestrue\@mixedrulesfalse}
 
 \ExecuteOptions{mixedrules}
 \ProcessOptions\relax
@@ -123,8 +119,16 @@
 \renewcommand*{\titlefont}{\Huge\mdseries\upshape}
 \renewcommand*{\addressfont}{\normalsize\mdseries\upshape}
 \renewcommand*{\quotefont}{\large\slshape}
-\renewcommand*{\sectionfont}{\Large\bfseries\upshape}
-\renewcommand*{\subsectionfont}{\large\upshape\fontseries{sb}\selectfont}
+\renewcommand*{\sectionfont}{%
+  \if@norules%
+    \Large\bfseries\scshape%
+  \else%
+    \Large\bfseries\upshape\fi}
+\renewcommand*{\subsectionfont}{%
+  \if@norules%
+    \large\mdseries\itshape%
+  \else%
+    \large\upshape\fontseries{sb}\selectfont\fi}
 \renewcommand*{\hintfont}{\bfseries}
 
 % styles
@@ -132,8 +136,16 @@
 \renewcommand*{\titlestyle}[1]{{\titlefont\textcolor{color2!85}{#1}}}
 \renewcommand*{\addressstyle}[1]{{\addressfont\textcolor{color2}{#1}}}
 \renewcommand*{\quotestyle}[1]{{\quotefont\textcolor{color1}{#1}}}
-\renewcommand*{\sectionstyle}[1]{{\sectionfont\textcolor{color1}{#1}}}
-\renewcommand*{\subsectionstyle}[1]{{\subsectionfont\textcolor{color1}{#1}}}
+\renewcommand*{\sectionstyle}[1]{%
+  \if@centeredrules%
+    {\centering\sectionfont\textcolor{color1}{#1}\par}%
+  \else
+    {\sectionfont\textcolor{color1}{#1}}\fi}
+\renewcommand*{\subsectionstyle}[1]{%
+  \if@centeredrules%
+    {\centering\subsectionfont\textcolor{color1}{#1}\par}%
+  \else
+    {\subsectionfont\textcolor{color1}{#1}}\fi}
 \renewcommand*{\hintstyle}[1]{{\hintfont\textcolor{color0}{#1}}}
 
 % lengths
@@ -192,6 +204,24 @@
   \strut\subsectionstyle{#2}%
   \subsectionrule%
   \par\nobreak\addvspace{0.5ex}\@afterheading}
+
+\newcommand*{\sectionrule}{}
+\newcommand*{\subsectionrule}{}
+\if@fullrules%
+  \renewcommand*{\sectionrule}{\par\nobreak\vspace*{-.7\baselineskip}\leavevmode{\color{color1}\leaders\hbox{\rule{1pt}{0.4pt}}\hfill\kern0pt}}
+  \renewcommand*{\subsectionrule}{\par\nobreak\vspace*{-.7\baselineskip}\leavevmode{\color{color1}\xleaders\hbox to 0.35em{\scriptsize.}\hfill}}\fi% different subsectionrules will not be perfectly aligned, but remaining space at the end of the fill will be distributed evenly between leaders, so it will be barely visible}
+\if@shortrules%
+  \renewcommand*{\sectionrule}{\leavevmode{\color{color1}\leaders\hbox{\rule{1pt}{0.4pt}}\hfill\kern0pt}}
+  \renewcommand*{\subsectionrule}{\leavevmode{\color{color1}\xleaders\hbox to 0.35em{\scriptsize.}\hfill}}\fi% different subsectionrules will not be perfectly aligned, but remaining space at the end of the fill will be distributed evenly between leaders, so it will be barely visible}}
+\if@mixedrules%
+  \renewcommand*{\sectionrule}{\par\nobreak\vspace*{-.7\baselineskip}\leavevmode{\color{color1}\leaders\hbox{\rule{1pt}{0.4pt}}\hfill\kern0pt}}
+  \renewcommand*{\subsectionrule}{\leavevmode{\color{color1}\xleaders\hbox to 0.35em{\scriptsize.}\hfill}}\fi% different subsectionrules will not be perfectly aligned, but remaining space at the end of the fill will be distributed evenly between leaders, so it will be barely visible}}
+\if@centeredrules%
+  \renewcommand*{\sectionrule}{\par\nobreak\vspace*{-.7\baselineskip}\leavevmode{\color{color1}\leaders\hbox{\rule{1pt}{0.4pt}}\hfill\kern0pt}}
+  \renewcommand*{\subsectionrule}{\par\nobreak\vspace*{-.7\baselineskip}\leavevmode{\color{color1}\xleaders\hbox to 0.35em{\scriptsize.}\hfill}}\fi% similar to full rules
+\if@norules%
+  \renewcommand*{\sectionrule}{}
+  \renewcommand*{\subsectionrule}{}\fi
 
 \renewcommand*{\cvitem}[3][.25em]{%
   \ifthenelse{\equal{#2}{}}{}{\hintstyle{#2}: }{#3}%
