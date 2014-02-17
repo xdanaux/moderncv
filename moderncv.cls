@@ -310,10 +310,25 @@
 % usage: \makefooter
 \newcommand*{\makefooter}{}%
 
-% loads a style variant
+% loads a style variant (a combination of header, body and footer)
 % usage: \moderncvstyle{<style variant name>}
 \newcommand*{\moderncvstyle}[2][]{
   \RequirePackage[#1]{moderncvstyle#2}}
+
+% loads a header variant
+% usage: \moderncvheader{<header variant number>}
+\newcommand*{\moderncvheader}[1]{
+  \RequirePackage{moderncvheader#1}}
+
+% loads a body variant
+% usage: \moderncvbody{<body variant number>}
+\newcommand*{\moderncvbody}[1]{
+  \RequirePackage{moderncvbody#1}}
+
+% loads a footer variant
+% usage: \moderncvfooter{<footer variant number>}
+\newcommand*{\moderncvfooter}[1]{
+  \RequirePackage{moderncvfooter#1}}
   
 % loads a color scheme
 % usage: \moderncvcolor{<color scheme name>}
@@ -326,12 +341,25 @@
   \RequirePackage{moderncvicons#1}}
 
 % recomputes all automatic lengths
+\newcommand*{\recomputeheadlengths}{\recomputecvheadlengths}
+\newcommand*{\recomputebodylengths}{\recomputecvbodylengths}
+\newcommand*{\recomputefootlengths}{\recomputecvfootlengths}
 \newcommand*{\recomputelengths}{\recomputecvlengths}
 \AtBeginDocument{\recomputelengths{}}
 
 % creates a length if not yet defined
 \newcommand*{\@initializelength}[1]{%
-  \ifdefined#1\else\newlength{#1}\fi}
+  \ifdefined#1
+    \setlength{#1}{0pt}%
+  \else%
+    \newlength{#1}\fi}
+
+% creates a savebox if not yet defined
+\newcommand*{\@initializebox}[1]{%
+  \ifdefined#1
+    \savebox{#1}{}%
+  \else%
+    \newsavebox{#1}\fi}
 
 
 %-------------------------------------------------------------------------------
@@ -370,7 +398,13 @@
 \newcommand*{\pagenumberstyle}[1]{{\pagenumberfont#1}}
 
 % recompute all resume lengths
-\newcommand*{\recomputecvlengths}{}
+\newcommand*{\recomputecvheadlengths}{}
+\newcommand*{\recomputecvbodylengths}{}
+\newcommand*{\recomputecvfootlengths}{}
+\newcommand*{\recomputecvlengths}{%
+  \recomputecvheadlengths%
+  \recomputecvbodylengths%
+  \recomputecvfootlengths}
 
 % internal maketitle command to issue a new line only when required
 \newif\if@firstdetailselement\@firstdetailselementtrue
@@ -605,7 +639,13 @@
   \def\@enclosure{#2}}
 
 % recompute all letter lengths
-\newcommand*{\recomputeletterlengths}{}
+\newcommand*{\recomputeletterheadlengths}{}
+\newcommand*{\recomputeletterbodylengths}{}
+\newcommand*{\recomputeletterfootlengths}{}
+\newcommand*{\recomputeletterlengths}{%
+  \recomputeletterheadlengths%
+  \recomputeletterbodylengths%
+  \recomputeletterfootlengths}
 
 % makes the letter title
 % usage: \makelettertitle
