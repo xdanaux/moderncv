@@ -81,7 +81,7 @@
 % TODO: move to xifthen and \isempty{<arg>} instead of \equal{<arg>}{}
 
 % color
-\RequirePackage{xcolor}
+\RequirePackage[table]{xcolor}
 
 % font loading
 \RequirePackage{ifxetex,ifluatex}
@@ -485,7 +485,9 @@
         \g@addto@macro\cvcolumns@def{@{\hspace*{\separatorcolumnwidth}}}%
         \g@addto@macro\cvcolumns@head{&}%
         \g@addto@macro\cvcolumns@content{&}\fi%
-      \expandafter\g@addto@macro\expandafter\cvcolumns@def\expandafter{\csname cvcolumn\roman{tmpiteratorcounter}@def\endcsname}%
+%      \expandafter\g@addto@macro\expandafter\cvcolumns@def\expandafter{\csname cvcolumn\roman{tmpiteratorcounter}@def\endcsname}%      % this creates issues with the colortbl" package (loaded by xcolor when passing the "table" option) as the column definitions passed to \begin{tabular} contains \cvcolumn<i>@def references that it doesn't understand; the next 2 lines expand \cvcolumn@def to the point it doesn't
+      \edef\tmpcvcolumn@def{\csname cvcolumn\roman{tmpiteratorcounter}@def\endcsname}%
+      \expandafter\g@addto@macro\expandafter\cvcolumns@def\expandafter{\tmpcvcolumn@def}%
       \expandafter\g@addto@macro\expandafter\cvcolumns@head\expandafter{\csname cvcolumn\roman{tmpiteratorcounter}@head\endcsname}%
       \expandafter\g@addto@macro\expandafter\cvcolumns@content\expandafter{\csname cvcolumn\roman{tmpiteratorcounter}@content\endcsname}%
       \stepcounter{tmpiteratorcounter}%
@@ -503,7 +505,9 @@
 %      \repeat%
     % create the tabular
     \cvitem{}{%
-      \begin{tabular}{\cvcolumns@def}%
+%      \begin{tabular}{\cvcolumns@def}% this conflicts with the "colortbl" package (loaded by xcolor when passing the "table" option), and requires the below 2 lines to expand \cvcolumns@def
+      \def\begincvcolumns{\begin{tabular}}
+      \expandafter\begincvcolumns\expandafter{\cvcolumns@def}%
         \if@cvcolumns@head@empty\else%
           \cvcolumns@head%\\[-.8em]%
 %          {\color{color1}\rule{\maincolumnwidth}{.25pt}}%
