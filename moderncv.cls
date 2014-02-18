@@ -354,12 +354,22 @@
   \else%
     \newlength{#1}\fi}
 
-% creates a savebox if not yet defined
+% creates a box if not yet defined
 \newcommand*{\@initializebox}[1]{%
   \ifdefined#1
     \savebox{#1}{}%
   \else%
     \newsavebox{#1}\fi}
+
+% creates an if switch if not yet defined
+\newcommand*{\@initializeif}[1]{%
+  \ifdefined#1
+  \else%
+    \newif#1\fi}
+
+% custom strut for spacing; the first argument is the vertical offset of the strut, the second its total height (both as a fraction of \baselineskip)
+\newcommand*{\@moderncvstrut}[2]{%
+  \rule[-#1\baselineskip]{0pt}{#2\baselineskip}}
 
 
 %-------------------------------------------------------------------------------
