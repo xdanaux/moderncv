@@ -316,19 +316,19 @@
   \RequirePackage[#1]{moderncvstyle#2}}
 
 % loads a header variant
-% usage: \moderncvheader{<header variant number>}
-\newcommand*{\moderncvheader}[1]{
-  \RequirePackage{moderncvheader#1}}
+% usage: \moderncvhead{<header variant number>}
+\newcommand*{\moderncvhead}[1]{
+  \expandafter\RequirePackage\expandafter{\expandafter moderncvhead\romannumeral #1}}
 
 % loads a body variant
 % usage: \moderncvbody{<body variant number>}
 \newcommand*{\moderncvbody}[1]{
-  \RequirePackage{moderncvbody#1}}
+  \expandafter\RequirePackage\expandafter{\expandafter moderncvbody\romannumeral #1}}
 
 % loads a footer variant
-% usage: \moderncvfooter{<footer variant number>}
-\newcommand*{\moderncvfooter}[1]{
-  \RequirePackage{moderncvfooter#1}}
+% usage: \moderncvfoot{<footer variant number>}
+\newcommand*{\moderncvfoot}[1]{
+  \expandafter\RequirePackage\expandafter{\expandafter moderncvfoot\romannumeral #1}}
   
 % loads a color scheme
 % usage: \moderncvcolor{<color scheme name>}
