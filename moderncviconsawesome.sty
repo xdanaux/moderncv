@@ -1,5 +1,5 @@
-%% start of file `moderncviconsmarvosym.sty'.
-%% Copyright 2013-2013 Xavier Danaux (xdanaux@gmail.com).
+%% start of file `moderncviconsawesome.sty'.
+%% Copyright 2013-2015 Xavier Danaux (xdanaux@gmail.com).
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License version 1.3c,
@@ -10,9 +10,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{moderncviconsawesome}[2013/04/29 v1.5.1 modern curriculum vitae and letter icons: awesome]
-% XeTeX or LuaTeX is needed to be able to use fontspec and fontawesome
-\ifxetexorluatex
+\ProvidesPackage{moderncviconsawesome}[2015/07/28 v2.0.0 modern curriculum vitae and letter icons: awesome]
 
 %-------------------------------------------------------------------------------
 %                required packages
@@ -24,7 +22,7 @@
 %-------------------------------------------------------------------------------
 %                symbols definition
 %-------------------------------------------------------------------------------
-\renewcommand*{\labelitemi}          {\strut\textcolor{color1}{\tiny\faCircleBlank}}
+\renewcommand*{\labelitemi}          {\strut\textcolor{color1}{\tiny\faCircleO}}
 %\renewcommand*{\labelitemii}         {\strut\textcolor{color1}{\large\bfseries-}}            % no change from default in moderncv.cls
 %\renewcommand*{\labelitemiii}        {\strut\textcolor{color1}{\rmfamily\textperiodcentered}}% no change from default in moderncv.cls
 %\renewcommand*{\labelitemiv}         {\labelitemiii}                                         % no change from default in moderncv.cls
@@ -32,20 +30,15 @@
 \renewcommand*{\addresssymbol}       {}
 \renewcommand*{\mobilephonesymbol}   {{\Large\faMobilePhone}~}
 \renewcommand*{\fixedphonesymbol}    {\faPhone~}
-\renewcommand*{\faxphonesymbol}      {\faPrint~}              % alternative: \faFileAlt
-\renewcommand*{\emailsymbol}         {\faEnvelope~}           % alternative: \faInbox
-\renewcommand*{\homepagesymbol}      {\faGlobe~}              % alternative: \faHome
-\renewcommand*{\linkedinsocialsymbol}{\faLinkedinSign~}       % alternative: \faLinkedin
-\renewcommand*{\twittersocialsymbol} {\faTwitter~}
-\renewcommand*{\githubsocialsymbol}  {\faGithub~}
+\renewcommand*{\faxphonesymbol}      {{\small\faFax}~}                % alternative: \faPrint
+\renewcommand*{\emailsymbol}         {{\small\faEnvelopeO}~}          % alternative: \faInbox
+\renewcommand*{\homepagesymbol}      {{\small\faGlobe}~}              % alternative: \faHome
+\renewcommand*{\linkedinsocialsymbol}{{\small\faLinkedin}~}           % alternative: \faLinkedinSquare
+\renewcommand*{\twittersocialsymbol} {{\small\faTwitter}~}            % alternative: \faTwitterSquare
+\renewcommand*{\githubsocialsymbol}  {{\small\faGithub}~}             % alternative: \faGithubSquare, \faGithubSquare
 
 
-% if XeTeX or LuaTeX is not used, load the marvosym icon set instead
-\else
-  \typeout{WARNING: to use the awesome icon set, please use XeTeX or LuaTeX to compile your document; switching to the marvosym icon set.}
-  \RequirePackage{moderncviconsmarvosym}
-\fi
 \endinput
 
 
-%% end of file `moderncviconsmarvosym.sty'.
+%% end of file `moderncviconsawesome.sty'.
