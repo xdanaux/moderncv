@@ -1,12 +1,33 @@
-version 1.6.0 (xx MMM 2013)
+version 2.0.0 (28 Jul 2015)
+ - refactored the  code into heads, body, foot and icon substyles. All styles
+ (classic, casual, banking and oldstyle) are just a combination of these and
+ some font selection. Mixing substyles (e.g., the banking header with the
+ classic body) is now trivial by using the \moderncvhead, \moderncvbody,
+ \moderncvfoot and \moderncvicons commands. Each of these take a substyle number
+ as argument. \moderncvcolor takes a color name as argument.
+ - added a new style, "fancy".
  - added an optional argument to \moderncvstyle to specify style options, i.e.
- \moderncvstyle[options]{style}.
- - added style options to the banking style, to specify how the section- and
- subsectionrules should behave: "fullrules", "shortrules", "mixedrules"
-(default; full rules for sections, short rules for subsections), "centered"
-(fullrules with centered title) and "norules" (norules, small caps font).
+ \moderncvstyle[options]{style}. Below is a list of the available options per
+ style:
+   * classic
+     > to specify of one's name should appear left or right at the top: "left"
+     (default) or "right;
+   * casual
+     > to specify of one's name should appear left or right at the top: "left"
+     (default) or "right;
+   * banking
+     > to specify how the section- and subsectionrules should be set:
+     "fullrules", "shortrules", "mixedrules" (default; full rules for  sections,
+     short rules for subsections), "centered" (fullrules with centered title)
+     and "norules" (norules, small caps font);
+     > to specify how the body should be aligned: left" (default), "center" or
+     "right";
+   * oldstyle & fancy
+     n/a
+ - added a new color variant: "burgundy".
  - corrected the color of \addressstyle to match the one effectively used
  (color2).
+ - adjusted the bibliography spacing to handle entries with or without labels.
  - added a check on the emptyness of \title when setting the hyperref document
  properties.
 
