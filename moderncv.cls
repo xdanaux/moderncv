@@ -312,34 +312,39 @@
 % usage: \makefooter
 \newcommand*{\makefooter}{}%
 
+\newcommand*{\@loadmoderncvpackage}[3][]{%
+  \begingroup\edef\x{\endgroup%
+    \noexpand\RequirePackage[#1]{moderncv#2\ifcase#3\or i\or ii\or iii\or iv\or v\or vi\or vii\or viii\or ix\or x\fi}%
+  }\x}
+
 % loads a style variant (a combination of header, body and footer)
 % usage: \moderncvstyle{<style variant name>}
-\newcommand*{\moderncvstyle}[2][]{
+\newcommand*{\moderncvstyle}[2][]{%
   \RequirePackage[#1]{moderncvstyle#2}}
 
 % loads a header variant
 % usage: \moderncvhead[<optional head option>]{<header variant number>}
-\newcommand*{\moderncvhead}[2][]{
-  \expandafter\RequirePackage\expandafter[\expandafter#1\expandafter]{\expandafter moderncvhead\romannumeral #2}}
+\newcommand*{\moderncvhead}[2][]{%
+  \@loadmoderncvpackage[#1]{head}{#2}}
 
 % loads a body variant
 % usage: \moderncvbody[<optional body option>]{<body variant number>}
-\newcommand*{\moderncvbody}[2][]{
-  \expandafter\RequirePackage\expandafter[\expandafter#1\expandafter]{\expandafter moderncvbody\romannumeral #2}}
+\newcommand*{\moderncvbody}[2][]{%
+  \@loadmoderncvpackage[#1]{body}{#2}}
 
 % loads a footer variant
-% usage: \moderncvfoot{<footer variant number>}
-\newcommand*{\moderncvfoot}[1]{
-  \expandafter\RequirePackage\expandafter{\expandafter moderncvfoot\romannumeral #1}}
+% usage: \moderncvfoot[<optional foot option>]{<foot variant number>}
+\newcommand*{\moderncvfoot}[2][]{%
+  \@loadmoderncvpackage[#1]{foot}{#2}}
   
 % loads a color scheme
 % usage: \moderncvcolor{<color scheme name>}
-\newcommand*{\moderncvcolor}[1]{
+\newcommand*{\moderncvcolor}[1]{%
   \RequirePackage{moderncvcolor#1}}
 
 % loads an icons set
 % usage: \moderncvicons{<icon set name>}
-\newcommand*{\moderncvicons}[1]{
+\newcommand*{\moderncvicons}[1]{%
   \RequirePackage{moderncvicons#1}}
 
 % recomputes all automatic lengths
