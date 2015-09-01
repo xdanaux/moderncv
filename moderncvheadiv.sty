@@ -49,6 +49,7 @@
 %-------------------------------------------------------------------------------
 % lengths
 \@initializelength{\quotewidth}
+\@initializelength{\makecvheadnamewidth}% optional makecvheadname width to force a certain width (if set/remains to 0pt, the width is calculated automatically)
 \setlength{\marginparwidth}{0\p@}
 \setlength{\marginparsep}{0\p@}
 \renewcommand*{\recomputecvheadlengths}{%
@@ -86,7 +87,9 @@
       \framebox{\includegraphics[width=\@photowidth]{\@photo}}}}%
   % name and optional title
   \newlength{\makecvheadpicturewidth}\settowidth{\makecvheadpicturewidth}{\usebox{\makecvheadpicturebox}}%
-  \newlength{\makecvheadnamewidth}\setlength{\makecvheadnamewidth}{\textwidth-\makecvheadpicturewidth}%
+  \ifthenelse{\lengthtest{\makecvheadnamewidth=0pt}}% check for dummy value (equivalent to \ifdim\makecvheadnamewidth=0pt)
+    {\setlength{\makecvheadnamewidth}{\textwidth-\makecvheadpicturewidth}}%
+    {}%
   \begin{minipage}[b]{\makecvheadnamewidth}%
     \namestyle{\@firstname\ \@lastname}%
     \ifthenelse{\equal{\@title}{}}{}{\\[1.25em]\titlestyle{\@title}}%
