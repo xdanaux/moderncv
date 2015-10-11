@@ -297,7 +297,7 @@
 \newcommand*{\emailsymbol}         {}
 \newcommand*{\homepagesymbol}      {}
 \newcommand*{\linkedinsocialsymbol}{}
-\newcommand*{\xingsocialsymbol}{}
+\newcommand*{\xingsocialsymbol}    {}
 \newcommand*{\twittersocialsymbol} {}
 \newcommand*{\githubsocialsymbol}  {}
 
