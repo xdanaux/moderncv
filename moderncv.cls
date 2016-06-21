@@ -156,7 +156,8 @@
           \fancypagestyle{plain}{%
             \fancyfoot[r]{\parbox[b]{\pagenumberwidth}{\color{color2}\pagenumberfont\strut\thepage/\pageref{lastpage}}}}% the parbox is required to ensure alignment with a possible center footer (e.g., as in the casual style)
           \pagestyle{plain}}{}}%
-      \AtEndDocument{\label{lastpage}}\else\fi}}
+    \else\fi  
+    \AtEndDocument{\label{lastpage}}}
 \pagestyle{plain}
 
 % reduced list spacing
