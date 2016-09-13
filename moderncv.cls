@@ -299,6 +299,7 @@
 \newcommand*{\linkedinsocialsymbol}{}
 \newcommand*{\twittersocialsymbol} {}
 \newcommand*{\githubsocialsymbol}  {}
+\newcommand*{\gitlabsocialsymbol}  {}
 
 % other
 %------
