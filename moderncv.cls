@@ -256,7 +256,7 @@
 
 % adds a social link to one's personal information (optional)
 % usage: \social[<optional type>][<optional url>]{<account name>}
-% where <optional type> should be either "linkedin", "twitter" or "github"
+% where <optional type> should be either "linkedin", "twitter", "github" or "gitlab"
 \collectionnew{socials}
 \NewDocumentCommand{\social}{O{}O{}m}{%
   \ifthenelse{\equal{#2}{}}%
@@ -264,6 +264,7 @@
       \ifthenelse{\equal{#1}{linkedin}}{\collectionadd[linkedin]{socials}{\protect\httplink[#3]{www.linkedin.com/in/#3}}}{}%
       \ifthenelse{\equal{#1}{twitter}} {\collectionadd[twitter]{socials} {\protect\httplink[#3]{www.twitter.com/#3}}}    {}%
       \ifthenelse{\equal{#1}{github}}  {\collectionadd[github]{socials}  {\protect\httplink[#3]{www.github.com/#3}}}     {}%
+      \ifthenelse{\equal{#1}{gitlab}}  {\collectionadd[gitlab]{socials}  {\protect\httplink[#3]{gitlab.com/#3}}}     {}%
     }
     {\collectionadd[#1]{socials}{\protect\httplink[#3]{#2}}}}
 
@@ -303,6 +304,7 @@
 \newcommand*{\linkedinsocialsymbol}{}
 \newcommand*{\twittersocialsymbol} {}
 \newcommand*{\githubsocialsymbol}  {}
+\newcommand*{\gitlabsocialsymbol}  {}
 
 % other
 %------
