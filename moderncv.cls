@@ -155,8 +155,8 @@
           \settowidth{\pagenumberwidth}{\color{color2}\addressfont\itshape\strut\thepage/\pageref{lastpage}}%
           \fancypagestyle{plain}{%
             \fancyfoot[r]{\parbox[b]{\pagenumberwidth}{\color{color2}\pagenumberfont\strut\thepage/\pageref{lastpage}}}}% the parbox is required to ensure alignment with a possible center footer (e.g., as in the casual style)
-          \pagestyle{plain}}{}}%
-      \AtEndDocument{\label{lastpage}}\else\fi}}
+          \pagestyle{plain}}{}}\fi}%
+  \AtEndDocument{\label{lastpage}}}
 \pagestyle{plain}
 
 % reduced list spacing
@@ -191,6 +191,7 @@
 % compatibility package with older versions of moderncv
 \RequirePackageWithOptions{moderncvcompatibility}
 
+\RequirePackage{l3regex}
 
 %-------------------------------------------------------------------------------
 %                class definition
@@ -247,17 +248,22 @@
 % usage: \phone[<optional type>]{<number>}
 % where <optional type> should be either "fixed" (default), "mobile" or "fax
 \collectionnew{phones}
-\newcommand*{\phone}[2][fixed]{\collectionadd[#1]{phones}{#2}}
+\NewDocumentCommand{\phone}{O{fixed}m}{%
+  \ifthenelse{\equal{#1}{fax}}%
+    {\collectionadd[#1]{phones}{#2}}
+    {\collectionadd[#1]{phones}{\protect\tellink{#2}}}
+    }
 
 
 % adds a social link to one's personal information (optional)
 % usage: \social[<optional type>][<optional url>]{<account name>}
-% where <optional type> should be either "linkedin", "twitter", "github" or "skype"
+% where <optional type> should be either "linkedin", "xing", "twitter", "github" or "skype"
 \collectionnew{socials}
 \NewDocumentCommand{\social}{O{}O{}m}{%
   \ifthenelse{\equal{#2}{}}%
     {%
-      \ifthenelse{\equal{#1}{linkedin}}{\collectionadd[linkedin]{socials}{\protect\httplink[#3]{www.linkedin.com/in/#3}}}{}%
+      \ifthenelse{\equal{#1}{linkedin}}{\collectionadd[linkedin]{socials}{\protect\httplink[#3]{www.linkedin.com/in/#3}}} {}%
+      \ifthenelse{\equal{#1}{xing}}    {\collectionadd[xing]{socials}    {\protect\httplink[#3]{www.xing.com/profile/#3}}}{}%
       \ifthenelse{\equal{#1}{twitter}} {\collectionadd[twitter]{socials} {\protect\httplink[#3]{www.twitter.com/#3}}}    {}%
       \ifthenelse{\equal{#1}{github}}  {\collectionadd[github]{socials}  {\protect\httplink[#3]{www.github.com/#3}}}     {}%
       \ifthenelse{\equal{#1}{skype}}   {\collectionadd[skype]{socials}   {#3}}                                   {}%
@@ -298,6 +304,7 @@
 \newcommand*{\emailsymbol}         {}
 \newcommand*{\homepagesymbol}      {}
 \newcommand*{\linkedinsocialsymbol}{}
+\newcommand*{\xingsocialsymbol}    {}
 \newcommand*{\twittersocialsymbol} {}
 \newcommand*{\githubsocialsymbol}  {}
 \newcommand*{\skypesocialsymbol}   {}
@@ -504,6 +511,22 @@
   \ifthenelse{\equal{#1}{}}%
     {\href{mailto:#2}{#2}}%
     {\href{mailto:#2}{#1}}}
+    
+% makes a tel hyperlink
+% usage: \tellink[optional text]{link}
+\newcommand*{\tellink}[2][]{%
+  \ifthenelse{\equal{#1}{}}%
+    {\expandafter\onlynumberslink\expandafter{#2}{#2}}%
+    {\expandafter\onlynumberslink\expandafter{#2}{#1}}}
+
+\ExplSyntaxOn
+\tl_new:N \l_onlynumberslink_tl
+\cs_new:Npn \onlynumberslink #1 #2  {
+    \tl_set:Nn \l_onlynumberslink_tl {#1}
+    \regex_replace_all:nnN {[^0-9+]} {} \l_onlynumberslink_tl
+    \href{ tel\token_to_str:N : \tl_use:N \l_onlynumberslink_tl}{ #2 }
+}
+\ExplSyntaxOff
 
 % cvcolumns environment, where every column is created through \cvcolumn
 % usage: \begin{cvcolumns}
