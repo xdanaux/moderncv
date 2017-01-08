@@ -257,17 +257,18 @@
 
 % adds a social link to one's personal information (optional)
 % usage: \social[<optional type>][<optional url>]{<account name>}
-% where <optional type> should be either "linkedin", "xing", "twitter", "github", "gitlab" or "skype"
+% where <optional type> should be either "linkedin", "xing", "twitter", "github", "gitlab", "bitbucket" or "skype"
 \collectionnew{socials}
 \NewDocumentCommand{\social}{O{}O{}m}{%
   \ifthenelse{\equal{#2}{}}%
     {%
-      \ifthenelse{\equal{#1}{linkedin}}{\collectionadd[linkedin]{socials}{\protect\httplink[#3]{www.linkedin.com/in/#3}}} {}%
-      \ifthenelse{\equal{#1}{xing}}    {\collectionadd[xing]{socials}    {\protect\httplink[#3]{www.xing.com/profile/#3}}}{}%
-      \ifthenelse{\equal{#1}{twitter}} {\collectionadd[twitter]{socials} {\protect\httplink[#3]{www.twitter.com/#3}}}     {}%
-      \ifthenelse{\equal{#1}{github}}  {\collectionadd[github]{socials}  {\protect\httplink[#3]{www.github.com/#3}}}      {}%
-      \ifthenelse{\equal{#1}{gitlab}}  {\collectionadd[gitlab]{socials}  {\protect\httplink[#3]{www.gitlab.com/#3}}}      {}%
-      \ifthenelse{\equal{#1}{skype}}   {\collectionadd[skype]{socials}   {#3}}                                            {}%
+      \ifthenelse{\equal{#1}{linkedin}} {\collectionadd[linkedin]{socials} {\protect\httplink[#3]{www.linkedin.com/in/#3}}} {}%
+      \ifthenelse{\equal{#1}{xing}}     {\collectionadd[xing]{socials}     {\protect\httplink[#3]{www.xing.com/profile/#3}}}{}%
+      \ifthenelse{\equal{#1}{twitter}}  {\collectionadd[twitter]{socials}  {\protect\httplink[#3]{www.twitter.com/#3}}}     {}%
+      \ifthenelse{\equal{#1}{github}}   {\collectionadd[github]{socials}   {\protect\httplink[#3]{www.github.com/#3}}}      {}%
+      \ifthenelse{\equal{#1}{gitlab}}   {\collectionadd[gitlab]{socials}   {\protect\httplink[#3]{www.gitlab.com/#3}}}      {}%
+      \ifthenelse{\equal{#1}{bitbucket}}{\collectionadd[bitbucket]{socials}{\protect\httplink[#3]{www.bitbucket.org/#3}}}   {}%
+      \ifthenelse{\equal{#1}{skype}}    {\collectionadd[skype]{socials}    {#3}}                                            {}%
     }
     {\collectionadd[#1]{socials}{\protect\httplink[#3]{#2}}}}
 
@@ -297,19 +298,20 @@
 \renewcommand{\theenumiv}          {\@Alph\c@enumiv}
 
 % other symbols
-\newcommand*{\listitemsymbol}      {\labelitemi~}
-\newcommand*{\addresssymbol}       {}
-\newcommand*{\mobilephonesymbol}   {}
-\newcommand*{\fixedphonesymbol}    {}
-\newcommand*{\faxphonesymbol}      {}
-\newcommand*{\emailsymbol}         {}
-\newcommand*{\homepagesymbol}      {}
-\newcommand*{\linkedinsocialsymbol}{}
-\newcommand*{\xingsocialsymbol}    {}
-\newcommand*{\twittersocialsymbol} {}
-\newcommand*{\githubsocialsymbol}  {}
-\newcommand*{\gitlabsocialsymbol}  {}
-\newcommand*{\skypesocialsymbol}   {}
+\newcommand*{\listitemsymbol}       {\labelitemi~}
+\newcommand*{\addresssymbol}        {}
+\newcommand*{\mobilephonesymbol}    {}
+\newcommand*{\fixedphonesymbol}     {}
+\newcommand*{\faxphonesymbol}       {}
+\newcommand*{\emailsymbol}          {}
+\newcommand*{\homepagesymbol}       {}
+\newcommand*{\linkedinsocialsymbol} {}
+\newcommand*{\xingsocialsymbol}     {}
+\newcommand*{\twittersocialsymbol}  {}
+\newcommand*{\githubsocialsymbol}   {}
+\newcommand*{\gitlabsocialsymbol}   {}
+\newcommand*{\bitbucketsocialsymbol}{}
+\newcommand*{\skypesocialsymbol}    {}
 
 % other
 %------
