@@ -134,8 +134,7 @@ where \verb|\recomputelengths| is required when changes are made to page layout 
 Now we can get into the part most related to our curriculum vit\ae: our personal data. They will be inserted in the header of the first page, in the classic theme, or in the footer of every page, in the case of casual theme.
 
 \begin{itemize}
-\item \verb|\firstname{John}|
-\item \verb|\familyname{Doe}|
+\item \verb|\name{John}{Doe}|
 \item \verb|\title{Resum\'e title}|: optional
 \item \verb|\address{street and number}{postcode city}|: optional 
 \item \verb|\mobile{mobile}|: optional
@@ -171,15 +170,14 @@ In practice, you will type:
 \recomputelengths
 
 % personal data 
-\firstname{John}
-\familyname{Doe}
+\name{John}{Doe}
 \title{Design enthusiast}
 \address{12 somestreet}{3456 somecity}
 \mobile{+123 456 7890}
 \phone{+12 (3)456 78 90}
 \fax{+12 (3)456 78 90}
 \email{jdoe@design.org}
-\extrainfo{\weblink{www.ctan.org}}
+\extrainfo{\link{www.ctan.org}}
 \photo[64pt]{jdoe_picture}
 \quote{Any intelligent fool can make things bigger, more complex, 
 and more violent. It takes a touch of genius -- and a lot of courage -- to 
@@ -426,7 +424,7 @@ For example: the  following code produces the result shown in figure \ref{fig:ex
  \label{fig:ex_items}
 \end{figure}
 
-\subsection*{Adjusting lenghts}
+\subsection*{Adjusting lengths}
 The different lengths used by moderncv are customizable by
 \begin{verbatim}
 \setlength{<length>}{<new_dimensions>}
@@ -442,7 +440,7 @@ In particular, the first column, can be set to any width. You can do that in two
 \subsection*{Additional commands}
 There are commands to manage hypertextual links:
 \begin{itemize}
- \item[-] \verb|\weblink[optional text]{link}|
+ \item[-] \verb|\link[optional text]{URL}|
  \item[-] \verb|\httplink[optional text]{link}|
  \item[-] \verb|\emaillink[optional text]{link}|
 \end{itemize}
