@@ -100,6 +100,13 @@
 % compatibility with versions <= 1.5.1
 \newcommand*{\makecvtitlenamewidth}{\makecvheadnamewidth} % only used in header variants 1 and 4, themself used by the classic and oldstyle styles
 
+% compatibility with versions <= 2.0.0
+% HTTP is considered legacy, this command only allows to use the HTTP URL scheme and is thus considered legacy as well. Use \link.
+% usage: \httplink[optional text]{http host}
+\newcommand*{\httplink}[2][]{%
+  \ifthenelse{\equal{#1}{}}%
+    {\href{http://#2}{#2}}%
+    {\href{http://#2}{#1}}}
 
 \endinput
 
