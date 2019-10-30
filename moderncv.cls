@@ -1,5 +1,6 @@
 %% start of file `moderncv.cls'.
 %% Copyright 2006-2015 Xavier Danaux (xdanaux@gmail.com).
+%% Modification Copyright 2019-2019 Raju Rimal (therimalaya@gmail.com).
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License version 1.3c,
@@ -488,6 +489,16 @@
 % makes a typical resume job / education entry
 % usage: \cventry[spacing]{years}{degree/job title}{institution/employer}{localization}{optionnal: grade/...}{optional: comment/job description}
 \newcommand*{\cventry}[7][.25em]{}
+
+% makes a resume entry which contains nested subentries
+% Removed the year and degree/job title from cventry. These items can be multiple and can be nested
+% usage: \cventryout[spacing]{years}{localization}{optional: comment/job description}
+\newcommand*{\cventryout}[4][.25em]{}
+
+% makes a resume entry which has removed institution/employer and localization
+% This can be used as nested item under cvhasnesedentry so that multiple items can be nested with same cventry
+% usage: \cventryin[spacing]{years}{degree/job title}{optional: comment/job description}
+\newcommand*{\cventryin}[4][.25em]{}
 
 % makes a resume entry with a proficiency comment
 % usage: \cvitemwithcomment[spacing]{header}{text}{comment}

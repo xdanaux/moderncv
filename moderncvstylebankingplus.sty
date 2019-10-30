@@ -1,0 +1,65 @@
+%% start of file `moderncvstylebankingplus.sty'.
+%% Copyright 2006-2015 Xavier Danaux (xdanaux@gmail.com).
+%% Modification Copyright 2019-2019 Raju Rimal (therimalaya@gmail.com).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+%-------------------------------------------------------------------------------
+%                identification
+%-------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{moderncvstylebankingplus}[2019/10/30 v2.0.0 modern curriculum vitae and letter style scheme: bankingplus]
+
+% body rules type options: "fullrules", "shortrules", "mixedrules" (default) or "norules"
+\@initializecommand{\moderncvstylebodyoptions}{}
+\DeclareOption{fullrules}    {\edef\moderncvstylebodyoptions{\moderncvstylebodyoptions,fullrules}}
+\DeclareOption{shortrules}   {\edef\moderncvstylebodyoptions{\moderncvstylebodyoptions,shortrules}}
+\DeclareOption{mixedrules}   {\edef\moderncvstylebodyoptions{\moderncvstylebodyoptions,mixedrules}}
+\DeclareOption{norules}      {\edef\moderncvstylebodyoptions{\moderncvstylebodyoptions,norules}}
+
+% body section alignment options: "left" (default), "center" or "right"
+\DeclareOption{left}         {\edef\moderncvstylebodyoptions{\moderncvstylebodyoptions,left}}
+\DeclareOption{center}       {\edef\moderncvstylebodyoptions{\moderncvstylebodyoptions,center}}
+\DeclareOption{right}        {\edef\moderncvstylebodyoptions{\moderncvstylebodyoptions,right}}
+
+\DeclareOption*{}% avoid choking on unknown options
+\ExecuteOptions{mixedrules,left}
+\ProcessOptions*\relax% \ProcessOptions* processes the options in the order provided (i.e., with the later ones possibly overriding the former ones), while \ProcessOptions processes them in the order of the package
+
+
+%-------------------------------------------------------------------------------
+%                fonts & icons
+%-------------------------------------------------------------------------------
+% TeX Gyre Pagella font
+%\ifxetexorluatex
+%  \setmainfont{Tex-Gyre Pagella}
+%  \setsansfont{Tex-Gyre Pagella}
+%  \setmathfont{Tex-Gyre Pagella}
+%  \setmathfont[range=\mathit,\mathsfit]{Tex-Gyre Pagella Italic}
+%  \setmathfont[range=\mathbfup,\mathbfsfup]{Tex-Gyre Pagella Bold}
+%  \setmathfont[range=\mathbfit,\mathbfsfit]{Tex-Gyre Pagella Bold Italic}
+%\else
+  \IfFileExists{tgpagella.sty}%
+    {%
+      \RequirePackage{tgpagella}%
+      \renewcommand*{\familydefault}{\rmdefault}}%
+    {}
+%\fi
+
+% symbols
+\moderncvicons{awesome}
+
+
+%-------------------------------------------------------------------------------
+%                header, body & footer
+%-------------------------------------------------------------------------------
+\moderncvhead{7}
+\moderncvbody[\moderncvstylebodyoptions]{7}
+
+\endinput
+
+
+%% end of file `moderncvstylebankingplus.sty'.
