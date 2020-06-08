@@ -1,0 +1,257 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% "ModernCV" CV and Cover Letter
+% LaTeX Template
+% Version 1.1 (9/12/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Xavier Danaux (xdanaux@gmail.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+% Important note:
+% This template requires the moderncv.cls and .sty files to be in the same
+% directory as this .tex file. These files provide the resume style and themes
+% used for structuring the document.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Customized ModernCV template developed by Christine Chai
+% Built upon the moderncv package from Xavier Danaux
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[10pt,letterpaper,sans]{moderncv} % Font sizes: 10, 11, or 12; paper sizes: a4paper, letterpaper, a5paper, legalpaper, executivepaper or landscape; font families: sans or roman
+
+\moderncvstyle{classic} % CV theme - options include: 'casual' (default), 'classic', 'oldstyle' and 'banking'
+\moderncvcolor{blue} % CV color - options include: 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{lastpage}
+\rfoot{\addressfont\itshape\textcolor{gray}{Page \thepage}}
+
+\usepackage{url}
+\usepackage{multicol}
+\usepackage{fontawesome}
+\usepackage[bottom]{footmisc} % enabling footnotes
+\usepackage{amsmath}
+
+%\setlength{\voffset}{-0.2in}
+%\setlength{\textheight}{10.5in} % increase text height to fit resume on 1 page
+
+\usepackage[scale=0.94, footskip=0.4cm]{geometry} % Reduce document margins
+\setlength{\hintscolumnwidth}{0.5cm} % Uncomment to change the width of the dates column
+%\setlength{\makecvtitlenamewidth}{10cm} % For the 'classic' style, uncomment to adjust the width of the space allocated to your name
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS %----------------------------------------------------------------------------------------
+
+% Created a Table of Contents in moderncv.
+% https://tex.stackexchange.com/questions/158803/add-a-table-of-contents-into-a-moderncv-document
+
+\makeatletter
+%\setlength\columnsep{20pt}
+
+\setcounter{tocdepth}{2}
+\setlength\columnsep{20pt}
+\newcommand\@pnumwidth{1.5em}
+
+\newcommand\contentsname{Contents}
+\newcommand\tableofcontents{%
+	% One Column Version (complete)
+	%\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+	%\section*{\contentsname}
+	%\vspace{-20pt}
+	%\addtocontents{toc}{\protect\setcounter{tocdepth}{1}}
+	%\cvitem{}{\@starttoc{toc}}%
+
+	% Two Column Version (complete)
+	\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+	\section*{\contentsname}
+	\vspace{-25pt}
+	\cvitem{}{
+		\begin{multicols}{2}[]
+		\addtocontents{toc}{\protect\setcounter{tocdepth}{1}}
+		\@starttoc{toc}%
+		\end{multicols}
+	}
+	\vspace{-15pt}
+}
+
+\RenewDocumentCommand{\section}{sm}{%
+  \par\addvspace{2.5ex}%
+  \phantomsection{}% reset the anchor for hyperrefs
+  \addtocontents{toc}{\protect\vskip0pt}
+  \addcontentsline{toc}{section}{#2}%
+  \parbox[t]{\hintscolumnwidth}{\strut\raggedleft\raisebox{\baseletterheight}{\color{color1}\rule{\hintscolumnwidth}{0.95ex}}}%
+  \hspace{\separatorcolumnwidth}%
+  \parbox[t]{\maincolumnwidth}{\strut\sectionstyle{#2}}%
+  \par\nobreak\addvspace{1ex}\@afterheading}% to avoid a pagebreak after the heading
+
+\newcommand*\l@section[2]{%
+  \ifnum \c@tocdepth >\z@
+    \addpenalty\@secpenalty
+    %\addvspace{1.0em \@plus\p@}%
+    \setlength\@tempdima{1.5em}%
+    \begingroup
+      \parindent \z@ \rightskip \@pnumwidth
+      \parfillskip -\@pnumwidth
+      \leavevmode
+      \advance\leftskip\@tempdima
+      \hskip -\leftskip
+	#1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss\itshape #2}\par
+      %#1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss\itshape #2}\par
+    \endgroup
+  \fi}
+
+%\newcommand*\l@section[2]{\\}
+\newcommand*\l@subsection[2]{}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CONTACT INFORMATION SECTION
+%----------------------------------------------------------------------------------------
+
+\firstname{Firstname} % Your first name
+\familyname{Lastname} % Your last name
+
+% All information in this block is optional, comment out any lines you don't need
+\title{Updated on \today}
+\address{P.O. Box xxxxx, City, State, Zip Code}{}
+%\address{P.O. Box 25142, Arlington, VA 22202}{}
+\mobile{(111) 111-1111}
+\email{firstname.lastname@gmail.com}
+\homepage{(put your url here)}
+
+\extrainfo{%
+\httplink{www.linkedin.com/in/yourname}\\
+\httplink{github.com/yourGitHubID}
+}
+
+%\photo[70pt][0.4pt]{picture} % The first bracket is the picture height, the second is the thickness of the frame around the picture (0pt for no frame)
+%\quote{"A witty and playful quotation" - John Smith}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\clearpage
+
+\makecvtitle % Print the CV title
+
+%\vspace{-35pt}
+\vspace{-20pt}
+%\vspace{-10pt}
+
+\setcounter{tocdepth}{1}
+\tableofcontents
+%\tableofcontents % Create a table of contents
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION SECTION
+%----------------------------------------------------------------------------------------
+
+\section{Introduction}
+
+\cvitem{$\bullet$}{This CV template is created by Christine P. Chai (\texttt{cpchai21@gmail.com}) from the ModernCV template (Xavier Danaux). The ModernCV package in LaTeX can be downloaded on \href{https://github.com/xdanaux/moderncv}{\textit{GitHub}} or \href{https://www.overleaf.com/latex/templates/modern-cv-and-cover-letter-2015-version/sttkgjcysttn}{Overleaf}.} 
+
+\vspace{10pt}
+
+\cvitem{$\bullet$}{The original ModernCV template is awesome, and I use it for a wide variety of documents, such as resume/CV, cover letter, and even project descriptions. Therefore, many settings need to be customized to meet my needs. I would like to share this CV template, which includes the modifications I frequently use.}
+
+\vspace{10pt}
+
+\cvitem{$\bullet$}{Here is a list of what I modified:
+\begin{itemize}
+	\item Use the \texttt{today} command to show the date when I last modified this document.
+	\item Put the dates on the right hand side, instead of at the beginning of each row.
+	\item Add a contents section. This is recommended for a document with more than 10 pages.
+	\item Add the page number at the bottom right of each page.
+	\item Utilize the \texttt{input} command to add a section directly from another \texttt{.tex} file.\newline{When each section is long, this keeps the main document short and easy to maintain.}
+\end{itemize}}
+
+\vspace{-10pt}
+
+%----------------------------------------------------------------------------------------
+%	DISCLAIMER SECTION
+%----------------------------------------------------------------------------------------
+
+\section{Disclaimer}
+
+\cvitem{$\bullet$}{This template works best for long documents, such as a full CV or a file for all project descriptions. \newline{For industry job applications, it is still recommended to submit a one-page resume and be concise.}}
+
+%----------------------------------------------------------------------------------------
+%	EDUCATION SECTION
+%----------------------------------------------------------------------------------------
+
+\section{Education}
+% Arguments not required can be left empty
+
+\cventry{$\bullet$}{Ph.D. in Subject}{University of Elsewhere}{Country CC}{2016 -- Present. GPA: 4.0/4.0}{}
+\cvitem{}{Research areas: field one, field two, and field three.}
+
+\cventry{$\bullet$}{B.S. in Subject}{University of Somewhere}{Country AB}{2012 -- 2016. GPA: 3.88/4.0}{}
+\cvitem{}{Minor in another subject.}
+
+%\vspace{-10pt}
+
+%----------------------------------------------------------------------------------------
+%	WORK EXPERIENCE SECTION
+%----------------------------------------------------------------------------------------
+
+\section{Work Experience}
+
+\subsection{Research Assistant, Subject, University of Elsewhere}
+
+\cventry{$\bullet$}{Research Project Name}{}{January 2017 -- Present}{}{First line of description.
+\newline{Second line of description.}}
+
+\subsection{Summer Intern, Division X, Company ABCDE}
+
+\cventry{$\bullet$}{Project Name}{}{May 2016 -- August 2016}{}{First line of description.
+\newline{Second line of description.}}
+
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	COMPUTER SKILLS SECTION
+%----------------------------------------------------------------------------------------
+
+\section{Computer Skills}
+% Just three lines
+\cvitem{}{Proficient in $\mathsf{R}$, Python, C++}
+\cvitem{}{Familiar with SAS, MATLAB, SQL, Java}
+
+
+%----------------------------------------------------------------------------------------
+%	PUBLICATIONS SECTION
+%----------------------------------------------------------------------------------------
+
+% These are input files because they can get much longer over time.
+% yyyy-mm-dd is the date when I modified the input file.
+
+\input{./input-publications-yyyy-mm-dd.tex}
+
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATIONS SECTION
+%----------------------------------------------------------------------------------------
+
+\input{./input-presentations-yyyy-mm-dd.tex}
+
+
+
+
+
+
+
+
+
+\end{document}
