@@ -262,14 +262,14 @@
 \NewDocumentCommand{\social}{O{}O{}m}{%
   \ifthenelse{\equal{#2}{}}%
     {%
-      \ifthenelse{\equal{#1}{linkedin}}{\collectionadd[linkedin]{socials}{\protect\httplink[#3]{www.linkedin.com/in/#3}}} {}%
-      \ifthenelse{\equal{#1}{xing}}    {\collectionadd[xing]{socials}    {\protect\httplink[#3]{www.xing.com/profile/#3}}}{}%
-      \ifthenelse{\equal{#1}{twitter}} {\collectionadd[twitter]{socials} {\protect\httplink[#3]{www.twitter.com/#3}}}     {}%
-      \ifthenelse{\equal{#1}{github}}  {\collectionadd[github]{socials}  {\protect\httplink[#3]{www.github.com/#3}}}      {}%
-      \ifthenelse{\equal{#1}{gitlab}}  {\collectionadd[gitlab]{socials}  {\protect\httplink[#3]{www.gitlab.com/#3}}}      {}%
+      \ifthenelse{\equal{#1}{linkedin}}{\collectionadd[linkedin]{socials}{\protect\httpslink[#3]{www.linkedin.com/in/#3}}} {}%
+      \ifthenelse{\equal{#1}{xing}}    {\collectionadd[xing]{socials}    {\protect\httpslink[#3]{www.xing.com/profile/#3}}}{}%
+      \ifthenelse{\equal{#1}{twitter}} {\collectionadd[twitter]{socials} {\protect\httpslink[#3]{www.twitter.com/#3}}}     {}%
+      \ifthenelse{\equal{#1}{github}}  {\collectionadd[github]{socials}  {\protect\httpslink[#3]{www.github.com/#3}}}      {}%
+      \ifthenelse{\equal{#1}{gitlab}}  {\collectionadd[gitlab]{socials}  {\protect\httpslink[#3]{www.gitlab.com/#3}}}      {}%
       \ifthenelse{\equal{#1}{skype}}   {\collectionadd[skype]{socials}   {#3}}                                            {}%
     }
-    {\collectionadd[#1]{socials}{\protect\httplink[#3]{#2}}}}
+    {\collectionadd[#1]{socials}{\protect\httpslink[#3]{#2}}}}
 
 % defines additional personal information (optional)
 % usage: \extrainfo{<text>}
@@ -506,6 +506,13 @@
   \ifthenelse{\equal{#1}{}}%
     {\href{http://#2}{#2}}%
     {\href{http://#2}{#1}}}
+
+% makes a https hyperlink
+% usage: \httpslink[optional text]{link}
+\newcommand*{\httpslink}[2][]{%
+  \ifthenelse{\equal{#1}{}}%
+    {\href{https://#2}{#2}}%
+    {\href{https://#2}{#1}}}
 
 % makes an email hyperlink
 % usage: \emaillink[optional text]{link}

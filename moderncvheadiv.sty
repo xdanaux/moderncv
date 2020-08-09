@@ -110,7 +110,7 @@
       \collectionloop{phones}{% the key holds the phone type (=symbol command prefix), the item holds the number
         \makenewline\hbox to 1.0em{\csname\collectionloopkey phonesymbol\endcsname}~\collectionloopitem}%
       \ifthenelse{\isundefined{\@email}}{}{\makenewline\hbox to 1.0em{\emailsymbol}~\emaillink{\@email}}%
-      \ifthenelse{\isundefined{\@homepage}}{}{\makenewline\hbox to 1.0em{\homepagesymbol}~\httplink{\@homepage}}%
+      \ifthenelse{\isundefined{\@homepage}}{}{\makenewline\hbox to 1.0em{\homepagesymbol}~\httpslink{\@homepage}}%
       \collectionloop{socials}{% the key holds the social type (=symbol command prefix), the item holds the link
         \makenewline\hbox to 1.0em{\csname\collectionloopkey socialsymbol\endcsname}~\collectionloopitem}%
       \ifthenelse{\isundefined{\@extrainfo}}{}{\makenewline\@extrainfo}}\fi}
@@ -156,7 +156,7 @@
         \collectionloop{phones}{% the key holds the phone type (=symbol command prefix), the item holds the number
           \makenewline\hbox to 1.0em{\csname\collectionloopkey phonesymbol\endcsname}~\collectionloopitem}%
         \ifthenelse{\isundefined{\@email}}{}{\makenewline\hbox to 1.0em{\emailsymbol}~\emaillink{\@email}}%
-        \ifthenelse{\isundefined{\@homepage}}{}{\makenewline\hbox to 1.0em{\homepagesymbol}~\httplink{\@homepage}}%
+        \ifthenelse{\isundefined{\@homepage}}{}{\makenewline\hbox to 1.0em{\homepagesymbol}~\httpslink{\@homepage}}%
         \collectionloop{socials}{% the key holds the social type (=symbol command prefix), the item holds the link
           \makenewline\hbox to 1.0em{\csname\collectionloopkey socialsymbol\endcsname}~\collectionloopitem}%
         \ifthenelse{\isundefined{\@extrainfo}}{}{\makenewline\@extrainfo}}}%
