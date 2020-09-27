@@ -255,6 +255,10 @@
     }
 
 
+% http://latex.org/forum/viewtopic.php?t=12239
+\def\SplitMyMacro#1/#2{#2}
+    
+    
 % adds a social link to one's personal information (optional)
 % usage: \social[<optional type>][<optional url>]{<account name>}
 % where <optional type> should be either "linkedin", "xing", "twitter", "github", "gitlab" or "skype"
@@ -267,6 +271,7 @@
       \ifthenelse{\equal{#1}{twitter}} {\collectionadd[twitter]{socials} {\protect\httpslink[#3]{www.twitter.com/#3}}}     {}%
       \ifthenelse{\equal{#1}{github}}  {\collectionadd[github]{socials}  {\protect\httpslink[#3]{www.github.com/#3}}}      {}%
       \ifthenelse{\equal{#1}{gitlab}}  {\collectionadd[gitlab]{socials}  {\protect\httpslink[#3]{www.gitlab.com/#3}}}      {}%
+      \ifthenelse{\equal{#1}{stackoverflow}}  {\collectionadd[stackoverflow]{socials}  {\protect\httpslink[\SplitMyMacro#3]{stackoverflow.com/users/#3}}}      {}%
       \ifthenelse{\equal{#1}{skype}}   {\collectionadd[skype]{socials}   {#3}}                                            {}%
     }
     {\collectionadd[#1]{socials}{\protect\httpslink[#3]{#2}}}}
@@ -310,6 +315,7 @@
 \newcommand*{\githubsocialsymbol}  {}
 \newcommand*{\gitlabsocialsymbol}  {}
 \newcommand*{\skypesocialsymbol}   {}
+\newcommand*{\stackoverflowsocialsymbol} {}
 
 % other
 %------
@@ -507,7 +513,8 @@
     {\href{http://#2}{#2}}%
     {\href{http://#2}{#1}}}
 
-% makes a https hyperlink
+
+% makes an https hyperlink
 % usage: \httpslink[optional text]{link}
 \newcommand*{\httpslink}[2][]{%
   \ifthenelse{\equal{#1}{}}%
