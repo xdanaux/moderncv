@@ -369,7 +369,7 @@
 % loads an icons set
 % usage: \moderncvicons{<icon set name>}
 \newcommand*{\moderncvicons}[1]{%
-  \RequirePackage{../moderncvicons#1}}
+  \RequirePackage{moderncvicons#1}}
 
 % recomputes all automatic lengths
 \newcommand*{\recomputeheadlengths}{\recomputecvheadlengths}
