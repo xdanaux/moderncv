@@ -261,7 +261,7 @@
     
 % adds a social link to one's personal information (optional)
 % usage: \social[<optional type>][<optional url>]{<account name>}
-% where <optional type> should be either "linkedin", "xing", "twitter", "github", "gitlab" or "skype"
+% where <optional type> should be either "linkedin", "xing", "twitter", "github", "gitlab", "bitbucket" or "skype"
 \collectionnew{socials}
 \NewDocumentCommand{\social}{O{}O{}m}{%
   \ifthenelse{\equal{#2}{}}%
@@ -272,6 +272,7 @@
       \ifthenelse{\equal{#1}{github}}       {\collectionadd[github]{socials}       {\protect\httpslink[#3]{www.github.com/#3}}}              {}%
       \ifthenelse{\equal{#1}{gitlab}}       {\collectionadd[gitlab]{socials}       {\protect\httpslink[#3]{www.gitlab.com/#3}}}              {}%
       \ifthenelse{\equal{#1}{stackoverflow}}{\collectionadd[stackoverflow]{socials}{\protect\httpslink[#3]{stackoverflow.com/users/#3}}}     {}%
+      \ifthenelse{\equal{#1}{bitbucket}}    {\collectionadd[bitbucket]{socials}{\protect\httplink[#3]{www.bitbucket.org/#3}}}   {}%
       \ifthenelse{\equal{#1}{skype}}        {\collectionadd[skype]{socials}        {#3}}                                                     {}%
       \ifthenelse{\equal{#1}{orcid}}        {\collectionadd[orcid]{socials}        {\protect\httpslink[#3]{orcid.org/#3}}}                   {}%
       \ifthenelse{\equal{#1}{researchgate}} {\collectionadd[researchgate]{socials} {\protect\httpslink[#3]{www.researchgate.net/profile/#3}}}{}%
@@ -318,6 +319,7 @@
 \newcommand*{\githubsocialsymbol}       {}
 \newcommand*{\gitlabsocialsymbol}       {}
 \newcommand*{\stackoverflowsocialsymbol}{}
+\newcommand*{\bitbucketsocialsymbol}    {}
 \newcommand*{\skypesocialsymbol}        {}
 \newcommand*{\orcidsocialsymbol}        {}
 \newcommand*{\researchgatesocialsymbol} {}
