@@ -272,12 +272,13 @@
       \ifthenelse{\equal{#1}{github}}       {\collectionadd[github]{socials}       {\protect\httpslink[#3]{www.github.com/#3}}}              {}%
       \ifthenelse{\equal{#1}{gitlab}}       {\collectionadd[gitlab]{socials}       {\protect\httpslink[#3]{www.gitlab.com/#3}}}              {}%
       \ifthenelse{\equal{#1}{stackoverflow}}{\collectionadd[stackoverflow]{socials}{\protect\httpslink[#3]{stackoverflow.com/users/#3}}}     {}%
-      \ifthenelse{\equal{#1}{bitbucket}}    {\collectionadd[bitbucket]{socials}{\protect\httplink[#3]{www.bitbucket.org/#3}}}   {}%
+        \ifthenelse{\equal{#1}{bitbucket}}    {\collectionadd[bitbucket]{socials}{\protect\httplink[#3]{www.bitbucket.org/#3}}}              {}%
       \ifthenelse{\equal{#1}{skype}}        {\collectionadd[skype]{socials}        {#3}}                                                     {}%
       \ifthenelse{\equal{#1}{orcid}}        {\collectionadd[orcid]{socials}        {\protect\httpslink[#3]{orcid.org/#3}}}                   {}%
       \ifthenelse{\equal{#1}{researchgate}} {\collectionadd[researchgate]{socials} {\protect\httpslink[#3]{www.researchgate.net/profile/#3}}}{}%
       \ifthenelse{\equal{#1}{researcherid}} {\collectionadd[researcherid]{socials} {\protect\httpslink[#3]{www.researcherid.com/rid/#3}}}    {}%
-    }
+      \ifthenelse{\equal{#1}{telegram}}     {\collectionadd[telegram]{socials} {\protect\httpslink[#3]{t.me/#3}}}                        {}%
+      }
     {\collectionadd[#1]{socials}{\protect\httpslink[#3]{#2}}}}
 
 % defines additional personal information (optional)
@@ -325,6 +326,8 @@
 \newcommand*{\researchgatesocialsymbol} {}
 \newcommand*{\researchidsocialsymbol}   {}
 \newcommand*{\googlescholarsocialsymbol}{}
+\newcommand*{\telegramsocialsymbol}     {}
+
 % other
 %------
 % fonts
