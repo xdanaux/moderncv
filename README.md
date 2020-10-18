@@ -6,7 +6,7 @@
 
 Most commands are defined in such a way that arguments are optional.
 
-Until a decent manual is written, one can always look in the "examples" directory for some examples. Documents can be compiled into dvi, ps or pdf.
+Until a decent manual is written, one can always look in the `template.tex` file for an example. It can be compiled to pdf via `latexmk -pdf ./template.tex`.
 
 ## Licence
 moderncv is licensed under the [LPPL-1.3c](https://spdx.org/licenses/LPPL-1.3c.html).
