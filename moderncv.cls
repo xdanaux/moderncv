@@ -104,6 +104,7 @@
 %  \setsansfont{Latin Modern Sans}
 %  \setmathfont{Latin Modern Math}
 %\else
+
   \RequirePackage[T1]{fontenc}
   \IfFileExists{lmodern.sty}%
     {\RequirePackage{lmodern}}%
@@ -266,18 +267,19 @@
 \NewDocumentCommand{\social}{O{}O{}m}{%
   \ifthenelse{\equal{#2}{}}%
     {%
-      \ifthenelse{\equal{#1}{linkedin}}     {\collectionadd[linkedin]{socials}     {\protect\httpslink[#3]{www.linkedin.com/in/#3}}}         {}%
-      \ifthenelse{\equal{#1}{xing}}         {\collectionadd[xing]{socials}         {\protect\httpslink[#3]{www.xing.com/profile/#3}}}        {}%
-      \ifthenelse{\equal{#1}{twitter}}      {\collectionadd[twitter]{socials}      {\protect\httpslink[#3]{www.twitter.com/#3}}}             {}%
-      \ifthenelse{\equal{#1}{github}}       {\collectionadd[github]{socials}       {\protect\httpslink[#3]{www.github.com/#3}}}              {}%
-      \ifthenelse{\equal{#1}{gitlab}}       {\collectionadd[gitlab]{socials}       {\protect\httpslink[#3]{www.gitlab.com/#3}}}              {}%
-      \ifthenelse{\equal{#1}{stackoverflow}}{\collectionadd[stackoverflow]{socials}{\protect\httpslink[#3]{stackoverflow.com/users/#3}}}     {}%
-        \ifthenelse{\equal{#1}{bitbucket}}    {\collectionadd[bitbucket]{socials}{\protect\httplink[#3]{www.bitbucket.org/#3}}}              {}%
-      \ifthenelse{\equal{#1}{skype}}        {\collectionadd[skype]{socials}        {#3}}                                                     {}%
-      \ifthenelse{\equal{#1}{orcid}}        {\collectionadd[orcid]{socials}        {\protect\httpslink[#3]{orcid.org/#3}}}                   {}%
-      \ifthenelse{\equal{#1}{researchgate}} {\collectionadd[researchgate]{socials} {\protect\httpslink[#3]{www.researchgate.net/profile/#3}}}{}%
-      \ifthenelse{\equal{#1}{researcherid}} {\collectionadd[researcherid]{socials} {\protect\httpslink[#3]{www.researcherid.com/rid/#3}}}    {}%
-      \ifthenelse{\equal{#1}{telegram}}     {\collectionadd[telegram]{socials} {\protect\httpslink[#3]{t.me/#3}}}                        {}%
+      \ifthenelse{\equal{#1}{linkedin}}     {\collectionadd[linkedin]{socials}     {\protect\httpslink[#3]{www.linkedin.com/in/#3}}}               {}%
+      \ifthenelse{\equal{#1}{xing}}         {\collectionadd[xing]{socials}         {\protect\httpslink[#3]{www.xing.com/profile/#3}}}              {}%
+      \ifthenelse{\equal{#1}{twitter}}      {\collectionadd[twitter]{socials}      {\protect\httpslink[#3]{www.twitter.com/#3}}}                   {}%
+      \ifthenelse{\equal{#1}{github}}       {\collectionadd[github]{socials}       {\protect\httpslink[#3]{www.github.com/#3}}}                    {}%
+      \ifthenelse{\equal{#1}{gitlab}}       {\collectionadd[gitlab]{socials}       {\protect\httpslink[#3]{www.gitlab.com/#3}}}                    {}%
+      \ifthenelse{\equal{#1}{stackoverflow}}{\collectionadd[stackoverflow]{socials}{\protect\httpslink[#3]{stackoverflow.com/users/#3}}}           {}%
+      \ifthenelse{\equal{#1}{bitbucket}}    {\collectionadd[bitbucket]{socials}    {\protect\httpslink[#3]{www.bitbucket.org/#3}}}                  {}%
+      \ifthenelse{\equal{#1}{skype}}        {\collectionadd[skype]{socials}        {#3}}                                                           {}%
+      \ifthenelse{\equal{#1}{orcid}}        {\collectionadd[orcid]{socials}        {\protect\httpslink[#3]{orcid.org/#3}}}                         {}%
+      \ifthenelse{\equal{#1}{researchgate}} {\collectionadd[researchgate]{socials} {\protect\httpslink[#3]{www.researchgate.net/profile/#3}}}      {}%
+      \ifthenelse{\equal{#1}{researcherid}} {\collectionadd[researcherid]{socials} {\protect\httpslink[#3]{www.researcherid.com/rid/#3}}}          {}%
+      \ifthenelse{\equal{#1}{telegram}}     {\collectionadd[telegram]{socials}     {\protect\httpslink[#3]{t.me/#3}}}                              {}%
+      \ifthenelse{\equal{#1}{googlescholar}}{\collectionadd[googlescholar]{socials}{\protect\httpslink[#3]{scholar.google.com/citations?user=#3}}} {}%                        {}%
       }
     {\collectionadd[#1]{socials}{\protect\httpslink[#3]{#2}}}}
 
