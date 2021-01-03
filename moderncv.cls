@@ -517,14 +517,14 @@
 \newcommand*{\link}[2][]{%
   \ifthenelse{\equal{#1}{}}%
     {\href{#2}{#2}}%
-    {\href{#2}{#1}}}
+    {\href{#2}{\detokenize{#1}}}}
 
 % makes a http hyperlink
 % usage: \httplink[optional text]{link}
 \newcommand*{\httplink}[2][]{%
   \ifthenelse{\equal{#1}{}}%
     {\href{http://#2}{#2}}%
-    {\href{http://#2}{#1}}}
+    {\href{http://#2}{\detokenize{#1}}}}
 
 
 % makes an https hyperlink
@@ -532,15 +532,15 @@
 \newcommand*{\httpslink}[2][]{%
   \ifthenelse{\equal{#1}{}}%
     {\href{https://#2}{#2}}%
-    {\href{https://#2}{#1}}}
+    {\href{https://#2}{\detokenize{#1}}}}
 
 % makes an email hyperlink
 % usage: \emaillink[optional text]{link}
 \newcommand*{\emaillink}[2][]{%
   \ifthenelse{\equal{#1}{}}%
     {\href{mailto:#2}{#2}}%
-    {\href{mailto:#2}{#1}}}
     
+    {\href{mailto:#2}{\detokenize{#1}}}}
 % makes a tel hyperlink
 % usage: \tellink[optional text]{link}
 \newcommand*{\tellink}[2][]{%
