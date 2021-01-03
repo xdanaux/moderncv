@@ -31,7 +31,12 @@
 %\fi
 
 % symbols
-\moderncvicons{awesome}
+\RequirePackage{ifxetex}
+\ifxetexorluatex
+  \moderncvicons{awesome}
+\else
+  \moderncvicons{marvosym}
+\fi
 
 
 %-------------------------------------------------------------------------------
