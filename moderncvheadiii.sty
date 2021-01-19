@@ -70,10 +70,11 @@
     \@firstmakeheaddetailselementfalse\fi}
 %   internal command to flush the makehead
 \@initializecommand{\flushmakeheaddetails}{%
-  \strut\usebox{\makeheaddetailsbox}%
-  \savebox{\makeheaddetailsbox}{}%
-  \savebox{\makeheaddetailstempbox}{}%
-  \setlength{\makeheaddetailsboxwidth}{0pt}}
+  \ifnum\makeheaddetailsboxwidth>0%
+    \strut\usebox{\makeheaddetailsbox}%
+    \savebox{\makeheaddetailsbox}{}%
+    \savebox{\makeheaddetailstempbox}{}%
+    \setlength{\makeheaddetailsboxwidth}{0pt}\fi}
 \@initializecommand{\makehead}{%
   \setlength{\makeheaddetailswidth}{0.8\textwidth}%
   \hfil%
@@ -81,9 +82,10 @@
     \centering%
     % name and title
     \namestyle{\@firstname~\@lastname}%
-    \ifthenelse{\equal{\@title}{}}{}{\titlestyle{~|~\@title}}\\% \isundefined doesn't work on \@title, as LaTeX itself defines \@title (before it possibly gets redefined by \title) 
+    \ifthenelse{\equal{\@title}{}}{}{\titlestyle{~|~\@title}}% \isundefined doesn't work on \@title, as LaTeX itself defines \@title (before it possibly gets redefined by \title) 
     % optional detailed information
     \if@details{%
+      \\%
       \addressfont\color{color2}%
       \ifthenelse{\isundefined{\@addressstreet}}{}{\addtomakeheaddetails{\addresssymbol\@addressstreet}%
         \ifthenelse{\equal{\@addresscity}{}}{}{\addtomakeheaddetails[~--~]{\@addresscity}}% if \addresstreet is defined, \addresscity and \addresscountry will always be defined but could be empty
@@ -96,7 +98,7 @@
       \collectionloop{socials}{% the key holds the social type (=symbol command prefix), the item holds the link
         \addtomakeheaddetails{\csname\collectionloopkey socialsymbol\endcsname\collectionloopitem}}%
       \ifthenelse{\isundefined{\@extrainfo}}{}{\addtomakeheaddetails{\@extrainfo}}%
-    \flushmakeheaddetails}\fi}\\[2.5em]}% need to force a \par after this to avoid weird spacing bug at the first section if no blank line is left after \makehead
+      \flushmakeheaddetails}\fi}\\[2.5em]}% need to force a \par after this to avoid weird spacing bug at the first section if no blank line is left after \makehead
 
 
 %-------------------------------------------------------------------------------
