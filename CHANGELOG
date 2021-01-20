@@ -1,3 +1,12 @@
+version 2.1.0 (unreleased)
+ - Deprecate the \httplink macro as it was too inflexible and did only support
+ links to URLs using the (legacy) HTTP schema and not the new default HTTPS. Use \link.
+ - Change the format of the \homepage macro to support HTTPS homepage URLs.
+ Note that you will need to update your \homepage calls to make it work with
+ the new version.
+ - Switche \social URLs to HTTPS which has long been the default for all the
+ sites supported by \social.
+
 version 2.0.0 (28 Jul 2015)
  - refactored the  code into heads, body, foot and icon substyles. All styles
  (classic, casual, banking and oldstyle) are just a combination of these and

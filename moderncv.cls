@@ -241,8 +241,11 @@
 \newcommand*{\email}[1]{\def\@email{#1}}
 
 % defines one's home page (optional)
-% usage: \homepage{<url>}
-\newcommand*{\homepage}[1]{\def\@homepage{#1}}
+% usage: \homepage{<url>}{home page text}
+\newcommand*{\homepage}[2]{
+  \def\@homepage@url{#1}
+  \def\@homepage@text{#2}
+}
 
 % adds a fixed/mobile/fax number to one's personal information (optional)
 % usage: \phone[<optional type>]{<number>}
@@ -262,14 +265,14 @@
 \NewDocumentCommand{\social}{O{}O{}m}{%
   \ifthenelse{\equal{#2}{}}%
     {%
-      \ifthenelse{\equal{#1}{linkedin}}{\collectionadd[linkedin]{socials}{\protect\httplink[#3]{www.linkedin.com/in/#3}}} {}%
-      \ifthenelse{\equal{#1}{xing}}    {\collectionadd[xing]{socials}    {\protect\httplink[#3]{www.xing.com/profile/#3}}}{}%
-      \ifthenelse{\equal{#1}{twitter}} {\collectionadd[twitter]{socials} {\protect\httplink[#3]{www.twitter.com/#3}}}     {}%
-      \ifthenelse{\equal{#1}{github}}  {\collectionadd[github]{socials}  {\protect\httplink[#3]{www.github.com/#3}}}      {}%
-      \ifthenelse{\equal{#1}{gitlab}}  {\collectionadd[gitlab]{socials}  {\protect\httplink[#3]{www.gitlab.com/#3}}}      {}%
+      \ifthenelse{\equal{#1}{linkedin}}{\collectionadd[linkedin]{socials}{\protect\link[#3]{https://www.linkedin.com/in/#3}}} {}%
+      \ifthenelse{\equal{#1}{xing}}    {\collectionadd[xing]{socials}    {\protect\link[#3]{https://www.xing.com/profile/#3}}}{}%
+      \ifthenelse{\equal{#1}{twitter}} {\collectionadd[twitter]{socials} {\protect\link[#3]{https://www.twitter.com/#3}}}     {}%
+      \ifthenelse{\equal{#1}{github}}  {\collectionadd[github]{socials}  {\protect\link[#3]{https://www.github.com/#3}}}      {}%
+      \ifthenelse{\equal{#1}{gitlab}}  {\collectionadd[gitlab]{socials}  {\protect\link[#3]{https://www.gitlab.com/#3}}}      {}%
       \ifthenelse{\equal{#1}{skype}}   {\collectionadd[skype]{socials}   {#3}}                                            {}%
     }
-    {\collectionadd[#1]{socials}{\protect\httplink[#3]{#2}}}}
+    {\collectionadd[#1]{socials}{\protect\link[#3]{#2}}}}
 
 % defines additional personal information (optional)
 % usage: \extrainfo{<text>}
@@ -499,13 +502,6 @@
   \ifthenelse{\equal{#1}{}}%
     {\href{#2}{#2}}%
     {\href{#2}{#1}}}
-
-% makes a http hyperlink
-% usage: \httplink[optional text]{link}
-\newcommand*{\httplink}[2][]{%
-  \ifthenelse{\equal{#1}{}}%
-    {\href{http://#2}{#2}}%
-    {\href{http://#2}{#1}}}
 
 % makes an email hyperlink
 % usage: \emaillink[optional text]{link}
