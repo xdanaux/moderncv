@@ -143,13 +143,13 @@
   \renewcommand*{\subsectionrule}{}\fi
 
 \renewcommand*{\cvitem}[3][.25em]{%
-  \ifthenelse{\equal{#2}{}}{}{\hintstyle{#2}: }{#3}%
+  \ifstrempty{#2}{}{\hintstyle{#2}: }{#3}%
   \par\addvspace{#1}}
 
 \renewcommand*{\cvdoubleitem}[5][.25em]{%
   \begin{minipage}[t]{\doubleitemcolumnwidth}\hintstyle{#2}: #3\end{minipage}%
   \hfill% fill of \separatorcolumnwidth
-  \begin{minipage}[t]{\doubleitemcolumnwidth}\ifthenelse{\equal{#4}{}}{}{\hintstyle{#4}: }#5\end{minipage}%
+  \begin{minipage}[t]{\doubleitemcolumnwidth}\ifstrempty{#4}{}{\hintstyle{#4}: }#5\end{minipage}%
   \par\addvspace{#1}}
 
 \renewcommand*{\cvlistitem}[2][.25em]{%
@@ -159,14 +159,20 @@
 \renewcommand*{\cvlistdoubleitem}[3][.25em]{%
   \cvitem[#1]{}{\listitemsymbol\begin{minipage}[t]{\listdoubleitemcolumnwidth}#2\end{minipage}%
   \hfill% fill of \separatorcolumnwidth
-  \ifthenelse{\equal{#3}{}}%
+  \ifstrempty{#3}%
     {}%
     {\listitemsymbol\begin{minipage}[t]{\listdoubleitemcolumnwidth}#3\end{minipage}}}}
 
 \renewcommand*{\cventry}[7][.25em]{
   \begin{tabular*}{\maincolumnwidth}{l@{\extracolsep{\fill}}r}%
-    {\bfseries #4} & {\bfseries #5}\\%
-    {\itshape #3\ifthenelse{\equal{#6}{}}{}{, #6}} & {\itshape #2}\\%
+    % skip the company name and location line if both are empty, allowing one to show multiple roles within the same company without repeating it
+    \ifboolexpr{%
+      test {\ifstrempty{#4}}
+      and
+      test {\ifstrempty{#5}}}%
+      {}%
+      {{\bfseries #4} & {\bfseries #5}\\}%
+    {\itshape #3\ifstrempty{#6}{}{, #6}} & {\itshape #2}\\%
   \end{tabular*}%
   \ifx&#7&%
   \else{\\%
@@ -179,7 +185,7 @@
 \@initializelength{\cvitemwithcommentmainlength}
 \@initializelength{\cvitemwithcommentcommentlength}
 \renewcommand*{\cvitemwithcomment}[4][.25em]{%
-  \savebox{\cvitemwithcommentmainbox}{\ifthenelse{\equal{#2}{}}{}{\hintstyle{#2}: }#3}%
+  \savebox{\cvitemwithcommentmainbox}{\ifstrempty{#2}{}{\hintstyle{#2}: }#3}%
   \setlength{\cvitemwithcommentmainlength}{\widthof{\usebox{\cvitemwithcommentmainbox}}}%
   \setlength{\cvitemwithcommentcommentlength}{\maincolumnwidth-\separatorcolumnwidth-\cvitemwithcommentmainlength}%
   \begin{minipage}[t]{\cvitemwithcommentmainlength}\usebox{\cvitemwithcommentmainbox}\end{minipage}%
