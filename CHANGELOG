@@ -1,3 +1,14 @@
+version 2.1.0 (21 Jan 2021)
+- maintainer change: now team maintained (https://github.com/moderncv), since
+ original repository is basically dead since 2016.
+- new \social options: Xing, Skype, GitLab, Bitbucket, stack overflow, ORCID,
+ ResearcherID, ResearchGate, Telegram and Google Scholar
+- hyperlinks in phone numbers
+- switch from l3regex to expl3
+- new skill matrix feature
+- move to fonawesome5 package
+- default to https
+
 version 2.0.0 (28 Jul 2015)
  - refactored the  code into heads, body, foot and icon substyles. All styles
  (classic, casual, banking and oldstyle) are just a combination of these and
