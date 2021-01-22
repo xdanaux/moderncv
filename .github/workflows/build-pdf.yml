@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Install TeX Live
-        run: sudo apt update && sudo apt install texlive-full
+        run: sudo apt update && sudo apt install texlive-full fonts-font-awesome
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Build pdf
