@@ -1,3 +1,14 @@
+Release: next
+- fix Researcher ID (still) doesn't display Issue #29.
+- make options 'symbols' and 'nosymbols' available to all styles to toggle whether 
+  symbols should be used or not. Include symbols in oldstyle by default. 
+- migrate older newcommand syntax in moderncvcollection.sty to the xparse syntax.
+- Fix resumé typo in template. Is now résumé.
+- remove loading lmodern fonts in all styles as they can produce issues with 
+  german characters, see https://tex.stackexchange.com/questions/496630/lualatex-problems-with-german-characters.
+- remove loading inputenc package by default. Only load the package when pdflatex is 
+  used.
+
 version 2.1.0 (21 Jan 2021)
 - maintainer change: now team maintained (https://github.com/moderncv), since
  original repository is basically dead since 2016.

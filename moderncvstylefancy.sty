@@ -12,8 +12,13 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{moderncvstylefancy}[2021/01/21 v2.1.0 modern curriculum vitae and letter style scheme: fancy]
 
+% toggle use of symbol fonts.
+\@initializeif{\if@symbols}\@symbolsfalse
+\DeclareOption{symbols}      {\@symbolstrue}
+\DeclareOption{nosymbols}    {\@symbolsfalse}
+
 \DeclareOption*{}% avoid choking on unknown options
-\ExecuteOptions{}
+\ExecuteOptions{symbols}
 \ProcessOptions*\relax% \ProcessOptions* processes the options in the order provided (i.e., with the later ones possibly overriding the former ones), while \ProcessOptions processes them in the order of the package
 
 %-------------------------------------------------------------------------------
@@ -30,12 +35,16 @@
     {}
 %\fi
 
+
 % symbols
-\RequirePackage{ifxetex}
-\ifxetexorluatex
-  \moderncvicons{awesome}
+\if@symbols
+    \ifxetexorluatex
+    \moderncvicons{awesome}     % use font-awesome symbols if lualatex or xelatex is used
+    \else
+    \moderncvicons{marvosym}    % use marvosym symbols pdflatex is used
+    \fi
 \else
-  \moderncvicons{marvosym}
+    \moderncvicons{letters}    % do not use symbols, use letters
 \fi
 
 
