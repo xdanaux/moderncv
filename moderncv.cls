@@ -268,6 +268,8 @@
       \ifthenelse{\equal{#1}{github}}  {\collectionadd[github]{socials}  {\protect\httplink[#3]{www.github.com/#3}}}      {}%
       \ifthenelse{\equal{#1}{gitlab}}  {\collectionadd[gitlab]{socials}  {\protect\httplink[#3]{www.gitlab.com/#3}}}      {}%
       \ifthenelse{\equal{#1}{skype}}   {\collectionadd[skype]{socials}   {#3}}                                            {}%
+      \ifthenelse{\equal{#1}{orcid}}   {\collectionadd[orcid]{socials}   {\protect\httplink[#3]{orcid.org/#3}}}          {}%
+      \ifthenelse{\equal{#1}{researchgate}}{\collectionadd[researchgate]{socials}{\protect\httplink[#3]{www.researchgate.net/profile/#3}}}{}%
     }
     {\collectionadd[#1]{socials}{\protect\httplink[#3]{#2}}}}
 
@@ -310,6 +312,8 @@
 \newcommand*{\githubsocialsymbol}  {}
 \newcommand*{\gitlabsocialsymbol}  {}
 \newcommand*{\skypesocialsymbol}   {}
+\newcommand*{\orcidsocialsymbol}   {}
+\newcommand*{\researchgatesocialsymbol}{}
 
 % other
 %------
