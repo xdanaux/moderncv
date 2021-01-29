@@ -1,0 +1,17 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    name: GenerateCvExamples
+    runs-on: ubuntu-latest
+    container: blang/latex:ctanfull
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - run:  cd examples && pdflatex template.tex
+    - uses: actions/upload-artifact@v1
+      with:
+        name: template_example
+        path: examples/template.pdf
