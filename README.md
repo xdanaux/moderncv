@@ -7,9 +7,9 @@ and allowing one to define his own by modifying colors, fonts, icons, etc.
 
 Most commands are defined in such a way that arguments are optional.
 
-Until a decent manual is written, one can always look in the "examples"
-directory for some examples. Documents can be compiled into dvi, ps or pdf.
-
+Here is one of the possible styles:
+[fancy purple](examples/template_fancy_purple.pdf), you can find more in the 
+[examples folder](/examples). Documents can be compiled into dvi, ps or pdf.
 
 Author: Xavier Danaux <xdanaux@gmail.com><br/>
 Licence: The LaTeX Project Public Li­cense, version 1.3c<br/>
