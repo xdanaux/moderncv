@@ -28,7 +28,7 @@ version 2.0.0 (28 Jul 2015)
  - corrected the color of \addressstyle to match the one effectively used
  (color2).
  - adjusted the bibliography spacing to handle entries with or without labels.
- - added a check on the emptyness of \title when setting the hyperref document
+ - added a check on the emptiness of \title when setting the hyperref document
  properties.
 
 version 1.5.1 (29 Apr 2013)
