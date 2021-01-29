@@ -1,4 +1,4 @@
-#moderncv: a modern curriculum vitae class#
+# moderncv: a modern curriculum vitae class #
 
 **Moderncv** provides a documentclass for typesetting curricula vitae in various
 styles. Moderncv aims to be both straightforward to use and customizable,
