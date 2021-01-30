@@ -159,7 +159,7 @@
 	\item Put the dates on the right hand side, instead of at the beginning of each row.
 	\item Add a contents section. This is recommended for a document with more than 10 pages.
 	\item Add the page number at the bottom right of each page.
-	\item Utilize the \texttt{input} command to add a section directly from another \texttt{.tex} file.\newline{When each section is long, this keeps the main document short and easy to maintain.}
+	% This does not contain the input files.
 \end{itemize}}
 
 \vspace{-10pt}
@@ -220,17 +220,22 @@
 %	PUBLICATIONS SECTION
 %----------------------------------------------------------------------------------------
 
-% These are input files because they can get much longer over time.
-% yyyy-mm-dd is the date when I modified the input file.
+\section{Publications}
 
-\input{./input-publications-yyyy-mm-dd.tex}
+\cvitem {$\bullet$}{\textbf{Lastname, F.}, Someone, E., Another, O. Paper Title is Something. Submitted to Journal ABC, August 2017.}
+
+\cvitem {$\bullet$}{Author, W., Collaborator, A., \textbf{Lastname, F.} Another Paper Title. XYZ Journal, December 2015.}
 
 
 %----------------------------------------------------------------------------------------
 %	PRESENTATIONS SECTION
 %----------------------------------------------------------------------------------------
 
-\input{./input-presentations-yyyy-mm-dd.tex}
+\section{Presentations}
+
+\cvitem{$\bullet$}{\textbf{Presentation Title:} Description here. Is it a poster, contributed talk, or an invited talk? Conference ZZZ, January 2018.}
+
+\cvitem{$\bullet$}{\textbf{Undergraduate Presentation:} Description here. What is this presentation about? University of Somewhere, April 2016.}
 
 
 
