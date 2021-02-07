@@ -1,5 +1,5 @@
 name: Build template
-on: push
+on: [push, pull_request]
 
 jobs:
   build-template:
