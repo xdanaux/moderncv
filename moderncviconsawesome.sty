@@ -1,5 +1,5 @@
 %% start of file `moderncviconsawesome.sty'.
-%% Copyright 2013-2015 Xavier Danaux (xdanaux@gmail.com).
+%% Copyright 2013-2015 Xavier Danaux (xdanaux@gmail.com), 2020-2021 moderncv maintainers (github.com/moderncv).
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License version 1.3c,
@@ -10,36 +10,48 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{moderncviconsawesome}[2015/07/28 v2.0.0 modern curriculum vitae and letter icons: awesome]
+\ProvidesPackage{moderncviconsawesome}[2021/01/21 v2.1.0 modern curriculum vitae and letter icons: awesome]
 
 %-------------------------------------------------------------------------------
 %                required packages
 %-------------------------------------------------------------------------------
 % Font Awesome font
-\RequirePackage{fontawesome}
+\RequirePackage{fontawesome5}
+% Package for academic icons
+\RequirePackage{academicons}
 
 
 %-------------------------------------------------------------------------------
 %                symbols definition
 %-------------------------------------------------------------------------------
-\renewcommand*{\labelitemi}          {\strut\textcolor{color1}{\tiny\faCircleO}}
+\renewcommand*{\labelitemi}          {\strut\textcolor{color1}{\tiny\faIcon[regular]{circle}}
 %\renewcommand*{\labelitemii}         {\strut\textcolor{color1}{\large\bfseries-}}            % no change from default in moderncv.cls
 %\renewcommand*{\labelitemiii}        {\strut\textcolor{color1}{\rmfamily\textperiodcentered}}% no change from default in moderncv.cls
 %\renewcommand*{\labelitemiv}         {\labelitemiii}                                         % no change from default in moderncv.cls
 
-\renewcommand*{\addresssymbol}       {}
-\renewcommand*{\mobilephonesymbol}   {{\Large\faMobilePhone}~}
-\renewcommand*{\fixedphonesymbol}    {\faPhone~}
-\renewcommand*{\faxphonesymbol}      {{\small\faFax}~}                % alternative: \faPrint
-\renewcommand*{\emailsymbol}         {{\small\faEnvelopeO}~}          % alternative: \faInbox
-\renewcommand*{\homepagesymbol}      {{\small\faGlobe}~}              % alternative: \faHome
-\renewcommand*{\linkedinsocialsymbol}{{\small\faLinkedin}~}           % alternative: \faLinkedinSquare
-\renewcommand*{\xingsocialsymbol}    {{\small\faXing}~}               % alternative: \faXingSquare
-\renewcommand*{\twittersocialsymbol} {{\small\faTwitter}~}            % alternative: \faTwitterSquare
-\renewcommand*{\githubsocialsymbol}  {{\small\faGithub}~}             % alternative: \faGithubSquare, \faGithubSquare
-\renewcommand*{\gitlabsocialsymbol}  {{\small\faGitlab}~}
-\renewcommand*{\skypesocialsymbol}   {{\small\faSkype}~}
-
+\renewcommand*{\addresssymbol}            {}
+\renewcommand*{\mobilephonesymbol}        {{\small\faMobile}~}
+\renewcommand*{\fixedphonesymbol}         {{\small\faPhone}~}
+\renewcommand*{\faxphonesymbol}           {{\small\faFax}~}                      % alternative: \faPrint
+\renewcommand*{\emailsymbol}              {{\small\faIcon[regular]{envelope}}~}  % alternative: \faInbox
+\renewcommand*{\homepagesymbol}           {{\small\faGlobe}~}                    % alternative: \faHome
+\renewcommand*{\linkedinsocialsymbol}     {{\small\faLinkedin}~}                 % alternative: \faLinkedinSquare
+\renewcommand*{\xingsocialsymbol}         {{\small\faXing}~}                     % alternative: \faXingSquare
+\renewcommand*{\twittersocialsymbol}      {{\small\faTwitter}~}                  % alternative: \faTwitterSquare
+\renewcommand*{\githubsocialsymbol}       {{\small\faGithub}~}                   % alternative: \faGithubSquare, \faGithubSquare
+\renewcommand*{\gitlabsocialsymbol}       {{\small\faGitlab}~}
+\renewcommand*{\stackoverflowsocialsymbol}{{\small\faStackOverflow}~}
+\renewcommand*{\bitbucketsocialsymbol}    {{\small\faBitbucket}~}
+\renewcommand*{\skypesocialsymbol}        {{\small\faSkype}~}
+\renewcommand*{\orcidsocialsymbol}        {{\small\aiOrcid}~}
+\renewcommand*{\researchgatesocialsymbol} {{\small\aiResearchGate}~}
+\renewcommand*{\researcheridsocialsymbol} {{\small\aiResearcherID}~}             % alternative: \aiResearcherIDSquare 
+\renewcommand*{\telegramsocialsymbol}     {{\small\faTelegram}~}
+\renewcommand*{\googlescholarsocialsymbol}{{\small\aiGoogleScholar}~}
+\renewcommand*{\telegramsocialsymbol}     {{\small\faTelegram}~}
+\renewcommand*{\whatsappsocialsymbol}     {{\small\faWhatsapp}~}
+\renewcommand*{\signalsocialsymbol}       {}
+\renewcommand*{\matrixsocialsymbol}       {}
 
 \endinput
 

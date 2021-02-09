@@ -1,5 +1,5 @@
 %% start of file `moderncvheadiii.sty'.
-%% Copyright 2006-2015 Xavier Danaux (xdanaux@gmail.com).
+%% Copyright 2006-2015 Xavier Danaux (xdanaux@gmail.com), 2020-2021 moderncv maintainers (github.com/moderncv).
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License version 1.3c,
@@ -10,7 +10,7 @@
 %                identification
 %-------------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{moderncvheadiii}[2015/07/28 v2.0.0 modern curriculum vitae and letter header variant: 3]
+\ProvidesPackage{moderncvheadiii}[2021/01/21 v2.1.0 modern curriculum vitae and letter header variant: 3]
 
 % details options: "details" (default) or "nodetails"
 \@initializeif{\if@details}\@detailsfalse
@@ -94,7 +94,7 @@
       \collectionloop{phones}{% the key holds the phone type (=symbol command prefix), the item holds the number
         \addtomakeheaddetails{\csname\collectionloopkey phonesymbol\endcsname\collectionloopitem}}%
       \ifthenelse{\isundefined{\@email}}{}{\addtomakeheaddetails{\emailsymbol\emaillink{\@email}}}%
-      \ifthenelse{\isundefined{\@homepage}}{}{\addtomakeheaddetails{\homepagesymbol\httplink{\@homepage}}}%
+      \ifthenelse{\isundefined{\@homepage}}{}{\addtomakeheaddetails{\homepagesymbol\httpslink{\@homepage}}}%
       \collectionloop{socials}{% the key holds the social type (=symbol command prefix), the item holds the link
         \addtomakeheaddetails{\csname\collectionloopkey socialsymbol\endcsname\collectionloopitem}}%
       \ifthenelse{\isundefined{\@extrainfo}}{}{\addtomakeheaddetails{\@extrainfo}}%

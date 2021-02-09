@@ -1,0 +1,26 @@
+name: Build template
+on: [push, pull_request]
+
+jobs:
+  build-template:
+    name: Build template
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Install TeX Live
+        run: sudo apt update && sudo apt install texlive-full fonts-font-awesome
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build pdf
+        run: latexmk -pdflua ./template.tex
+      - name: Scan log
+        run: texloganalyser -w ./template.log
+      - name: Upload pdf
+        uses: actions/upload-artifact@v2
+        with:
+          name: template.pdf
+          path: ./template.pdf
+      - name: Upload log
+        uses: actions/upload-artifact@v2
+        with:
+          name: template.log
+          path: ./template.log
