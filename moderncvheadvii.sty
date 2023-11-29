@@ -17,6 +17,11 @@
 \@initializeif{\if@details}\@detailsfalse
 \DeclareOption{details}   {\@detailstrue}
 \DeclareOption{nodetails} {\@detailsfalse}
+% QR options: "qr" (default) or "noqr".  If "qr" is specified, a QR code is generated to point to the
+% homepage and placed near the details section
+\@initializeif{\if@headqr}\@headqrfalse
+\DeclareOption{qr}   {\@headqrtrue}
+\DeclareOption{noqr} {\@headqrfalse}
 
 % left/right options: "left" (default) or "right"
 \@initializeif{\if@left} \@leftfalse
@@ -25,29 +30,37 @@
 \DeclareOption{right}   {\@leftfalse\@righttrue}
 
 \DeclareOption*{}% avoid choking on unknown options
-\ExecuteOptions{details,left}
+\ExecuteOptions{details,qr,left}
 \ProcessOptions*\relax% \ProcessOptions* processes the options in the order provided (i.e., with the later ones possibly overriding the former ones), while \ProcessOptions processes them in the order of the package
 
 
 %-------------------------------------------------------------------------------
 %                required packages
 %-------------------------------------------------------------------------------
+\RequirePackage{qrcode}
+\RequirePackage{tikz}
+\usetikzlibrary{tikzmark,fit}
 
 
 %-------------------------------------------------------------------------------
 %                overall head definition
 %-------------------------------------------------------------------------------
+\@ifundefined{\string\color@headTL}{\colorlet{headTL}{color1}}{}
+\@ifundefined{\string\color@headBR}{\colorlet{headBR}{color1}}{}
+\@ifundefined{\string\color@headtext}{\colorlet{headtext}{color2}}{}
+\@ifundefined{\string\color@headhr}{\colorlet{headhr}{color2}}{}
+
 % fonts
-\renewcommand*{\namefont}{\fontsize{34}{36}\mdseries\upshape}
+\renewcommand*{\namefont}{\fontsize{30}{32}\rmfamily\mdseries\upshape}
 \renewcommand*{\titlefont}{\LARGE\mdseries\slshape}
 \renewcommand*{\addressfont}{\small\mdseries\slshape}
 \renewcommand*{\quotefont}{\large\slshape}
 
 % styles
-\renewcommand*{\namestyle}[1]{{\namefont\textcolor{color0}{#1}}}
-\renewcommand*{\titlestyle}[1]{{\titlefont\textcolor{color2}{#1}}}
-\renewcommand*{\addressstyle}[1]{{\addressfont\textcolor{color2}{#1}}}
-\renewcommand*{\quotestyle}[1]{{\quotefont\textcolor{color1}{#1}}}
+\renewcommand*{\namestyle}[1]{{\namefont\textcolor{headtext}{#1}}}
+\renewcommand*{\titlestyle}[1]{{\titlefont\textcolor{headtext}{#1}}}
+\renewcommand*{\addressstyle}[1]{{\addressfont\textcolor{headtext}{#1}}}
+\renewcommand*{\quotestyle}[1]{{\quotefont\textcolor{color0}{#1}}}
 
 
 %-------------------------------------------------------------------------------
@@ -73,7 +86,7 @@
     \collectionloop{socials}{% the key holds the social type (=symbol command prefix), the item holds the link
       \protected@edef\socialsdetails{\socialsdetails\protect\makenewline\csname\collectionloopkey socialsymbol\endcsname\collectionloopitem}}%
     \savebox{\makecvheaddetailsbox}{%
-      \addressfont\color{color2}%
+      \addressfont\color{headtext}%
       \if@left\begin{tabular}[b]{@{}r@{}}\fi%
       \if@right\begin{tabular}[b]{@{}l@{}}\fi%
         \ifthenelse{\isundefined{\@addressstreet}}{}{\makenewline\addresssymbol\@addressstreet%
@@ -92,15 +105,24 @@
     \ifthenelse{\isundefined{\@photo}}%
       {}%
       {%
-        \if@left%
-          \hspace*{\separatorcolumnwidth}\fi%
-        \color{color1}%
-        \setlength{\fboxrule}{\@photoframewidth}%
-        \ifdim\@photoframewidth=0pt%
-          \setlength{\fboxsep}{0pt}\fi%
-        \framebox{\includegraphics[width=\@photowidth]{\@photo}}}%
         \if@right%
-          \hspace*{\separatorcolumnwidth}\fi}%
+          \hspace*{\separatorcolumnwidth}\fi%
+        \begin{tikzpicture}
+          \path[top color=headBR,bottom color=headTL,shading angle=45] (0,0) circle (\dimexpr\@photowidth/2+\@photoframewidth*2);
+          \path[fill=white] (0,0) circle (\dimexpr\@photowidth/2+\@photoframewidth);
+          \begin{scope}
+            \clip (0,0) circle (\dimexpr\@photowidth/2);
+            \node[inner sep=0pt] at (0,0) {\includegraphics[width=\@photowidth]{\@photo}};
+          \end{scope}
+        \end{tikzpicture}%
+      }%
+      \if@left%
+        \hspace*{\separatorcolumnwidth}\fi}%
+  % optional QR for homepage (pre-rendering)
+  \@initializebox{\makecvheadqrbox}%
+  \savebox{\makecvheadqrbox}{%
+    \ifthenelse{\isundefined{\@homepage}}{}{\tikz\node[inner sep=1ex,fill=white]{\qrcode[height=1.5cm]{\@homepage}};}%
+    }%
   % name and title (pre-rendering)
   \@initializelength{\makecvheaddetailswidth}\settowidth{\makecvheaddetailswidth}{\usebox{\makecvheaddetailsbox}}%
   \@initializelength{\makecvheadpicturewidth}\settowidth{\makecvheadpicturewidth}{\usebox{\makecvheadpicturebox}}%
@@ -112,25 +134,39 @@
     \begin{minipage}[b]{\makecvheadnamewidth}%
       \if@left\raggedright\fi%
       \if@right\raggedleft\fi%
-      \namestyle{\@firstname\ \@lastname}%
+      \namestyle{\@firstname\ {\scshape\@lastname}}%
       \ifthenelse{\equal{\@title}{}}{}{\\[1.25em]\titlestyle{\@title}}%
     \end{minipage}}%
   % rendering
+  \begin{tikzpicture}[remember picture,overlay]
+    \node(head-bg) [top color=headTL,bottom color=headBR,shading angle=45,inner sep=0pt,
+      fit={(current page.north west)(current page.north east)(pic cs:head-end)}] {};
+    % Users may define `\@moderncvheadBackground` for additional background decoration
+    \ifthenelse{\isundefined{\@moderncvheadBackground}}{}{\@moderncvheadBackground}
+
+    \path[draw,line width=\@photoframewidth]
+        (head-bg.south west) edge[color=headhr!85!black] ([xshift=8em]head-bg.south west)
+        ([xshift=8em]head-bg.south west) edge[color=headhr] ([xshift=-8em]head-bg.south east)
+        ([xshift=-8em]head-bg.south east) edge[color=headhr!85!black] (head-bg.south east);
+  \end{tikzpicture}%
   \if@left%
+    \usebox{\makecvheadpicturebox}%
     \usebox{\makecvheadnamebox}%
     \hfill%
     \llap{\usebox{\makecvheaddetailsbox}}% \llap is used to suppress the width of the box, allowing overlap if the value of makecvheadnamewidth is forced
-    \usebox{\makecvheadpicturebox}\fi%
+    \usebox{\makecvheadqrbox}\fi%
   \if@right%
-    \usebox{\makecvheadpicturebox}%
+    \usebox{\makecvheadqrbox}%
     \rlap{\usebox{\makecvheaddetailsbox}}% \llap is used to suppress the width of the box, allowing overlap if the value of makecvheadnamewidth is forced
     \hfill%
-    \usebox{\makecvheadnamebox}\fi%
-  \\[2.5em]%
+    \usebox{\makecvheadnamebox}%
+    \usebox{\makecvheadpicturebox}\fi%
+  \\[.15em]%
+  \tikzmark{head-end}\\[.15em]%
   % optional quote
   \ifthenelse{\isundefined{\@quote}}%
     {}%
-    {{\centering\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
+    {{\centering\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[.15em]}}%
   \par}% to avoid weird spacing bug at the first section if no blank line is left after \makecvhead
 
 
