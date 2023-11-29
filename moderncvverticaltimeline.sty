@@ -1,0 +1,79 @@
+%% start of file `moderncvverticaltimeline.sty'.
+%% Copyright 2023 Javier Lopez-Gomez (javier.lopez.gomez@proton.me).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+%-------------------------------------------------------------------------------
+%                identification
+%-------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{moderncvverticaltimeline}[2023/11/29 v2.0.0 modern curriculum vitae vertical timeline]
+
+
+%-------------------------------------------------------------------------------
+%                required packages
+%-------------------------------------------------------------------------------
+\RequirePackage{tikz}
+
+%-------------------------------------------------------------------------------
+%                vertical timeline implementation
+%-------------------------------------------------------------------------------
+\tikzset{
+  tl_milestone/.style={circle,inner sep=1.5pt,draw=color0!20,label={west:#1}},
+  tl_link/.style={thick,densely dotted,color0!20},
+}
+
+\newcounter{tl@chainidx}\setcounter{tl@chainidx}{0}
+\newcounter{tl@nodeidx}\setcounter{tl@nodeidx}{0}
+
+% Mark the end of the current chain; any `\tl@milestone` issued afterward will be on a new timeline.
+\def\tl@resetchain{%
+  \stepcounter{tl@chainidx}%
+  \setcounter{tl@nodeidx}{0}%
+}
+
+% Create a node in the current timeline and link it to the previous node; if the previous milestone
+% is on the last shipped out page, draw a line that extends until the top margin.  The argument is laid out as a label (default left).
+\def\tl@milestone#1{%
+  \edef\@tl@prev{tl-\thetl@chainidx-\thetl@nodeidx}%
+  \stepcounter{tl@nodeidx}%
+  \edef\@tl@this{tl-\thetl@chainidx-\thetl@nodeidx}%
+  \tikz[remember picture,overlay] {
+    \node[tl_milestone={#1}] (\@tl@this) {};
+    \ifnum\thetl@nodeidx>1
+      \pgfpointdiff{\pgfpointanchor{\@tl@prev}{center}}{\pgfpointanchor{\@tl@this}{center}}
+      \ifnum\pgf@y>0
+        \draw[tl_link] (\@tl@this) -- ([yshift=-1em] \@tl@this |- current page.north);
+      \else
+        \draw[tl_link] (\@tl@this) -- (\@tl@prev);
+      \fi
+    \fi
+  }
+}
+
+\AddToHook{shipout/background}{%
+  % If there are follow-up  milestones in the current timeline, draw a line that extends until the bottom margin
+  \edef\@tl@prev{tl-\thetl@chainidx-\number\numexpr\thetl@nodeidx-1}%
+  \edef\@tl@this{tl-\thetl@chainidx-\thetl@nodeidx}%
+  \tikz[remember picture,overlay] {
+    \ifnum\thetl@nodeidx>1
+      \pgfpointdiff{\pgfpointanchor{\@tl@prev}{center}}{\pgfpointanchor{\@tl@this}{center}}
+      \ifnum\pgf@y>0
+        \draw[tl_link] (\@tl@prev) -- ([yshift=1em] \@tl@prev |- current page.south);
+      \fi
+    \fi
+  }
+}
+
+\AtEndDocument{\tl@resetchain}
+
+\let\@old@section=\section%
+\RenewDocumentCommand{\section}{sm}{\tl@resetchain\@old@section{#1}}
+
+\endinput
+
+
+%% end of file `moderncvverticaltimeline.sty'.
