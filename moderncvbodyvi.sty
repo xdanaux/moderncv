@@ -17,13 +17,14 @@
 %-------------------------------------------------------------------------------
 %                required packages
 %-------------------------------------------------------------------------------
+\RequirePackage{moderncvverticaltimeline}
 
 
 %-------------------------------------------------------------------------------
 %                overall body definition
 %-------------------------------------------------------------------------------
 % fonts
-\renewcommand*{\sectionfont}{\Large\mdseries\upshape}
+\renewcommand*{\sectionfont}{\Large\upshape\bfseries}
 \renewcommand*{\subsectionfont}{\large\mdseries\upshape}
 \renewcommand*{\hintfont}{}
 
@@ -66,11 +67,15 @@
 \@initializelength{\baseletterheight}
 \settoheight{\baseletterheight}{\sectionstyle{o}}
 \setlength{\baseletterheight}{\baseletterheight-0.95ex}
-\RenewDocumentCommand{\section}{sm}{%
+% The optional argument can be used to place a small icon near the section name.
+% E.g. `\section[\faBookmark]{Education}`
+\RenewDocumentCommand{\section}{sO{}m}{%
+  \tl@resetchain%
   \par\addvspace{2.5ex}%
   \phantomsection{}% reset the anchor for hyperrefs
-  \addcontentsline{toc}{section}{#2}%
-  \cvitem[0ex]{\strut\raggedleft\raisebox{\baseletterheight}{\color{color1}\rule{\hintscolumnwidth}{0.95ex}}}{\strut\sectionstyle{#2}}%
+  \addcontentsline{toc}{section}{#3}%
+  \strut\sectionstyle{\textcolor{color1!55!white}{{#2}\rule{.75ex}{0pt}\rule{1pt}{\heightof{#3}}}%
+    \rule{.75ex}{0pt}#3}%
   \par\nobreak\addvspace{1ex}\@afterheading}% to avoid a pagebreak after the heading
 
 \RenewDocumentCommand{\subsection}{sm}{%
@@ -105,7 +110,7 @@
     {\listitemsymbol\begin{minipage}[t]{\listdoubleitemcolumnwidth}#3\end{minipage}}}}
 
 \renewcommand*{\cventry}[7][.25em]{%
-  \cvitem[#1]{#2}{%
+  \cvitem[#1]{\tl@milestone{#2}}{%
     {\bfseries#3}%
     \ifthenelse{\equal{#4}{}}{}{, {\slshape#4}}%
     \ifthenelse{\equal{#5}{}}{}{, #5}%
